@@ -1,0 +1,9 @@
+.transaction {
+  display: flex;
+  flex-direction: row;
+  border-radius: 0.7em;
+  box-shadow: 0px 3px 20px 0px #36353590;
+  margin: 5em;
+  height: 4em;
+  background-color: #fff;
+}
