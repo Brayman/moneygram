@@ -1,6 +1,5 @@
 import style from './Account.module.css';
 function Account() {
-    console.log(style);
     return (
         <section className={style.account}>
             <div className={style.balance_card}>
