@@ -3,6 +3,7 @@ import { BiCartAlt } from "react-icons/bi";
 import { 
     RiTaxiLine,
     RiTakeawayLine,
+    RiBusFill,
     RiRestaurant2Fill,
     RiPlaneFill,
     RiStethoscopeLine,
@@ -40,6 +41,9 @@ function Tag({tag}) {
             break;
         case 'gift':
             setIcon(<RiGiftLine/>)
+            break;
+        case 'bus':
+            setIcon(<RiBusFill/>)
             break;
 
     

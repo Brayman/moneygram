@@ -1,4 +1,5 @@
 .tag {
+  margin-left: 1em;
   display: flex;
   color: #4caf50;
   border-radius: 1em;
