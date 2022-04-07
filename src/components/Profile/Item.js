@@ -1,5 +1,5 @@
 import { BiChevronRight } from "react-icons/bi";
-import style from "../Profile/Settings.module.css"
+import style from "./Settings.module.css"
 function Item({desc, header, type, children}) {
     return (
     <div className={style.item}>
