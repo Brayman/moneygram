@@ -6,20 +6,18 @@ import Transaction from './components/Transaction/Transaction';
 import Settings from './components/Profile/Settings';
 import { BrowserRouter, Route, Router, Routes } from 'react-router-dom';
 import Menu from './components/Menu/Menu';
+import Main from './components/Main/Main';
+import Profile from './components/Profile/Profile';
 
 function App() {
   return (
     <BrowserRouter>
       <Header/>
         <Routes>
-          <Route path='/' element={<Account/>}/>
-          <Route path='/profile' element={<Settings/>}/>
+          <Route path='/' element={<Main/>}/>
+          <Route path='/profile' element={<Profile/>}/>
+          <Route path='/settings' element={<Settings/>}/>
         </Routes>
-      
-      <section className='transactions'>
-        <Transaction cost={10} tag={"shop"}/>
-        <Transaction cost={5} tag={"bus"}/>
-      </section>
       <Menu/>
     </BrowserRouter>
   );
