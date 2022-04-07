@@ -2,11 +2,11 @@ import Account from "../Account/Account";
 import { BiChevronRight, BiChevronLeft } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 
-function Profile() {
+function Profile({accountData}) {
     const navigate = useNavigate();
     return (
         <div>
-            <Account/>
+            <Account data={accountData}/>
             <BiChevronLeft className="left_button"/>
             <button onClick={() => navigate("/settings")}>
                 Settings

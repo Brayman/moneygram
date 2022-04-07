@@ -8,15 +8,23 @@ import { BrowserRouter, Route, Router, Routes } from 'react-router-dom';
 import Menu from './components/Menu/Menu';
 import Main from './components/Main/Main';
 import Profile from './components/Profile/Profile';
+import Tag from './components/Tag';
+import NotFound from './components/NotFound';
 
-function App() {
+
+
+function App({props}) {
   return (
     <BrowserRouter>
       <Header/>
         <Routes>
-          <Route path='/' element={<Main/>}/>
-          <Route path='/profile' element={<Profile/>}/>
+          <Route path='/' element={<Main accountData={props.accountData} transactions={props.transactions}/>}/>
+          <Route path='/profile' element={<Profile accountData={props.accountData}/>}/>
           <Route path='/settings' element={<Settings/>}/>
+          <Route path='/test' element={<div>
+              <Tag tag='shop'/>
+            </div>}/>
+          <Route path='*' element={<NotFound/>}/>
         </Routes>
       <Menu/>
     </BrowserRouter>

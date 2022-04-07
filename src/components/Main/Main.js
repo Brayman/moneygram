@@ -1,14 +1,12 @@
 import Account from "../Account/Account";
 import Transaction from "../Transaction/Transaction";
 
-function Main() {
-    return (
+function Main({accountData, transactions}) {
+        return (
         <div>
-            <Account/>
+            <Account data={accountData} />
             <section className='transactions'>
-                <Transaction cost={10} tag="shop"/>
-                <Transaction cost={1} tag="bus"/>
-                <Transaction cost={4} tag="shop"/>
+                {transactions.map((item, i) => <Transaction key={i} body={item}/>)}
             </section>
         </div>
     )

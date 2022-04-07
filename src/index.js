@@ -4,9 +4,28 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+const accountData = {
+  balance: 299,
+  spend: 15
+}
+const transactions = [
+  {
+      cost: 5.4,
+      tag: "shop"
+  },
+  {
+      cost: 6.01,
+      tag: "shop"
+  },
+  {
+      cost: 3.33+0.54,
+      tag: "taxi"
+  }
+]
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <App props={{accountData, transactions}}/>
   </React.StrictMode>,
   document.getElementById('root')
 );
