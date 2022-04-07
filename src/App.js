@@ -1,24 +1,25 @@
-import logo from './logo.svg';
+import Account from './components/Account/Account';
+import logo from './logo.png';
 import './App.css';
+import Header from './components/Header/Header';
+import Transaction from './components/Transaction/Transaction';
+import Settings from './components/Profile/Settings';
+import { BrowserRouter, Route, Router, Routes } from 'react-router-dom';
+import Menu from './components/Menu/Menu';
+import Main from './components/Main/Main';
+import Profile from './components/Profile/Profile';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Header/>
+        <Routes>
+          <Route path='/' element={<Main/>}/>
+          <Route path='/profile' element={<Profile/>}/>
+          <Route path='/settings' element={<Settings/>}/>
+        </Routes>
+      <Menu/>
+    </BrowserRouter>
   );
 }
 

@@ -1,0 +1,41 @@
+.secttion {
+  display: flex;
+  flex-direction: row;
+  border-radius: 0.7em;
+  margin: 2em;
+  height: 4em;
+  background-color: #fff;
+}
+.item {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  color: #4caf50;
+  padding: 0.2em 1em;
+  font-size: 1em;
+  cursor: pointer;
+  margin: 0.5em 1em;
+}
+
+.icon {
+  
+}
+.content {
+  flex-grow: 1;
+  display: flex;
+  color: #9e9e9e;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.button {
+}
+.header {
+  align-content: center;
+  font-size: 1.4em;
+  color: #000;
+}
+.item:hover {
+  background-color: #bdbdbd33;
+  border-radius: 0.5em;
+}
