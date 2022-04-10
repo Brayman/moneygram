@@ -9,6 +9,9 @@
   height: 4em;
   background-color: #fff;
 }
+ .transaction:hover {
+  box-shadow: 0px 8px 10px 1px #3635354f;
+ }
 .body {
   display: flex;
   flex-direction: column;

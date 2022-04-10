@@ -1,6 +1,7 @@
 import style from "./Transaction.module.css"
 import Tag from "../Tag";
 function Transaction({body}) {
+    const date = new Date(body.date).toLocaleString('ru-RU',{month: 'short', day: '2-digit', year:'numeric'})
     return (
         <section className={style.transaction}>
           <Tag tag={body.tag}/>
@@ -10,10 +11,9 @@ function Transaction({body}) {
                     - ${body.cost}
                </div>
                <div className={style.second}>
-                    <div>idificator</div>
-                    <div>07/04/22</div>
-               </div>
-                
+                    <div>{body.receiver}</div>
+                    <div>{date}</div>
+                </div>
             </div>
            
             
