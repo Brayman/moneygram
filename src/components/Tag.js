@@ -13,13 +13,16 @@ import {
     RiMoneyDollarCircleLine,
     RiForbidLine
  } from "react-icons/ri";
-function Tag({tag}) {
+function Tag({tag, getTag}) {
     const [icon, setIcon] = useState(<RiForbidLine/>)
     
     useEffect(() =>{
         switch (tag) {
         case 'taxi':
             setIcon(<RiTaxiLine/>)
+            break;
+        case 'restaurant':
+            setIcon(<RiRestaurant2Fill/>)
             break;
         case 'deliver':
             setIcon(<RiTakeawayLine/>)
@@ -54,7 +57,7 @@ function Tag({tag}) {
     },[tag])
     
     return (
-    <div className="tag">
+    <div className="tag" onClick={() =>getTag(tag)}>
         {icon}
     </div>
     )

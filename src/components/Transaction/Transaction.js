@@ -4,7 +4,7 @@ function Transaction({body}) {
     const date = new Date(body.date).toLocaleString('ru-RU',{month: 'short', day: '2-digit', year:'numeric'})
     return (
         <section className={style.transaction}>
-          <Tag tag={body.tag}/>
+          <Tag tag={body.tag} getTag={tag => console.log(tag)}/>
             <div className={style.body}>
                 <div className={style.main}>
                     <div>{body.tag}</div>
