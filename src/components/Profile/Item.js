@@ -1,8 +1,10 @@
 import { BiChevronRight } from "react-icons/bi";
-import style from "../Profile/Settings.module.css"
-function Item({desc, header, type, children}) {
+import { useNavigate } from "react-router-dom";
+import style from "./Settings.module.css"
+function Item({desc, header, item, children}) {
+    const navigate = useNavigate();
     return (
-    <div className={style.item}>
+    <div className={style.item} onClick={() => navigate(item)}>
         <div className={style.icon}>
             {children}
         </div>

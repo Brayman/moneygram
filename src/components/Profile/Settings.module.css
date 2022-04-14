@@ -1,9 +1,8 @@
-.secttion {
+.section {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   border-radius: 0.7em;
   margin: 2em;
-  height: 4em;
   background-color: #fff;
 }
 .item {
