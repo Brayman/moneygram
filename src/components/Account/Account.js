@@ -8,7 +8,7 @@ function Account({data}) {
             </div>
         
         <div className={style.status}>
-            spent today ${data.spend}
+            spent today $
         </div>
         <div className={`${style.active} ${style.empty}`}></div>
       </section>

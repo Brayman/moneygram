@@ -1,10 +1,12 @@
 import {
     ADD_TRANSACTION,
     CHANGE_SETTINGS,
-    SAVE_SETTINGS
+    SAVE_SETTINGS,
+    SET_CARDS
 } from "./action-types";
 
 const defaultState = {
+    id: 1,
     login: 'brayman',
     first_name: '',
     balance: 299,
@@ -12,7 +14,11 @@ const defaultState = {
     avatar: null,
     mail: 'my@mail.com',
     language: 'en',
-    card: 1,
+    cards: [{
+        "id": 1,
+        "curency": null,
+        "balance": null
+    }],
     settings: {
         first_name: '',
         second_name: '',
@@ -36,6 +42,11 @@ const account = (state = defaultState, action) => {
                     [action.payload.item]: action.payload.value
                 }
             }
+        case SET_CARDS:
+            return {
+                ...state,
+                cards: action.payload
+            }
         case SAVE_SETTINGS:
             return {
                 ...state,
@@ -52,6 +63,12 @@ export const settingsChangeAC = (item,value) => {
             item,
             value
         }
+    }
+}
+export const setCardsAC = data => {
+    return {
+        type: SET_CARDS,
+        payload: data
     }
 }
 export const settingsSaveAC = () => {
