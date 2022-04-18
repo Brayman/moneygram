@@ -1,54 +1,41 @@
 import {
     CREATE_TRANASACTION,
     ADD_TRANSACTION,
-    GET_TRANSACTIONS
+    GET_TRANSACTIONS,
+    SET_TRANSACTIONS,
+    SET_CURRENT_PAGE
  } from "./action-types";
 
 const defaultState = {
-    transactions : [
-        {
-            cost: 0.49,
-            tag: "bus"
-        },
-        {
-            cost: 5.4,
-            tag: "shop"
-        },
-        {
-            cost: 6.01,
-            tag: "shop"
-        },
-        {
-            cost: 3.33+0.54,
-            tag: "taxi"
-        }
-    ],
-    newTransaktion: {
+    transactions : [],
+    newTrans: {
         receiver: '',
         cost: ''
     },
+    pageSize: 10,
+    totalTransCount: 0,
+    curentPage: 1
 }
 
 const transactions = (state = defaultState, {type, payload}) => {
     switch (type) {
         case CREATE_TRANASACTION:
-            console.log(payload);
             return {
                 ...state,
-                newTransaktion: {
-                    ...state.newTransaktion,
+                newTrans: {
+                    ...state.newTrans,
                     [payload.item]: payload.value
                 }
             }
         case ADD_TRANSACTION:
-            console.log(state);
             return {
                 ...state,
                 transactions: [...state.transactions, {
-                    ...state.newTransaktion,
+                    ...state.newTrans,
+                    id: new Date().getTime(),
                     date: new Date().getTime()
                 }],
-                newTransaktion: {
+                newTrans: {
                     receiver: '',
                     cost: ''
                 }
@@ -56,14 +43,25 @@ const transactions = (state = defaultState, {type, payload}) => {
         case GET_TRANSACTIONS:
             return {
                 ...state,
-                transactions: payload
+                transactions: [...state.transactions, ...payload],
+                totalTransCount: [...state.transactions, ...payload].length
             }
+        case SET_TRANSACTIONS:
+            return {
+                ...state,
+                transactions: payload,
+                totalTransCount: payload.length
+                }
+        case SET_CURRENT_PAGE:
+            return {
+                ...state,
+                curentPage: payload
+                } 
         default:
             return state;
     }    
 }
 export const createChangeAction = (item) => {
-    console.log(item);
     return {
     type: CREATE_TRANASACTION,
     payload: {
@@ -75,6 +73,24 @@ export const AddTransactionAction = value => {
     return {
         type: ADD_TRANSACTION,
         payload: value
+    }
+}
+export const setTransactionsAC = data => {
+    return {
+        type: SET_TRANSACTIONS,
+        payload: data
+    }
+}
+export const getTransactionsAC = data => {
+    return {
+        type: GET_TRANSACTIONS,
+        payload: data
+    }
+}
+export const setCurrentPageAC = page => {
+    return {
+        type: SET_CURRENT_PAGE,
+        payload: page
     }
 }
 export default transactions;

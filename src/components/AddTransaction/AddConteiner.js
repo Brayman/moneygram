@@ -3,7 +3,7 @@ import { AddTransactionAction, createChangeAction } from "../../redux/transactio
 import AddForm from "./AddTransaction";
 const mapStateToProps = state => {
     return {
-        transaction: state.transactions.newTransaktion
+        transaction: state.transactions.newTrans
     }
 }
 const mapDispatchToProps = dispatch => {

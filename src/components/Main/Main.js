@@ -1,14 +1,13 @@
 import Account from "../Account/Account";
 import Transaction from "../Transaction/Transaction";
 
-function Main({accountData, transactions}) {
-        return (
-        <div className="home">
-            <Account data={accountData} />
+function Main({props}) {
+    return (<div className="home">
+            <Account data={props.account} />
             <section className='transactions'>
-                {transactions.map((item, i) => <Transaction key={i} body={item}/>)}
+                {props.transactions.map((item, i) => <Transaction key={i} body={item}/>)}
+                <button onClick={() => props.getNextPage(props.curentPage + 1)}>more</button>
             </section>
-        </div>
-    )
+        </div>)
 }
 export default Main;
