@@ -1,13 +1,24 @@
 import Account from "../Account/Account";
+import Loader from "../Loading/Loader";
 import Transaction from "../Transaction/Transaction";
 
 function Main({props}) {
-    return (<div className="home">
+    if (!props.isLoading) {
+        return (<div className="home">
             <Account data={props.account} />
             <section className='transactions'>
                 {props.transactions.map((item, i) => <Transaction key={i} body={item}/>)}
-                <button onClick={() => props.getNextPage(props.curentPage + 1)}>more</button>
+                {
+                    props.maxPage !== props.curentPage ?
+                    <button disabled={props.moreTransLoad} onClick={()=>props.getNextPage(props.curentPage + 1)}>more</button> :
+                    null
+                }
+                
             </section>
         </div>)
+    } else {
+        return <Loader/>
+    }
+    
 }
 export default Main;

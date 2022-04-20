@@ -1,24 +1,27 @@
-import { createRef, useEffect } from "react";
+import { createRef, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import style from "./AddTransaktion.module.css"
 import Tag from "../Tag";
     
-    function AddForm({transaction, Add, Change}) {
-        
+    function AddForm({transaction, Add,AddPost,  Change}) {
+    const [editMode, setEditMode] = useState(false)
     const cost = createRef();
     const receiver = createRef();
-    console.log(cost);
     document.title = 'new transaktion';
     return (
-        <div className="add form">
+        <div className={style.form}>
             <label htmlFor="cost" value="cost">
                 Cost
                 
             </label>
-            <input id="cost"
-                    value={transaction.cost}
-                    type="number" ref={cost}
-                    onChange={() => Change(cost.current)}/>
+            <input
+                id="cost"
+                value={transaction.cost}
+                type="number" ref={cost}
+                autoFocus={true}
+                onChange={() => Change(cost.current)}
+                onFocus={() => setEditMode(true)}
+            />
             <input type='text' ref={receiver} id='receiver' value={transaction.receiver} onChange={() => Change(receiver.current)}/>
             <div className={style.scroller}>
                 <Tag tag='shop' getTag={tag => Change({id: 'tag', value:tag})}/>                

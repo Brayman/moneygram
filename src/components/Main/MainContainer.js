@@ -1,57 +1,43 @@
 import { Component, useEffect } from "react";
-import Account from "../Account/Account";
-import Transaction from "../Transaction/Transaction";
-import * as axios from "axios";
 import Main from "./Main";
 import { connect } from "react-redux";
-import { getTransactionsAC, setCurrentPageAC, setTransactionsAC } from "../../redux/transactions";
-import { getTransactions } from "../../api/api";
-
-// function Main({accountData, transactions, setTransaktions}) {
-//     useEffect(() => {
-//         console.log('go');
-//             axios.get("http://localhost:5000/transactions?_limit=6")
-//             .then(data => setTransaktions(data.data))
-//     },[])
-//     return (
-//         <div className="home">
-//             <Account data={accountData} />
-//             <section className='transactions'>
-//                 {transactions.map((item, i) => <Transaction key={i} body={item}/>)}
-//             </section>
-//         </div>
-//     )
-// }
+import { getTransactionsThunk } from "../../redux/transactions";
+import { WithAuthRedirect } from "../../hoc/withAuthRedirect";
+import { compose } from "redux";
 
 class MainContainer extends Component {
     
     componentDidMount = () => {
-        getTransactions(this.props.pageSize).then(data => this.props.setTransactions(data.data))
+        this.props.getTransactionsThunk(this.props.pageSize)
     }
     onPageChanget = page => {
-        this.props.setCurrentPage(page)
-        getTransactions(this.props.pageSize, page).then(data => this.props.getMoreTrans(data.data))
+        this.props.getTransactionsThunk(this.props.pageSize, page) 
     }
     render() {
-        let page = this.props.totalTransCount / this.props.pageSize;
-        return <Main props={{...this.props, getNextPage: this.onPageChanget}}/>
-        
+        const page = Math.ceil(this.props.totalTransCount / this.props.pageSize);
+        return <Main props={{...this.props, maxPage: page, getNextPage: this.onPageChanget}}/>
     }
 }
 const mapStateToProps = state => {
     return {
-        account: state.account,
+        isLoading: state.transactions.isLoading,
+        isAuth: state.account.isAuth,
+        account: state.account.cards[state.account.selectCard],
         transactions: state.transactions.transactions,
         curentPage: state.transactions.curentPage,
         pageSize: state.transactions.pageSize,
-        totalTransCount: state.transactions.totalTransCount
+        totalTransCount: state.transactions.totalTransCount,
+        moreTransLoad: state.transactions.moreTransLoad,
+
     }
 }
+
 const mapDispatchToProps = dispatch => {
     return {
-        setCurrentPage: page => dispatch(setCurrentPageAC(page)),
-        setTransactions: data => dispatch(setTransactionsAC(data)),
-        getMoreTrans: data => dispatch(getTransactionsAC(data))
+        getTransactionsThunk: (pageSize, page) => dispatch(getTransactionsThunk(pageSize, page))
     }
 }
-export default connect(mapStateToProps,mapDispatchToProps)(MainContainer);
+export default compose(
+    connect(mapStateToProps,mapDispatchToProps),
+    WithAuthRedirect
+)(MainContainer)

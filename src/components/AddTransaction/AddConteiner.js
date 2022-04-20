@@ -1,5 +1,7 @@
 import { connect } from "react-redux";
+import { WithAuthRedirect } from "../../hoc/withAuthRedirect";
 import { AddTransactionAction, createChangeAction } from "../../redux/transactions";
+
 import AddForm from "./AddTransaction";
 const mapStateToProps = state => {
     return {
@@ -12,5 +14,5 @@ const mapDispatchToProps = dispatch => {
         Add: value => dispatch(AddTransactionAction(value))
     }
 }
-const AddContainer = connect(mapStateToProps, mapDispatchToProps)(AddForm)
+const AddContainer = connect(mapStateToProps, mapDispatchToProps)(WithAuthRedirect(AddForm))
 export default AddContainer;

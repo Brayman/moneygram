@@ -2,18 +2,20 @@ import Account from "../Account/Account";
 import { BiChevronRight, BiChevronLeft } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 import Cards from "../Cards/CardsComponent";
+import { WithAuthRedirect } from "../../hoc/withAuthRedirect";
+import { connect } from "react-redux";
 
-function ArrowButton({props}) {
+function ArrowButton({props, setNextCard, setPervCard}) {
     switch (props) {
         case 'left':
             return (
-                <button className="left_button">
+                <button className="left_button" onClick={() => setPervCard()}>
                     <BiChevronLeft size={30}/>
                 </button>
             )
         case 'right':
             return (
-                <button className="right_button">
+                <button className="right_button"  onClick={() => setNextCard()}>
                     <BiChevronRight size={30}/>
                 </button>
             )
@@ -22,24 +24,25 @@ function ArrowButton({props}) {
     }
 }
 
-function Profile({accountData, setCards}) {
+function Profile({account,setUser, card, setCards, setNextCard, setPervCard}) {
     const navigate = useNavigate();
+   
     return (
         <div  className="home">
             <section className='cards'>
-               <ArrowButton props='left'/>
-               <Account data={accountData}/>
-               <ArrowButton props='right'/>
+               <ArrowButton props='left' setPervCard={setPervCard}/>
+               <Cards card={card} setCards={setCards} setUser={setUser}/>
+               <ArrowButton props='right' setNextCard={setNextCard}/>
             </section>
-            <Cards cards={accountData.cards} setCards={setCards}/>
-            <p>{accountData.login}</p>
-            <p>{accountData.first_name}</p>
-            <p>{accountData.second_name}</p>
-            <p>{accountData.mail}</p>
+            
+            <p>{account.login}</p>
+            <p>{account.first_name}</p>
+            <p>{account.second_name}</p>
+            <p>{account.mail}</p>
             <button onClick={() => navigate("/settings")}>
                 Settings
             </button>
         </div>
     )
 }
-export default Profile;
+export default WithAuthRedirect(Profile);
