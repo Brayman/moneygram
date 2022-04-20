@@ -1,19 +1,17 @@
+import { API } from "../api/api";
 import {
     ADD_TRANSACTION,
     CHANGE_SETTINGS,
     SAVE_SETTINGS,
-    SET_CARDS
+    SET_CARDS,
+    SET_NEXT_CARD,
+    SET_PERV_CARD,
+    SET_USER
 } from "./action-types";
 
 const defaultState = {
-    id: 1,
-    login: 'brayman',
-    first_name: '',
-    balance: 299,
-    spend: 15,
-    avatar: null,
-    mail: 'my@mail.com',
-    language: 'en',
+    isAuth: false,
+    selectCard: 0,
     cards: [{
         "id": 1,
         "curency": null,
@@ -26,26 +24,41 @@ const defaultState = {
     }
 
 }
-const account = (state = defaultState, action) => {
-    switch (action.type) {
+const account = (state = defaultState, {type, payload}) => {
+    switch (type) {
         case ADD_TRANSACTION:
-            console.log(action);
             return {
                 ...state,
-                balance: state.balance - action.payload
+                balance: state.balance - payload
             }
         case CHANGE_SETTINGS:
             return {
                 ...state,
                 settings: {
                     ...state.settings,
-                    [action.payload.item]: action.payload.value
+                    [payload.item]: payload.value
                 }
             }
         case SET_CARDS:
             return {
                 ...state,
-                cards: action.payload
+                cards: payload
+            }
+        case SET_NEXT_CARD:
+            return {
+                ...state,
+                selectCard: ++state.selectCard
+            }
+        case SET_PERV_CARD:
+            return {
+                ...state,
+                selectCard: --state.selectCard
+            }
+        case SET_USER:
+            return {
+                ...state,
+                isAuth: true,
+                ...payload
             }
         case SAVE_SETTINGS:
             return {
@@ -65,15 +78,56 @@ export const settingsChangeAC = (item,value) => {
         }
     }
 }
+export const settingsSaveAC = () => {
+    return {
+        type: SAVE_SETTINGS
+    }
+}
 export const setCardsAC = data => {
     return {
         type: SET_CARDS,
         payload: data
     }
 }
-export const settingsSaveAC = () => {
+export const setUserAC = data => {
     return {
-        type: SAVE_SETTINGS
+        type: SET_USER,
+        payload: data
     }
 }
+export const setNextCardAC = data => {
+    return {
+        type: SET_NEXT_CARD,
+        payload: data
+    }
+}
+export const setPreviousCardAC = data => {
+    return {
+        type: SET_PERV_CARD,
+        payload: data
+    }
+}
+export const getCardsThunk = () => dispatch => {
+    API.getCards()
+    .then(data => {
+        dispatch(setCardsAC(data))
+    })
+}
+export const setUserThunk = login => dispatch => {
+    API.getUser(login)
+    .then(data => {
+        dispatch(setUserAC(data))
+    })
+}
+export const AuthThunk = login => dispatch => {
+    API.getUser(login)
+    .then(data => {
+        dispatch(setUserAC(data))
+        API.getCards()
+        .then(data => {
+            dispatch(setCardsAC(data))
+        })
+    })
+}
+
 export default account;

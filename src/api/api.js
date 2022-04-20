@@ -1,10 +1,25 @@
 import * as axios from "axios";
-export const getTransactions = (pageSize, page) => {
-    if (page === undefined) {
-        return axios.get(`http://localhost:5000/transactions?_limit=${pageSize}`)
+
+const instance = axios.create({
+    baseURL: 'http://localhost:5000/'
+})
+export const API = {
+    getTransactions(pageSize) {
+        return instance.get(`transactions?_limit=${pageSize}`)
+        .then(data => data)
+    },
+    getNextTransactions(pageSize, page) {
+        return instance.get(`transactions?_limit=${pageSize}&_page=${page}`)
+        .then(data => data)
+    },
+    addTransaction(data) {
+        return instance.post(`transactions`,{data})
+    },
+    getCards() {
+        return instance.get("cards").then(data => data.data)
+    },
+    getUser(login) {
+        return instance.get(`users?login=${login}`).then(data => data.data)
     }
-    return axios.get(`http://localhost:5000/transactions?_limit=${pageSize}&_page=${page}`)
 }
-export const getCards = () => {
-    return axios.get("http://localhost:5000/cards")
-}
+
