@@ -13,7 +13,7 @@
 }
 .home {
   overflow-y: overlay;
-  height: calc(100vh - 7em);
+  height: 94vh
 }
 .cards {
   display: flex;
@@ -74,13 +74,4 @@ button {
 
 .App-link {
   color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }

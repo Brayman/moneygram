@@ -1,13 +1,16 @@
 .form {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
+  height: 100%;
+  justify-content: center;
 }
 .scroller {
   display: flex;
   flex-direction: row;
   overflow-x: overlay;
   padding: 1em 0em;
+  width: 100vw;
 }
 .button {
 

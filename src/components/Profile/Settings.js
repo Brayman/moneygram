@@ -7,7 +7,7 @@ import Item from "./Item"
 import { Route, Routes } from "react-router-dom";
 function SettingsList() {
     return (
-        <div>
+        <div className="home">
             <section>
                 <h2>Profile Settings</h2>
                 <Item   header="Change Name"
@@ -37,7 +37,7 @@ function SettingsList() {
 }
 function ProfileName({Save, Change, profile}) {
     return (
-            <section className={style.section}>
+            <section className={`home ${style.section}`}>
                 <h2>Change Name</h2>
                 <label htmlFor='first_name'>First name</label>
                 <input  id='first_name'
