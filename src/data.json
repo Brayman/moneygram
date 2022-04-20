@@ -1,16 +1,27 @@
 {
-  "cards": [
-    {
-      "id": 1,
-      "curency": "USD",
-      "balance": 100
+    "users": {
+        "id": 1,
+        "login": "brayman",
+        "first_name": "",
+        "balance": 299,
+        "spend": 15,
+        "avatar": null,
+        "mail": "my@mail.com",
+        "language": "ru",
+        "selectCard": 0
     },
-    {
-      "id": 2,
-      "curency": "BYN",
-      "balance": 0
-    }
-  ],
+    "cards": [
+        {
+        "id": 1,
+        "curency": "USD",
+        "balance": 176
+        },
+        {
+        "id": 2,
+        "curency": "BYN",
+        "balance": 2
+        }
+    ],
   "transactions": [
     {
         "cost": 0.49,
@@ -76,6 +87,83 @@
         "tag": "shop",
         "id": 1650030803450,
         "date": 1650030803450
+    },
+    {
+        "receiver": "p/e mikheil khabuliani",
+        "cost": "1.33",
+        "tag": "shop",
+        "id": 1650357308802,
+        "date": 1650357308802
+    },
+    {
+        "receiver": "Yandex.Taxi",
+        "cost": "1.63",
+        "tag": "taxi",
+        "id": 1650357340292,
+        "date": 1650357340292
+    },
+    {
+        "receiver": "Yandex.Taxi",
+        "cost": "3.38",
+        "tag": "taxi",
+        "id": 1650357356970,
+        "date": 1650357356970
+    },
+    {
+        "receiver": "METRO SERVICE+ LTD",
+        "cost": "0.49",
+        "tag": "bus",
+        "id": 1650357407592,
+        "date": 1650357407592
+    },
+    {
+        "receiver": "KHOCHA LTD",
+        "cost": "6.53",
+        "tag": "shop",
+        "id": 1650357648272,
+        "date": 1650357648272
+    },
+    {
+        "receiver": "GLOVO 16APR",
+        "cost": "18.18",
+        "tag": "deliver",
+        "id": 1650357679042,
+        "date": 1650357679042
+    },
+    {
+        "receiver": "Yandex.Taxi",
+        "cost": "1.49",
+        "tag": "taxi",
+        "id": 1650357716242,
+        "date": 1650357716242
+    },
+    {
+        "receiver": "Yandex.Taxi",
+        "cost": "3.38",
+        "tag": "taxi",
+        "id": 1650357729827,
+        "date": 1650357729827
+    },
+    {
+        "receiver": "METRO SERVICE+ LTD",
+        "cost": "0.51",
+        "tag": "bus",
+        "id": 1650357762083,
+        "date": 1650357762083
+    },
+    {
+        "receiver": "KHOCHA LTD",
+        "cost": "3.8",
+        "tag": "shop",
+        "id": 1650357789980,
+        "date": 1650357789980
+    },
+    {
+        "receiver": "KLIKES LHINKALI LLC",
+        "cost": "9.24",
+        "tag": "restaurant",
+        "id": 1650357838702,
+        "date": 1650357838702
     }
 ]
 }
