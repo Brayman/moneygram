@@ -20,7 +20,6 @@ const defaultState = {
     settings: {
         first_name: '',
         second_name: '',
-        mail: ''
     }
 
 }
@@ -63,7 +62,7 @@ const account = (state = defaultState, {type, payload}) => {
         case SAVE_SETTINGS:
             return {
                 ...state,
-                ...state.settings
+                ...payload
             }
         default:
             return state;
@@ -78,9 +77,10 @@ export const settingsChangeAC = (item,value) => {
         }
     }
 }
-export const settingsSaveAC = () => {
+export const settingsSaveAC = (items) => {
     return {
-        type: SAVE_SETTINGS
+        type: SAVE_SETTINGS,
+        payload: items
     }
 }
 export const setCardsAC = data => {
@@ -113,16 +113,19 @@ export const getCardsThunk = () => dispatch => {
         dispatch(setCardsAC(data))
     })
 }
-export const setUserThunk = login => dispatch => {
-    API.getUser(login)
+export const updateProfileThunk = (login,items) => dispatch => {
+    API.updateProfile(login,items)
     .then(data => {
-        dispatch(setUserAC(data))
+        data.status === 200 ? 
+        dispatch(settingsSaveAC(items)) :
+        dispatch({type: "ERROR_REQVEST"})
     })
 }
 export const AuthThunk = login => dispatch => {
     API.getUser(login)
     .then(data => {
-        dispatch(setUserAC(data))
+        const [obj] = data
+        dispatch(setUserAC(obj))
         API.getCards()
         .then(data => {
             dispatch(setCardsAC(data))

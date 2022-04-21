@@ -20,6 +20,10 @@ export const API = {
     },
     getUser(login) {
         return instance.get(`users?login=${login}`).then(data => data.data)
+    },
+    updateProfile(login, data) {
+        console.log(login, data);
+        return instance.patch(`profile/${login}`,data).then(data => data)
     }
 }
 

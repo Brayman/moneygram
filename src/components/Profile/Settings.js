@@ -1,10 +1,11 @@
 import { BiUser, BiEnvelope,  } from "react-icons/bi";
-import { Link, useLocation } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import { MdPassword, MdOutlineMail, MdOutlineAccountCircle, MdOutlineTranslate } from "react-icons/md";
 
 import style from "./Settings.module.css"
 import Item from "./Item"
 import { Route, Routes } from "react-router-dom";
+import { useState } from "react";
 function SettingsList() {
     return (
         <div className="home">
@@ -35,50 +36,76 @@ function SettingsList() {
         
     )
 }
-function ProfileName({Save, Change, profile}) {
+function ProfileName({Save, account}) {
+    const {first_name,second_name}=account
+    const [settings, setSettings] = useState({first_name,second_name})
+    const navigator = useNavigate()
+    const ChangeSettings = (item, value) => {
+        setSettings({
+            ...settings,
+            [item]: value
+        })
+    }
+    const SaveClick = (id, props) => {
+        Save(id,props)
+        navigator(-1)
+    }
     return (
             <section className={`home ${style.section}`}>
                 <h2>Change Name</h2>
                 <label htmlFor='first_name'>First name</label>
                 <input  id='first_name'
                         type='text'
-                        value={profile.first_name}
-                        onChange={e => Change(e.target.id, e.target.value)}
+                        value={settings.first_name}
+                        onChange={e => ChangeSettings(e.target.id, e.target.value)}
                 />
                 <label htmlFor='second_name'>Second name</label>
                 <input  id='second_name'
                         type='text'
-                        value={profile.second_name}
-                        onChange={e => Change(e.target.id, e.target.value)}
+                        value={settings.second_name}
+                        onChange={e => ChangeSettings(e.target.id, e.target.value)}
                 />
-                <button onClick={() => Save()}>save</button>
+                <button onClick={() => SaveClick(account.id,settings)}>save</button>
             </section>
         
     )
 }
-function ProfileMail({Save, Change, profile}) {
+function ProfileMail({Save, account}) {
+    
+    const [settings, setSettings] = useState({mail: account.mail})
+    const navigator = useNavigate()
+    const ChangeSettings = (item, value) => {
+        setSettings({
+            ...settings,
+            [item]: value
+        })
+    }
+    const SaveClick = (id, props) => {
+        Save(id,props)
+        navigator(-1)
+    }
     return (
             <section className={style.section}>
                 <h2>Change Mail</h2>
                 <label htmlFor='mail'>Your mail</label>
                 <input  id='mail'
                         type='mail'
-                        value={profile.mail}
-                        onChange={e => Change(e.target.id, e.target.value)}
+                        value={settings.mail}
+                        onChange={e => ChangeSettings(e.target.id, e.target.value)}
                 />
-                <button onClick={() => Save()}>save</button>
+                <button onClick={() => SaveClick(account.id,settings)}>save</button>
             </section>
         
     )
 }
 
-function Settings({profile, Change, Save}) {
+function Settings({profile,account, Change, Save}) {
     console.log(profile);
     return (
         <Routes>
            <Route path="/" element={<SettingsList/>}/> 
-           <Route path="/change-name" element={<ProfileName Change={Change} Save={Save} profile={profile}/>}/>
-           <Route path="/change-mail" element={<ProfileMail Change={Change} Save={Save} profile={profile}/>}/> 
+           <Route path="/change-name" element={<ProfileName Change={Change} Save={Save} account={account}/>}/>
+           <Route path="/change-mail" element={<ProfileMail Change={Change} Save={Save} account={account}/>}/> 
         </Routes>
         
     )

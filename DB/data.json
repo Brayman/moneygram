@@ -3,14 +3,14 @@
     {
       "id": 1,
       "login": "brayman",
-      "first_name": "Artsiom",
+      "first_name": "Artem",
       "balance": 299,
       "spend": 15,
       "avatar": null,
-      "mail": "my@mail.com",
+      "mail": "ar.rak@gmail.com",
       "language": "ru",
       "selectCard": 0,
-      "second_name": "Rakitski"
+      "second_name": "Rakitskiy"
     },
     {
       "id": 2,
