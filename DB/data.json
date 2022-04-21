@@ -1,0 +1,205 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "login": "brayman",
+      "first_name": "Artsiom",
+      "balance": 299,
+      "spend": 15,
+      "avatar": null,
+      "mail": "my@mail.com",
+      "language": "ru",
+      "selectCard": 0,
+      "second_name": "Rakitski"
+    },
+    {
+      "id": 2,
+      "login": "brayman",
+      "first_name": "",
+      "balance": 299,
+      "spend": 15,
+      "avatar": null,
+      "mail": "my@mail.com",
+      "language": "ru",
+      "selectCard": 0
+    },
+    {
+      "login": "two",
+      "text": "thi shit now work?",
+      "id": "test"
+    }
+  ],
+  "profile": [
+    {
+      "id": 1,
+      "login": "one",
+      "text": "text"
+    },
+    {
+      "login": "2",
+      "text": "oops",
+      "id": 2
+    },
+    {
+      "login": "two",
+      "text": "thi shit now work?",
+      "id": "two"
+    }
+  ],
+  "cards": [
+    {
+      "id": 1,
+      "curency": "USD",
+      "balance": 176
+    },
+    {
+      "id": 2,
+      "curency": "BYN",
+      "balance": 2
+    }
+  ],
+  "transactions": [
+    {
+      "cost": 0.49,
+      "tag": "bus"
+    },
+    {
+      "cost": 5.4,
+      "tag": "shop"
+    },
+    {
+      "cost": 6.01,
+      "tag": "shop"
+    },
+    {
+      "cost": 3.87,
+      "tag": "taxi"
+    },
+    {
+      "receiver": "KHOCHA LTD",
+      "cost": "3.77",
+      "tag": "shop",
+      "id": 1650030454409,
+      "date": 1650030454409
+    },
+    {
+      "receiver": "KLIKES KHINKALI LLC",
+      "cost": "9.16",
+      "tag": "restaurant",
+      "id": 1650030521262,
+      "date": 1650030521262
+    },
+    {
+      "receiver": "T AND K RESTAURANTS LT",
+      "cost": "4.99",
+      "tag": "restaurant",
+      "id": 1650030559732,
+      "date": 1650030559732
+    },
+    {
+      "receiver": "METRO SERVICE+ LTD",
+      "cost": "0.49",
+      "tag": "bus",
+      "id": 1650030597278,
+      "date": 1650030597278
+    },
+    {
+      "receiver": "MAGTI.COM",
+      "cost": "2.69",
+      "tag": "ethernet",
+      "id": 1650030629015,
+      "date": 1650030629015
+    },
+    {
+      "receiver": "Yandex.Taxi",
+      "cost": "3.29",
+      "tag": "taxi",
+      "id": 1650030655519,
+      "date": 1650030655519
+    },
+    {
+      "receiver": "Spar - 243",
+      "cost": "3.54",
+      "tag": "shop",
+      "id": 1650030803450,
+      "date": 1650030803450
+    },
+    {
+      "receiver": "p/e mikheil khabuliani",
+      "cost": "1.33",
+      "tag": "shop",
+      "id": 1650357308802,
+      "date": 1650357308802
+    },
+    {
+      "receiver": "Yandex.Taxi",
+      "cost": "1.63",
+      "tag": "taxi",
+      "id": 1650357340292,
+      "date": 1650357340292
+    },
+    {
+      "receiver": "Yandex.Taxi",
+      "cost": "3.38",
+      "tag": "taxi",
+      "id": 1650357356970,
+      "date": 1650357356970
+    },
+    {
+      "receiver": "METRO SERVICE+ LTD",
+      "cost": "0.49",
+      "tag": "bus",
+      "id": 1650357407592,
+      "date": 1650357407592
+    },
+    {
+      "receiver": "KHOCHA LTD",
+      "cost": "6.53",
+      "tag": "shop",
+      "id": 1650357648272,
+      "date": 1650357648272
+    },
+    {
+      "receiver": "GLOVO 16APR",
+      "cost": "18.18",
+      "tag": "deliver",
+      "id": 1650357679042,
+      "date": 1650357679042
+    },
+    {
+      "receiver": "Yandex.Taxi",
+      "cost": "1.49",
+      "tag": "taxi",
+      "id": 1650357716242,
+      "date": 1650357716242
+    },
+    {
+      "receiver": "Yandex.Taxi",
+      "cost": "3.38",
+      "tag": "taxi",
+      "id": 1650357729827,
+      "date": 1650357729827
+    },
+    {
+      "receiver": "METRO SERVICE+ LTD",
+      "cost": "0.51",
+      "tag": "bus",
+      "id": 1650357762083,
+      "date": 1650357762083
+    },
+    {
+      "receiver": "KHOCHA LTD",
+      "cost": "3.8",
+      "tag": "shop",
+      "id": 1650357789980,
+      "date": 1650357789980
+    },
+    {
+      "receiver": "KLIKES LHINKALI LLC",
+      "cost": "9.24",
+      "tag": "restaurant",
+      "id": 1650357838702,
+      "date": 1650357838702
+    }
+  ]
+}
