@@ -4,7 +4,7 @@ import style from "./Loader.module.css";
 
 function Loader() {
     return (
-        <div className={style.around}>
+        <div className={`home ${style.around}`}>
             <MdAutorenew size={50} className={style.loader}/>
         </div>
         
