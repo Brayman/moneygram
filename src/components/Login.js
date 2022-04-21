@@ -15,6 +15,7 @@ function Login({SetUser,login}) {
         return (
             <div className="home">
                 {login}
+                {navigate(-1)}
             </div>    
         )
     }
