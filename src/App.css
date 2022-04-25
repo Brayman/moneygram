@@ -58,7 +58,11 @@ button {
 .App {
   text-align: center;
 }
-
+.form {
+  display: flex;
+  flex-direction: column;
+  height: 94vh;
+}
 .App-logo {
   height: 10em;
   pointer-events: none;

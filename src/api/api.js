@@ -27,6 +27,11 @@ export const API = {
     },
     SignUp(formData) {
         return instance.post(`users`, formData).then(data => data.data)
+    },
+    Login(formData) {
+        return instance.post(`login`, formData)
+        .then(data => data)
+        .catch(error => {return 404})
     }
 }
 

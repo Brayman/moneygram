@@ -1,7 +1,6 @@
 import './App.css';
-import Header from './components/Header/Header';
 import Settings from './components/Profile/SettingsContainer';
-import { BrowserRouter, Route, Router, Routes } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Router, Routes } from 'react-router-dom';
 import Menu from './components/Menu/Menu';
 import Main from './components/Main/MainContainer';
 import Profile from './components/Profile/Profile';
@@ -9,21 +8,35 @@ import Tag from './components/Tag';
 import NotFound from './components/NotFound';
 import AddContainer from './components/AddTransaction/AddConteiner';
 import { connect } from 'react-redux';
-import { setCardsAC } from './redux/account';
-import { setCurrentPageAC, setTransactionsAC } from './redux/transactions';
+import { getCardsThunk, AuthThunk, setNextCardAC, setPreviousCardAC, SignUp } from './redux/account';
+import { setCurrentPageAC } from './redux/transactions';
+import Login from './components/Login';
+import SignIn from './components/SignIn';
 
 
 
-function App({setCards, accountData}) {
+function App({setCards,isAuth,Auth, card, account, setNextCard, setPervCard, SignUp}) {
   return (
     <BrowserRouter>
-      <Header/>
         <Routes>
           <Route  path='/'
                   element={<Main/>}/>
-          <Route path='/profile' element={<Profile accountData={accountData} setCards={setCards}/>}/>
+          <Route path='/profile' element={
+            
+            <Profile
+              isAuth={isAuth}
+              setUser={Auth}
+              account={account}
+              card={card}
+              setCards={setCards}
+              setNextCard={setNextCard}
+              setPervCard={setPervCard}
+            /> 
+          }/>
           <Route path='/settings/*' element={<Settings/>}/>
-          <Route path='/add' element={<AddContainer/>}/>
+          <Route path='/sign-up' element={<SignIn onSubmit={(item) => console.log(item)}/>}/>
+          <Route path='/add' element={<AddContainer isAuth={isAuth}/>}/>
+          <Route path='/login' element={<Login SetUser={Auth} login={account.login}/>}/>
           <Route path='/test' element={<div>
               <Tag tag='shop'/>
             </div>}/>
@@ -39,7 +52,9 @@ const mapStateToProps = state => {
       transactions: state.transactions.transactions,
       newTrans: state.transactions.newTrans
     },
-    accountData: state.account,
+    isAuth: state.account.isAuth,
+    card: state.account.cards[state.account.selectCard],
+    account: state.account,
     pageSize: state.transactions.pageSize,
     totalTransCount: state.transactions.totalTransCount,
     curentPage: state.transactions.curentPage
@@ -47,9 +62,12 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = dispatch => {
   return {
-      setTransaktions: data => dispatch(setTransactionsAC(data)),
-      setCards: data => dispatch(setCardsAC(data)),
-      setCurrentPage: page => dispatch(setCurrentPageAC(page))
+    SignUp: FormData => dispatch(SignUp(FormData)),
+    Auth: FormData => dispatch(AuthThunk(FormData)),
+    setCards: () => dispatch(getCardsThunk()),
+    setPervCard: () => dispatch(setPreviousCardAC()),
+    setNextCard: () => dispatch(setNextCardAC()),
+    setCurrentPage: page => dispatch(setCurrentPageAC(page)),
   }
 }
 

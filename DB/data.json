@@ -4,6 +4,7 @@
       "id": 1,
       "login": "brayman",
       "first_name": "Artem",
+      "pass": 8292913,
       "balance": 299,
       "spend": 15,
       "avatar": null,
@@ -14,7 +15,7 @@
     },
     {
       "id": 2,
-      "login": "brayman",
+      "login": "braymn",
       "first_name": "",
       "balance": 299,
       "spend": 15,

@@ -1,3 +1,4 @@
+import { stopSubmit } from "redux-form";
 import { API } from "../api/api";
 import {
     ADD_TRANSACTION,
@@ -122,15 +123,29 @@ export const updateProfileThunk = (login,items) => dispatch => {
     })
 }
 export const AuthThunk = login => dispatch => {
-    API.getUser(login)
+    API.Login(login)
     .then(data => {
-        const [obj] = data
-        dispatch(setUserAC(obj))
-        API.getCards()
-        .then(data => {
-            dispatch(setCardsAC(data))
-        })
+        console.log(data);
+        if (data >= 400) {
+            
+            dispatch(stopSubmit("login",{_error: "login or password wrong"}))
+        } else {
+            dispatch(setUserAC(data.data))
+            API.getCards()
+            .then(data => {
+                dispatch(setCardsAC(data))
+            })
+        }
     })
 }
+export const SignUp = formData => dispatch => {
+    API.SignUp({
+        ...formData,
+        id: new Date().getTime()
+    })
+    .then(data => {
+        dispatch(setUserAC(data))
+    })
 
+}
 export default account;
