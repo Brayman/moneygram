@@ -3,11 +3,11 @@ import { useNavigate } from "react-router-dom";
 import style from "./AddTransaktion.module.css"
 import Tag from "../Tag";
     
-    function AddForm({transaction, Add,AddPost,  Change}) {
+    function AddForm({transaction, userid, Add, Change}) {
     const [editMode, setEditMode] = useState(false)
     const cost = createRef();
     const receiver = createRef();
-    document.title = 'new transaktion';
+    const navigate = useNavigate();
     return (
         <div className={style.form}>
             <label htmlFor="cost" value="cost">
@@ -32,7 +32,11 @@ import Tag from "../Tag";
                 <Tag tag='bus' getTag={tag => Change({id: 'tag', value:tag})}/>                
             </div>
             
-            <button onClick={() => Add(transaction.cost)}>
+            <button onClick={() => {
+                Add(userid, transaction.cost)
+                navigate(-1)
+                }}
+            >
                 Add transaction
             </button>
 
