@@ -34,7 +34,22 @@ const transactions = (state = defaultState, {type, payload}) => {
                 }
             }
         case ADD_TRANSACTION:
-            return { ...state, transactions: [...state.transactions, { ...state.newTrans, id: new Date().getTime(), date: new Date().getTime() }], newTrans: { receiver: '', cost: '' } }
+            return {
+                ...state,
+                transactions: [
+                    ...state.transactions,
+                    {
+                        ...state.newTrans,
+                        id: new Date().getTime(),
+                        date: new Date().getTime(),
+                        userid: payload.userid
+                    }
+                ],
+                newTrans: {
+                    receiver: '',
+                    cost: ''
+                }
+            }
         case GET_TRANSACTIONS: return { ...state, transactions: [...state.transactions, ...payload], }
         case SET_TRANSACTIONS: return { ...state, transactions: payload }
         case SET_TOTAL_COUNT: return { ...state, totalTransCount: payload }
@@ -49,10 +64,28 @@ const transactions = (state = defaultState, {type, payload}) => {
         default: return state;
     }
 }
-export const createChangeAction = (item) => { return { type: CREATE_TRANASACTION, payload: { item: item.id, value: item.value } }}
-export const AddTransactionAction = value => { return { type: ADD_TRANSACTION, payload: value } }
+export const createChangeAction = (item) => {
+    return {
+        type: CREATE_TRANASACTION,
+        payload: {
+            item: item.id,
+            value: item.value
+        }
+    }
+}
+export const AddTransactionAction = (userid, value) => {
+    return {
+        type: ADD_TRANSACTION,
+        payload: {...value, userid}
+    }
+}
 export const load = value => { return { type: ADD_TRANSACTION, payload: value } }
-export const setTransactionsAC = data => { return { type: SET_TRANSACTIONS, payload: data } }
+export const setTransactionsAC = data => {
+    return {
+        type: SET_TRANSACTIONS,
+        payload: data
+    }
+}
 export const getTransactionsAC = data => { return { type: GET_TRANSACTIONS, payload: data } }
 export const setCurrentPageAC = page => { return { type: SET_CURRENT_PAGE, payload: page } }
 export const transLoadingStartAction = data => { return { type: TRANSACTIONS_LOADING, payload: data } }
@@ -71,10 +104,10 @@ export const transLoadingProgresAC = data => {
     }
 }
 
-export const getTransactionsThunk = (pageSize, page) => dispatch => {
+export const getTransactionsThunk = (login, pageSize, page) => dispatch => {
     if (page === undefined) {
         dispatch(transLoadingStartAction(true))
-        API.getTransactions(pageSize)
+        API.getTransactions(login, pageSize)
         .then(data => {
             dispatch(setCurrentPageAC(1))
             dispatch(setTransactionsAC(data.data))
@@ -84,7 +117,7 @@ export const getTransactionsThunk = (pageSize, page) => dispatch => {
     } else {
         dispatch(transLoadingProgresAC(true))
         dispatch(setCurrentPageAC(page))
-        API.getNextTransactions(pageSize, page)
+        API.getNextTransactions(login, pageSize, page)
         .then(data => {
             dispatch(getTransactionsAC(data.data))
             dispatch(transLoadingProgresAC(false))

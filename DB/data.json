@@ -24,26 +24,12 @@
       "selectCard": 0
     },
     {
-      "login": "two",
-      "text": "thi shit now work?",
-      "id": "test"
-    }
-  ],
-  "profile": [
-    {
-      "id": 1,
-      "login": "one",
-      "text": "text"
-    },
-    {
-      "login": "2",
-      "text": "oops",
-      "id": 2
-    },
-    {
-      "login": "two",
-      "text": "thi shit now work?",
-      "id": "two"
+      "login": "braymanrun",
+      "mail": "test@mail.com",
+      "pass": "paswort",
+      "id": 1650623802885,
+      "first_name": "test",
+      "second_name": "test"
     }
   ],
   "cards": [
@@ -60,22 +46,27 @@
   ],
   "transactions": [
     {
+      "userid": "brayman",
       "cost": 0.49,
       "tag": "bus"
     },
     {
+      "userid": "brayman",
       "cost": 5.4,
       "tag": "shop"
     },
     {
+      "userid": "brayman",
       "cost": 6.01,
       "tag": "shop"
     },
     {
+      "userid": "brayman",
       "cost": 3.87,
       "tag": "taxi"
     },
     {
+      "userid": "brayman",
       "receiver": "KHOCHA LTD",
       "cost": "3.77",
       "tag": "shop",
@@ -83,6 +74,7 @@
       "date": 1650030454409
     },
     {
+      "userid": "brayman",
       "receiver": "KLIKES KHINKALI LLC",
       "cost": "9.16",
       "tag": "restaurant",
@@ -90,6 +82,7 @@
       "date": 1650030521262
     },
     {
+      "userid": "brayman",
       "receiver": "T AND K RESTAURANTS LT",
       "cost": "4.99",
       "tag": "restaurant",
@@ -97,6 +90,7 @@
       "date": 1650030559732
     },
     {
+      "userid": "brayman",
       "receiver": "METRO SERVICE+ LTD",
       "cost": "0.49",
       "tag": "bus",
@@ -104,6 +98,7 @@
       "date": 1650030597278
     },
     {
+      "userid": "brayman",
       "receiver": "MAGTI.COM",
       "cost": "2.69",
       "tag": "ethernet",
@@ -111,6 +106,7 @@
       "date": 1650030629015
     },
     {
+      "userid": "brayman",
       "receiver": "Yandex.Taxi",
       "cost": "3.29",
       "tag": "taxi",
@@ -118,6 +114,7 @@
       "date": 1650030655519
     },
     {
+      "userid": "brayman",
       "receiver": "Spar - 243",
       "cost": "3.54",
       "tag": "shop",
@@ -125,6 +122,7 @@
       "date": 1650030803450
     },
     {
+      "userid": "brayman",
       "receiver": "p/e mikheil khabuliani",
       "cost": "1.33",
       "tag": "shop",
@@ -132,6 +130,7 @@
       "date": 1650357308802
     },
     {
+      "userid": "brayman",
       "receiver": "Yandex.Taxi",
       "cost": "1.63",
       "tag": "taxi",
@@ -139,6 +138,7 @@
       "date": 1650357340292
     },
     {
+      "userid": "brayman",
       "receiver": "Yandex.Taxi",
       "cost": "3.38",
       "tag": "taxi",
@@ -146,6 +146,7 @@
       "date": 1650357356970
     },
     {
+      "userid": "brayman",
       "receiver": "METRO SERVICE+ LTD",
       "cost": "0.49",
       "tag": "bus",
@@ -153,6 +154,7 @@
       "date": 1650357407592
     },
     {
+      "userid": "brayman",
       "receiver": "KHOCHA LTD",
       "cost": "6.53",
       "tag": "shop",
@@ -160,6 +162,7 @@
       "date": 1650357648272
     },
     {
+      "userid": "brayman",
       "receiver": "GLOVO 16APR",
       "cost": "18.18",
       "tag": "deliver",
@@ -167,6 +170,7 @@
       "date": 1650357679042
     },
     {
+      "userid": "brayman",
       "receiver": "Yandex.Taxi",
       "cost": "1.49",
       "tag": "taxi",
@@ -174,6 +178,7 @@
       "date": 1650357716242
     },
     {
+      "userid": "brayman",
       "receiver": "Yandex.Taxi",
       "cost": "3.38",
       "tag": "taxi",
@@ -181,6 +186,7 @@
       "date": 1650357729827
     },
     {
+      "userid": "brayman",
       "receiver": "METRO SERVICE+ LTD",
       "cost": "0.51",
       "tag": "bus",
@@ -188,6 +194,7 @@
       "date": 1650357762083
     },
     {
+      "userid": "brayman",
       "receiver": "KHOCHA LTD",
       "cost": "3.8",
       "tag": "shop",
@@ -195,6 +202,7 @@
       "date": 1650357789980
     },
     {
+      "userid": "brayman",
       "receiver": "KLIKES LHINKALI LLC",
       "cost": "9.24",
       "tag": "restaurant",

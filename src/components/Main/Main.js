@@ -1,5 +1,5 @@
 import Account from "../Account/Account";
-import Loader from "../Loading/Loader";
+import Loader from "../common/Loader/Loader";
 import Transaction from "../Transaction/Transaction";
 
 function Main({props}) {

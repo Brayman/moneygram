@@ -8,11 +8,11 @@ import { compose } from "redux";
 class MainContainer extends Component {
     
     componentDidMount = () => {
-        this.props.getTransactionsThunk(this.props.pageSize)
+        this.props.getTransactionsThunk(this.props.login, this.props.pageSize)
     }
     onPageChanget = page => {
-        this.props.getTransactionsThunk(this.props.pageSize, page) 
-    }
+        this.props.getTransactionsThunk(this.props.login, this.props.pageSize, page) 
+    } 
     render() {
         const page = Math.ceil(this.props.totalTransCount / this.props.pageSize);
         return <Main props={{...this.props, maxPage: page, getNextPage: this.onPageChanget}}/>
@@ -20,6 +20,7 @@ class MainContainer extends Component {
 }
 const mapStateToProps = state => {
     return {
+        login: state.account.login,
         isLoading: state.transactions.isLoading,
         isAuth: state.account.isAuth,
         account: state.account.cards[state.account.selectCard],
@@ -34,7 +35,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        getTransactionsThunk: (pageSize, page) => dispatch(getTransactionsThunk(pageSize, page))
+        getTransactionsThunk: (login, pageSize, page) => dispatch(getTransactionsThunk(login, pageSize, page))
     }
 }
 export default compose(
