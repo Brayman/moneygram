@@ -1,14 +1,18 @@
 import { applyMiddleware, combineReducers, createStore } from "redux";
 import thunk from "redux-thunk";
 import account from "./account";
-import transactions from "./transactions";
+import card from "./card";
 import { reducer as formReducer } from "redux-form";
+import app from "./app";
+
 const reducers = combineReducers({
-    transactions,
+    card,
     account,
+    app,
     form: formReducer
 })
 
 
 const store = createStore(reducers, applyMiddleware(thunk));
 export default store;
+window.store = store;

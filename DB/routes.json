@@ -1,4 +1,5 @@
 {
     "/profile/:id": "/users/:id",
-    "/login/:login": "users?login=:login"
+    "/login/:login": "users?login=:login",
+    "/cards/:id": "/cards/:id"
 }

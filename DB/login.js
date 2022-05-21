@@ -1,4 +1,4 @@
-const { users } = require("./data.json")
+const { users } = require("./db.json")
 
 module.exports = (req, res, next) => {
     if (req.originalUrl === '/login') {
