@@ -1,0 +1,86 @@
+button {
+    background-color: #fff;
+    border: none;
+    outline-offset: none;
+}
+
+.button__select {
+    border-radius: 1.5em;
+    border: 2px solid #eee;
+    padding: 0.5em 1em;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.icon-button {
+    font-size: 1.5em;
+    padding: 0.2em;
+    border: 2px solid #eee;
+    border-radius: 0.2em;
+    cursor: pointer;
+}
+
+.button-select__icon {
+    font-size: 1.5em;
+    color: #7B61FF;
+}
+
+.main__header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.main__list {
+    display: flex;
+    flex-direction: column;
+    margin: 1em;
+}
+
+.transaction__item {
+    padding: 1em;
+    display: flex;
+    flex-direction: row;
+    border-radius: 1em;
+    margin: 0 0 1em;
+    background-color: #FCFCFC;
+}
+
+.transaction__icon {
+    font-size: 1.5em;
+    padding: 0.5em;
+    border-radius: 0.6em;
+    background-color: #CFFAEA;
+    color: #00A86B;
+    align-self: center;
+}
+
+.transaction__content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.content__title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+
+.content__money_expense {
+    font-weight: 800;
+    color: #FD3C4A;
+}
+
+
+.content__subtitle {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    font-size: 0.8em;
+    color: #91919F;
+}
