@@ -40,6 +40,7 @@ input {
   border: 1px solid #F1F1FA;
   border-radius: 1em;
 }
+
 .select__icon {
   color: #91919F;
   font-size: 2em;
@@ -76,6 +77,9 @@ input {
   background-color: #FCFCFC;
   border: 1px solid #F1F1FA
 }
+.tag-option__empty {
+  height: 28.25px;
+}
 
 .options__hidden {
   display: none;
@@ -95,11 +99,28 @@ input {
 
 .tr-add__content {
   margin: 1em 1.5em;
+  display: flex;
+  font-size: 16px;
+  flex-direction: column;
+  align-content: center;
 }
+
 .tr-add-header__subtitle {
-  margin: 3.6875em 1.625em ;
+  margin: 3.6875em 1.625em;
 }
+
 .tr-add-header__title {
   margin: 0.2em 0.4em;
   font-size: 4em;
+}
+
+.primary-btn {
+  cursor: pointer;
+  padding: 1em;
+  text-align: center;
+  border-radius: 16px;
+  font-size: 18px;
+  line-height: 22px;
+  color: #fff;
+  background-color: #7F3DFF;
 }

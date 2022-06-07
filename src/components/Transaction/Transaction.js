@@ -4,21 +4,16 @@ import {
 } from "react-icons/md";
 import style from "./Transaction.module.css"
 import "./Trans.css"
+import { Navigation } from "../common/Navigation/Navigation";
 function Transaction({ tag, currency = "GEL", type = "expense", cost, date, payee, comment = "no comment" }) {
     return (
         <section className="tr-full">
             <header className={`tr-full__header header_${type}`}>
-                <nav className="header__nav nav">
-                    <button className="nav__button">
-                        <MdKeyboardBackspace />
-                    </button>
-                    <h2 className="nav__title">
-                        Detail Transaction
-                    </h2>
+                <Navigation className="header__nav" title={'Detail Transaction'}>
                     <button className="nav__button">
                         <MdDelete />
                     </button>
-                </nav>
+                </Navigation>
                 <h1 className="header__title">
                     {`${currency} ${cost}`}
                 </h1>
@@ -40,7 +35,7 @@ function Transaction({ tag, currency = "GEL", type = "expense", cost, date, paye
                         </div>
                     </div>
                     <div className="panel__col">
-                        <div className="panel__title"> 
+                        <div className="panel__title">
                             Category
                         </div>
                         <div>

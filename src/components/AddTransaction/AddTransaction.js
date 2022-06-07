@@ -4,7 +4,6 @@ import "./AddTransaktion.css"
 import Tag from "../Tag";
 import { v4 as uuidv4 } from 'uuid';
 import {
-    MdKeyboardBackspace,
     MdOutlineKeyboardArrowDown,
     MdOutlineKeyboardArrowUp
 } from "react-icons/md";
@@ -15,6 +14,7 @@ import {
     useField,
     useFormikContext
 } from "formik";
+import { Navigation } from '../common/Navigation/Navigation';
 
 const tags = ['shop', 'taxi', 'deliver', 'restaurant', 'ethernet', 'bus']
 const TagSelect = ({ label, ...props }) => {
@@ -42,10 +42,12 @@ const SelectTag = ({item}) => {
     return (
         <div className='select-field'>
             <div className='select field tr-add__field' onClick={() => setOpen(!open)}>
-                <div className='tag-option tag-option__selected'>
+                {item !== '' ? <div className='tag-option tag-option__selected'>
                     <div className='tag-option__dot' />
                     {item}
-                </div>
+                </div> :
+                <div className='tag-option__empty'/>
+                }
                 {open ?
                     <MdOutlineKeyboardArrowUp className='select__icon' /> :
                     <MdOutlineKeyboardArrowDown className='select__icon' />
@@ -115,14 +117,7 @@ function AddForm({ userid, cardid, Add, Change }) {
             {({ values }) => <Form>
                 <section className="tr-add">
                     <header className={`tr-add__header header_${values.type}`}>
-                        <nav className="header__nav nav">
-                            <button className="nav__button">
-                                <MdKeyboardBackspace />
-                            </button>
-                            <h2 className="nav__title">
-                                {values.type}
-                            </h2>
-                        </nav>
+                        <Navigation className="header_nav" title={values.type}/>
                         <div className="tr-add-header__subtitle">
                             How much?
                         </div>
@@ -144,7 +139,7 @@ function AddForm({ userid, cardid, Add, Change }) {
                             </h4>
 
                         </section>
-                        <button className="tr-add__button">
+                        <button className="tr-add__button primary-btn">
                             edit
                         </button>
                     </main>
