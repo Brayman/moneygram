@@ -5,8 +5,8 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 0em 1em;
-    padding: 2em 0;
+    padding-top: 1em;
+    color: #FFFFFF;
 }
 
 .nav__button {
@@ -15,6 +15,7 @@
     background-color: inherit;
     font-size: 2em;
     cursor: pointer;
+    margin: 0.5em;
 }
 
 .nav__button:first-child {
@@ -26,6 +27,9 @@
 }
 
 .nav__title {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 22px;
     margin: 0.5em 0 0.2em 0;
     align-self: center;
 }

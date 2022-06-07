@@ -30,7 +30,7 @@ function Transaction({ tag, currency = "GEL", type = "expense", cost, date, paye
                         <div className="panel__title">
                             Type
                         </div>
-                        <div>
+                        <div className="panel__text">
                             {type}
                         </div>
                     </div>
@@ -38,7 +38,7 @@ function Transaction({ tag, currency = "GEL", type = "expense", cost, date, paye
                         <div className="panel__title">
                             Category
                         </div>
-                        <div>
+                        <div className="panel__text">
                             {tag}
                         </div>
                     </div>
@@ -46,7 +46,7 @@ function Transaction({ tag, currency = "GEL", type = "expense", cost, date, paye
                         <div className="panel__title">
                             Wallet
                         </div>
-                        <div>
+                        <div className="panel__text">
                             main
                         </div>
                     </div>
@@ -57,7 +57,7 @@ function Transaction({ tag, currency = "GEL", type = "expense", cost, date, paye
                     </h4>
                     {comment}
                 </section>
-                <button className="tr-full__button">
+                <button className="primary-btn">
                     edit
                 </button>
             </main>
