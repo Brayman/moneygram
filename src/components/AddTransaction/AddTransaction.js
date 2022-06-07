@@ -3,10 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "./AddTransaktion.css"
 import Tag from "../Tag";
 import { v4 as uuidv4 } from 'uuid';
-import {
-    MdOutlineKeyboardArrowDown,
-    MdOutlineKeyboardArrowUp
-} from "react-icons/md";
+
 import {
     Field,
     Form,
@@ -15,9 +12,10 @@ import {
     useFormikContext
 } from "formik";
 import { Navigation } from '../common/Navigation/Navigation';
+import TagSelect from '../common/TagSelect/TagSelect';
 
 const tags = ['shop', 'taxi', 'deliver', 'restaurant', 'ethernet', 'bus']
-const TagSelect = ({ label, ...props }) => {
+const SelectTag = ({ label, ...props }) => {
     const { setFieldValue } = useFormikContext()
     const [field, meta] = useField(props);
     return (
@@ -35,43 +33,7 @@ const DatePicker = (props) => {
 }
 
 
-const SelectTag = ({item}) => {
-    const [open, setOpen] = useState(false);
-    const { setFieldValue } = useFormikContext()
-    const hiddenClass = !open ? 'options__hidden' : 'options';
-    return (
-        <div className='select-field'>
-            <div className='select field tr-add__field' onClick={() => setOpen(!open)}>
-                {item !== '' ? <div className='tag-option tag-option__selected'>
-                    <div className='tag-option__dot' />
-                    {item}
-                </div> :
-                <div className='tag-option__empty'/>
-                }
-                {open ?
-                    <MdOutlineKeyboardArrowUp className='select__icon' /> :
-                    <MdOutlineKeyboardArrowDown className='select__icon' />
-                }
-            </div>
-            <div className={hiddenClass}>
-                {tags.map(item => {
-                    return (
-                        <div
-                            key={item}
-                            className='tag-option'
-                            onClick={e => {
-                                setOpen(!open)
-                                setFieldValue('tag', e.target.outerText)}
-                            }
-                        >
-                            {item}
-                        </div>
-                    )
-                })}
-            </div>
-        </div>
-    )
-}
+
 
 
 function AddForm({ userid, cardid, Add, Change }) {
@@ -115,22 +77,20 @@ function AddForm({ userid, cardid, Add, Change }) {
             }
         >
             {({ values }) => <Form>
-                <section className="tr-add">
+                <section className={`tr-add tr-add_${values.type}`}>
                     <header className={`tr-add__header header_${values.type}`}>
                         <Navigation className="header_nav" title={values.type}/>
                         <div className="tr-add-header__subtitle">
                             How much?
                         </div>
-                        <h1 className="tr-add-header__title">
-                            {`${values.currency} ${values.cost}`}
-                        </h1>
-
-                        <div className="header__date">
-
+                        <div className="tr-add-header__title">
+                            {values.currency}
+                            <Field className='tr-add-header__input' type='number' name='cost'/>
                         </div>
                     </header>
                     <main className="tr-add__content">
-                        <SelectTag item={values.tag}/>
+                        <TagSelect item={values.tag} tags={tags}/>
+                        <DatePicker className='tr-add__field field' name='date' id='date' placeholder="date" />
                         <Field className='tr-add__field field' name='payee'  placeholder='payee' />
                         <Field className='tr-add__field field' name='card' placeholder='select card' />
                         <section className="tr-add__field tr-add__comment">
@@ -140,16 +100,11 @@ function AddForm({ userid, cardid, Add, Change }) {
 
                         </section>
                         <button className="tr-add__button primary-btn">
-                            edit
+                            save
                         </button>
                     </main>
                 </section>
-                <label htmlFor="cost">price</label>
-                <Field type='number' id='cost' name='cost' />
-                <Field type='text' name='payee' placeholder='shop' />
-                <DatePicker name='date' id='date' placeholder="date" />
-                <TagSelect name='tag' />
-                <button type='submit'> Save</button>
+                
             </Form>}
         </Formik>
     )
