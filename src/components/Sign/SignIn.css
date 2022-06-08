@@ -1,0 +1,41 @@
+.signin {
+    display: flex;
+    flex-direction: column;
+    margin: 0 1em;
+}
+
+.signin-nav {
+    color: #212325;
+}
+
+.signin__field {
+    margin: 0 0 1.5em 0;
+}
+
+.signin__field:first-child {
+    margin: 3.5em 0 1.5em 0;
+}
+
+.signin__button {
+    margin-bottom: 0.75em;
+}
+.signin__footer {
+    text-align: center;
+    color: #91919F;
+    margin-bottom: 1em;
+}
+.signin-link {
+    color: #7F3DFF;
+}
+
+.signin-link__title {
+    margin: 2em 0 2.1em 0;
+    font-size: 18px;
+    text-align: center;
+    text-decoration-line: none;
+    font-weight: 600;
+}
+
+.signin-link__subtitle {
+    margin: 0 0.2em;
+}

@@ -1,3 +1,13 @@
+export const validate = values => {
+    const errors = {};
+    if (!values.email) {
+        errors.email = 'This field not to be empty'
+    }
+    if (!values.password) {
+        errors.password = 'This field not to be empty'
+    }
+    return errors
+}
 export const required = value => {
     if (value) {
         console.log('ok');
