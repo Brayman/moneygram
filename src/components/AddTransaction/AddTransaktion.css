@@ -55,26 +55,6 @@
   width: 100vw;
 }
 
-input {
-  border: none;
-  outline: none;
-}
-
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-.field {
-  font-size: 16px;
-  padding: 0.75em 0.8em;
-  line-height: 2.125em;
-  border: 1px solid #F1F1FA;
-  border-radius: 1em;
-
-}
-
 .select {
   display: flex;
   align-items: center;

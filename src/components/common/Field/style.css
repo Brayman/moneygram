@@ -1,0 +1,38 @@
+input {
+    border: none;
+    outline: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.field {
+    font-size: 16px;
+    padding: 0.75em 0.8em;
+    line-height: 2.125em;
+    border: 1px solid #F1F1FA;
+    border-radius: 1em;
+}
+.field:hover,
+.field:focus {
+    border-color: #D3BDFF;
+}
+
+.field_error {
+    border: 1px solid #FD5662;
+    background-color: #FDD5D7;
+    margin-bottom: 0.5em !important;
+}
+
+.field__error {
+    padding: 0.75em 0.8em;
+    line-height: 2.125em;
+    border-radius: 1em;
+    color: #FD5662 !important;
+    border: 1px solid #FD5662;
+    background-color: #FDD5D7;
+    margin-bottom: 1.5em;
+}
