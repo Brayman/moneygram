@@ -89,7 +89,8 @@
       "payee": "",
       "userid": "brayman",
       "cardid": "2114b669-3ac9-4754-95af-b02cd3f7321d",
-      "cost": -17.82,
+      "type": "expense",
+      "cost": 17.82,
       "tag": "restaurant"
     },
     {
@@ -22894,6 +22895,7 @@
       "date": "2022-04-20T00:00:00.000Z",
       "payee": "",
       "userid": "brayman",
+      "type": "income",
       "cardid": "2114b669-3ac9-4754-95af-b02cd3f7321d",
       "cost": 200,
       "tag": ""
@@ -23038,72 +23040,10 @@
       "date": "2022-05-12T00:00:00.000Z",
       "userid": "brayman",
       "cardid": "2114b669-3ac9-4754-95af-b02cd3f7321d",
+      "type": "expense",
       "cost": 0.33,
       "payee": "magticom",
       "tag": "ethernet"
-    },
-    {
-      "id": "5594ef84-c171-46d7-b0b7-5fdc914bf492",
-      "date": "2022-05-13T00:00:00.000Z",
-      "userid": "brayman",
-      "cardid": "2114b669-3ac9-4754-95af-b02cd3f7321d",
-      "cost": 1,
-      "payee": "yandex.taxi",
-      "tag": "taxi"
-    },
-    {
-      "id": "ef460628-b8cd-4072-a315-4d6b6762849d",
-      "date": "2022-05-13T00:00:00.000Z",
-      "userid": "brayman",
-      "cardid": "2114b669-3ac9-4754-95af-b02cd3f7321d",
-      "cost": 2,
-      "payee": "yandex.taxi",
-      "tag": "taxi"
-    },
-    {
-      "id": "9333c663-f9ef-4607-b174-042dc2f1dc20",
-      "date": "2022-05-13T00:00:00.000Z",
-      "userid": "brayman",
-      "cardid": "2114b669-3ac9-4754-95af-b02cd3f7321d",
-      "cost": 3,
-      "payee": "yandex.taxi",
-      "tag": "taxi"
-    },
-    {
-      "userid": "brayman",
-      "date": "2022-05-13T00:00:00.000Z",
-      "cardid": "2114b669-3ac9-4754-95af-b02cd3f7321d",
-      "cost": 4,
-      "payee": "yandex.taxi",
-      "tag": "taxi",
-      "id": "74c46df7-8792-4842-a7ec-5a7e8b004c0d"
-    },
-    {
-      "userid": "brayman",
-      "date": "2022-05-13T00:00:00.000Z",
-      "cardid": "2114b669-3ac9-4754-95af-b02cd3f7321d",
-      "cost": 5,
-      "payee": "yandex.taxi",
-      "tag": "taxi",
-      "id": "ac37439e-0f86-47c7-a6c4-b87c6255fa12"
-    },
-    {
-      "userid": "brayman",
-      "date": "2022-05-13T00:00:00.000Z",
-      "cardid": "9c46e85e-2de5-4eaf-8877-1f7ad224f1af",
-      "cost": 1,
-      "payee": "yandex.taxi",
-      "tag": "taxi",
-      "id": "cd7d0489-3337-4492-acdb-630d3fa6c76d"
-    },
-    {
-      "userid": "brayman",
-      "date": "2022-05-13T00:00:00.000Z",
-      "cardid": "9c46e85e-2de5-4eaf-8877-1f7ad224f1af",
-      "cost": 10,
-      "payee": "yandex.taxi",
-      "tag": "deliver",
-      "id": "d1a180d9-7d19-417a-a3af-875feae01596"
     },
     {
       "userid": "brayman",
@@ -23116,57 +23056,14 @@
     },
     {
       "userid": "brayman",
-      "date": "2022-05-13T00:00:00.000Z",
-      "cardid": "9c46e85e-2de5-4eaf-8877-1f7ad224f1af",
-      "cost": 10,
-      "payee": "yammy",
+      "date": "2022-06-06T00:00:00.000Z",
+      "cardid": "2114b669-3ac9-4754-95af-b02cd3f7321d",
+      "cost": "12",
+      "payee": "Yammy",
       "tag": "shop",
-      "id": "ef8468a7-4c02-4b02-8a02-407fa334be60"
-    },
-    {
-      "userid": "brayman",
-      "date": "2022-05-13T00:00:00.000Z",
-      "cardid": "9c46e85e-2de5-4eaf-8877-1f7ad224f1af",
-      "cost": 10,
-      "payee": "test",
-      "tag": "bus",
-      "id": "72bb6498-6018-436b-9e7c-2ffe2ff752fe"
-    },
-    {
-      "userid": "brayman",
-      "date": "2022-05-13T00:00:00.000Z",
-      "cardid": "9c46e85e-2de5-4eaf-8877-1f7ad224f1af",
-      "cost": 11,
-      "payee": "yandex.taxi",
-      "tag": "bus",
-      "id": "142dbba3-066d-465e-82ca-de38acb1a755"
-    },
-    {
-      "userid": "brayman",
-      "date": "2022-05-13T00:00:00.000Z",
-      "cardid": "9c46e85e-2de5-4eaf-8877-1f7ad224f1af",
-      "cost": 10,
-      "payee": "yandex.taxi",
-      "tag": "",
-      "id": "eef31c20-d54a-4942-8da4-b9194ed4dd0b"
-    },
-    {
-      "userid": "brayman",
-      "date": "2022-05-13T00:00:00.000Z",
-      "cardid": "9c46e85e-2de5-4eaf-8877-1f7ad224f1af",
-      "cost": 1,
-      "payee": "1",
-      "tag": "",
-      "id": "3bd3f20d-7cbd-40be-8a05-23a835eb7889"
-    },
-    {
-      "userid": "brayman",
-      "date": "2022-05-13T00:00:00.000Z",
-      "cardid": "9c46e85e-2de5-4eaf-8877-1f7ad224f1af",
-      "cost": 10,
-      "payee": "yandex.taxi",
-      "tag": "",
-      "id": "cdbda54e-6d2b-4e97-9fc7-98a8b42dd37e"
+      "type": "expense",
+      "currency": "GEL",
+      "id": "756661b2-fd5e-4532-9c31-324b1b0bf7ff"
     }
   ]
 }

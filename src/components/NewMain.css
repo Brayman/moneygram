@@ -57,7 +57,6 @@ button {
 .day-section {
     display: flex;
     flex-direction: column;
-
 }
 .day-section__header {
     margin: 0.45em;
@@ -65,54 +64,6 @@ button {
     font-size: 18px;
     font-weight: 600;
 }
-.transaction {
-    margin: 0.5em 1em;
-    background-color: #FCFCFC;
-    padding: 0.9375em 1.0625em;
-    border-radius: 1.5em;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-.transaction__icon {
-    width: 2.5em;
-    height: 2.5em;
-    background-color: #FCEED4;
-    border-radius: 16px;
-    padding: 0.5em;
-    color: #FCAC12;
-   
-}
-.transaction__content {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 0.375em 0;
-    flex-grow: 1;
-    margin-left: 0.5625em;
-}
-.transaction__title {
-    font-weight: 500;
-    color: #292B2D;
-}
-.transaction__subtitle {
-    font-size: 13px;
-    line-height: 16px;
-    color: #91919F;
-}
-.content__row {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-.cost {
-    font-weight: 600;
-}
-.cost_expense {
-    color: #FD3C4A;
-}
-.cost_income {
-    color: #00A86B;
-}
+
 
 

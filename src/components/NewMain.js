@@ -7,30 +7,16 @@ import {
 } from "react-icons/md";
 
 
-import React from 'react'
 
-export const Transaction = () => {
+
+
+export const DaySection = () => {
     return (
-        <section className="transaction">
-            <MdShoppingCart className="transaction__icon" />
-            <div className="transaction__content">
-                <div className="content__row transaction__title">
-                    <div>
-                        Shopping
-                    </div>
-                    <div className="cost cost_expense">
-                        -120 $
-                    </div>
-                </div>
-                <div className="content__row transaction__subtitle">
-                    <div>
-                        Something buying
-                    </div>
-                    <div>
-                        07:30 PM
-                    </div>
-                </div>
-            </div>
+        <section className="day-section transactions__item">
+            <header className="day-section__header">
+                Today
+            </header>
+         
         </section>
     )
 }
@@ -51,21 +37,8 @@ function Main(params) {
                 See your financial report
                 <MdKeyboardArrowRight className="info-btn__icon" />
             </button>
-            <section className="day-section transactions__item">
-                <header className="day-section__header">
-                    Today
-                </header>
-                <Transaction />
-                <Transaction />
-                <Transaction />
-            </section>
-            <section className="day-section transactions__item">
-                <header className="day-section__header">
-                    Yesterday
-                </header>
-                <Transaction />
-                <Transaction />
-            </section>
+            <DaySection />
+            
         </section>
     )
 }
