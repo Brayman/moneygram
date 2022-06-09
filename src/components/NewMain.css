@@ -3,84 +3,116 @@ button {
     border: none;
     outline-offset: none;
 }
-
-.button__select {
-    border-radius: 1.5em;
-    border: 2px solid #eee;
-    padding: 0.5em 1em;
-    cursor: pointer;
+.transactions {
+    display: flex;
+    flex-direction: column;
+}
+.transactions__header {
+    margin: 0.75em 1em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.transactions__report {
+    margin: 0.5em 1em;
+    flex-grow: 1;
+}
+.filter-btn {
     display: flex;
     flex-direction: row;
     align-items: center;
+    font-size: 14px;
+    color: #212325;
+    padding: 0.785em 1.14em;
+    border-radius: 2.857em;
+    border: 1px solid #F1F1FA;
+}
+.filter-btn__icon {
+    color: #7F3DFF;
+    font-size: 1.6em;
+    line-height: 24px;
+}
+.icon-btn {
+    padding: 0 auto;
+    font-size: 32px;
+    line-height: 1em;
+    border-radius: 0.25em;
+    border: 1px solid #F1F1FA;
 }
 
-.icon-button {
-    font-size: 1.5em;
-    padding: 0.2em;
-    border: 2px solid #eee;
-    border-radius: 0.2em;
-    cursor: pointer;
+.info-btn {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #EEE5FF;
+    color: #7F3DFF;
+    padding: 0.90625em 1em;
+    border-radius: 0.5em;
+    border: 1px solid #7F3DFF;
 }
-
-.button-select__icon {
-    font-size: 1.5em;
-    color: #7B61FF;
+.info-btn__icon {
+    font-size: 25px;
 }
+.day-section {
+    display: flex;
+    flex-direction: column;
 
-.main__header {
+}
+.day-section__header {
+    margin: 0.45em;
+    padding: 0.45em;
+    font-size: 18px;
+    font-weight: 600;
+}
+.transaction {
+    margin: 0.5em 1em;
+    background-color: #FCFCFC;
+    padding: 0.9375em 1.0625em;
+    border-radius: 1.5em;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
-
-.main__list {
-    display: flex;
-    flex-direction: column;
-    margin: 1em;
-}
-
-.transaction__item {
-    padding: 1em;
-    display: flex;
-    flex-direction: row;
-    border-radius: 1em;
-    margin: 0 0 1em;
-    background-color: #FCFCFC;
-}
-
 .transaction__icon {
-    font-size: 1.5em;
+    width: 2.5em;
+    height: 2.5em;
+    background-color: #FCEED4;
+    border-radius: 16px;
     padding: 0.5em;
-    border-radius: 0.6em;
-    background-color: #CFFAEA;
-    color: #00A86B;
-    align-self: center;
+    color: #FCAC12;
+   
 }
-
 .transaction__content {
     display: flex;
     flex-direction: column;
-    width: 100%;
     justify-content: space-between;
+    padding: 0.375em 0;
+    flex-grow: 1;
+    margin-left: 0.5625em;
 }
-
-.content__title {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+.transaction__title {
+    font-weight: 500;
+    color: #292B2D;
 }
-
-
-.content__money_expense {
-    font-weight: 800;
-    color: #FD3C4A;
-}
-
-
-.content__subtitle {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    font-size: 0.8em;
+.transaction__subtitle {
+    font-size: 13px;
+    line-height: 16px;
     color: #91919F;
 }
+.content__row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.cost {
+    font-weight: 600;
+}
+.cost_expense {
+    color: #FD3C4A;
+}
+.cost_income {
+    color: #00A86B;
+}
+
+
