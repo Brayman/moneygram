@@ -61,7 +61,7 @@ function Tag({ tag, getTag = undefined, active }) {
     }, [tag])
 
     return (
-        <div onClick={() => getTag(tag) || console.log(null)}>
+        <div onClick={getTag && (() => getTag(tag)) }>
             {Icon}
         </div>
     )

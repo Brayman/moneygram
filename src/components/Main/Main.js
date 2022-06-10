@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import Account from "../Account/Account";
 import Loader from "../common/Loader/Loader";
-import TransactionMini from "../Transaction/TransactionMini";
+import TransactionMini from "../Transaction/TransactionPreview";
 import style from './MainPage.module.css';
 import {
     MdFilterList,

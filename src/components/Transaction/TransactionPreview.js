@@ -4,7 +4,7 @@ import { memo } from "react";
 const TransactionMini = memo(({ body, onClick }) => {
     const date = new Date(body.date).toLocaleString('ru-RU', { month: 'short', day: '2-digit', year: 'numeric' })
     return (
-        <section key={body.id} className="transaction">
+        <section key={body.id} className="transaction" onClick={() => onClick()}>
             <Tag tag={body.tag} />
             <div className="transaction__content">
                 <div className="content__row transaction__title">
