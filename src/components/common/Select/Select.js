@@ -4,38 +4,49 @@ import {
     MdOutlineKeyboardArrowUp
 } from "react-icons/md";
 import {
-    useFormikContext
+    useFormikContext,
+    useField
 } from "formik";
-
-const TagSelect = ({ item, tags }) => {
+import "./style.css"
+const Select = ({ up = false, tag = false, options, ...props }) => {
     const [open, setOpen] = useState(false);
     const { setFieldValue } = useFormikContext()
-    const hiddenClass = !open ? 'options__hidden' : 'options';
+    const [field, meta] = useField(props);
+    const direction = up ? 'options_up' : 'options_down'
+    const hiddenClass = !open ? 'options_hidden' : direction;
+
+    const item = tag ?
+        <div className='tag-option tag-option__selected'>
+            <div className='tag-option__dot' />
+            {meta.value}
+        </div> :
+        <div className='tag-option__empty'>
+            {meta.value}
+        </div>
     return (
         <div className='select-field'>
             <div className='select field tr-add__field' onClick={() => setOpen(!open)}>
-                {item !== '' ? <div className='tag-option tag-option__selected'>
-                    <div className='tag-option__dot' />
-                    {item}
-                </div> :
-                    <div className='tag-option__empty' />
-                }
+
+                {meta.value == "" ?
+                    <div className='tag-option__empty'>
+                    </div> : 
+                    item}
+
                 {open ?
                     <MdOutlineKeyboardArrowUp className='select__icon' /> :
                     <MdOutlineKeyboardArrowDown className='select__icon' />
                 }
             </div>
             <div className={hiddenClass}>
-                {tags.map(item => {
+                {options.map(item => {
                     return (
                         <div
                             key={item}
-                            className='tag-option'
+                            className='option'
                             onClick={e => {
                                 setOpen(!open)
-                                setFieldValue('tag', e.target.outerText)
-                            }
-                            }
+                                setFieldValue(props.name, item)
+                            }}
                         >
                             {item}
                         </div>
@@ -45,4 +56,5 @@ const TagSelect = ({ item, tags }) => {
         </div>
     )
 }
-export default TagSelect;
+
+export default Select;
