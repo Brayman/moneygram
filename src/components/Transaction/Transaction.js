@@ -2,10 +2,11 @@ import {
     MdDelete,
     MdKeyboardBackspace
 } from "react-icons/md";
-import style from "./Transaction.module.css"
 import "./Trans.css"
 import { Navigation } from "../common/Navigation/Navigation";
-function Transaction({ tag, currency = "GEL", type = "expense", cost, date, payee, comment = "no comment" }) {
+import { useNavigate } from "react-router-dom";
+function Transaction({ tag, currency = "GEL", type = "expense", cost, date, payee, comment = "no comment", id}) {
+    const navigate = useNavigate()
     return (
         <section className="tr-full">
             <header className={`tr-full__header header_${type}`}>
@@ -57,7 +58,7 @@ function Transaction({ tag, currency = "GEL", type = "expense", cost, date, paye
                     </h4>
                     {comment}
                 </section>
-                <button className="primary-btn">
+                <button className="primary-btn" onClick={() => navigate(`/transaction/edit/${id}`)}>
                     edit
                 </button>
             </main>

@@ -12,18 +12,11 @@ import {
     useFormikContext
 } from "formik";
 import { Navigation } from '../common/Navigation/Navigation';
-import TagSelect from '../common/TagSelect/TagSelect';
+import Select from '../common/Select/Select';
+import { useSelector } from 'react-redux';
+import { SpecialField } from '../common/Field/SpecialField';
 
 const tags = ['shop', 'taxi', 'deliver', 'restaurant', 'ethernet', 'bus']
-const SelectTag = ({ label, ...props }) => {
-    const { setFieldValue } = useFormikContext()
-    const [field, meta] = useField(props);
-    return (
-        <div >
-            {tags.map((item, i) => <Tag key={i} tag={item} active={meta.value === item} getTag={tag => setFieldValue('tag', tag)} />)}
-        </div>
-    );
-};
 const DatePicker = (props) => {
     const { setFieldValue } = useFormikContext()
     const [field, meta] = useField(props);
@@ -32,25 +25,15 @@ const DatePicker = (props) => {
     )
 }
 
+function AddForm({ userid, cardid, cards, trans = undefined, Action, Change }) {
 
-
-
-
-function AddForm({ userid, cardid, Add, Change }) {
-    const navigate = useNavigate();
-    const validate = values => {
-        const errors = {};
-        if (!values.cost) {
-            errors.cost = 'Required'
-        }
-        return errors
-    }
-    const initialValues = {
+    const initialValues = trans || {
+        id: uuidv4(),
         userid,
         date: new Date().toISOString().substring(0, 10),
         cardid,
         card: '',
-        cost: '',
+        cost: 0,
         payee: '',
         tag: '',
         type: 'expense',
@@ -62,16 +45,11 @@ function AddForm({ userid, cardid, Add, Change }) {
             initialValues={initialValues}
             onSubmit={
                 (values, actions) => {
-                    console.log({
+                    Action({
                         ...values,
-                        id: uuidv4(),
-                        date: new Date(values.date).toISOString()
-                    });
-                    // Add({
-                    //     ...values,
-                    //     id: uuidv4(),
-                    //     date: new Date(values.date).toISOString()
-                    // })
+                        date: new Date(values.date).toISOString(),
+                        cardid: cards.find((card) => card.name === values.card).id
+                    })
                     actions.resetForm();
                 }
             }
@@ -79,20 +57,19 @@ function AddForm({ userid, cardid, Add, Change }) {
             {({ values }) => <Form>
                 <section className={`tr-add tr-add_${values.type}`}>
                     <header className={`tr-add__header header_${values.type}`}>
-                        <Navigation className="header_nav" title={values.type}/>
-                        <div className="tr-add-header__subtitle">
-                            How much?
-                        </div>
-                        <div className="tr-add-header__title">
-                            {values.currency}
-                            <Field className='tr-add-header__input' type='number' name='cost'/>
-                        </div>
+                        <Navigation className="header_nav" title={values.type} />
+                        <SpecialField
+                            name='cost'
+                            placeholder='How much?'
+                            label={values.currency}
+                            type='number'
+                        />
                     </header>
                     <main className="tr-add__content">
-                        <TagSelect item={values.tag} tags={tags}/>
+                        <Select name="tag" tag options={tags} />
                         <DatePicker className='tr-add__field field' name='date' id='date' placeholder="date" />
-                        <Field className='tr-add__field field' name='payee'  placeholder='payee' />
-                        <Field className='tr-add__field field' name='card' placeholder='select card' />
+                        <Field className='tr-add__field field' name='payee' placeholder='payee' />
+                        <Select up options={cards.map(card => card.name)} name='card' placeholder='select card' />
                         <section className="tr-add__field tr-add__comment">
                             <h4 className="comment__header">
                                 Comment
@@ -104,7 +81,7 @@ function AddForm({ userid, cardid, Add, Change }) {
                         </button>
                     </main>
                 </section>
-                
+
             </Form>}
         </Formik>
     )

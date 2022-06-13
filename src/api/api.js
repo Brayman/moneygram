@@ -16,6 +16,10 @@ export const API = {
     addTransaction: async (data) => {
         return instance.post(`transactions`, data)
     },
+    editTransaction: async (form) => {
+        const res = await instance.put(`transactions/${form.id}`, form)
+        return res.data
+    },
     addCard(form) {
         return instance.post('cards', form)
     },
@@ -37,7 +41,7 @@ export const API = {
         return instance.post(`users`, formData).then(data => data.data)
     },
     Login(formData) {
-        return instance.post(`login`, formData)
+        return instance.post(`login`, {login: formData.login, pass: formData.password})
             .then(data => data)
             .catch(error => { return 404 })
     },

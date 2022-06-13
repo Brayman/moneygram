@@ -122,6 +122,12 @@ export const cardThunks = {
 
             })
     },
+    editTrans: form => async dispatch => {
+        const res = await API.editTransaction(form)
+        dispatch(actions.getTransaction(res))
+
+
+    },
     updateCard: card => dispatch => {
 
         API.updateCard(card)
