@@ -28,3 +28,5 @@ export const UPDATE_CARD = 'UPDATE_CARD';
 export const INITIALIZE_SUCCESS = 'INITIALIZE_SUCCESS';
 export const START_LOGIN = 'START_LOGIN';
 export const FAIL_LOGIN = 'FAIL_LOGIN';
+export const SHOW_MODAL = 'SHOW_MODAL';
+export const HIDE_MODAL = 'HIDE_MODAL';
