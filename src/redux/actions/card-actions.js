@@ -12,6 +12,7 @@ import {
     UPDATE_CARD,
     DELETE_TRANSACTION
 } from "../action-types"
+import { appActions } from "../app"
 
 export const actions = {
     addTransaction: value => {
@@ -124,9 +125,13 @@ export const cardThunks = {
     },
     editTrans: form => async dispatch => {
         const res = await API.editTransaction(form)
-        dispatch(actions.getTransaction(res))
-
-
+        dispatch(appActions.showModal({
+            type: res.type,
+            message: res.message
+        }))
+        if (res.type == 'message') {
+            dispatch(actions.getTransaction(res.data))
+        }
     },
     updateCard: card => dispatch => {
 

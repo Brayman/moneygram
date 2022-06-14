@@ -17,8 +17,22 @@ export const API = {
         return instance.post(`transactions`, data)
     },
     editTransaction: async (form) => {
-        const res = await instance.put(`transactions/${form.id}`, form)
-        return res.data
+        try {
+            const res = await instance.put(`transactions/${form.id}`, form)
+            console.log(res.status);
+            if (res.status === 200) {
+                return {
+                    type: 'message',
+                    data: res.data,
+                    message: 'Transaction has been successfully edited'
+                }
+            }
+        } catch (error) {
+            return {
+                type: 'error',
+                message: 'Edit transaction failed'
+            }
+        }
     },
     addCard(form) {
         return instance.post('cards', form)
@@ -41,7 +55,7 @@ export const API = {
         return instance.post(`users`, formData).then(data => data.data)
     },
     Login(formData) {
-        return instance.post(`login`, {login: formData.login, pass: formData.password})
+        return instance.post(`login`, { login: formData.login, pass: formData.password })
             .then(data => data)
             .catch(error => { return 404 })
     },

@@ -5,8 +5,10 @@ import {
 import "./Trans.css"
 import { Navigation } from "../common/Navigation/Navigation";
 import { useNavigate } from "react-router-dom";
-function Transaction({ tag, currency = "GEL", type = "expense", cost, date, payee, comment = "no comment", id}) {
+import Modal from "../common/Modal/Modal";
+function Transaction({ transaction, modal }) {
     const navigate = useNavigate()
+    const { id, tag, cost, date, payee, currency = 'GEL', type = 'expence', comment = "no comments" } = transaction
     return (
         <section className="tr-full">
             <header className={`tr-full__header header_${type}`}>
@@ -62,6 +64,7 @@ function Transaction({ tag, currency = "GEL", type = "expense", cost, date, paye
                     edit
                 </button>
             </main>
+            {modal.showModal && <Modal show={modal.showModal} text={modal.message} type={modal.type}/>}
         </section>
     )
 }
