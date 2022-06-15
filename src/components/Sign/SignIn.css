@@ -39,3 +39,9 @@
 .signin-link__subtitle {
     margin: 0 0.2em;
 }
+
+.primary-btn:disabled {
+    cursor: no-drop;
+    color: #0D0E0F;
+    background-color: #EEE6FF;
+}
