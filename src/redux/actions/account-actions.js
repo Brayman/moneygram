@@ -58,8 +58,8 @@ export const accountThunks = {
     AuthThunk: login => async dispatch => {
         dispatch(actions.startLogin())
         const resp = await API.Login(login)
-        if (resp.data >= 400) {
-            dispatch(actions.errorLogin("login or password wrong"))
+        if (resp.status >= 400) {
+            dispatch(actions.errorLogin(resp.message))
         } else {
             dispatch(actions.setUser(resp.data))
             const respCard = await API.getCards(resp.data.id)

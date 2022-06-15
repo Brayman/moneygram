@@ -19,7 +19,6 @@ export const API = {
     editTransaction: async (form) => {
         try {
             const res = await instance.put(`transactions/${form.id}`, form)
-            console.log(res.status);
             if (res.status === 200) {
                 return {
                     type: 'message',
@@ -54,10 +53,20 @@ export const API = {
     SignUp(formData) {
         return instance.post(`users`, formData).then(data => data.data)
     },
-    Login(formData) {
-        return instance.post(`login`, { login: formData.login, pass: formData.password })
-            .then(data => data)
-            .catch(error => { return 404 })
+    async Login(formData) {
+        try {
+            const res = await instance.post(`login`, { login: formData.login, pass: formData.password })
+            if (res.status >= 400) {
+                return res
+            }
+            return res
+        } catch (error) {
+            const res = error.toJSON()
+            return {
+                status: res.status,
+                message: "login or password is wrong"
+            }
+        }
     },
     Test() {
         return instance.get(`transactions?login=brayman&cardid=2114b669-3ac9-4754-95af-b02cd3f7321d`)

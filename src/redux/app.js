@@ -18,7 +18,8 @@ const initialState = {
     },
     login: {
         loading: false,
-        error: false
+        error: false,
+        message: ''
     }
 
 }
@@ -27,7 +28,10 @@ const AppReducer = (state = initialState, { type, payload }) => {
         case INITIALIZE_SUCCESS:
             return ({
                 ...state,
-                initialized: true
+                initialized: true,
+                login: {
+                    ...initialState.login
+                }
             })
         case SHOW_MODAL:
             return ({
@@ -68,7 +72,8 @@ const AppReducer = (state = initialState, { type, payload }) => {
                 login: {
                     ...state.login,
                     error: true,
-                    loading: false
+                    loading: false,
+                    message: payload
                 }
             })
         default:
