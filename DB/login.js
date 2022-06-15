@@ -7,11 +7,10 @@ module.exports = (req, res, next) => {
             if (user.pass == req.body.pass) {
                 res.json(user)
             } else {
-                res.status(404).jsonp({"body": "wrong login or password"})
+                res.status(404)
             }
         } catch (error) {
-            console.error('not found');
-            res.status(404).jsonp({"err": "wrong login or password"})
+            res.status(404)
         }  
     } else {
         next() 
