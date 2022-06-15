@@ -2,6 +2,9 @@ import { Component } from "react";
 import { connect } from "react-redux";
 import Transaction from "./Transaction";
 import {modal, transaction } from "../../redux/selectors";
+import { withModalAlert } from "../../hoc/withModalAlert";
+import { compose } from "redux";
+import { WithAuthRedirect } from "../../hoc/withAuthRedirect";
 class TransContainer extends Component {
     render() {
         return(
@@ -15,4 +18,4 @@ const mapStateToProps = state => {
         modal: modal(state)
     }        
 }
-export default connect(mapStateToProps)(TransContainer)
+export default compose(WithAuthRedirect,withModalAlert)(connect(mapStateToProps)(TransContainer))

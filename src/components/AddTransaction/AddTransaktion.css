@@ -9,7 +9,7 @@
 .tr-add__content {
   background-color: #FFF;
   border-radius: 2em 2em 0 0;
-  padding: 1.5em 1em;
+  padding: 1.5em 1em 4em 1em;
   display: flex;
   font-size: 16px;
   flex-direction: column;
@@ -105,21 +105,7 @@
   height: 28.25px;
 }
 
-.options__hidden {
-  display: none;
-}
 
-.options {
-  position: absolute;
-  top: 3em;
-  width: 100%;
-  background-color: #fff;
-  padding: 1em;
-  border: 1px solid #F1F1FA;
-  border-bottom-left-radius: 1em;
-  border-bottom-right-radius: 1em;
-  border-style: none solid solid solid;
-}
 
 .primary-btn {
   cursor: pointer;

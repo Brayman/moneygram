@@ -5,7 +5,6 @@ import {
 import "./Trans.css"
 import { Navigation } from "../common/Navigation/Navigation";
 import { useNavigate } from "react-router-dom";
-import Modal from "../common/Modal/Modal";
 function Transaction({ transaction, modal }) {
     const navigate = useNavigate()
     const { id, tag, cost, date, payee, currency = 'GEL', type = 'expence', comment = "no comments" } = transaction
@@ -63,8 +62,7 @@ function Transaction({ transaction, modal }) {
                 <button className="primary-btn" onClick={() => navigate(`/transaction/edit/${id}`)}>
                     edit
                 </button>
-            </main>
-            {modal.showModal && <Modal show={modal.showModal} text={modal.message} type={modal.type}/>}
+            </main>       
         </section>
     )
 }

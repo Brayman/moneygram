@@ -10,7 +10,7 @@ const Modal = ({ text, show, type = 'message' }) => {
     useEffect(() => {
         setTimeout(() => {
             dispatch(appActions.hideModal())
-        }, 7000);
+        }, 6000);
     }, [show])
 
 
