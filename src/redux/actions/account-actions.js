@@ -58,7 +58,9 @@ export const accountThunks = {
     AuthThunk: login => async dispatch => {
         dispatch(actions.startLogin())
         const resp = await API.Login(login)
+        console.log(resp);
         if (resp.status >= 400) {
+            console.log(resp.status);
             dispatch(actions.errorLogin(resp.message))
         } else {
             dispatch(actions.setUser(resp.data))

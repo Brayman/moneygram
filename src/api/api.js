@@ -62,9 +62,15 @@ export const API = {
             return res
         } catch (error) {
             const res = error.toJSON()
+            if (res.status >= 400) {
+                return {
+                    status: res.status,
+                    message: "login or password is wrong"
+                }
+            }
             return {
-                status: res.status,
-                message: "login or password is wrong"
+                status: 500,
+                message: res.message
             }
         }
     },

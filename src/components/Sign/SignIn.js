@@ -1,9 +1,9 @@
 import { Navigate, NavLink, useNavigate } from "react-router-dom";
 import { Formik, Form, useFormikContext } from "formik";
 import { Navigation } from "../common/Navigation/Navigation";
-import "./SignIn.css";
+import "./Sign.css";
 import { Field } from "../common/Field/Field";
-import { validate, validateYup } from "../../utils/validators/validators";
+import { loginValidate } from "../../utils/validators/validators";
 import { useSelector } from "react-redux";
 import { app } from "../../redux/selectors";
 import React, { useEffect } from "react";
@@ -16,31 +16,31 @@ export const MyForm = ({ isValid, ...props }) => {
         }
     }, [login])
     return (
-        <Form className="signin">
+        <Form className="sign__form">
             <Field
                 name="login"
-                className="signin__field"
+                className="sign__field"
                 placeholder="login"
             />
             <Field
-                className="signin__field"
+                className="sign__field"
                 name="password"
                 type="password"
                 placeholder="password"
             />
             <button
                 disabled={!isValid}
-                className="primary-btn signin__button"
+                className="primary-btn sign__button"
                 type="submit"
             >
                 Login
             </button>
-            <NavLink to="/signin" className="signin-link signin-link__title">
+            <NavLink to="/sign" className="sign-link sign-link__title">
                 Forgot password?
             </NavLink>
-            <span className="signin__footer">
+            <span className="sign__footer">
                 Don't have an account yet?
-                <NavLink to="/sign-up" className="signin-link signin-link__subtitle">
+                <NavLink to="/sign-up" className="sign-link sign-link__subtitle">
                     Sign Up
                 </NavLink>
             </span>
@@ -62,9 +62,8 @@ const SignIn = ({ Login, init }) => {
                 initialValues={{
                     login: '',
                     password: '',
-                    form: ''
                 }}
-                validationSchema={validateYup}
+                validationSchema={loginValidate}
                 onSubmit={formData => Login(formData)}
             >
                 {(props) => <MyForm {...props} />}
