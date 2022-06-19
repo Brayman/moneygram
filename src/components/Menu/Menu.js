@@ -4,7 +4,8 @@ import {
     BiTransferAlt,
     BiChart,
     BiMenu,
-    BiPlusCircle
+    BiPlusCircle,
+    BiUser
 } from "react-icons/bi";
 import style from "./Menu.module.css"
 function Menu() {
@@ -30,8 +31,8 @@ function Menu() {
                 <BiChart />
             </NavLink>
 
-            <NavLink to='/more' className={navStyle}>
-                <BiMenu />
+            <NavLink to='/profile' className={navStyle}>
+                <BiUser />
             </NavLink>
         </nav>
     )
