@@ -1,8 +1,5 @@
-import { useNavigate } from "react-router-dom";
-import Account from "../Account/Account";
 import Loader from "../common/Loader/Loader";
 import TransactionMini from "../Transaction/TransactionPreview";
-import style from './MainPage.module.css';
 import {
     MdFilterList,
     MdKeyboardArrowDown,
@@ -13,7 +10,7 @@ import {
 function Main({ props }) {
     if (!props.isLoading) {
         return (
-            <section className="transactions">
+            <section className="page transactions">
                 <header className="transactions__header">
                     <button className="filter-btn">
                         <MdKeyboardArrowDown className="filter-btn__icon" />
@@ -41,13 +38,6 @@ function Main({ props }) {
                         />)
                     })}
                 </section>
-
-
-            </section>
-        )
-        return (<div className={style.main}>
-            <section className='transactions'>
-
                 {
                     props.maxPage !== props.curentPage ?
                         <button
@@ -58,8 +48,9 @@ function Main({ props }) {
                         </button> :
                         null
                 }
+
             </section>
-        </div>)
+        )
     } else {
         return <Loader />
     }

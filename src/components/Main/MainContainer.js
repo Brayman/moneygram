@@ -1,44 +1,43 @@
-import { Component, useEffect } from "react";
+import { useEffect } from "react";
 import Main from "./Main";
-import { connect } from "react-redux";
-import { getTransactionsThunk } from "../../redux/transactions";
+import { useDispatch, useSelector } from "react-redux";
 import { WithAuthRedirect } from "../../hoc/withAuthRedirect";
 import { compose } from "redux";
+import { cardThunks } from "../../redux/actions/card-actions";
+import Loader from "../common/Loader/Loader";
+import * as selectors from "../../redux/selectors";
+import { useLocation, useMatch, useParams, Navigate, useNavigate } from "react-router-dom";
+import { withModalAlert } from "../../hoc/withModalAlert";
 
-class MainContainer extends Component {
-    
-    componentDidMount = () => {
-        this.props.getTransactionsThunk(this.props.login, this.props.pageSize)
+function MainContainerWithEffect({ login }) {
+    const totalTransCount = useSelector(selectors.totalTransCount)
+    const transactions = useSelector(selectors.transactions);
+    const initialized = useSelector(selectors.initialized);
+    // const cardid = useSelector(selectors.cardID);
+    const page = useSelector(selectors.curentPage);
+    const pageSize = useSelector(selectors.pageSize);
+    const card = useSelector(selectors.card);
+    const isLoading = useSelector(selectors.isLoading)
+    const { cardid } = useParams();
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const getNextPage = (page) => dispatch(cardThunks.getTransactions(login, cardid, pageSize, page));
+    useEffect(() => {
+        dispatch(cardThunks.getTransactions(login, cardid, pageSize))
+    }, [login, cardid])
+    useEffect(() => {
+        if (card) {
+            dispatch(cardThunks.updateCard(card))
+        }
+    }, [card])
+    const openTransaction = (item) => {
+        dispatch(cardThunks.getTransaction(item))
+        navigate(`/transaction/${item.id}`)
     }
-    onPageChanget = page => {
-        this.props.getTransactionsThunk(this.props.login, this.props.pageSize, page) 
-    } 
-    render() {
-        const page = Math.ceil(this.props.totalTransCount / this.props.pageSize);
-        return <Main props={{...this.props, maxPage: page, getNextPage: this.onPageChanget}}/>
+    const maxPage = Math.ceil(totalTransCount / pageSize);
+    if (!initialized) {
+        return <Loader />
     }
+    return <Main props={{ isLoading, transactions, login, cardid, page, pageSize, maxPage, getNextPage, openTransaction }} />
 }
-const mapStateToProps = state => {
-    return {
-        login: state.account.login,
-        isLoading: state.transactions.isLoading,
-        isAuth: state.account.isAuth,
-        account: state.account.cards[state.account.selectCard],
-        transactions: state.transactions.transactions,
-        curentPage: state.transactions.curentPage,
-        pageSize: state.transactions.pageSize,
-        totalTransCount: state.transactions.totalTransCount,
-        moreTransLoad: state.transactions.moreTransLoad,
-
-    }
-}
-
-const mapDispatchToProps = dispatch => {
-    return {
-        getTransactionsThunk: (login, pageSize, page) => dispatch(getTransactionsThunk(login, pageSize, page))
-    }
-}
-export default compose(
-    connect(mapStateToProps,mapDispatchToProps),
-    WithAuthRedirect
-)(MainContainer)
+export default compose(WithAuthRedirect, withModalAlert)(MainContainerWithEffect)
