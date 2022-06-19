@@ -1,4 +1,4 @@
-import { applyMiddleware, combineReducers, createStore } from "redux";
+import { applyMiddleware, compose, combineReducers, createStore } from "redux";
 import thunk from "redux-thunk";
 import account from "./account";
 import card from "./card";
@@ -12,7 +12,8 @@ const reducers = combineReducers({
     form: formReducer
 })
 
-
-const store = createStore(reducers, applyMiddleware(thunk));
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(reducers,  composeEnhancers(
+ applyMiddleware(thunk)));
 export default store;
 window.store = store;
