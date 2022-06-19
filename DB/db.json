@@ -48,11 +48,11 @@
     },
     {
       "userid": 1,
-      "cardid": "538b2479-b4be-4237-876a-d73c94442e84",
-      "name": "test",
-      "currency": "GEL",
-      "balance": "0",
-      "id": "40AOFb3"
+      "cardid": "14ce762f-af8f-4b80-9db7-9f367810cf0a",
+      "name": "DollarCash",
+      "currency": "USD",
+      "balance": "1800",
+      "id": "L1M7xyE"
     }
   ],
   "transactions": [
@@ -22988,7 +22988,8 @@
       "userid": "brayman",
       "cardid": "2114b669-3ac9-4754-95af-b02cd3f7321d",
       "cost": -3.36,
-      "tag": "taxi"
+      "tag": "taxi",
+      "card": "main"
     },
     {
       "id": "179460fa-e115-4307-bd6f-93dd1fb61780",
@@ -23005,8 +23006,10 @@
       "payee": "MEIN MARTI 3 LTD",
       "userid": "brayman",
       "cardid": "2114b669-3ac9-4754-95af-b02cd3f7321d",
-      "cost": -0.93,
-      "tag": "shop"
+      "cost": 0.93,
+      "type": "expense",
+      "tag": "shop",
+      "card": "main"
     },
     {
       "id": "2944fe99-5bab-449c-86a4-80b82d80ba49",
@@ -23014,8 +23017,10 @@
       "payee": "P/E MIKHEIL KHABULIANI",
       "userid": "brayman",
       "cardid": "2114b669-3ac9-4754-95af-b02cd3f7321d",
-      "cost": -3,
-      "tag": ""
+      "cost": 3,
+      "type": "expense",
+      "tag": "restaurant",
+      "card": "main"
     },
     {
       "id": "24544c5f-b638-4ccd-b4e3-ca686a4fb167",
@@ -23023,8 +23028,9 @@
       "payee": "",
       "userid": "brayman",
       "cardid": "2114b669-3ac9-4754-95af-b02cd3f7321d",
-      "cost": -7.06,
-      "tag": "shop"
+      "cost": 7.06,
+      "tag": "shop",
+      "card": "main"
     },
     {
       "id": "644b7ad7-6faa-4b7a-b18b-0a01abf6840c",
@@ -23043,7 +23049,8 @@
       "type": "expense",
       "cost": 0.33,
       "payee": "magticom",
-      "tag": "ethernet"
+      "tag": "ethernet",
+      "card": "main"
     },
     {
       "userid": "brayman",
@@ -23058,12 +23065,60 @@
       "userid": "brayman",
       "date": "2022-06-06T00:00:00.000Z",
       "cardid": "2114b669-3ac9-4754-95af-b02cd3f7321d",
-      "cost": "12",
+      "cost": 12,
       "payee": "Yammy",
       "tag": "shop",
       "type": "expense",
       "currency": "GEL",
       "id": "756661b2-fd5e-4532-9c31-324b1b0bf7ff"
+    },
+    {
+      "userid": "brayman",
+      "date": "2022-06-10T00:00:00.000Z",
+      "cardid": "2114b669-3ac9-4754-95af-b02cd3f7321d",
+      "card": "main",
+      "cost": 25.85,
+      "payee": "",
+      "tag": "shop",
+      "type": "expense",
+      "currency": "GEL",
+      "id": "ec97b9c1-21b2-47d7-b6ec-c145ef4651d3"
+    },
+    {
+      "userid": "brayman",
+      "date": "2022-06-12T00:00:00.000Z",
+      "cardid": "2114b669-3ac9-4754-95af-b02cd3f7321d",
+      "card": "main",
+      "cost": 43.8,
+      "payee": "yammy",
+      "tag": "shop",
+      "type": "expense",
+      "currency": "GEL",
+      "id": "454c6386-1c52-4ec9-bfae-3ee04239c74d"
+    },
+    {
+      "id": "e9bfb154-ae6b-45c1-9d37-22ae7381ec84",
+      "userid": "brayman",
+      "date": "2022-06-14T00:00:00.000Z",
+      "cardid": "2114b669-3ac9-4754-95af-b02cd3f7321d",
+      "card": "main",
+      "cost": 32.7,
+      "payee": "yammy",
+      "tag": "shop",
+      "type": "expense",
+      "currency": "GEL"
+    },
+    {
+      "id": "ebc49fe8-f16d-4239-beaa-d2ec6e6c7ab0",
+      "userid": "brayman",
+      "date": "2022-06-14T00:00:00.000Z",
+      "cardid": "L1M7xyE",
+      "card": "DollarCash",
+      "cost": 370,
+      "payee": "",
+      "tag": "",
+      "type": "expense",
+      "currency": "GEL"
     }
   ]
 }
