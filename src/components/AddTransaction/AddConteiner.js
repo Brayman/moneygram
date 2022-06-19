@@ -29,6 +29,7 @@ export const Add = compose(
         date: new Date().getTime(),
         cardid: useSelector(selectors.cardID),
         cards: useSelector(selectors.cards),
+        modal: useSelector(selectors.modal),
         Action: form => dispatch(cardThunks.saveTrans(form))
     }
     return <AddForm {...props}/>
@@ -40,6 +41,7 @@ export const Edit = compose(
     const trans = useSelector(selectors.transaction)
     const props = {
         trans,
+        modal: useSelector(selectors.modal),
         userid: useSelector(selectors.login),
         cardid: useSelector(selectors.cardID),
         cards: useSelector(selectors.cards),
