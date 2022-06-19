@@ -41,6 +41,7 @@ input::-webkit-inner-spin-button {
     color: inherit;
 }
 .special-field__input-wrapper {
+    margin: 0.2em 0.4em;
     font-size: 4em;
     display: flex;
     flex-direction: row;
