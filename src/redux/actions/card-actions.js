@@ -10,7 +10,9 @@ import {
     TRANSACTIONS_LOADED,
     TRANSACTIONS_LOADING,
     UPDATE_CARD,
-    DELETE_TRANSACTION
+    DELETE_TRANSACTION,
+    EDIT_TRANASACTION,
+
 } from "../action-types"
 import { appActions } from "../app"
 
@@ -19,6 +21,11 @@ export const actions = {
         return {
             type: ADD_TRANSACTION,
             payload: value
+        }
+    },
+    editTransaction: transaction => {
+        return {
+            type: EDIT_TRANASACTION
         }
     },
     deleteTransaction: id => {
@@ -87,10 +94,10 @@ export const cardThunks = {
     getTransaction: (transaction) => dispatch => {
         dispatch(actions.getTransaction(transaction))
     },
-    getTransactions: (login, cardid, pageSize, page) => dispatch => {
+    getTransactions: ({ login, cardid, pageSize, sort, filter, page = undefined }) => dispatch => {
         if (page === undefined) {
             dispatch(actions.startLoadTarns(true))
-            API.getTransactions(login, cardid, pageSize)
+            API.getTransactions({ login, cardid, pageSize, filter, sort })
                 .then(data => {
                     dispatch(actions.setCurrentPage(1))
                     dispatch(actions.setTransactions(data.data))
@@ -100,7 +107,7 @@ export const cardThunks = {
         } else {
             dispatch(actions.transLoadingProgres(true))
             dispatch(actions.setCurrentPage(page))
-            API.getNextTransactions(login, cardid, pageSize, page)
+            API.getNextTransactions({login, cardid, pageSize, filter, sort, page})
                 .then(data => {
                     dispatch(actions.getTransactions(data.data))
                     dispatch(actions.transLoadingProgres(false))
