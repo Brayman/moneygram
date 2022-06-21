@@ -1,0 +1,67 @@
+.fltr-shadow {
+    position: fixed;
+    top: 0px;
+    z-index: 4;
+    background-color: #0000003d;
+    height: 100%;
+    width: 100%;
+    backdrop-filter: saturate(180%) blur(20px);
+}
+.fltr-filter {  
+    bottom: 0px;
+    position: fixed;
+    border-radius: 1.5em 1.5em 0 0;
+    background-color: #FFF;
+    width: calc(100% - 2em);
+    padding: 1.5em 1em 1em 1em;
+    box-shadow: 0px -20px 20px 100vh rgb(0 0 0 / 50%);
+}
+
+.fltr-shadow_hide {
+   display: none;
+}
+
+.fltr-filter__header {
+    margin-bottom: 1em;
+}
+
+.fltr-header {
+    font-size: 16px;
+    font-weight: 600;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.fltr-filter__section {
+    margin-bottom: 1em;
+}
+
+.fltr-section__options {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+}
+
+.fltr-section__header {
+    margin-bottom: 1em;
+}
+
+.fltr-option__button {
+    font-size: 14px !important;
+    padding: 0.85em 1.72em !important;
+    width: max-content;
+    margin-bottom: 1em;
+}
+
+.fltr-header__button {
+    font-size: 14px !important;
+    padding: 0.5em 1em !important;
+}
+.fltr-option__button_active {
+    color: #7F3DFF !important;
+    background-color: #EEE5FF;
+}
