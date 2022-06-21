@@ -18,13 +18,15 @@ function MainContainerWithEffect({ login }) {
     const pageSize = useSelector(selectors.pageSize);
     const card = useSelector(selectors.card);
     const isLoading = useSelector(selectors.isLoading)
+    const sort = useSelector(selectors.sort)
+    const filter = useSelector(selectors.filter)
     const { cardid } = useParams();
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const getNextPage = (page) => dispatch(cardThunks.getTransactions(login, cardid, pageSize, page));
+    const getNextPage = (page) => dispatch(cardThunks.getTransactions({login, cardid, pageSize,filter, sort, page}));
     useEffect(() => {
-        dispatch(cardThunks.getTransactions(login, cardid, pageSize))
-    }, [login, cardid])
+        dispatch(cardThunks.getTransactions({login, cardid, pageSize, sort, filter}))
+    }, [login, cardid, sort, filter])
     useEffect(() => {
         if (card) {
             dispatch(cardThunks.updateCard(card))

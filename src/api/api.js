@@ -5,12 +5,12 @@ const instance = axios.create({
     baseURL: 'http://localhost:5000/'
 })
 export const API = {
-    getTransactions(login, cardid, pageSize) {
-        return instance.get(`transactions?login=${login}&cardid=${cardid}&_limit=${pageSize}&_sort=date&_order=desc`)
+    getTransactions({login, cardid, pageSize, filter, sort}) {
+        return instance.get(`transactions?login=${login}&cardid=${cardid}${filter ? `&type=${filter}` : ''}&_limit=${pageSize}&_sort=${sort.field}&_order=${sort.order}`)
             .then(data => data)
     },
-    getNextTransactions(login, cardid, pageSize, page) {
-        return instance.get(`transactions?login=${login}&cardid=${cardid}&_limit=${pageSize}&_page=${page}&_sort=date&_order=desc`)
+    getNextTransactions({login, cardid, pageSize, sort, filter, page}) {
+        return instance.get(`transactions?login=${login}&cardid=${cardid}${filter ? `&type=${filter}` : ''}&_limit=${pageSize}&_page=${page}&_sort=${sort.field}&_order=${sort.order}`)
             .then(data => data)
     },
     addTransaction: async (data) => {
