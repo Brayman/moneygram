@@ -1,6 +1,7 @@
 .transactions {
     display: flex;
     flex-direction: column;
+    padding-bottom: 7vh;
 }
 .transactions__header {
     margin: 0.75em 1em;
@@ -28,7 +29,8 @@
 }
 .icon-btn {
     padding: 0 auto;
-    font-size: 32px;
+    height: 32px;
+    width: 32px;
     line-height: 1em;
     border-radius: 0.25em;
     border: 1px solid #F1F1FA;

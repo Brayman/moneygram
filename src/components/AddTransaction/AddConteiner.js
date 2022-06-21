@@ -3,23 +3,8 @@ import { useLocation, useMatch } from "react-router-dom";
 import { compose } from "redux";
 import { WithAuthRedirect } from "../../hoc/withAuthRedirect";
 import { actions, cardThunks } from "../../redux/actions/card-actions";
-import { AddTransactionAction, createChangeAction } from "../../redux/card";
 import * as selectors from "../../redux/selectors";
 import AddForm from "./AddTransaction";
-const mapStateToProps = state => {
-    return {
-        date: new Date().getTime(),
-        userid: selectors.login(state),
-        cardid: selectors.cardID(state),
-        cards: selectors.cards(state)
-    }
-}
-const mapDispatchToProps = dispatch => {
-    return {
-        Change: item => dispatch(createChangeAction(item)),
-        Add: (value) => dispatch(cardThunks.saveTrans(value))
-    }
-}
 export const Add = compose(
     WithAuthRedirect
 )(() => {
