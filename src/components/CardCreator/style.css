@@ -1,0 +1,32 @@
+.wallet-add {
+    background-color: #7F3DFF;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    height: 93vh;
+    justify-content: space-between;
+}
+
+.wallet-add__nav {
+    justify-self: flex-start;
+    background-color: #7F3DFF;
+}
+
+.wallet-add__fields {
+    display: flex;
+    flex-direction: column;
+    background-color: #FFF;
+    margin: auto 0 0 0;
+    align-self: flex-end;
+    padding: 1em;
+    border-radius: 1em 1em 0 0;
+}
+
+.wallet-add__field {
+    margin-bottom: 1em;
+}
+.wallet-add__header-input {
+    color: #FFF;
+    background-color: #7F3DFF;
+    margin: 3.6875em 0.4em 0 0.4em;
+}

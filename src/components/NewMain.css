@@ -1,0 +1,63 @@
+.transactions {
+    display: flex;
+    flex-direction: column;
+}
+.transactions__header {
+    margin: 0.75em 1em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.transactions__report {
+    margin: 0.5em 1em;
+}
+.filter-btn {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 14px;
+    color: #212325;
+    padding: 0.785em 1.14em;
+    border-radius: 2.857em;
+    border: 1px solid #F1F1FA;
+}
+.filter-btn__icon {
+    color: #7F3DFF;
+    font-size: 1.6em;
+    line-height: 24px;
+}
+.icon-btn {
+    padding: 0 auto;
+    font-size: 32px;
+    line-height: 1em;
+    border-radius: 0.25em;
+    border: 1px solid #F1F1FA;
+}
+
+.info-btn {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #EEE5FF;
+    color: #7F3DFF;
+    padding: 0.90625em 1em;
+    border-radius: 0.5em;
+    border: 1px solid #7F3DFF;
+}
+.info-btn__icon {
+    font-size: 25px;
+}
+.day-section {
+    display: flex;
+    flex-direction: column;
+}
+.day-section__header {
+    margin: 0.45em;
+    padding: 0.45em;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+
+

@@ -1,0 +1,35 @@
+.modal__shadow {
+    top: 0px;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #000000a6;
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.modal__hide {
+    display: none;
+}
+.modal__box {
+    margin: 1em;
+    background-color: #FFF;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1em;
+    border-radius: 1em;
+   
+}
+.modal__icon_message {
+    height: 3em;
+    width: 3em;
+    color: #00A86B;
+}
+.modal__icon_error {
+    height: 3em;
+    width: 3em;
+    color: #FD3C4A;
+}

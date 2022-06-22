@@ -1,0 +1,31 @@
+.input {
+    padding: 1em;
+    background-color: #e3e3e361;
+    border: none;
+    border-radius: 1em;
+    margin: 1em;
+}
+.input:active,
+.input:hover,
+.input:focus {
+    outline-offset: 0;
+    border: none;
+    box-shadow: 0px 0px 5px 2px #4caf50a1;
+}
+.error {
+    border: 1px solid #e91e63;
+    border-color: #e91e63;
+    background-color: #e91e632e;
+    color: #e91e63;
+}
+.input.error:active,
+.input.error:hover,
+.input.error:focus {
+    margin: calc(1em + 1px);
+    box-shadow: 0px 0px 5px 2px #e91e63;
+}
+.section {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}

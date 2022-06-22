@@ -1,8 +1,14 @@
 import { NavLink } from "react-router-dom";
-import { MdHomeFilled, MdPermIdentity, MdEqualizer, MdAddCircle } from "react-icons/md";
+import {
+    BiWallet,
+    BiTransferAlt,
+    BiChart,
+    BiPlusCircle,
+    BiUser
+} from "react-icons/bi";
 import style from "./Menu.module.css"
-function Menu(params) {
-    const navStyle = ({isActive}) => {
+function Menu() {
+    const navStyle = ({ isActive }) => {
         if (isActive) {
             return `${style.active} ${style.item}`
         } else {
@@ -11,17 +17,21 @@ function Menu(params) {
     }
     return (
         <nav className={style.menu}>
-            <NavLink to='/' className={navStyle}>
-                <MdHomeFilled/>
+            <NavLink to='/accounts' className={navStyle}>
+                <BiWallet />
             </NavLink>
-            <NavLink to='/chart' className={navStyle}>
-                <MdEqualizer/>
-            </NavLink>
-            <NavLink to='/profile' className={navStyle}>
-                <MdPermIdentity/>
+            <NavLink to={`/transactions`} className={navStyle}>
+                <BiTransferAlt />
             </NavLink>
             <NavLink to='/add' className={navStyle}>
-                <MdAddCircle/>
+                <BiPlusCircle />
+            </NavLink>
+            <NavLink to='/analytics' className={navStyle}>
+                <BiChart />
+            </NavLink>
+
+            <NavLink to='/profile' className={navStyle}>
+                <BiUser />
             </NavLink>
         </nav>
     )

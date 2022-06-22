@@ -1,0 +1,60 @@
+.signin {
+
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.signin-nav {
+    color: #212325;
+}
+
+
+
+.sign__button {
+    margin: 0 1em 1.5em 1em;
+}
+.sign__footer {
+    text-align: center;
+    color: #91919F;
+    margin-bottom: 1em;
+}
+.sign-link {
+    color: #7F3DFF;
+}
+
+.sign-link__title {
+    margin: 2em 0 2.1em 0;
+    font-size: 18px;
+    text-align: center;
+    text-decoration-line: none;
+    font-weight: 600;
+}
+
+.sign-link__subtitle {
+    margin: 0 0.2em;
+}
+
+.primary-btn:disabled {
+    cursor: no-drop;
+    color: #0D0E0F;
+    background-color: #EEE6FF;
+}
+
+.sign__form {
+    margin-top: 4.5em;
+    display: flex;
+    flex-direction: column;
+}
+.signup-page {
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    margin-top: auto;
+}
+.signup__nav {
+    color: #212325;
+}
+.sign__field {
+    margin: 0 1em 1.5em 1em;
+}

@@ -1,0 +1,103 @@
+/*  Transaction Full    */
+.tr-full {
+    font-size: 16px;
+}
+.tr-full__header {
+    color: #FCFCFC;
+    padding: 0 0 4em 0;
+    border-bottom-left-radius: 3vw;
+    border-bottom-right-radius: 3vw;
+
+}
+
+.tr-full__content {
+    display: flex;
+    flex-direction: column;
+    min-height: 20em;
+    margin: -2em 1em 1em 1em;
+}
+
+.tr-full__panel {
+    margin-bottom: 1em;
+}
+
+.tr-full__comment {
+    flex-grow: 1;
+    margin: 0.5em 0;
+    padding-top: 0.5em;
+    border-top: 2px dashed #E3E5E5;
+}
+
+.tr-full__button {
+    color: #FCFCFC;
+    background-color: #7F3DFF;
+    border-radius: 0.8em;
+    width: 100%;
+    padding: 1em;
+    font-size: 0.9em;
+}
+
+.header_income {
+    color: #FFF;
+    background-color: #00A86B;
+}
+
+.header_expense {
+    background-color: #FD3C4A;
+}
+
+.header__title {
+    font-size: 48px;
+    line-height: 80px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.header__subtitle {
+    font-size: 1em;
+    text-align: center;
+}
+
+.header__date {
+    text-align: center;
+    font-size: 0.8125em;
+    font-weight: 500;
+    margin-top: 0.6em;
+}
+
+
+
+/*      panel   */
+
+.panel {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 0.6em;
+    background-color: #FFF;
+    border: 1px solid #F1F1FA;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.panel__col {
+    flex-grow: 1;
+    align-items: center;
+    margin: 0.75em 1em;
+    display: flex;
+    flex-direction: column;
+}
+
+.panel__title {
+    font-size: 14px;
+    color: #91919F;
+}
+.panel__text {
+    margin-top: 0.625em;
+    color: #0D0E0F;
+    font-weight: 600;
+}
+/*      comment     */
+.comment__header {
+    color: #91919F;
+}

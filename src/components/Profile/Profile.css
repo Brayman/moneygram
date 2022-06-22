@@ -1,0 +1,52 @@
+.profile {
+    background-color: #F7F7F7;
+    min-height: calc(100vh - 2em);
+    padding: 1em 1.25em;
+}
+.profile__header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 1.875em 2.125em;
+}
+.profile__title {
+    display: flex;
+    flex-direction: column;
+    margin: 0 1em;
+}
+.profile-header__subtitle {
+    color: #91919F;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 0.5em;
+}
+.profile-header__title {
+    font-size: 24px;
+    font-weight: 600;
+    color: #161719;
+}
+.avatar {
+    border-radius: 2.5em;
+    
+    border: 0.1em solid #7F3DFF;
+    width: 5em;
+    height: 5em;
+}
+
+.avatar__image {
+    text-align: center;
+    margin: 0.2em;
+    width: 4.6em;
+    height: 4.6em;
+}
+.menu__option {
+    padding: 0.85em 1em;
+    margin-bottom: 1px;
+    background-color: #FFF;
+}
+.menu__option:first-child {
+    border-radius: 1.5em 1.5em 0 0;
+}
+.menu__option:last-child {
+    border-radius: 0 0 1.5em 1.5em;
+}

@@ -1,0 +1,6 @@
+{
+    "/profile/:id": "/users/:id",
+    "/login/:login": "users?login=:login",
+    "/cards/:id": "/cards/:id",
+    "/transactions/:id": "/transactions/:id"
+}

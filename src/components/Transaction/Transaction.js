@@ -1,23 +1,69 @@
-import style from "./Transaction.module.css"
-import Tag from "../Tag";
-function Transaction({body}) {
-    const date = new Date(body.date).toLocaleString('ru-RU',{month: 'short', day: '2-digit', year:'numeric'})
+import {
+    MdDelete
+} from "react-icons/md";
+import "./Trans.css"
+import { Navigation } from "../common/Navigation/Navigation";
+import { useNavigate } from "react-router-dom";
+function Transaction({ transaction, del }) {
+    const navigate = useNavigate()
+    const { id, tag, cost, date, payee, currency = 'GEL', type = 'expence', comment = "no comments" } = transaction
     return (
-        <section className={style.transaction}>
-          <Tag tag={body.tag} getTag={tag => console.log(tag)}/>
-            <div className={style.body}>
-                <div className={style.main}>
-                    <div>{body.tag}</div>
-                    - ${body.cost}
-               </div>
-               <div className={style.second}>
-                    <div>{body.receiver}</div>
-                    <div>{date}</div>
+        <section className="tr-full">
+            <header className={`tr-full__header header_${type}`}>
+                <Navigation className="header__nav" title={'Detail Transaction'}>
+                    <button className="nav__button" onClick={() => del(id)}>
+                        <MdDelete />
+                    </button>
+                </Navigation>
+                <h1 className="header__title">
+                    {`${currency} ${cost}`}
+                </h1>
+                <div className="header__subtitle">
+                    {payee}
                 </div>
-            </div>
-           
-            
+                <div className="header__date">
+                    {new Date(date).toLocaleString()}
+                </div>
+            </header>
+            <main className="tr-full__content">
+                <section className="tr-full__panel panel">
+                    <div className="panel__col">
+                        <div className="panel__title">
+                            Type
+                        </div>
+                        <div className="panel__text">
+                            {type}
+                        </div>
+                    </div>
+                    <div className="panel__col">
+                        <div className="panel__title">
+                            Category
+                        </div>
+                        <div className="panel__text">
+                            {tag}
+                        </div>
+                    </div>
+                    <div className="panel__col">
+                        <div className="panel__title">
+                            Wallet
+                        </div>
+                        <div className="panel__text">
+                            main
+                        </div>
+                    </div>
+                </section>
+                <section className="tr-full__comment">
+                    <h4 className="comment__header">
+                        Comment
+                    </h4>
+                    {comment}
+                </section>
+                <button className="primary-btn" onClick={() => navigate(`/transaction/edit/${id}`)}>
+                    edit
+                </button>
+            </main>       
         </section>
     )
 }
-export default Transaction;
+
+export default Transaction
