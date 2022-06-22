@@ -4,7 +4,6 @@ import "./Filter.css";
 import { Button } from '../../common/Button/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { actions } from '../../../redux/filter';
-import { useSearchParams } from 'react-router-dom';
 import * as selectors from "../../../redux/selectors";
 
 const cn = withNaming({ n: 'fltr-', e: '__', m: '_', v: '_' })
