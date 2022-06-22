@@ -3,7 +3,6 @@ import {
     BiWallet,
     BiTransferAlt,
     BiChart,
-    BiMenu,
     BiPlusCircle,
     BiUser
 } from "react-icons/bi";

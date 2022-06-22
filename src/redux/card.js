@@ -12,7 +12,7 @@ import {
     CREATE_CARD,
     SET_NEXT_CARD,
     SET_PERV_CARD,
-    DELETE_TRANSACTION,
+    DELETE_TRANSACTION
 } from "./action-types";
 
 const defaultState = {
@@ -71,9 +71,7 @@ const card = (state = defaultState, { type, payload }) => {
         case DELETE_TRANSACTION:
             return {
                 ...state,
-                transactions: state.transactions.filter(item => {
-                    if (item.id !== payload) return item
-                })
+                transactions: state.transactions.filter(item => item.id !== payload)
             }
         case GET_TRANSACTION:
             return {

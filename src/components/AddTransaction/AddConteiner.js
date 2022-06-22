@@ -1,10 +1,10 @@
-import { connect, useDispatch, useSelector } from "react-redux";
-import { useLocation, useMatch } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { compose } from "redux";
 import { WithAuthRedirect } from "../../hoc/withAuthRedirect";
-import { actions, cardThunks } from "../../redux/actions/card-actions";
+import { cardThunks } from "../../redux/actions/card-actions";
 import * as selectors from "../../redux/selectors";
 import AddForm from "./AddTransaction";
+
 export const Add = compose(
     WithAuthRedirect
 )(() => {

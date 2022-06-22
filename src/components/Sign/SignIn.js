@@ -1,5 +1,5 @@
-import { Navigate, NavLink, useNavigate } from "react-router-dom";
-import { Formik, Form, useFormikContext } from "formik";
+import { Navigate, NavLink } from "react-router-dom";
+import { Formik, Form } from "formik";
 import { Navigation } from "../common/Navigation/Navigation";
 import "./Sign.css";
 import { Field } from "../common/Field/Field";
@@ -8,13 +8,13 @@ import { useSelector } from "react-redux";
 import { app } from "../../redux/selectors";
 import React, { useEffect } from "react";
 
-export const MyForm = ({ isValid, ...props }) => {
+export const MyForm = ({ isValid, setErrors }) => {
     const login = useSelector(app).login
     useEffect(() => {
         if (login.error) {
-            props.setErrors({ login: login.message, password: login.message })
+            setErrors({ login: login.message, password: login.message })
         }
-    }, [login])
+    }, [login, setErrors])
     return (
         <Form className="sign__form">
             <Field
@@ -50,7 +50,6 @@ export const MyForm = ({ isValid, ...props }) => {
 
 
 const SignIn = ({ Login, init }) => {
-    const navigate = useNavigate
     if (init) {
         return <Navigate to={-1} replace={true} />
     }
@@ -70,10 +69,6 @@ const SignIn = ({ Login, init }) => {
             </Formik>
         </section>
     )
-
-
-
-
 }
 
 export default SignIn;

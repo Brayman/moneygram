@@ -136,7 +136,7 @@ export const cardThunks = {
             type: res.type,
             message: res.message
         }))
-        if (res.type == 'message') {
+        if (res.type === 'message') {
             dispatch(actions.getTransaction(res.data))
         }
     },

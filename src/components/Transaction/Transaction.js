@@ -1,18 +1,17 @@
 import {
-    MdDelete,
-    MdKeyboardBackspace
+    MdDelete
 } from "react-icons/md";
 import "./Trans.css"
 import { Navigation } from "../common/Navigation/Navigation";
 import { useNavigate } from "react-router-dom";
-function Transaction({ transaction, modal }) {
+function Transaction({ transaction, del }) {
     const navigate = useNavigate()
     const { id, tag, cost, date, payee, currency = 'GEL', type = 'expence', comment = "no comments" } = transaction
     return (
         <section className="tr-full">
             <header className={`tr-full__header header_${type}`}>
                 <Navigation className="header__nav" title={'Detail Transaction'}>
-                    <button className="nav__button">
+                    <button className="nav__button" onClick={() => del(id)}>
                         <MdDelete />
                     </button>
                 </Navigation>

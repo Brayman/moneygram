@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from "react-router-dom";
 import "./AddTransaktion.css"
 import { v4 as uuidv4 } from 'uuid';
@@ -17,7 +17,7 @@ import { SpecialField } from '../common/Field/SpecialField';
 const tags = ['shop', 'taxi', 'deliver', 'restaurant', 'ethernet', 'bus']
 const DatePicker = (props) => {
     const { setFieldValue } = useFormikContext()
-    const [field, meta] = useField(props);
+    const [field] = useField(props);
     return (
         <input type='date' {...field} {...props} onChange={e => setFieldValue('date', new Date(e.target.value).toISOString().substring(0, 10))} />
     )

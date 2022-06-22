@@ -1,14 +1,7 @@
-import Account from "../Account/Account";
 import {
-    BiChevronRight,
-    BiChevronLeft,
-    BiPlus,
     BiUser
 } from "react-icons/bi";
-import { useNavigate } from "react-router-dom";
-import Cards from "../Cards/CardsComponent";
 import { WithAuthRedirect } from "../../hoc/withAuthRedirect";
-import style from "./Settings.module.css";
 import { useEffect } from "react";
 import { accountThunks } from "../../redux/actions/account-actions";
 import { compose } from "redux";
@@ -17,17 +10,22 @@ import { setPreviousCardAC, setNextCardAC } from "../../redux/account";
 import * as selectors from "../../redux/selectors"
 import "./Profile.css"
 
-function Profile({ cards, userid, account, loadUser, setPervCard, setNextCard, selectCard }) {
+function Profile({ userid, loadUser }) {
     useEffect(() => {
         loadUser(userid)
-    }, [])
-    const navigate = useNavigate();
+    }, [loadUser, userid])
     const user = useSelector(selectors.account)
     return (
         <section className="profile">
             <header className="profile__header">
                 <div className="avatar">
-                    {user.avatar == null ? <BiUser className="avatar__image" /> : <img className="avatar__image" src={user.avatar} />}
+                    {user.avatar == null ?
+                        <BiUser className="avatar__image" /> :
+                        <img
+                            alt="avatar"
+                            className="avatar__image"
+                            src={user.avatar}
+                        />}
                 </div>
                 <div className="profile__title">
                     <span className="profile-header__subtitle">
