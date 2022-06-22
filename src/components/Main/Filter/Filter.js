@@ -47,8 +47,7 @@ export const Filter = ({ hide = false, showFilter }) => {
     },[filter])
     const dispatch = useDispatch();
     
-    
-    const [searchParams, setSearchParams] = useSearchParams();
+
     const setFilters = ({ filter, sort }) => {
         const [field, order] = sort;
         dispatch(actions.setFilter(filter))

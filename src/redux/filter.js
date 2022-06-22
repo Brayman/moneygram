@@ -32,7 +32,7 @@ const initialState = {
     }
 }
 
-export default (state = initialState, { type, payload }) => {
+export default filter = (state = initialState, { type, payload }) => {
     switch (type) {
         case SET_SORT:
             return {

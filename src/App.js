@@ -16,7 +16,6 @@ import * as selectors from "./redux/selectors";
 import TransComponent from './components/Transaction/TransComponent';
 import Accounts from './components/Accounts/Accounts';
 import "./App.css";
-import { Filter } from './components/Main/Filter/Filter';
 
 class App extends Component {
   render() {
