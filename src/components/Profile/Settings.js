@@ -1,5 +1,4 @@
-import { BiUser, BiEnvelope,  } from "react-icons/bi";
-import { Link, useLocation, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { MdPassword, MdOutlineMail, MdOutlineAccountCircle, MdOutlineTranslate } from "react-icons/md";
 
 import style from "./Settings.module.css"

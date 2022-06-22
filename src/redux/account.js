@@ -7,7 +7,6 @@ import {
     CREATE_CARD,
     SAVE_SETTINGS,
     SET_CARDS,
-    SET_COUNT_CARDS,
     SET_NEXT_CARD,
     SET_PERV_CARD,
     SET_USER

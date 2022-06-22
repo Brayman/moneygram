@@ -3,8 +3,7 @@ import TransactionMini from "../Transaction/TransactionPreview";
 import {
     MdFilterList,
     MdKeyboardArrowDown,
-    MdKeyboardArrowRight,
-    MdShoppingCart
+    MdKeyboardArrowRight
 } from "react-icons/md";
 
 function Main({ props }) {

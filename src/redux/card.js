@@ -1,5 +1,3 @@
-import { API } from "../api/api";
-import { v4 as uuidv4 } from 'uuid';
 import { orderBy } from "lodash";
 import {
     CREATE_TRANASACTION,
@@ -16,7 +14,6 @@ import {
     CREATE_CARD,
     SET_NEXT_CARD,
     SET_PERV_CARD,
-    UPDATE_CARD,
     DELETE_TRANSACTION
 } from "./action-types";
 

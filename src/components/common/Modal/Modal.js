@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { MdCancel, MdCheckCircle } from 'react-icons/md'
-import { useDispatch, useSelector } from 'react-redux'
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { appActions } from '../../../redux/app';
 import './Modal.css'
 
@@ -11,7 +10,7 @@ const Modal = ({ text, show, type = 'message' }) => {
         setTimeout(() => {
             dispatch(appActions.hideModal())
         }, 6000);
-    }, [show])
+    }, [show, dispatch])
 
 
     const icon = type === 'error' ?
@@ -19,7 +18,6 @@ const Modal = ({ text, show, type = 'message' }) => {
         <MdCheckCircle className='modal__icon_message' />
     const showWindow = !show ? 'modal__hide' : ''
 
-    const navigate = useNavigate()
     return (
         <div className={`modal__shadow ${showWindow}`}>
             <div className='modal__box'>

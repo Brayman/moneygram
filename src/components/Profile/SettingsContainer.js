@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { WithAuthRedirect } from "../../hoc/withAuthRedirect";
-import { settingsChangeAC, settingsSaveAC, updateProfileThunk } from "../../redux/account";
+import { settingsChangeAC, updateProfileThunk } from "../../redux/account";
 import Settings from "./Settings";
 
 const mapStateToProps = state => {

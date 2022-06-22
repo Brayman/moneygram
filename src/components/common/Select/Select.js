@@ -11,7 +11,7 @@ import "./style.css"
 const Select = ({ up = false, tag = false, options, ...props }) => {
     const [open, setOpen] = useState(false);
     const { setFieldValue } = useFormikContext()
-    const [field, meta] = useField(props);
+    const [ , meta] = useField(props);
     const direction = up ? 'options_up' : 'options_down'
     const hiddenClass = !open ? 'options_hidden' : direction;
 
@@ -27,7 +27,7 @@ const Select = ({ up = false, tag = false, options, ...props }) => {
         <div className='select-field'>
             <div className='select field tr-add__field' onClick={() => setOpen(!open)}>
 
-                {meta.value == "" ?
+                {meta.value === "" ?
                     <div className='tag-option__empty'>
                     </div> : 
                     item}

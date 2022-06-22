@@ -1,7 +1,6 @@
 import React from "react";
-import style from "./Cards.module.css";
 import Account, { CreateAccount } from "../Account/Account";
-import { BiChevronRight, BiChevronLeft, BiPlus } from "react-icons/bi";
+import { BiChevronRight, BiChevronLeft } from "react-icons/bi";
 
 function ArrowButton({props, setNextCard, setPervCard}) {
     switch (props) {
@@ -33,9 +32,6 @@ function Cards({selectCard, setPervCard, setNextCard, cards}) {
             {selectCard < cards.length ?
             <ArrowButton props='right' setNextCard={setNextCard}/> : null}
         </section>
-        // <div className={style.card_section}>
-        //     <Account card={props.card}/>
-        // </div>
     )
 }
 export default Cards;
