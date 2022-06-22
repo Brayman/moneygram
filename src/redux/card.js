@@ -84,11 +84,7 @@ const card = (state = defaultState, { type, payload }) => {
         case DELETE_TRANSACTION:
             return {
                 ...state,
-                transactions: state.transactions.filter(item => {
-                    if (item.id !== payload) {
-                        return item
-                    }
-                })
+                transactions: state.transactions.filter(item => item.id !== payload)
             }
         case GET_TRANSACTION:
             return {
