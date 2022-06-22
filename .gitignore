@@ -128,3 +128,5 @@ dist
 .tern-port
 yarn.lock
 DB/db.json
+*.stories.js
+package-lock.json
