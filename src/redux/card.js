@@ -1,6 +1,4 @@
-import { orderBy } from "lodash";
 import {
-    CREATE_TRANASACTION,
     ADD_TRANSACTION,
     GET_TRANSACTIONS,
     GET_TRANSACTION,
@@ -21,7 +19,7 @@ const defaultState = {
     isLoading: false,
 
     transactions: [],
-    pageSize: 10,
+    pageSize: 50,
     curentPage: 1,
     totalTransCount: 0,
     moreTransLoad: false,
@@ -58,14 +56,6 @@ const card = (state = defaultState, { type, payload }) => {
                 ...state,
                 selectCard: --state.selectCard,
             }
-        case CREATE_TRANASACTION:
-            return {
-                ...state,
-                newTrans: {
-                    ...state.newTrans,
-                    [payload.item]: payload.value
-                }
-            }
         case ADD_TRANSACTION:
             return {
                 ...state,
@@ -99,7 +89,7 @@ const card = (state = defaultState, { type, payload }) => {
         case SET_TRANSACTIONS:
             return {
                 ...state,
-                transactions: orderBy(payload, 'date', 'desc')
+                transactions: payload
             }
         case SET_TOTAL_COUNT: return { ...state, totalTransCount: payload }
         case SET_CURRENT_PAGE: return { ...state, curentPage: payload }
@@ -111,15 +101,6 @@ const card = (state = defaultState, { type, payload }) => {
                 moreTransLoad: payload
             }
         default: return state;
-    }
-}
-export const createChangeAction = (item) => {
-    return {
-        type: CREATE_TRANASACTION,
-        payload: {
-            item: item.id,
-            value: item.value
-        }
     }
 }
 

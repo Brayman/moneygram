@@ -20,5 +20,7 @@ export const card = createSelector(cards, selectCard, (cards, index) => {
 });
 // export const card = state => state.card.card;
 export const cardID = createSelector(card, card => card.id);
+export const sort = state => state.filter.sort;
+export const filter = state => state.filter.filter;
 
 

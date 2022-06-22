@@ -1,5 +1,5 @@
 import Settings from './components/Profile/SettingsContainer';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import MyMenu from './components/Menu/Menu';
 import Main from './components/Main/MainContainer';
 import Profile from './components/Profile/Profile';
@@ -46,6 +46,7 @@ class App extends Component {
               init={initialized}
             />}
           />
+          <Route path='/' element={<Navigate to='/accounts' />} />
           <Route path='/accounts' element={<Accounts isAuth={isAuth} />} />
           <Route
             path='/transactions/:cardid'
