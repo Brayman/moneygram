@@ -1,21 +1,14 @@
 import { useField } from 'formik'
 import React from 'react';
-import "./style.css";
+import CreateClasssName from '../../../utils/bemClassCreate';
+import { Input } from './Input';
+
+const fcn = CreateClasssName()
+
 
 export const Field = (props) => {
     const [field, meta] = useField(props)
-    const error = !!meta.error && "field__error field_error" 
     return (
-        <>
-            <input
-                {...field}
-                {...props}
-                className={`${props.className} field ${error}`}
-            />
-            {!!meta.touched && !!meta.error && 
-            <div className="field__error">
-                {meta.error}
-            </div>}
-        </>
+        <Input meta={meta} field={field} {...props} className={props.className} />
     )
 }
