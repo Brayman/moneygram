@@ -1,7 +1,8 @@
 button {
-    background-color: #fff;
-    border: none;
-    outline-offset: none;
+    background-color: #fff ;
+    border: none ;
+    outline-offset: none ;
+    padding: 0;
 }
 .primary-button {
     cursor: pointer;
@@ -12,6 +13,10 @@ button {
     line-height: 22px;
     color: #fff;
     background-color: #7F3DFF;
+    
+}
+.primary-button_big {
+    width: -webkit-fill-available;
 }
 .secondary-button {
     cursor: pointer;
@@ -33,4 +38,13 @@ button {
     line-height: 22px;
     border: 1px solid #E3E5E5;
     color: #000;
+}
+.icon-button {
+    padding: 0.4em;
+    width: 2em;
+    height: 2em;
+}
+.icon-button__icon {
+    width: 1.2em;
+    height: 1.2em;
 }
