@@ -2,22 +2,20 @@ import React, { useEffect, useState } from 'react';
 import { withNaming } from '@bem-react/classname';
 import "./Filter.css";
 import { Button } from '../../common/Button/Button';
-import { useDispatch, useSelector } from 'react-redux';
-import { actions } from '../../../redux/filter';
-import * as selectors from "../../../redux/selectors";
+
 
 const cn = withNaming({ n: 'fltr-', e: '__', m: '_', v: '_' })
 const fcn = (b, e, m) => cn(b, e)(m);
 
-const FilterOption = ({ title, options, option, action }) => {
+const FilterOption = ({ title, options, selectFilter, action }) => {
 
-    const isActive = (name) => {
-        if (typeof name === 'string') {
-            return { active: option === name }
-        }
-        const [setField, setOrder] = name;
-        const [field, order] = option;
-        return { active: order === setOrder && field === setField }
+    const isActiveSortButton = sortOptions => {
+        const [field, order] = sortOptions;
+        const [selectField, selectOrder] = selectFilter;
+        return order === selectOrder && field === selectField
+    }
+    const isActiveFilterButton = filterOption => {
+        return filterOption === selectFilter
     }
     return (
         <article className={fcn('filter', 'section')}>
@@ -25,8 +23,11 @@ const FilterOption = ({ title, options, option, action }) => {
                 {title}
             </header>
             <div className={fcn('section', 'options')}>
-                {options.map(({ name, option }) => {
-                    return (<Button key={name} className={fcn('option', 'button', isActive(option))} onClick={() => action(option)}>
+                {options.map(({ name, filterOption, sortOptions }) => {
+                    const selectOptionType = () => {
+                        return !!filterOption ? isActiveFilterButton(filterOption) : isActiveSortButton(sortOptions)
+                    }
+                    return (<Button key={name} className={fcn('option', 'button', { active: selectOptionType() })} onClick={() => action(filterOption || sortOptions)}>
                         {name}
                     </Button>)
                 }
@@ -36,28 +37,35 @@ const FilterOption = ({ title, options, option, action }) => {
     )
 }
 
-export const Filter = ({ hide = false, showFilter }) => {
-    const sort = useSelector(selectors.sort)
-    const filter = useSelector(selectors.filter)
+export const Filter = (props) => {
+    const {
+        hide,
+        showFilter,
+        sort,
+        filter,
+        setFilter,
+        setSort,
+        resetFilter
+    } = props
     const [sortOption, setSortOption] = useState([sort.field, sort.order])
     const [filterOption, setFilterOption] = useState(filter)
     useEffect(() => {
         setFilterOption(filter)
-    },[filter])
-    const dispatch = useDispatch();
-    
+    }, [filter])
 
-    const setFilters = ({ filter, sort }) => {
+
+    const clickSetFilters = ({ filter, sort }) => {
         const [field, order] = sort;
-        dispatch(actions.setFilter(filter))
-        dispatch(actions.setSort({ order, field }))
+        setFilter(filter)
+        setSort({ order, field })
         showFilter()
     }
 
-    const resetFilters = () => {
-        dispatch(actions.resetFilter())
+    const clickResetFilters = () => {
+        resetFilter()
         showFilter()
     }
+
     return (
         <div className={fcn('shadow', '', { hide })} >
             <div className={fcn('filter')}>
@@ -68,40 +76,36 @@ export const Filter = ({ hide = false, showFilter }) => {
                     <Button
                         secondary
                         className={fcn('header', 'button')}
-                        onClick={() => {
-                            resetFilters()
-                            }}>
+                        onClick={() =>clickResetFilters()}>
                         Reset
                     </Button>
                 </header>
                 <FilterOption
                     title='Filter by'
                     options={[
-                        { name: 'income', option: 'income' },
-                        { name: 'Expense', option: 'expense' },
-                        { name: 'Transfer', option: 'transfer' }
+                        { name: 'Income', filterOption: 'income' },
+                        { name: 'Expense', filterOption: 'expense' },
+                        { name: 'Transfer', filterOption: 'transfer' }
                     ]}
-                    option={filterOption}
+                    selectFilter={filterOption}
                     action={item => setFilterOption(item)}
                 />
                 <FilterOption
                     title='Sort by'
                     options={[
-                        { name: 'Highest', option: ['cost', 'desc'] },
-                        { name: 'Lowest', option: ['cost', 'asc'] },
-                        { name: 'Newest', option: ['date', 'desc'] },
-                        { name: 'Oldest', option: ['date', 'asc'] }
+                        { name: 'Highest', sortOptions: ['cost', 'desc'] },
+                        { name: 'Lowest', sortOptions: ['cost', 'asc'] },
+                        { name: 'Newest', sortOptions: ['date', 'desc'] },
+                        { name: 'Oldest', sortOptions: ['date', 'asc'] }
                     ]}
-                    option={sortOption}
+                    selectFilter={sortOption}
                     action={item => setSortOption(item)}
                 />
 
-                <Button primary onClick={() => setFilters({ filter: filterOption, sort: sortOption })}>
+                <Button primary onClick={() => clickSetFilters({ filter: filterOption, sort: sortOption })}>
                     Apply
                 </Button>
             </div>
         </div>
-
-
     )
 }
