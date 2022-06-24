@@ -23,8 +23,8 @@ input::-webkit-inner-spin-button {
 
 .field__input {
     font-size: 16px;
-    padding: 0.75em 0.8em;
-    line-height: 2.125em;
+    padding: 0.75em 1em;
+    line-height: 1.875em;
     border-radius: 1em;
     background-color: inherit;
 }

@@ -55,15 +55,6 @@
   width: 100vw;
 }
 
-.select {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 13px 1em;
-  border: 1px solid #F1F1FA;
-  border-radius: 1em;
-}
-
 .select__icon {
   color: #91919F;
   font-size: 2em;

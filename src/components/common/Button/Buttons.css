@@ -6,7 +6,7 @@ button {
 }
 .primary-button {
     cursor: pointer;
-    padding: 1em;
+    padding: 17px;
     text-align: center;
     border-radius: 16px;
     font-size: 18px;
@@ -20,7 +20,7 @@ button {
 }
 .secondary-button {
     cursor: pointer;
-    padding: 1em;
+    padding: 17px;
     text-align: center;
     border-radius: 16px;
     font-size: 18px;
@@ -31,7 +31,7 @@ button {
 
 .ghost-button {
     cursor: pointer;
-    padding: 1em;
+    padding: 16px;
     text-align: center;
     border-radius: 16px;
     font-size: 18px;
