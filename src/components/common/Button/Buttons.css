@@ -13,10 +13,8 @@ button {
     line-height: 22px;
     color: #fff;
     background-color: #7F3DFF;
+    width: 100%
     
-}
-.primary-button_big {
-    width: -webkit-fill-available;
 }
 .secondary-button {
     cursor: pointer;
@@ -27,6 +25,7 @@ button {
     line-height: 22px;
     color: #7F3DFF;
     background-color: #EEE5FF;
+    width: 100%
 }
 
 .ghost-button {
@@ -38,6 +37,7 @@ button {
     line-height: 22px;
     border: 1px solid #E3E5E5;
     color: #000;
+    width: 100%
 }
 .icon-button {
     padding: 0.4em;

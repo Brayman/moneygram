@@ -1,9 +1,6 @@
 import { useField } from 'formik'
 import React from 'react';
-import CreateClasssName from '../../../utils/bemClassCreate';
 import { Input } from './Input';
-
-const fcn = CreateClasssName()
 
 
 export const Field = (props) => {
