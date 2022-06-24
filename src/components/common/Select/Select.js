@@ -1,54 +1,75 @@
 import React, { useState } from "react";
+import createClassName from "../../../utils/bemClassCreate"
+
 import {
     MdOutlineKeyboardArrowDown,
     MdOutlineKeyboardArrowUp
 } from "react-icons/md";
-import {
-    useFormikContext,
-    useField
-} from "formik";
+
 import "./style.css"
-const Select = ({ up = false, tag = false, options, ...props }) => {
-    const [open, setOpen] = useState(false);
-    const { setFieldValue } = useFormikContext()
-    const [ , meta] = useField(props);
-    const direction = up ? 'options_up' : 'options_down'
-    const hiddenClass = !open ? 'options_hidden' : direction;
-
-    const item = tag ?
-        <div className='tag-option tag-option__selected'>
-            <div className='tag-option__dot' />
-            {meta.value}
-        </div> :
-        <div className='tag-option__empty'>
-            {meta.value}
-        </div>
+import classNames from "classnames";
+const selectCN = createClassName();
+const SelectOption = ({ placeholder = 'text', tag, children }) => {
+    if (children !== '') {
+        const MyOption = tag ? TagOption : Option;
+        return (
+            <MyOption>
+                {children}
+            </MyOption>
+        )
+    }
     return (
-        <div className='select-field'>
-            <div className='select field tr-add__field' onClick={() => setOpen(!open)}>
+        <div className={selectCN('option', null, { placeholder: true })}>
+            {placeholder}
+        </div>
+    )
+}
+const Option = ({ children }) => {
+    return (
+        <div className={selectCN('option', null, { selected: true })}>
+            {children}
+        </div>
 
-                {meta.value === "" ?
-                    <div className='tag-option__empty'>
-                    </div> : 
-                    item}
-
-                {open ?
-                    <MdOutlineKeyboardArrowUp className='select__icon' /> :
-                    <MdOutlineKeyboardArrowDown className='select__icon' />
-                }
+    )
+}
+const TagOption = ({ children }) => {
+    return (
+        <div className={selectCN('option')}>
+            <div className={selectCN('option', 'tag')}>
+                <div className={selectCN('tag', 'dot')}></div>
+                <div className={selectCN('tag', 'text')}>{children}</div>
             </div>
-            <div className={hiddenClass}>
-                {options.map(item => {
+        </div>
+
+    )
+}
+
+
+
+const Select = ({ options, up, tag = false, ...props }) => {
+    const [open, setOpen] = useState(false)
+    const arrowProps = {
+        className: selectCN('select', 'arrow'),
+        onClick: () => setOpen(!open)
+    }
+    return (
+        <div className={classNames(selectCN('select', null, {open}), props.className)}>
+            <SelectOption tag={tag} placeholder={props.placeholder}>
+                {props.value}
+            </SelectOption>
+            {open ? <MdOutlineKeyboardArrowUp {...arrowProps} /> : <MdOutlineKeyboardArrowDown {...arrowProps} />}
+            <div className={selectCN('options', '', { hidden: !open, up: up, down: !up })}>
+                {options.map((option, i) => {
                     return (
                         <div
-                            key={item}
-                            className='option'
-                            onClick={e => {
+                        key={`${option}-${i}`}
+                            className={selectCN('option')}
+                            onClick={() => {
+                                props.setValue(option)
                                 setOpen(!open)
-                                setFieldValue(props.name, item)
                             }}
                         >
-                            {item}
+                            {option}
                         </div>
                     )
                 })}
