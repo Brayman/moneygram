@@ -1,9 +1,10 @@
 button {
-    background-color: #fff ;
-    border: none ;
-    outline-offset: none ;
+    background-color: #fff;
+    border: none;
+    outline-offset: none;
     padding: 0;
 }
+
 .primary-button {
     cursor: pointer;
     padding: 17px;
@@ -14,8 +15,8 @@ button {
     color: #fff;
     background-color: #7F3DFF;
     width: 100%
-    
 }
+
 .secondary-button {
     cursor: pointer;
     padding: 17px;
@@ -39,12 +40,42 @@ button {
     color: #000;
     width: 100%
 }
+
 .icon-button {
     padding: 0.4em;
     width: 2em;
     height: 2em;
 }
+
 .icon-button__icon {
     width: 1.2em;
     height: 1.2em;
+}
+
+.group-buttons {
+    padding: 4px;
+    background-color: #F1F1FA;
+    color: #000;
+    display: flex;
+    flex-direction: row;
+    border-radius: 32px;
+    font-size: 18px;
+}
+
+.group-button {
+    background-color: inherit;
+    border-radius: 32px;
+    flex-grow: 1;
+    font-size: 1em;
+    padding: 13px 0;
+}
+
+.group-button_active {
+    padding: 13px;
+    text-align: center;
+    border-radius: 32px;
+    line-height: 22px;
+    color: #fff;
+    background-color: #7F3DFF;
+    font-size: 1em;
 }

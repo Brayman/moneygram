@@ -2,6 +2,7 @@ import './Buttons.css';
 import classNames from 'classnames'
 import { cn } from '@bem-react/classname'
 import React from 'react';
+import CreateClasssName from '../../../utils/bemClassCreate';
 
 const createClassName = (primary, secondary) => {
     const buttonType = classNames({
@@ -22,7 +23,7 @@ export const Button = ({ active, primary, secondary, className, children, ...pro
         <button
             {...props}
             className={classNames(bcn({ active }), className)}
-            
+
         >
             {children}
         </button>
@@ -38,5 +39,23 @@ export const IconButton = ({ className, onClick, ...props }) => {
         >
             <props.icon className="icon-button__icon" />
         </button>
+    )
+}
+export const GroupedButton = ({ className, onClick, value, ...props }) => {
+    const groupCN = CreateClasssName()
+    return (
+        <div className={classNames(groupCN('group-buttons'), className)}>
+            {props.buttons.map((button) => (
+                <button
+                
+                    className={groupCN('group-button', null, {active: value === button.toLowerCase()})}
+                    onClick={() => onClick(button.toLowerCase())}
+                >
+                    {button}
+                </button>
+            ))}
+
+        </div>
+
     )
 }

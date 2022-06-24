@@ -5,7 +5,12 @@
 .tr-add_expense {
   background-color: #FD3C4A;
 }
-
+.tr-add_income {
+  background-color: #00A86B;
+}
+.tr-add_transfer {
+  background-color: #0077FF;
+}
 .tr-add__content {
   background-color: #FFF;
   border-radius: 2em 2em 0 0;

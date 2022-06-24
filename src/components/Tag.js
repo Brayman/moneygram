@@ -12,6 +12,7 @@ import {
     RiScissorsFill,
     RiMoneyDollarCircleLine,
     RiForbidLine,
+    RiHandCoinLine
 } from "react-icons/ri";
 import {
     MdOutlineHighlightOff
@@ -54,6 +55,9 @@ function Tag({ tag, getTag = undefined, active }) {
             case 'bus':
                 setIcon(<RiBusFill className="transaction__icon" />)
                 break;
+            case 'send':
+                setIcon(<RiHandCoinLine className="transaction__icon" />)
+                break;
             default:
                 setIcon(<MdOutlineHighlightOff className="transaction__icon error-icon" />)
                 break;
@@ -61,11 +65,11 @@ function Tag({ tag, getTag = undefined, active }) {
     }, [tag])
 
     return (
-       
-        <div onClick={getTag && (() => getTag(tag)) }>
+
+        <div onClick={getTag && (() => getTag(tag))}>
             {Icon}
         </div>
-        
+
     )
 }
 export default Tag;
