@@ -61,9 +61,11 @@ function Tag({ tag, getTag = undefined, active }) {
     }, [tag])
 
     return (
+       
         <div onClick={getTag && (() => getTag(tag)) }>
             {Icon}
         </div>
+        
     )
 }
 export default Tag;

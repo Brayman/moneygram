@@ -4,22 +4,22 @@ import "./AddTransaktion.css"
 import { v4 as uuidv4 } from 'uuid';
 
 import {
-    Field,
     Form,
     Formik,
     useField,
     useFormikContext
 } from "formik";
 import { Navigation } from '../common/Navigation/Navigation';
-import Select from '../common/Select/Select';
+import {SelectField as Select} from '../common/Select/SelectField';
 import { SpecialField } from '../common/Field/SpecialField';
-
+import { Field } from '../common/Field/Field';
+import { Button } from '../common/Button/Buttons';
 const tags = ['shop', 'taxi', 'deliver', 'restaurant', 'ethernet', 'bus']
 const DatePicker = (props) => {
     const { setFieldValue } = useFormikContext()
     const [field] = useField(props);
     return (
-        <input type='date' {...field} {...props} onChange={e => setFieldValue('date', new Date(e.target.value).toISOString().substring(0, 10))} />
+        <Field type='date' {...field} {...props} onChange={e => setFieldValue('date', new Date(e.target.value).toISOString().substring(0, 10))} />
     )
 }
 
@@ -65,7 +65,7 @@ function AddForm({ userid, cardid, cards, trans = undefined, Action }) {
                     />
                 </header>
                 <main className="tr-add__content">
-                    <Select name="tag" tag options={tags} />
+                    <Select name="tag" tag options={tags} className="tr-add__field"/>
                     <DatePicker className='tr-add__field field' name='date' id='date' placeholder="date" />
                     <Field className='tr-add__field field' name='payee' placeholder='payee' />
                     <Select up options={cards.map(card => card.name)} name='card' placeholder='select card' />
@@ -75,9 +75,9 @@ function AddForm({ userid, cardid, cards, trans = undefined, Action }) {
                         </h4>
 
                     </section>
-                    <button className="tr-add__button primary-btn">
+                    <Button primary className="tr-add__button primary-btn">
                         save
-                    </button>
+                    </Button>
                 </main>
 
 

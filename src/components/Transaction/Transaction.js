@@ -4,6 +4,7 @@ import {
 import "./Trans.css"
 import { Navigation } from "../common/Navigation/Navigation";
 import { useNavigate } from "react-router-dom";
+import { Button } from "../common/Button/Buttons";
 function Transaction({ transaction, del }) {
     const navigate = useNavigate()
     const { id, tag, cost, date, payee, currency = 'GEL', type = 'expence', comment = "no comments" } = transaction
@@ -58,9 +59,9 @@ function Transaction({ transaction, del }) {
                     </h4>
                     {comment}
                 </section>
-                <button className="primary-btn" onClick={() => navigate(`/transaction/edit/${id}`)}>
+                <Button primary onClick={() => navigate(`/transaction/edit/${id}`)}>
                     edit
-                </button>
+                </Button>
             </main>       
         </section>
     )

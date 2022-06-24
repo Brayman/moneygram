@@ -6,6 +6,8 @@ import * as selectors from "../../redux/selectors"
 import { NavLink } from "react-router-dom";
 import { BiWallet } from "react-icons/bi";
 import { Navigation } from "../common/Navigation/Navigation";
+import { Icon } from "../Icon/Icon";
+import { Button } from "../common/Button/Buttons";
 
 function Accounts() {
     const cards = useSelector(selectors.cards);
@@ -17,7 +19,7 @@ function Accounts() {
 }
 function CardList({ cards }) {
     return (
-        <section  className="accounts">
+        <section className="accounts">
             <Navigation title="Accounts" className="accounts__nav" />
             <section className="accounts__balance">
                 <div className="balance__subtitle">
@@ -33,7 +35,7 @@ function CardList({ cards }) {
                         className="wallet"
                         to={`/transactions/${card.id}`}
                         key={card.id}>
-                        <BiWallet className="wallet__icon" />
+                        <Icon icon={BiWallet} className="wallet__icon" />
                         <div className="wallet__name">
                             {card.name}
                         </div>
@@ -44,7 +46,10 @@ function CardList({ cards }) {
                 })}
             </menu>
             <NavLink className="accounts__button primary-btn" to={'/create-card'}>
-                Add new card
+                <Button primary>
+                    Add new card
+                </Button>
+
             </NavLink>
         </section>
     )

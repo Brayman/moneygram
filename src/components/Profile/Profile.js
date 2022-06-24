@@ -1,5 +1,8 @@
 import {
-    BiUser
+    BiUser,
+    BiWallet,
+    BiLogOut,
+    BiCog
 } from "react-icons/bi";
 import { WithAuthRedirect } from "../../hoc/withAuthRedirect";
 import { useEffect } from "react";
@@ -9,6 +12,22 @@ import { connect, useSelector } from "react-redux";
 import { setPreviousCardAC, setNextCardAC } from "../../redux/account";
 import * as selectors from "../../redux/selectors"
 import "./Profile.css"
+import { Icon } from "../Icon/Icon";
+
+function ProfileMenu({items}) {
+    return (
+        <menu className="profile__menu">
+            {items.map(item => (
+                <div className="menu__option">
+                    <Icon icon={item.icon} className="option__icon" />
+                    <span className="option__title">
+                        {item.title}
+                    </span>
+                </div>
+            ))}
+        </menu>
+    )
+}
 
 function Profile({ userid, loadUser }) {
     useEffect(() => {
@@ -36,23 +55,20 @@ function Profile({ userid, loadUser }) {
                     </span>
                 </div>
             </header>
-            <menu className="profile__menu">
-                <div className="menu__option">
-                    <span>
-                        Account
-                    </span>
-                </div>
-                <div className="menu__option">
-                    <span>
-                        Settings
-                    </span>
-                </div>
-                <div className="menu__option">
-                    <span>
-                        Logout
-                    </span>
-                </div>
-            </menu>
+            <ProfileMenu items={[
+                {
+                    icon: BiWallet,
+                    title: 'Account'
+                },
+                {
+                    icon: BiCog,
+                    title: 'Settings'
+                },
+                {
+                    icon: BiLogOut,
+                    title: 'Logout'
+                }
+            ]} />
         </section>
     )
 }

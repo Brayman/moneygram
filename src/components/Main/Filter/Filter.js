@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { withNaming } from '@bem-react/classname';
 import "./Filter.css";
-import { Button } from '../../common/Button/Button';
+import { Button } from '../../common/Button/Buttons';
 import { useDispatch, useSelector } from 'react-redux';
 import { actions } from '../../../redux/filter';
 import * as selectors from "../../../redux/selectors";
