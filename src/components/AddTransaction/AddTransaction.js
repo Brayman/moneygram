@@ -46,7 +46,7 @@ function AddForm({ userid, cardid, cards, trans = undefined, Action }) {
                     Action({
                         ...values,
                         date: new Date(values.date).toISOString(),
-                        cardid: cards.find((card) => card.name === values.card).id
+                        cardid: cards.find((card) => card.name === values.card).cardid
                     })
                     actions.resetForm();
                     navigate(-1)
@@ -75,7 +75,7 @@ function AddForm({ userid, cardid, cards, trans = undefined, Action }) {
                         </h4>
 
                     </section>
-                    <Button primary className="tr-add__button primary-btn">
+                    <Button primary type='submit' className="tr-add__button primary-btn">
                         save
                     </Button>
                 </main>

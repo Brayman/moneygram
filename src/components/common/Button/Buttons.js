@@ -14,15 +14,15 @@ const createClassName = (primary, secondary) => {
 
 
 
-export const Button = ({ active, primary, disabled, secondary, className, children, onClick }) => {
+export const Button = ({ active, primary, secondary, className, children, ...props }) => {
 
 
     const bcn = createClassName(primary, secondary)
     return (
         <button
-            disabled={disabled}
+            {...props}
             className={classNames(bcn({ active }), className)}
-            onClick={onClick}
+            
         >
             {children}
         </button>
