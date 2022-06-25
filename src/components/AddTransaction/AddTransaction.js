@@ -10,11 +10,15 @@ import {
     useFormikContext
 } from "formik";
 import { Navigation } from '../common/Navigation/Navigation';
-import {SelectField as Select} from '../common/Select/SelectField';
+import { SelectField as Select } from '../common/Select/SelectField';
 import { SpecialField } from '../common/Field/SpecialField';
 import { Field } from '../common/Field/Field';
-import { Button } from '../common/Button/Buttons';
-const tags = ['shop', 'taxi', 'deliver', 'restaurant', 'ethernet', 'bus']
+import { Button, GroupedButton } from '../common/Button/Buttons';
+import CreateClasssName from '../../utils/bemClassCreate';
+
+const add = CreateClasssName('tr')
+const tags = ['send','shop', 'taxi', 'deliver', 'restaurant', 'ethernet', 'bus']
+
 const DatePicker = (props) => {
     const { setFieldValue } = useFormikContext()
     const [field] = useField(props);
@@ -46,14 +50,14 @@ function AddForm({ userid, cardid, cards, trans = undefined, Action }) {
                     Action({
                         ...values,
                         date: new Date(values.date).toISOString(),
-                        cardid: cards.find((card) => card.name === values.card).id
+                        cardid: cards.find((card) => card.name === values.card).cardid
                     })
                     actions.resetForm();
                     navigate(-1)
                 }
             }
         >
-            {({ values }) => <Form className={`page tr-add tr-add_${values.type}`}>
+            {({ values, setFieldValue }) => <Form className={add('add', null, { [values.type]: true })} date={`page tr-add tr-add_${values.type}`}>
 
                 <header className={`tr-add__header header_${values.type}`}>
                     <Navigation className="header_nav" title={values.type} />
@@ -65,17 +69,24 @@ function AddForm({ userid, cardid, cards, trans = undefined, Action }) {
                     />
                 </header>
                 <main className="tr-add__content">
-                    <Select name="tag" tag options={tags} className="tr-add__field"/>
+                    <Select name="tag" tag options={tags} className="tr-add__field" />
                     <DatePicker className='tr-add__field field' name='date' id='date' placeholder="date" />
                     <Field className='tr-add__field field' name='payee' placeholder='payee' />
-                    <Select up options={cards.map(card => card.name)} name='card' placeholder='select card' />
+                    <Select up options={cards.map(card => card.name)} className={add('add','field')} name='card' placeholder='select card' />
+                    <GroupedButton
+                        className={add('add','field')}
+                        type='button'
+                        buttons={['Income', 'Expense', 'Transfer']}
+                        onClick={(type) => setFieldValue('type', type)}
+                        value={values.type}
+                    />
                     <section className="tr-add__field tr-add__comment">
                         <h4 className="comment__header">
                             Comment
                         </h4>
 
                     </section>
-                    <Button primary className="tr-add__button primary-btn">
+                    <Button primary type='submit' className="tr-add__button primary-btn">
                         save
                     </Button>
                 </main>

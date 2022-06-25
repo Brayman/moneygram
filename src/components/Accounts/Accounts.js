@@ -33,7 +33,7 @@ function CardList({ cards }) {
                 {cards.map(card => {
                     return <NavLink
                         className="wallet"
-                        to={`/transactions/${card.id}`}
+                        to={`/transactions/${card.cardid}`}
                         key={card.id}>
                         <Icon icon={BiWallet} className="wallet__icon" />
                         <div className="wallet__name">

@@ -34,14 +34,14 @@
   "cards": [
     {
       "userid": 1,
-      "id": "2114b669-3ac9-4754-95af-b02cd3f7321d",
+      "cardid": "2114b669-3ac9-4754-95af-b02cd3f7321d",
       "name": "main",
       "currency": "USD",
       "balance": 295
     },
     {
       "userid": 1,
-      "id": "9c46e85e-2de5-4eaf-8877-1f7ad224f1af",
+      "cardid": "9c46e85e-2de5-4eaf-8877-1f7ad224f1af",
       "name": "second",
       "currency": "BYN",
       "balance": 0
@@ -53,6 +53,14 @@
       "currency": "USD",
       "balance": "1800",
       "id": "L1M7xyE"
+    },
+    {
+      "userid": 1,
+      "cardid": "bf800890-48df-478b-b27d-ed974658cd12",
+      "name": "AlfaByn",
+      "currency": "BYN",
+      "balance": "16.8",
+      "id": "oSysrcv"
     }
   ],
   "transactions": [
@@ -23116,6 +23124,73 @@
       "card": "DollarCash",
       "cost": 370,
       "payee": "",
+      "tag": "",
+      "type": "expense",
+      "currency": "GEL"
+    },
+    {
+      "id": "e45c6c32-8e76-48b4-b700-161c8f1f132a",
+      "userid": "brayman",
+      "date": "2022-06-24T00:00:00.000Z",
+      "card": "AlfaByn",
+      "cost": 10,
+      "payee": "Mom",
+      "tag": "",
+      "type": "expense",
+      "currency": "GEL"
+    },
+    {
+      "id": "590356ea-e5cc-47f3-8cc9-60aef4d60fb8",
+      "userid": "brayman",
+      "date": "2022-06-24T00:00:00.000Z",
+      "card": "AlfaByn",
+      "cost": 10,
+      "payee": "Mom",
+      "tag": "",
+      "type": "expense",
+      "currency": "GEL"
+    },
+    {
+      "id": "b0d1d74a-a4e6-4406-a769-1c060e3eb4ea",
+      "userid": "brayman",
+      "date": "2022-06-24T00:00:00.000Z",
+      "card": "AlfaByn",
+      "cost": 10,
+      "payee": "Mom",
+      "tag": "",
+      "type": "expense",
+      "currency": "GEL"
+    },
+    {
+      "id": "7aec635f-d127-4745-a9d7-bcb85c313547",
+      "userid": "brayman",
+      "date": "2022-06-24T00:00:00.000Z",
+      "card": "AlfaByn",
+      "cost": 10,
+      "payee": "Mom",
+      "tag": "",
+      "type": "expense",
+      "currency": "GEL"
+    },
+    {
+      "id": "7b2adae6-7c95-4dc2-a06b-32f2161c85be",
+      "userid": "brayman",
+      "date": "2022-06-24T00:00:00.000Z",
+      "card": "AlfaByn",
+      "cost": 10,
+      "payee": "Mom",
+      "tag": "",
+      "type": "expense",
+      "currency": "GEL"
+    },
+    {
+      "id": "32bfbffd-1a6c-43a5-9438-2cb20b2c9f96",
+      "userid": "brayman",
+      "date": "2022-06-24T00:00:00.000Z",
+      "cardid": "bf800890-48df-478b-b27d-ed974658cd12",
+      "card": "AlfaByn",
+      "cost": 10,
+      "payee": "Mom",
       "tag": "",
       "type": "expense",
       "currency": "GEL"
