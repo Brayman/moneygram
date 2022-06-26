@@ -5,7 +5,7 @@ import {modal, transaction } from "../../redux/selectors";
 import { withModalAlert } from "../../hoc/withModalAlert";
 import { compose } from "redux";
 import { WithAuthRedirect } from "../../hoc/withAuthRedirect";
-import { actions } from "../../redux/actions/card-actions";
+import { transactionsThunk } from "../../redux/transactions-reducer";
 class TransContainer extends Component {
     
     render() {
@@ -16,7 +16,7 @@ class TransContainer extends Component {
 }
 const mapDispatchToProps = dispatch => {
     return {
-        del: (id) => dispatch(actions.deleteTransaction(id)) 
+        del: (id, cardid, cost, type) => dispatch(transactionsThunk.deleteTransaction(id, cardid, cost, type)) 
     }        
 }
 const mapStateToProps = state => {
