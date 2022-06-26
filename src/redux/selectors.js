@@ -20,6 +20,7 @@ export const modal = state => state.app.modal;
 export const sort = state => state.filter.sort;
 export const filter = state => state.filter.filter;
 export const cardForSave = state => state.card.cardForSave;
+export const cardidForSave = state => state.card.cardidForSave;
 export const card = createSelector(cards, cardForSave, (cards, cardid) => {
     return cards.find((card) => card.id === cardid)
 });

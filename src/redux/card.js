@@ -10,8 +10,7 @@ import {
 
 const defaultState = {
     isLoading: false,
-    cards: [],
-    cardForSave: undefined
+    cards: []
 
 }
 const card = (state = defaultState, { type, payload }) => {
@@ -37,12 +36,12 @@ const card = (state = defaultState, { type, payload }) => {
                     if (card.id === payload.cardid) {
                         return {
                             ...card,
-                            balance: ((card.balance * 100) + (payload.cost * 100)) / 100
+                            balance: Math.trunc((card.balance + payload.cost) * 100) / 100
                         }
                     }
                     return card
                 }),
-                cardForSave: payload.cardid
+                cardidForSave: payload.cardid
             }
         case CARD_SUBTRACT_TRANSACTION:
             return {
@@ -51,17 +50,22 @@ const card = (state = defaultState, { type, payload }) => {
                     if (card.id === payload.cardid) {
                         return {
                             ...card,
-                            balance: ((card.balance * 100) - (payload.cost * 100)) / 100
+                            balance: Math.trunc((card.balance - payload.cost) * 100) / 100
                         }
                     }
                     return card
                 }),
-                cardForSave: payload.cardid
+                cardidForSave: payload.cardid
             }
         case UPDATE_CARD:
             return {
                 ...state,
                 cards: state.cards.map(card => card.id === payload.id ? payload : card)
+            }
+        case SAVE_CARD:
+            return {
+                ...state,
+                cardForSave: state.cards.find(card => card.id === payload)
             }
         default: return state;
     }
@@ -89,11 +93,13 @@ export const actions = {
             payload: card
         }
     },
-    saveCard: () => {
+    getCardForSave: cardid => {
         return {
-            type: SAVE_CARD
+            type: SAVE_CARD,
+            payload: cardid
         }
-    }
+    },
+  
 }
 export const cardThunks = {
     addTransaktion: transaction => async dispatch => {
@@ -102,9 +108,10 @@ export const cardThunks = {
     subtractTransaktion: transaction => async dispatch => {
         dispatch(actions.subtractTransaktion(transaction))
     },
-    updateCardBalance: data => async dispatch => {
+    updateCardBalance: data => dispatch => {
         dispatch(actions.updateBalance(data))
     },
+    
     saveCard: (card) => async dispatch => {
         const res = await API.saveCard(card)
         if (res.status < 400) {

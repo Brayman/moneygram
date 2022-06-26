@@ -21,7 +21,6 @@ function MainContainerWithEffect({ login }) {
     const { cardid } = useParams();
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const loc = useParams();
     const getNextPage = (page) => dispatch(transactionsThunk.getTransactions({login, cardid, pageSize,filter, sort, page}));
     useEffect(() => {
         dispatch(transactionsThunk.getTransactions({login, cardid, pageSize, sort, filter}))

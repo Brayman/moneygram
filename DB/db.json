@@ -20,7 +20,7 @@
       "id": "36da6363-2982-41fc-b042-c8a3cf1b18b2",
       "name": "CashGEL",
       "currency": "GEL",
-      "balance": 268.35
+      "balance": 201.65
     },
     {
       "userid": 1,
@@ -121,6 +121,66 @@
       "date": "2022-06-15T00:00:00.000Z",
       "card": "CashGEL",
       "cost": 63.1,
+      "payee": "",
+      "tag": "shop",
+      "type": "expense",
+      "currency": "GEL",
+      "cardid": "36da6363-2982-41fc-b042-c8a3cf1b18b2"
+    },
+    {
+      "id": "d0dc87ff-20d0-4f6e-a967-2d36bc9592a2",
+      "userid": "brayman",
+      "date": "2022-05-17T00:00:00.000Z",
+      "card": "CashGEL",
+      "cost": 19.3,
+      "payee": "Fresco",
+      "tag": "shop",
+      "type": "expense",
+      "currency": "GEL",
+      "cardid": "36da6363-2982-41fc-b042-c8a3cf1b18b2"
+    },
+    {
+      "id": "8b13ee6d-c33c-4bc1-a908-87e0d524076d",
+      "userid": "brayman",
+      "date": "2022-05-17T00:00:00.000Z",
+      "card": "CashGEL",
+      "cost": 20,
+      "payee": "yammy",
+      "tag": "shop",
+      "type": "expense",
+      "currency": "GEL",
+      "cardid": "36da6363-2982-41fc-b042-c8a3cf1b18b2"
+    },
+    {
+      "id": "c2ce898c-e1be-400d-ab5b-f11b2b0b1a82",
+      "userid": "brayman",
+      "date": "2022-05-19T00:00:00.000Z",
+      "card": "CashGEL",
+      "cost": 1.2,
+      "payee": "Bread",
+      "tag": "shop",
+      "type": "expense",
+      "currency": "GEL",
+      "cardid": "36da6363-2982-41fc-b042-c8a3cf1b18b2"
+    },
+    {
+      "id": "7104134f-87b4-4ab9-9cc3-98555ee26b34",
+      "userid": "brayman",
+      "date": "2022-05-19T00:00:00.000Z",
+      "card": "CashGEL",
+      "cost": 1.2,
+      "payee": "Bread",
+      "tag": "shop",
+      "type": "expense",
+      "currency": "GEL",
+      "cardid": "36da6363-2982-41fc-b042-c8a3cf1b18b2"
+    },
+    {
+      "id": "3678497d-ae60-47a6-ac32-808724b8f502",
+      "userid": "brayman",
+      "date": "2022-05-22T00:00:00.000Z",
+      "card": "CashGEL",
+      "cost": 25,
       "payee": "",
       "tag": "shop",
       "type": "expense",

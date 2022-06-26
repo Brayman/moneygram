@@ -16,7 +16,7 @@ import * as selectors from "./redux/selectors";
 import TransComponent from './components/Transaction/TransComponent';
 import Accounts from './components/Accounts/Accounts';
 import "./App.css";
-import { cardThunks } from './redux/card';
+import { actions, cardThunks } from './redux/card';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -24,6 +24,7 @@ const App = () => {
   const login = useSelector(selectors.login)
   const initialized = useSelector(selectors.initialized)
   const isAuth = useSelector(selectors.isAuth)
+  const cardidForSave = useSelector(selectors.cardidForSave)
   const cardForSave = useSelector(selectors.cardForSave)
   const cards = useSelector(selectors.cards)
   const app = useSelector(selectors.app)
@@ -33,14 +34,15 @@ const App = () => {
   const Auth = FormData => dispatch(accountThunks.AuthThunk(FormData))
   const addCard = card => dispatch(CreateCard(card))
   const card = useSelector(selectors.card)
-  const getCardForSave = () => {
-    return card
-  }
+  useEffect(() => {
+    if (cardidForSave) {
+      dispatch(actions.getCardForSave(cardidForSave))
+    }
+  }, [cardidForSave, dispatch])
   useEffect(() => {
     if (cardForSave) {
-      dispatch(cardThunks.saveCard(getCardForSave()))
+      dispatch(cardThunks.saveCard(cardForSave))
     }
-
   }, [cardForSave, dispatch])
   return (
     <BrowserRouter>
