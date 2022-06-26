@@ -27,19 +27,18 @@ const DatePicker = (props) => {
     )
 }
 
-function AddForm({ userid, cardid, cards, trans = undefined, Action }) {
+function AddForm({ userid,  cards, trans = undefined, Action }) {
 
     const initialValues = trans || {
         id: uuidv4(),
         userid,
         date: new Date().toISOString().substring(0, 10),
-        cardid,
-        card: '',
+        card: cards[0].name || '',
         cost: 0,
         payee: '',
         tag: '',
         type: 'expense',
-        currency: 'GEL'
+        currency: cards[0].currency || ''
     }
     const navigate = useNavigate()
     return (
@@ -47,10 +46,12 @@ function AddForm({ userid, cardid, cards, trans = undefined, Action }) {
             initialValues={initialValues}
             onSubmit={
                 (values, actions) => {
+                    const card = cards.find((card) => card.name === values.card)
                     Action({
                         ...values,
                         date: new Date(values.date).toISOString(),
-                        cardid: cards.find((card) => card.name === values.card).cardid
+                        cardid: card.id,
+                        currency: card.currency
                     })
                     actions.resetForm();
                     navigate(-1)
