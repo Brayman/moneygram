@@ -3,15 +3,15 @@ import thunk from "redux-thunk";
 import account from "./account";
 import card from "./card";
 import { filter } from "./filter";
-import { reducer as formReducer } from "redux-form";
+import transactions from "./transactions-reducer";
 import app from "./app";
 
 const reducers = combineReducers({
+    transactions,
     filter,
     card,
     account,
-    app,
-    form: formReducer
+    app
 })
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

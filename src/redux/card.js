@@ -1,32 +1,17 @@
+import { API } from "../api/api";
 import {
-    ADD_TRANSACTION,
-    GET_TRANSACTIONS,
-    GET_TRANSACTION,
-    SET_TRANSACTIONS,
-    SET_CURRENT_PAGE,
-    SET_TOTAL_COUNT,
-    MORE_TRANSACTION_LOADING,
-    TRANSACTIONS_LOADING,
-    TRANSACTIONS_LOADED,
     SET_CARDS,
     CREATE_CARD,
-    SET_NEXT_CARD,
-    SET_PERV_CARD,
-    DELETE_TRANSACTION
+    UPDATE_CARD,
+    CARD_ADD_TRANSACTION,
+    CARD_SUBTRACT_TRANSACTION,
+    SAVE_CARD
 } from "./action-types";
 
 const defaultState = {
     isLoading: false,
-
-    transactions: [],
-    pageSize: 50,
-    curentPage: 1,
-    totalTransCount: 0,
-    moreTransLoad: false,
-
-    transaction: undefined,
     cards: [],
-    selectCard: 0,
+    cardForSave: undefined
 
 }
 const card = (state = defaultState, { type, payload }) => {
@@ -45,64 +30,94 @@ const card = (state = defaultState, { type, payload }) => {
                     payload
                 ]
             }
-        case SET_NEXT_CARD:
+        case CARD_ADD_TRANSACTION:
             return {
                 ...state,
-                selectCard: state.selectCard + 1,
-                card: state.cards[state.selectCard]
+                cards: state.cards.map((card) => {
+                    if (card.id === payload.cardid) {
+                        return {
+                            ...card,
+                            balance: ((card.balance * 100) + (payload.cost * 100)) / 100
+                        }
+                    }
+                    return card
+                }),
+                cardForSave: payload.cardid
             }
-        case SET_PERV_CARD:
+        case CARD_SUBTRACT_TRANSACTION:
             return {
                 ...state,
-                selectCard: --state.selectCard,
+                cards: state.cards.map((card) => {
+                    if (card.id === payload.cardid) {
+                        return {
+                            ...card,
+                            balance: ((card.balance * 100) - (payload.cost * 100)) / 100
+                        }
+                    }
+                    return card
+                }),
+                cardForSave: payload.cardid
             }
-        case ADD_TRANSACTION:
+        case UPDATE_CARD:
             return {
                 ...state,
-                transactions: [
-                    ...state.transactions,
-                    payload
-                ],
-                card: {
-                    ...state.card,
-                    balance: 1
-                }
-            }
-        case DELETE_TRANSACTION:
-            return {
-                ...state,
-                transactions: state.transactions.filter(item => item.id !== payload)
-            }
-        case GET_TRANSACTION:
-            return {
-                ...state,
-                transaction: payload,
-            }
-        case GET_TRANSACTIONS:
-            return {
-                ...state,
-                transactions: [
-                    ...state.transactions,
-                    ...payload
-                ],
-            }
-        case SET_TRANSACTIONS:
-            return {
-                ...state,
-                transactions: payload
-            }
-        case SET_TOTAL_COUNT: return { ...state, totalTransCount: payload }
-        case SET_CURRENT_PAGE: return { ...state, curentPage: payload }
-        case TRANSACTIONS_LOADING: return { ...state, isLoading: true }
-        case TRANSACTIONS_LOADED: return { ...state, isLoading: false }
-        case MORE_TRANSACTION_LOADING:
-            return {
-                ...state,
-                moreTransLoad: payload
+                cards: state.cards.map(card => card.id === payload.id ? payload : card)
             }
         default: return state;
     }
 }
 
-export const load = value => { return { type: ADD_TRANSACTION, payload: value } }
+
+
+
+export const actions = {
+    addTransaktion: payload => {
+        return {
+            type: CARD_ADD_TRANSACTION,
+            payload
+        }
+    },
+    subtractTransaktion: payload => {
+        return {
+            type: CARD_SUBTRACT_TRANSACTION,
+            payload
+        }
+    },
+    updateCard: card => {
+        return {
+            type: UPDATE_CARD,
+            payload: card
+        }
+    },
+    saveCard: () => {
+        return {
+            type: SAVE_CARD
+        }
+    }
+}
+export const cardThunks = {
+    addTransaktion: transaction => async dispatch => {
+        dispatch(actions.addTransaktion(transaction))
+    },
+    subtractTransaktion: transaction => async dispatch => {
+        dispatch(actions.subtractTransaktion(transaction))
+    },
+    updateCardBalance: data => async dispatch => {
+        dispatch(actions.updateBalance(data))
+    },
+    saveCard: (card) => async dispatch => {
+        const res = await API.saveCard(card)
+        if (res.status < 400) {
+            dispatch(actions.updateCard(res.data))
+        }
+        
+    },
+    updateCard: card => dispatch => {
+
+        API.updateCard(card)
+            .then(res => {
+                dispatch(actions.updateCard(res.data))
+            })
+    }
+}
 export default card;
