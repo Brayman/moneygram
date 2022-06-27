@@ -20,7 +20,7 @@ const initialState = {
     pageSize: 50,
     curentPage: 1,
     totalTransCount: 0,
-    moreTransLoad: false,
+    moreTransLoad: false
 }
 
 const transactions = (state = initialState, { type, payload }) => {
@@ -96,10 +96,10 @@ export const actions = {
             payload: id
         }
     },
-    getTransaction: data => {
+    getTransaction: transaction => {
         return {
             type: GET_TRANSACTION,
-            payload: data
+            payload: transaction
         }
     },
     startLoadTarns: data => {
@@ -201,11 +201,27 @@ export const transactionsThunk = {
         }
     },
     deleteTransaction: (id, cardid, cost, type) => async dispatch => {
-        dispatch(cardThunks.updateCardBalance(
-            { cardid, cost, type }
-        ))
+        if (type === 'expense') {
+            dispatch(cardThunks.addTransaktion(
+                {
+                    cardid: cardid,
+                    cost: cost,
+                    type: type
+                }
+            ))
+        }
+        if (type === 'income') {
+            dispatch(cardThunks.subtractTransaktion(
+                {
+                    cardid: cardid,
+                    cost: cost,
+                    type: type
+                }
+            ))
+            
+        }
         dispatch(actions.deleteTransaction(id));
-        const res = await API.deleteTransaction(id)
+        API.deleteTransaction(id)
     },
     editTrans: form => async dispatch => {
         const res = await API.editTransaction(form)

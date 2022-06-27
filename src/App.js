@@ -72,7 +72,7 @@ const App = () => {
         } />
 
         <Route path='/settings/*' element={<Settings />} />
-        <Route path='/transaction/:id' element={<TransComponent isAuth={isAuth} modal={modal} />} />
+        <Route path='/transaction/:id' element={<TransComponent isAuth={isAuth} />} />
         <Route path='/transaction/edit/:id' element={<Edit isAuth={isAuth} />} />
         <Route path='/sign-up' element={<SignUp onSubmit={signUp} />} />
         <Route path='/add' element={<Add isAuth={isAuth} />} />

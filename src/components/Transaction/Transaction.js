@@ -6,7 +6,7 @@ import { Navigation } from "../common/Navigation/Navigation";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../common/Button/Buttons";
 function Transaction({ transaction, del }) {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     const { id, tag, cost, date, payee, currency = 'GEL', type = 'expence', cardid, comment = "no comments" } = transaction
     return (
         <section className="tr-full">

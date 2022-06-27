@@ -25,9 +25,9 @@ function MainContainerWithEffect({ login }) {
     useEffect(() => {
         dispatch(transactionsThunk.getTransactions({login, cardid, pageSize, sort, filter}))
     }, [login, cardid, pageSize, sort, filter, dispatch])
-    const openTransaction = (item) => {
-        dispatch(transactionsThunk.getTransaction(item))
-        navigate(`/transaction/${item.id}`)
+    const openTransaction = (transaction) => {
+        dispatch(transactionsThunk.getTransaction(transaction))
+        navigate(`/transaction/${transaction.id}`)
     }
     const maxPage = Math.ceil(totalTransCount / pageSize);
     if (!initialized) {

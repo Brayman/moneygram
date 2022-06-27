@@ -1,5 +1,4 @@
 import * as axios from "axios";
-import { orderBy } from "lodash";
 
 const instance = axios.create({
     baseURL: 'http://localhost:5000/'
