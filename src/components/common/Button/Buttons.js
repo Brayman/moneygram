@@ -45,10 +45,11 @@ export const GroupedButton = ({ className, onClick, value, ...props }) => {
     const groupCN = CreateClasssName()
     return (
         <div className={classNames(groupCN('group-buttons'), className)}>
-            {props.buttons.map((button) => (
+            {props.buttons.map((button, i) => (
                 <button
-                    key={button}
-                    className={groupCN('group-button', null, {active: value === button.toLowerCase()})}
+                    key={`name-${i}-${button}`}
+                    {...props}
+                    className={groupCN('group-button', null, { active: value === button.toLowerCase() })}
                     onClick={() => onClick(button.toLowerCase())}
                 >
                     {button}

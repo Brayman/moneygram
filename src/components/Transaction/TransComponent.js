@@ -1,28 +1,22 @@
-import { Component } from "react";
-import { connect } from "react-redux";
+import { useSelector, useDispatch} from "react-redux";
 import Transaction from "./Transaction";
-import {modal, transaction } from "../../redux/selectors";
+import { modal, transaction } from "../../redux/selectors";
 import { withModalAlert } from "../../hoc/withModalAlert";
 import { compose } from "redux";
 import { WithAuthRedirect } from "../../hoc/withAuthRedirect";
-import { actions } from "../../redux/actions/card-actions";
-class TransContainer extends Component {
-    
-    render() {
-        return(
-            <Transaction {...this.props}/>
-        )
+import { transactionsThunk } from "../../redux/transactions-reducer";
+const TransContainer = () => {
+    const dispatch = useDispatch()
+    const props = {
+        modal: useSelector(modal),
+        transaction: useSelector(transaction),
+        del: (id, cardid, cost, type) => dispatch(transactionsThunk.deleteTransaction(id, cardid, cost, type))
     }
+
+    return (
+        <Transaction {...props} />
+    )
+
 }
-const mapDispatchToProps = dispatch => {
-    return {
-        del: (id) => dispatch(actions.deleteTransaction(id)) 
-    }        
-}
-const mapStateToProps = state => {
-    return {
-        transaction: transaction(state),
-        modal: modal(state)
-    }        
-}
-export default compose(WithAuthRedirect,withModalAlert)(connect(mapStateToProps, mapDispatchToProps)(TransContainer))
+
+export default compose(WithAuthRedirect, withModalAlert)(TransContainer)

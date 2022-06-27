@@ -16,7 +16,7 @@ const CardCreateForm = ({ userid, CreateCard }) => {
             <Formik
                 initialValues={{
                     userid,
-                    cardid: uuidv4(),
+                    id: uuidv4(),
                     name: '',
                     currency: "USD",
                     balance: ''
@@ -26,6 +26,7 @@ const CardCreateForm = ({ userid, CreateCard }) => {
                 {({ values }) => <Form className="wallet-add__form">
                     <SpecialField
                         placeholder="balance"
+                        type='number'
                         label={values.currency}
                         name='balance'
                         className='wallet-add__header-input'
