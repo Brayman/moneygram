@@ -11,8 +11,7 @@ import {
 } from "formik";
 import { Navigation } from '../common/Navigation/Navigation';
 import { SelectField as Select } from '../common/Select/SelectField';
-import { SpecialField } from '../common/Field/SpecialField';
-import { Field } from '../common/Field/Field';
+import { Field, SpecialField } from '../common/Field/Field';
 import { Button, GroupedButton } from '../common/Button/Buttons';
 import CreateClasssName from '../../utils/bemClassCreate';
 
@@ -33,8 +32,8 @@ function AddForm({ userid,  cards, trans = undefined, Action }) {
         id: uuidv4(),
         userid,
         date: new Date().toISOString().substring(0, 10),
+        cost: '',
         card: cards[0].name || '',
-        cost: 0,
         payee: '',
         tag: '',
         type: 'expense',
