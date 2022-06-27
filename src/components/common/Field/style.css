@@ -79,7 +79,10 @@ input::-webkit-inner-spin-button {
     padding: 5px 0 0 0.1em;
     min-width: 50%;
 }
-
+.special-field__input::placeholder {
+    opacity: 0.64;
+    color: #FCFCFC;
+}
 .special-field_error {
     border: 1px solid #FD5662;
 }
