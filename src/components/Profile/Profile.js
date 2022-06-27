@@ -9,7 +9,6 @@ import { useEffect } from "react";
 import { accountThunks } from "../../redux/actions/account-actions";
 import { compose } from "redux";
 import { connect, useSelector } from "react-redux";
-import { setPreviousCardAC, setNextCardAC } from "../../redux/account";
 import * as selectors from "../../redux/selectors"
 import "./Profile.css"
 import { Icon } from "../Icon/Icon";
@@ -83,8 +82,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         loadUser: (id) => dispatch(accountThunks.loadUser(id)),
-        setPervCard: () => dispatch(setPreviousCardAC()),
-        setNextCard: () => dispatch(setNextCardAC()),
     }
 }
 export default compose(

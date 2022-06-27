@@ -1,4 +1,4 @@
-import card, { actions } from "./card";
+import transactions, {actions} from "./transactions-reducer";
 
 const state = {
     transactions: [
@@ -83,65 +83,44 @@ const state = {
             "tag": "",
             "id": "cdbda54e-6d2b-4e97-9fc7-98a8b42dd37e"
         }
-    ],
-    cards: [
-        {
-            "userid": 1,
-            "id": "2114b669-3ac9-4754-95af-b02cd3f7321d",
-            "name": "main",
-            "currency": "USD",
-            "balance": 295
-        },
-        {
-            "userid": 1,
-            "id": "14ce762f-af8f-4b80-9db7-9f367810cf0a",
-            "name": "DollarCash",
-            "currency": "USD",
-            "balance": 1800
-        },
-        {
-            "userid": 1,
-            "id": "bf800890-48df-478b-b27d-ed974658cd12",
-            "name": "AlfaByn",
-            "currency": "BYN",
-            "balance": 15
-        }
     ]
 }
+const newTransaction = {
+    id: "82d33abe-f182-4c92-bccf-341fb475f9c0",
+    userid: "TestUser",
+    date: "2022-06-24T00:00:00.000Z",
+    cardid: "bf800890-48df-478b-b27d-ed974658cd12",
+    card: "testCard",
+    cost: 90,
+    payee: "test payee",
+    tag: "test",
+    type: "income",
+    currency: "USD"
+}
+
+it('length transactions should be increment and to be new transaction', () => {
+    // 1 test data
 
 
-it('increment card balance', () => {
-    // 1 test date
-    const action = actions.addTransaktion(
-        {
-            cardid: "bf800890-48df-478b-b27d-ed974658cd12",
-            cost: 10,
-            type: 'income'
-        }
-    )
+    const action = actions.addTransaction(newTransaction)
 
     // 2 action
-    const newState = card(state, action);
+    const newState = transactions(state, action);
 
     // 3 expection
 
-    expect(newState.cards[2].balance).toBe(25)
+    expect(newState.transactions.length).toBe(10)
+    expect(newState.transactions).toEqual(expect.arrayContaining([newTransaction]))
 })
 
-it('decrement card balance', () => {
+it('length after deleting transactions should be decrement', () => {
     // 1 test date
-    const action = actions.subtractTransaktion(
-        {
-            cardid: "bf800890-48df-478b-b27d-ed974658cd12",
-            cost: 10,
-            type: 'expense'
-        }
-    )
+    const action = actions.deleteTransaction(state.transactions[2].id)
 
     // 2 action
-    const newState = card(state, action);
-
+    const newState = transactions(state, action);
     // 3 expection
 
-    expect(newState.cards[2].balance).toBe(5)
+    expect(newState.transactions.length).toBe(8)
+    expect(newState.transactions).toEqual(expect.not.arrayContaining([state.transactions[2]]))
 })

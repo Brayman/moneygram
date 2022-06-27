@@ -19,11 +19,16 @@ export const SAVE_SETTINGS = 'SAVE_SETTINGS';
 export const SET_USER = 'SET_USER';
 
 //--- card types
-export const SET_NEXT_CARD = 'SET_NEXT_CARD';
-export const SET_PERV_CARD = 'SET_PERV_CARD';
 export const SET_CARDS = 'SET_CARDS';
 export const CREATE_CARD = 'CREATE_CARD';
 export const UPDATE_CARD = 'UPDATE_CARD';
+export const SAVE_CARD = 'SAVE_CARD';
+export const CARD_ADD_TRANSACTION = 'CARD/ADD_TRANSACTION';
+export const CARD_SUBTRACT_TRANSACTION = 'CARD/SUBTRACT_TRANSACTION';
+
+
+
+
 
 //--- app types
 export const INITIALIZE_SUCCESS = 'INITIALIZE_SUCCESS';

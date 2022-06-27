@@ -1,5 +1,4 @@
 import * as axios from "axios";
-import { orderBy } from "lodash";
 
 const instance = axios.create({
     baseURL: 'http://localhost:5000/'
@@ -15,6 +14,9 @@ export const API = {
     },
     addTransaction: async (data) => {
         return instance.post(`transactions`, data)
+    },
+    deleteTransaction: async (id) => {
+        return await instance.delete(`transactions/${id}`)
     },
     editTransaction: async (form) => {
         try {
@@ -39,9 +41,9 @@ export const API = {
     getCards(id) {
         return instance.get(`cards?userid=${id}`).then(data => data.data)
     },
-    updateCard(card) {
-        return instance.put(`cards/${card.id}`, card)
-            .then(res => res)
+    saveCard: async card => {
+        const res = await instance.put(`cards/${card.id}`, card)
+        return res
     },
     getUser(id) {
         return instance.get(`users/${id}`).then(data => data.data)
@@ -73,10 +75,5 @@ export const API = {
                 message: res.message
             }
         }
-    },
-    Test() {
-        return instance.get(`transactions?login=brayman&cardid=2114b669-3ac9-4754-95af-b02cd3f7321d`)
-            .then(data => console.log(orderBy(data.data, 'date', 'asc')))
-
     }
 }

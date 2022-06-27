@@ -7,8 +7,6 @@ import {
     CREATE_CARD,
     SAVE_SETTINGS,
     SET_CARDS,
-    SET_NEXT_CARD,
-    SET_PERV_CARD,
     SET_USER
 } from "./action-types";
 
@@ -70,19 +68,6 @@ export const settingsSaveAC = (items) => {
 export const setCardsAC = data => {
     return {
         type: SET_CARDS,
-        payload: data
-    }
-}
-
-export const setNextCardAC = data => {
-    return {
-        type: SET_NEXT_CARD,
-        payload: data
-    }
-}
-export const setPreviousCardAC = data => {
-    return {
-        type: SET_PERV_CARD,
         payload: data
     }
 }
