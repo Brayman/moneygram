@@ -8,6 +8,7 @@
     border-radius: 1em;
     flex-grow: 0;
     background-color: #fff;
+    cursor: pointer;
 }
 
 .select__arrow {
@@ -17,7 +18,7 @@
     color: #91919F;
 }
 .option {
-    cursor: pointer;
+    
     font-size: 16px;
     line-height: 2em;
     padding: 0.75em 1em;

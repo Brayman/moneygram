@@ -9,11 +9,11 @@ import {
 import "./style.css"
 import classNames from "classnames";
 const selectCN = createClassName();
-const SelectOption = ({ placeholder = 'text', tag, children }) => {
+const SelectOption = ({ tag, placeholder = '...', children, ...props}) => {
     if (children !== '') {
         const MyOption = tag ? TagOption : Option;
         return (
-            <MyOption>
+            <MyOption {...props}>
                 {children}
             </MyOption>
         )
@@ -24,9 +24,12 @@ const SelectOption = ({ placeholder = 'text', tag, children }) => {
         </div>
     )
 }
-const Option = ({ children }) => {
+const Option = ({ children, ...props}) => {
     return (
-        <div className={selectCN('option', null, { selected: true })}>
+        <div
+        {...props}
+        className={selectCN('option', null, { selected: true })}
+        >
             {children}
         </div>
 
@@ -53,7 +56,9 @@ const Select = ({ options, up, tag = false, ...props }) => {
         onClick: () => setOpen(!open)
     }
     return (
-        <div className={classNames(selectCN('select', null, {open}), props.className)}>
+        <div
+        onClick={() => setOpen(!open)}
+        className={classNames(selectCN('select', null, {open}), props.className)}>
             <SelectOption tag={tag} placeholder={props.placeholder}>
                 {props.value}
             </SelectOption>
