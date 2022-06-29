@@ -181,7 +181,8 @@ export const transactionsThunk = {
                 {
                     cardid: form.cardid,
                     cost: form.cost,
-                    type: form.type
+                    type: form.type,
+                    currency: form.currency
                 }
             ))
         }
@@ -190,7 +191,8 @@ export const transactionsThunk = {
                 {
                     cardid: form.cardid,
                     cost: form.cost,
-                    type: form.type
+                    type: form.type,
+                    currency: form.currency
                 }
             ))
         }

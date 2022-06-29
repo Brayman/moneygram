@@ -1,3 +1,4 @@
+import { add, subtract } from "../utils/saveOperations";
 import { API } from "../api/api";
 import {
     SET_CARDS,
@@ -7,6 +8,7 @@ import {
     CARD_SUBTRACT_TRANSACTION,
     SAVE_CARD
 } from "./action-types";
+import { accounThunks } from "./account";
 
 const defaultState = {
     isLoading: false,
@@ -36,7 +38,7 @@ const card = (state = defaultState, { type, payload }) => {
                     if (card.id === payload.cardid) {
                         return {
                             ...card,
-                            balance: Math.trunc((card.balance + payload.cost) * 100) / 100
+                            balance: add(card.balance, payload.cost)
                         }
                     }
                     return card
@@ -50,7 +52,7 @@ const card = (state = defaultState, { type, payload }) => {
                     if (card.id === payload.cardid) {
                         return {
                             ...card,
-                            balance: Math.trunc((card.balance - payload.cost) * 100) / 100
+                            balance: subtract(card.balance, payload.cost)
                         }
                     }
                     return card
@@ -104,9 +106,11 @@ export const actions = {
 export const cardThunks = {
     addTransaktion: transaction => async dispatch => {
         dispatch(actions.addTransaktion(transaction))
+        dispatch(accounThunks.addToBalance(transaction.currency, "USD", transaction.cost))
     },
     subtractTransaktion: transaction => async dispatch => {
         dispatch(actions.subtractTransaktion(transaction))
+        dispatch(accounThunks.subtractBalance(transaction.currency, "USD", transaction.cost))
     },
     updateCardBalance: data => dispatch => {
         dispatch(actions.updateBalance(data))

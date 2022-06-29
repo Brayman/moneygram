@@ -17,6 +17,7 @@ import TransComponent from './components/Transaction/TransComponent';
 import Accounts from './components/Accounts/Accounts';
 import "./App.css";
 import { actions, cardThunks } from './redux/card';
+import { API } from './api/api';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -44,6 +45,13 @@ const App = () => {
       dispatch(cardThunks.saveCard(cardForSave))
     }
   }, [cardForSave, dispatch])
+  useEffect(() => {
+    console.log(account.balance,!!account.balance);
+    if (!!account.balance) {
+      
+      API.updateAccount({id: account.id, balance: account.balance})
+    }
+  }, [account, dispatch])
   return (
     <BrowserRouter>
       <Routes>
@@ -56,7 +64,7 @@ const App = () => {
           />}
         />
         <Route path='/' element={<Navigate to='/accounts' />} />
-        <Route path='/accounts' element={<Accounts isAuth={isAuth} />} />
+        <Route path='/accounts' element={<Accounts isAuth={isAuth} balance={account.balance}/>} />
         <Route
           path='/transactions/:cardid'
           element={<Main login={login} isAuth={isAuth} modal={modal} />}

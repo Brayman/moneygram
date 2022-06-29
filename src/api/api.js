@@ -3,6 +3,13 @@ import * as axios from "axios";
 const instance = axios.create({
     baseURL: 'http://localhost:5000/'
 })
+const converteInstance = axios.create({
+    baseURL: "https://api.apilayer.com/", 
+    redirect: 'follow',
+    headers: {
+        apikey: "SScUf1BlWcB37t0hwMe13MduDxkDXTKs"
+    }
+})
 export const API = {
     getTransactions({login, cardid, pageSize, filter, sort}) {
         return instance.get(`transactions?login=${login}&cardid=${cardid}${filter ? `&type=${filter}` : ''}&_limit=${pageSize}&_sort=${sort.field}&_order=${sort.order}`)
@@ -17,6 +24,12 @@ export const API = {
     },
     deleteTransaction: async (id) => {
         return await instance.delete(`transactions/${id}`)
+    },
+    converteReq: async (from, to, amount) => {
+        return await converteInstance.get(`exchangerates_data/convert?to=${to}&from=${from}&amount=${amount}`)
+    },
+    updateAccount: async (account) => {
+        return await instance.patch(`users/${account.id}`, account)
     },
     editTransaction: async (form) => {
         try {
