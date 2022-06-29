@@ -1,7 +1,8 @@
+import { reduxActionType, sortTypes } from "../types"
 import { RESET_FILTER, SET_FILTER, SET_SORT } from "./action-types"
 
 export const actions = {
-    setSort: ({ order, field }) => {
+    setSort: ({ order, field }: sortTypes) => {
         return {
             type: SET_SORT,
             payload: {
@@ -10,7 +11,7 @@ export const actions = {
             }
         }
     },
-    setFilter: (field) => {
+    setFilter: (field: string) => {
         return {
             type: SET_FILTER,
             payload: field
@@ -32,7 +33,7 @@ const initialState = {
     }
 }
 
- export const filter = (state = initialState, { type, payload }) => {
+ export const filter = (state = initialState, { type, payload }: reduxActionType) => {
     switch (type) {
         case SET_SORT:
             return {

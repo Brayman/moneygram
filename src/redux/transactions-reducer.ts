@@ -14,16 +14,41 @@ import {
 } from "./action-types"
 import { cardThunks } from "./card";
 import { appActions } from "./app";
+import { getNextTransactions, reduxActionType } from "../types";
 
-const initialState = {
+type Transaction = {
+    id: string,
+    userid: string,
+    cardid: string,
+    date: number,
+    cost: number,
+    payee: string,
+    tag: string,
+    type: string,
+    currency: string,
+}
+
+interface State {
+    transactions: any;
+    pageSize: number;
+    curentPage: number;
+    totalTransCount: number;
+    moreTransLoad: boolean;
+    transaction: Transaction | null;
+    isLoading: boolean;
+}
+
+const initialState: State = {
     transactions: [],
     pageSize: 50,
     curentPage: 1,
     totalTransCount: 0,
-    moreTransLoad: false
+    moreTransLoad: false,
+    transaction: null,
+    isLoading: false
 }
 
-const transactions = (state = initialState, { type, payload }) => {
+const transactions = (state = initialState, { type, payload }: reduxActionType): State => {
     switch (type) {
         case SET_TRANSACTIONS:
             return {
@@ -41,7 +66,7 @@ const transactions = (state = initialState, { type, payload }) => {
         case DELETE_TRANSACTION:
             return {
                 ...state,
-                transactions: state.transactions.filter(item => item.id !== payload)
+                transactions: state.transactions.filter((item: any) => item.id !== payload)
             }
         case GET_TRANSACTION:
             return {
@@ -79,66 +104,66 @@ const transactions = (state = initialState, { type, payload }) => {
 }
 
 export const actions = {
-    addTransaction: value => {
+    addTransaction: (value: any) => {
         return {
             type: ADD_TRANSACTION,
             payload: value
         }
     },
-    editTransaction: transaction => {
+    editTransaction: () => {
         return {
             type: EDIT_TRANASACTION
         }
     },
-    deleteTransaction: id => {
+    deleteTransaction: (id: string) => {
         return {
             type: DELETE_TRANSACTION,
             payload: id
         }
     },
-    getTransaction: transaction => {
+    getTransaction: (transaction: string) => {
         return {
             type: GET_TRANSACTION,
             payload: transaction
         }
     },
-    startLoadTarns: data => {
+    startLoadTarns: (data: any) => {
         return {
             type: TRANSACTIONS_LOADING,
             payload: data
         }
     },
-    setCurrentPage: page => {
+    setCurrentPage: (page: number) => {
         return {
             type: SET_CURRENT_PAGE,
             payload: page
         }
     },
-    setTotalCount: count => {
+    setTotalCount: (count: number) => {
         return {
             type: SET_TOTAL_COUNT,
             payload: count
         }
     },
-    endLoadTrans: data => {
+    endLoadTrans: (data: any) => {
         return {
             type: TRANSACTIONS_LOADED,
             payload: data
         }
     },
-    transLoadingProgres: data => {
+    transLoadingProgres: (data: any) => {
         return {
             type: MORE_TRANSACTION_LOADING,
             payload: data
         }
     },
-    setTransactions: transactions => {
+    setTransactions: (transactions: any) => {
         return {
             type: SET_TRANSACTIONS,
             payload: transactions
         }
     },
-    getTransactions: transactions => {
+    getTransactions: (transactions: any) => {
         return {
             type: GET_TRANSACTIONS,
             payload: transactions
@@ -148,10 +173,10 @@ export const actions = {
 }
 
 export const transactionsThunk = {
-    getTransaction: (transaction) => dispatch => {
+    getTransaction: (transaction: any) => (dispatch: any) => {
         dispatch(actions.getTransaction(transaction))
     },
-    getTransactions: ({ login, cardid, pageSize, sort, filter, page = undefined }) => dispatch => {
+    getTransactions: ({ login, cardid, pageSize, sort, filter, page = undefined }: getNextTransactions) => (dispatch: any) => {
         if (page === undefined) {
             dispatch(actions.startLoadTarns(true))
             API.getTransactions({ login, cardid, pageSize, filter, sort })
@@ -172,7 +197,7 @@ export const transactionsThunk = {
         }
     },
 
-    addTransaction: form => async dispatch => {
+    addTransaction: (form: any) => async (dispatch: any) => {
         dispatch(actions.addTransaction(form))
         const res = await API.addTransaction(form)
         if (form.type === 'expense') {
@@ -200,7 +225,7 @@ export const transactionsThunk = {
             })
         }
     },
-    deleteTransaction: (id, cardid, cost, type) => async dispatch => {
+    deleteTransaction: (id: string, cardid: string, cost: number, type: string) => async (dispatch: any) => {
         if (type === 'expense') {
             dispatch(cardThunks.addTransaktion(
                 {
@@ -223,7 +248,7 @@ export const transactionsThunk = {
         dispatch(actions.deleteTransaction(id));
         API.deleteTransaction(id)
     },
-    editTrans: form => async dispatch => {
+    editTrans: (form: any) => async (dispatch: any) => {
         const res = await API.editTransaction(form)
         dispatch(appActions.showModal({
             type: res.type,
