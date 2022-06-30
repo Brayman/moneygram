@@ -14,19 +14,13 @@ import {
 } from "./action-types"
 import { cardThunks } from "./card";
 import { appActions } from "./app";
-import { getNextTransactions, reduxActionType } from "../types";
+import {
+    getNextTransactions,
+    reduxActionType,
+    transactionType
+} from "../types";
 
-type Transaction = {
-    id: string,
-    userid: string,
-    cardid: string,
-    date: number,
-    cost: number,
-    payee: string,
-    tag: string,
-    type: string,
-    currency: string,
-}
+
 
 interface State {
     transactions: any;
@@ -34,7 +28,7 @@ interface State {
     curentPage: number;
     totalTransCount: number;
     moreTransLoad: boolean;
-    transaction: Transaction | null;
+    transaction: transactionType | null;
     isLoading: boolean;
 }
 

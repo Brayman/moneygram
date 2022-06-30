@@ -15,7 +15,7 @@ const createClassName = (primary, secondary) => {
 
 
 
-export const Button = ({ active, primary, secondary, className, children, ...props }) => {
+export const Button = ({ active = false, primary = false, secondary = false, className = '', children, ...props }) => {
 
 
     const bcn = createClassName(primary, secondary)

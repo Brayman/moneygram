@@ -1,3 +1,4 @@
+import { reduxActionType } from "../types";
 import {
     INITIALIZE_SUCCESS,
     SET_USER,
@@ -23,7 +24,7 @@ const initialState = {
     }
 
 }
-const AppReducer = (state = initialState, { type, payload }) => {
+const AppReducer = (state = initialState, { type, payload }: reduxActionType) => {
     switch (type) {
         case INITIALIZE_SUCCESS:
             return ({
@@ -86,7 +87,7 @@ export const appActions = {
             type: INITIALIZE_SUCCESS
         })
     },
-    showModal: message => {
+    showModal: (message: any) => {
         return ({
             type: SHOW_MODAL,
             payload: message
@@ -98,9 +99,8 @@ export const appActions = {
             type: HIDE_MODAL
         })
     }
-
 }
-export const initializeApp = (login) => dispatch => {
+export const initializeApp = (login: string) => (dispatch: any) => {
     const promise = dispatch(accountThunks.AuthThunk(login))
     promise.then(() => {
         dispatch(appActions.initialize())

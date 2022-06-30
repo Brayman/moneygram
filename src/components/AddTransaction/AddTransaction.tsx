@@ -14,25 +14,31 @@ import { SelectField as Select } from '../common/Select/SelectField';
 import { Field, SpecialField } from '../common/Field/Field';
 import { Button, GroupedButton } from '../common/Button/Buttons';
 import CreateClasssName from '../../utils/bemClassCreate';
+import { transactionType } from '../../types';
 
 const add = CreateClasssName('tr')
-const tags = ['send','shop', 'taxi', 'deliver', 'restaurant', 'ethernet', 'bus']
+const tags = ['send', 'shop', 'taxi', 'deliver', 'restaurant', 'ethernet', 'bus']
 
-const DatePicker = (props) => {
+const DatePicker = (props: any) => {
     const { setFieldValue } = useFormikContext()
     const [field] = useField(props);
     return (
-        <Field type='date' {...field} {...props} onChange={e => setFieldValue('date', new Date(e.target.value).toISOString().substring(0, 10))} />
+        <Field type='date' {...field} {...props} onChange={(e: any) => setFieldValue('date', new Date(e.target.value).toISOString().substring(0, 10))} />
     )
 }
 
-function AddForm({ userid,  cards, trans = undefined, Action }) {
+interface addFormInterface {
+    userid: string,
+    cards: any,
+    trans?: any,
+    Action: (form: transactionType) => void
+}
+function AddForm({ userid, cards, trans = undefined, Action }: addFormInterface) {
 
-    const initialValues = trans || {
+    const initialValues: transactionType = trans || {
         id: uuidv4(),
         userid,
         date: new Date().toISOString().substring(0, 10),
-        cost: '',
         card: cards[0].name || '',
         payee: '',
         tag: '',
@@ -44,8 +50,8 @@ function AddForm({ userid,  cards, trans = undefined, Action }) {
         <Formik
             initialValues={initialValues}
             onSubmit={
-                (values, actions) => {
-                    const card = cards.find((card) => card.name === values.card)
+                (values: any, actions: any) => {
+                    const card = cards.find((card: any) => card.name === values.card)
                     Action({
                         ...values,
                         date: new Date(values.date).toISOString(),
@@ -57,7 +63,7 @@ function AddForm({ userid,  cards, trans = undefined, Action }) {
                 }
             }
         >
-            {({ values, setFieldValue }) => <Form className={add('add', null, { [values.type]: true })} date={`page tr-add tr-add_${values.type}`}>
+            {({ values, setFieldValue }) => <Form className={add('add', { [values.type]: true })} >
 
                 <header className={`tr-add__header header_${values.type}`}>
                     <Navigation className="header_nav" title={values.type} />
@@ -72,12 +78,12 @@ function AddForm({ userid,  cards, trans = undefined, Action }) {
                     <Select name="tag" tag options={tags} className="tr-add__field" />
                     <DatePicker className='tr-add__field field' name='date' id='date' placeholder="date" />
                     <Field className='tr-add__field field' name='payee' placeholder='payee' />
-                    <Select up options={cards.map(card => card.name)} className={add('add','field')} name='card' placeholder='select card' />
+                    <Select up options={cards.map((card: any) => card.name)} className={add('add', 'field')} name='card' placeholder='select card' />
                     <GroupedButton
-                        className={add('add','field')}
+                        className={add('add', 'field')}
                         type='button'
                         buttons={['Income', 'Expense', 'Transfer']}
-                        onClick={(type) => setFieldValue('type', type)}
+                        onClick={(type: string) => setFieldValue('type', type)}
                         value={values.type}
                     />
                     <section className="tr-add__field tr-add__comment">
@@ -90,8 +96,6 @@ function AddForm({ userid,  cards, trans = undefined, Action }) {
                         save
                     </Button>
                 </main>
-
-
             </Form>}
         </Formik>
     )

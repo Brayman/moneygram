@@ -4,7 +4,7 @@ import { setCardsAC } from "../account";
 import { FAIL_LOGIN, SET_USER, START_LOGIN } from "../action-types";
 import { appActions } from "../app";
 const actions = {
-    setUser: data => {
+    setUser: (data: any) => {
         return {
             type: SET_USER,
             payload: data
@@ -15,7 +15,7 @@ const actions = {
             type: START_LOGIN
         }
     },
-    errorLogin: message => {
+    errorLogin: (message: any) => {
         return {
             type: FAIL_LOGIN,
             payload: message
@@ -23,7 +23,7 @@ const actions = {
     }
 }
 export const accountThunks = {
-    SignUp: formData => dispatch => {
+    SignUp: (formData: any) => (dispatch: any) => {
         API.SignUp({
             ...formData,
             id: uuidv4()
@@ -32,7 +32,7 @@ export const accountThunks = {
                 dispatch(actions.setUser(data))
             })
     },
-    loadUser: id => dispatch => {
+    loadUser: (id: string) => (dispatch: any) => {
         API.getUser(id)
             .then(data => dispatch(actions.setUser(data)))
         API.getCards(id)
@@ -40,26 +40,24 @@ export const accountThunks = {
                 dispatch(setCardsAC(data));
             })
     },
-    Login: login => dispatch => {
+    Login: (login: string) => (dispatch: any) => {
 
         return API.Login(login)
     },
-    Card: login => dispatch => {
+    Card: (login: any) => (dispatch: any) => {
         return API.getCards(login.login)
     },
-    Auth: (login) => async dispatch => {
+    Auth: (login: string) => async (dispatch: any) => {
         const loginP = dispatch(accountThunks.Login(login))
         const cardP = dispatch(accountThunks.Card(login))
         Promise.all([loginP, cardP]).then(
             (data) => console.log(data)
         )
     },
-    AuthThunk: login => async dispatch => {
+    AuthThunk: (login: string) => async (dispatch: any) => {
         dispatch(actions.startLogin())
-        const resp = await API.Login(login)
-        console.log(resp);
+        const resp: any = await API.Login(login);
         if (resp.status >= 400) {
-            console.log(resp.status);
             dispatch(actions.errorLogin(resp.message))
         } else {
             dispatch(actions.setUser(resp.data))

@@ -17,7 +17,7 @@ function Accounts() {
 
     )
 }
-function CardList({ cards }) {
+function CardList({ cards }: {cards: any}) {
     return (
         <section className="accounts">
             <Navigation title="Accounts" className="accounts__nav" />
@@ -30,7 +30,7 @@ function CardList({ cards }) {
                 </div>
             </section>
             <menu className="accounts__list">
-                {cards.map(card => {
+                {cards.map((card: any) => {
                     return <NavLink
                         className="wallet"
                         to={`/transactions/${card.id}`}

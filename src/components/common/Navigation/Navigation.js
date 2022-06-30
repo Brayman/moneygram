@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import "./Navigation.css";
 
 
-export const Navigation = ({children, className, title}) => {
+export const Navigation = ({children = undefined, className, title}) => {
     const nav = useNavigate();
     return (
         <nav className={`${className} nav`}>

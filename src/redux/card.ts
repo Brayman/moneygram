@@ -1,4 +1,5 @@
 import { API } from "../api/api";
+import { reduxActionType } from "../types";
 import {
     SET_CARDS,
     CREATE_CARD,
@@ -13,13 +14,12 @@ const defaultState = {
     cards: []
 
 }
-const card = (state = defaultState, { type, payload }) => {
+const card = (state = defaultState, { type, payload }: reduxActionType) => {
     switch (type) {
         case SET_CARDS:
             return {
                 ...state,
-                cards: payload,
-                card: payload[state.selectCard]
+                cards: payload
             }
         case CREATE_CARD:
             return {
@@ -32,7 +32,7 @@ const card = (state = defaultState, { type, payload }) => {
         case CARD_ADD_TRANSACTION:
             return {
                 ...state,
-                cards: state.cards.map((card) => {
+                cards: state.cards.map((card: any) => {
                     if (card.id === payload.cardid) {
                         return {
                             ...card,
@@ -46,7 +46,7 @@ const card = (state = defaultState, { type, payload }) => {
         case CARD_SUBTRACT_TRANSACTION:
             return {
                 ...state,
-                cards: state.cards.map((card) => {
+                cards: state.cards.map((card: any) => {
                     if (card.id === payload.cardid) {
                         return {
                             ...card,
@@ -60,12 +60,12 @@ const card = (state = defaultState, { type, payload }) => {
         case UPDATE_CARD:
             return {
                 ...state,
-                cards: state.cards.map(card => card.id === payload.id ? payload : card)
+                cards: state.cards.map((card: any) => card.id === payload.id ? payload : card)
             }
         case SAVE_CARD:
             return {
                 ...state,
-                cardForSave: state.cards.find(card => card.id === payload)
+                cardForSave: state.cards.find((card: any) => card.id === payload)
             }
         default: return state;
     }
@@ -75,25 +75,25 @@ const card = (state = defaultState, { type, payload }) => {
 
 
 export const actions = {
-    addTransaktion: payload => {
+    addTransaktion: (payload: any) => {
         return {
             type: CARD_ADD_TRANSACTION,
             payload
         }
     },
-    subtractTransaktion: payload => {
+    subtractTransaktion: (payload: any) => {
         return {
             type: CARD_SUBTRACT_TRANSACTION,
             payload
         }
     },
-    updateCard: card => {
+    updateCard: (card: any) => {
         return {
             type: UPDATE_CARD,
             payload: card
         }
     },
-    getCardForSave: cardid => {
+    getCardForSave: (cardid: string) => {
         return {
             type: SAVE_CARD,
             payload: cardid
@@ -102,29 +102,17 @@ export const actions = {
   
 }
 export const cardThunks = {
-    addTransaktion: transaction => async dispatch => {
+    addTransaktion: (transaction: any) => async (dispatch: any) => {
         dispatch(actions.addTransaktion(transaction))
     },
-    subtractTransaktion: transaction => async dispatch => {
+    subtractTransaktion: (transaction: any) => async (dispatch: any) => {
         dispatch(actions.subtractTransaktion(transaction))
-    },
-    updateCardBalance: data => dispatch => {
-        dispatch(actions.updateBalance(data))
-    },
-    
-    saveCard: (card) => async dispatch => {
+    },    
+    saveCard: (card: any) => async (dispatch: any) => {
         const res = await API.saveCard(card)
         if (res.status < 400) {
             dispatch(actions.updateCard(res.data))
-        }
-        
-    },
-    updateCard: card => dispatch => {
-
-        API.updateCard(card)
-            .then(res => {
-                dispatch(actions.updateCard(res.data))
-            })
+        } 
     }
 }
 export default card;

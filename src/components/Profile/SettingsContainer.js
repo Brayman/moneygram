@@ -1,7 +1,6 @@
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { WithAuthRedirect } from "../../hoc/withAuthRedirect";
-import { settingsChangeAC, updateProfileThunk } from "../../redux/account";
 import Settings from "./Settings";
 
 const mapStateToProps = state => {
@@ -13,9 +12,7 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = dispatch => {
     return {
-        Change: (item, value) => dispatch(settingsChangeAC(item, value)),
-        // Save: () => dispatch(settingsSaveAC())
-        Save: (login, data) => dispatch(updateProfileThunk(login, data))
+        
     }
 }
 export default compose(

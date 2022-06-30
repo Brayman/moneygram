@@ -1,3 +1,14 @@
+export type transactionType = {
+    id: string,
+    userid: string,
+    cardid: string,
+    date: number,
+    cost: number,
+    payee: string,
+    tag: string,
+    type: string,
+    currency: string,
+}
 export type getTransactionsType = {
     login: string,
     cardid: string,
