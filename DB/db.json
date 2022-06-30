@@ -20,7 +20,7 @@
       "id": "36da6363-2982-41fc-b042-c8a3cf1b18b2",
       "name": "CashGEL",
       "currency": "GEL",
-      "balance": 201.65
+      "balance": 91.94
     },
     {
       "userid": 1,
@@ -181,6 +181,66 @@
       "date": "2022-05-22T00:00:00.000Z",
       "card": "CashGEL",
       "cost": 25,
+      "payee": "",
+      "tag": "shop",
+      "type": "expense",
+      "currency": "GEL",
+      "cardid": "36da6363-2982-41fc-b042-c8a3cf1b18b2"
+    },
+    {
+      "id": "0c9ec267-4281-43d1-9424-c15f5913b841",
+      "userid": "brayman",
+      "date": "2022-06-26T00:00:00.000Z",
+      "cost": 25,
+      "card": "CashGEL",
+      "payee": "yammy",
+      "tag": "shop",
+      "type": "expense",
+      "currency": "GEL",
+      "cardid": "36da6363-2982-41fc-b042-c8a3cf1b18b2"
+    },
+    {
+      "id": "241baed4-ffee-4304-a1a8-9e3b8ce53cde",
+      "userid": "brayman",
+      "date": "2022-06-25T00:00:00.000Z",
+      "cost": 1.5,
+      "card": "CashGEL",
+      "payee": "yammy",
+      "tag": "shop",
+      "type": "expense",
+      "currency": "GEL",
+      "cardid": "36da6363-2982-41fc-b042-c8a3cf1b18b2"
+    },
+    {
+      "id": "bce08dda-1307-4a84-b01e-186604ebf9d2",
+      "userid": "brayman",
+      "date": "2022-06-25T00:00:00.000Z",
+      "cost": 28.45,
+      "card": "CashGEL",
+      "payee": "yammy",
+      "tag": "shop",
+      "type": "expense",
+      "currency": "GEL",
+      "cardid": "36da6363-2982-41fc-b042-c8a3cf1b18b2"
+    },
+    {
+      "id": "9de794cc-2e65-4c3d-ac30-d81d1ac09c0a",
+      "userid": "brayman",
+      "date": "2022-06-22T00:00:00.000Z",
+      "cost": 20.35,
+      "card": "CashGEL",
+      "payee": "",
+      "tag": "shop",
+      "type": "expense",
+      "currency": "GEL",
+      "cardid": "36da6363-2982-41fc-b042-c8a3cf1b18b2"
+    },
+    {
+      "id": "5401d154-14a4-4fb6-8122-700f971e9131",
+      "userid": "brayman",
+      "date": "2022-06-08T00:00:00.000Z",
+      "cost": 34.4,
+      "card": "CashGEL",
       "payee": "",
       "tag": "shop",
       "type": "expense",
