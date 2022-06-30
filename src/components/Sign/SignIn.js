@@ -7,6 +7,7 @@ import { loginValidate } from "../../utils/validators/validators";
 import { useSelector } from "react-redux";
 import { app } from "../../redux/selectors";
 import React, { useEffect } from "react";
+import { Button } from "../common/Button/Buttons";
 
 export const MyForm = ({ isValid, setErrors }) => {
     const login = useSelector(app).login
@@ -28,13 +29,14 @@ export const MyForm = ({ isValid, setErrors }) => {
                 type="password"
                 placeholder="password"
             />
-            <button
+            <Button
+                primary
                 disabled={!isValid}
                 className="primary-btn sign__button"
                 type="submit"
             >
                 Login
-            </button>
+            </Button>
             <NavLink to="/sign" className="sign-link sign-link__title">
                 Forgot password?
             </NavLink>

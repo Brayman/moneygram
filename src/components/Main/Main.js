@@ -7,8 +7,8 @@ import {
 } from "react-icons/md";
 import Filter from "./Filter/FilterContainer";
 import React, { useState } from "react";
-import { Button } from "../common/Button/Button";
-import "../NewMain.css"
+import { Button, IconButton } from "../common/Button/Buttons";
+import "./Main.css"
 function Main({ props }) {
     const [filter, setFilter] = useState(true)
     return (
@@ -18,9 +18,11 @@ function Main({ props }) {
                     <MdKeyboardArrowDown className="filter-btn__icon" />
                     Month
                 </button>
-                <Button className="icon-btn" onClick={() => setFilter(prev => !prev)}>
-                    <MdFilterList />
-                </Button>
+                <IconButton
+                    icon={MdFilterList}
+                    className="icon-btn"
+                    onClick={() => setFilter(prev => !prev)}
+                />
             </header>
             <button className="info-btn transactions__report">
                 See your financial report
@@ -42,15 +44,16 @@ function Main({ props }) {
             </section>
             {
                 props.maxPage !== props.curentPage ?
-                    <button
+                    <Button
+                        className="transactions__button"
                         disabled={props.moreTransLoad}
                         onClick={() => props.getNextPage(props.page + 1)}
                     >
                         more
-                    </button> :
+                    </Button> :
                     null
             }
-            <Filter hide={filter} showFilter={() => setFilter(!filter)}/>
+            <Filter hide={filter} showFilter={() => setFilter(!filter)} />
         </section>
     )
 

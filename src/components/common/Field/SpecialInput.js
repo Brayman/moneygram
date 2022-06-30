@@ -1,12 +1,9 @@
-import { useField } from 'formik'
 import React from 'react';
 import "./style.css";
 
-export const SpecialField = ({ label, placeholder, ...props }) => {
-    const [field, meta] = useField(props)
-    const error = !!meta.error && "special-field_error"
+export const SpecialInput = ({ label, placeholder,field, ...props }) => {
     return (
-        <div className={`special-field ${props.className} ${error}`}>
+        <div className={`special-field ${props.className} ${props.error}`}>
             <div className="special-field__placeholder">
                 {placeholder}
             </div>
@@ -17,6 +14,7 @@ export const SpecialField = ({ label, placeholder, ...props }) => {
                 <input
                     {...field}
                     {...props}
+                    placeholder={0}
                     className="special-field__input"
                     id={props.name}
                 />

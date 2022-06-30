@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { withNaming } from '@bem-react/classname';
+import { Button } from '../../common/Button/Buttons';
 import "./Filter.css";
-import { Button } from '../../common/Button/Button';
+import CreateClasssName from '../../../utils/bemClassCreate';
 
 
-const cn = withNaming({ n: 'fltr-', e: '__', m: '_', v: '_' })
-const fcn = (b, e, m) => cn(b, e)(m);
+const fcn = CreateClasssName()
 
 const FilterOption = ({ title, options, selectFilter, action }) => {
 

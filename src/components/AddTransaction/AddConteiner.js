@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { compose } from "redux";
 import { WithAuthRedirect } from "../../hoc/withAuthRedirect";
-import { cardThunks } from "../../redux/actions/card-actions";
+import { transactionsThunk } from "../../redux/transactions-reducer";
 import * as selectors from "../../redux/selectors";
 import AddForm from "./AddTransaction";
 
@@ -12,10 +12,9 @@ export const Add = compose(
     const props = {
         userid: useSelector(selectors.login),
         date: new Date().getTime(),
-        cardid: useSelector(selectors.cardID),
         cards: useSelector(selectors.cards),
         modal: useSelector(selectors.modal),
-        Action: form => dispatch(cardThunks.saveTrans(form))
+        Action: form => dispatch(transactionsThunk.addTransaction(form))
     }
     return <AddForm {...props}/>
 });
@@ -28,9 +27,9 @@ export const Edit = compose(
         trans,
         modal: useSelector(selectors.modal),
         userid: useSelector(selectors.login),
-        cardid: useSelector(selectors.cardID),
+        cardid: trans.cardid,
         cards: useSelector(selectors.cards),
-        Action: (form) => dispatch(cardThunks.editTrans(form))
+        Action: (form) => dispatch(transactionsThunk.editTrans(form))
     }
     return <AddForm {...props}/>
 });

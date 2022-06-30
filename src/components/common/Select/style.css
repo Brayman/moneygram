@@ -1,48 +1,80 @@
-.options_hidden {
-    display: none;
-  }
-.options_down {
-    position: absolute;
-    top: 2.75em;
-    width: calc(100% - 2px);
-    background-color: #fff;
-    border: 1px solid #F1F1FA;
-    border-radius: 0 0 1em 1em;
-    border-style: none solid solid solid;
-    z-index: 2;
-}
-.options_up {
-    position: absolute;
-    bottom: 3.75em;
-    width: calc(100% - 2px);
-    background-color: #fff;
-    border: 1px solid #F1F1FA;
-    border-radius: 1em 1em 0 0;
-    border-style: solid solid none solid;
-    z-index: 2;
-}
 .select {
     display: flex;
-    align-items: center;
+    flex-direction: row;
     justify-content: space-between;
-    padding: 13px 1em;
+    align-items: center;
+    position: relative;
     border: 1px solid #F1F1FA;
     border-radius: 1em;
+    flex-grow: 0;
     background-color: #fff;
+    cursor: pointer;
 }
-.select:hover,
-.select:focus,
-.select:active {
-    border: 1px solid #F1F1FA !important;
+
+.select__arrow {
+    width: 2em;
+    height: 2em;
+    padding-right: 0.5em;
+    color: #91919F;
 }
 .option {
-    padding: 0.5em 1em;
+    
+    font-size: 16px;
+    line-height: 2em;
+    padding: 0.75em 1em;
+    flex-grow: 1;
+    border-radius: 1em;
 }
-.option:first-child {
-    margin-top: 0.5em;
+
+.option:hover {
+    background-color: #FCFCFC;
 }
-.option:hover,
-.option:active,
-.option:focus {
-    background-color: #D3BDFF;
+.option_placeholder {
+    color: #91919F;
+}
+.options {
+    background-color: #fff;
+    border: 1px solid #F1F1FA;
+    position: absolute;
+    
+    width: 100%;
+    margin-left: -1px;
+    z-index: 4;
+}
+.options_up {
+    padding-bottom: 0.5em;
+    border-radius: 1em 1em 0 0;
+    border-style:  solid solid none solid;
+    bottom: 2.75em;
+}
+.options_down {
+    padding-top: 0.5em;
+    border-radius: 0 0 1em 1em;
+    border-style: none solid solid solid;
+    top: 2.75em;
+}
+.options_hidden {
+    display: none;
+}
+.option__tag {
+    font-size: 14px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 8px;
+    border: 1px solid #F1F1FA;
+    background: #FCFCFC;
+    border-radius: 32px;
+    width: max-content;
+}
+.tag__dot {
+    background: #00A86B;
+    width: 1em;
+    height: 1em;
+    border-radius: 1em;
+}
+.tag__text {
+    font-weight: 500;
+    padding-left: 7px;
+    line-height: 1em;
 }

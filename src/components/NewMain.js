@@ -1,4 +1,4 @@
-import "./NewMain.css";
+import "./Main/Main.css";
 import {
     MdFilterList,
     MdKeyboardArrowDown,
