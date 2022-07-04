@@ -8,7 +8,7 @@ import { Navigation } from "../common/Navigation/Navigation";
 import { signupValidate } from "../../utils/validators/validators";
 import { Button } from "../common/Button/Buttons";
 
-export const SignUpForm = () => {
+export const SignUpForm = ({onSubmit}) => {
     return (
         <section className="signup-page">
             <Navigation className="signup__nav" title="Sign Up" />
@@ -19,7 +19,7 @@ export const SignUpForm = () => {
                     password: ''
                 }}
                 validationSchema={signupValidate}
-                onSubmit={form => console.log(form)}
+                onSubmit={form => onSubmit(form)}
             >
                 {() => <Form className="sign__form">
                     <Field
@@ -38,7 +38,7 @@ export const SignUpForm = () => {
                         placeholder="password"
                         type="password"
                     />
-                    <Button primary className="sign__button">
+                    <Button primary type='submit' className="sign__button">
                         Sign Up
                     </Button>
                     <span className="sign__footer">
