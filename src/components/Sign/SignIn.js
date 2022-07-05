@@ -7,6 +7,8 @@ import { loginValidate } from "../../utils/validators/validators";
 import { useSelector } from "react-redux";
 import { app } from "../../redux/selectors";
 import React, { useEffect } from "react";
+import { Button } from "../common/Button/Buttons";
+import { accountThunks } from "../../redux/actions/account-actions";
 
 export const MyForm = ({ isValid, setErrors }) => {
     const login = useSelector(app).login
@@ -18,9 +20,9 @@ export const MyForm = ({ isValid, setErrors }) => {
     return (
         <Form className="sign__form">
             <Field
-                name="login"
+                name="email"
                 className="sign__field"
-                placeholder="login"
+                placeholder="email"
             />
             <Field
                 className="sign__field"
@@ -28,13 +30,14 @@ export const MyForm = ({ isValid, setErrors }) => {
                 type="password"
                 placeholder="password"
             />
-            <button
+            <Button
+                primary
                 disabled={!isValid}
                 className="primary-btn sign__button"
                 type="submit"
             >
                 Login
-            </button>
+            </Button>
             <NavLink to="/sign" className="sign-link sign-link__title">
                 Forgot password?
             </NavLink>
@@ -44,6 +47,7 @@ export const MyForm = ({ isValid, setErrors }) => {
                     Sign Up
                 </NavLink>
             </span>
+            <button type='button' onClick={() => accountThunks.tokenAuth()}>auth</button>
         </Form>
     )
 }
@@ -59,7 +63,7 @@ const SignIn = ({ Login, init }) => {
             <Navigation title={"login"} className='signin-nav' />
             <Formik
                 initialValues={{
-                    login: '',
+                    email: '',
                     password: '',
                 }}
                 validationSchema={loginValidate}

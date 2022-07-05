@@ -1,12 +1,14 @@
 import { NavLink } from "react-router-dom";
-import React from 'react'
+import React from 'react';
+import "./Sign.css";
 import { Formik, Form } from "formik";
 import { Field } from "../common/Field/Field";
 import { Navigation } from "../common/Navigation/Navigation";
-import "./Sign.css"
-import { signupValidate } from "../../utils/validators/validators";
 
-export const SignUpForm = () => {
+import { signupValidate } from "../../utils/validators/validators";
+import { Button } from "../common/Button/Buttons";
+
+export const SignUpForm = ({onSubmit}) => {
     return (
         <section className="signup-page">
             <Navigation className="signup__nav" title="Sign Up" />
@@ -17,7 +19,7 @@ export const SignUpForm = () => {
                     password: ''
                 }}
                 validationSchema={signupValidate}
-                onSubmit={form => console.log(form)}
+                onSubmit={form => onSubmit(form)}
             >
                 {() => <Form className="sign__form">
                     <Field
@@ -36,9 +38,9 @@ export const SignUpForm = () => {
                         placeholder="password"
                         type="password"
                     />
-                    <button className="sign__button primary-btn">
+                    <Button primary type='submit' className="sign__button">
                         Sign Up
-                    </button>
+                    </Button>
                     <span className="sign__footer">
                         Already have an account?
                         <NavLink to="/login" className="sign-link sign-link__subtitle">

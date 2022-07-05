@@ -43,6 +43,16 @@
     padding: 0.85em 1em;
     margin-bottom: 1px;
     background-color: #FFF;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.option__icon {
+    width: 2em;
+    height: 2em;
+}
+.option__title {
+    margin-left: 1em;
 }
 .menu__option:first-child {
     border-radius: 1.5em 1.5em 0 0;

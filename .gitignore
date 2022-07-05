@@ -21,6 +21,7 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
 # Logs
 logs
 *.log
@@ -127,6 +128,6 @@ dist
 # TernJS port file
 .tern-port
 yarn.lock
-DB/db.json
 *.stories.js
 package-lock.json
+DB/db.json

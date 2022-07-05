@@ -1,15 +1,22 @@
 .transactions {
     display: flex;
     flex-direction: column;
+    padding-bottom: 7vh;
 }
 .transactions__header {
     margin: 0.75em 1em;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
 }
 .transactions__report {
     margin: 0.5em 1em;
+}
+.transactions__button {
+    width: max-content;
+    align-self: center;
+    margin-bottom: 1em;
 }
 .filter-btn {
     display: flex;
@@ -27,9 +34,6 @@
     line-height: 24px;
 }
 .icon-btn {
-    padding: 0 auto;
-    font-size: 32px;
-    line-height: 1em;
     border-radius: 0.25em;
     border: 1px solid #F1F1FA;
 }

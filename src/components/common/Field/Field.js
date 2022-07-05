@@ -1,21 +1,17 @@
 import { useField } from 'formik'
 import React from 'react';
-import "./style.css";
+import { Input } from './Input';
+import { SpecialInput } from './SpecialInput';
 
 export const Field = (props) => {
     const [field, meta] = useField(props)
-    const error = !!meta.error && "field__error field_error" 
     return (
-        <>
-            <input
-                {...field}
-                {...props}
-                className={`${props.className} field ${error}`}
-            />
-            {!!meta.touched && !!meta.error && 
-            <div className="field__error">
-                {meta.error}
-            </div>}
-        </>
+        <Input meta={meta} field={field} {...props} className={props.className} />
+    )
+}
+export const SpecialField = (props) => {
+    const [field, meta] = useField(props)
+    return (
+        <SpecialInput meta={meta} field={field} {...props} className={props.className} />
     )
 }

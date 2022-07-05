@@ -16,7 +16,7 @@ export const signupValidate = Yup.object({
     password,
 })
 export const loginValidate = Yup.object({
-    login,
+    email,
     password,
 })
 
