@@ -10,7 +10,7 @@ export const Navigation = ({children, className, title}) => {
     const nav = useNavigate();
     return (
         <nav className={`${className} nav`}>
-            <button className="nav__button" onClick={() => nav(-1)}>
+            <button type='button' className="nav__button" onClick={() => nav(-1)}>
                 <MdKeyboardBackspace />
             </button>
             <h2 className="nav__title">
