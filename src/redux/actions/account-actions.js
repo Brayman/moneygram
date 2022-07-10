@@ -44,9 +44,6 @@ export const accountThunks = {
 
         return API.Login(login)
     },
-    Card: login => dispatch => {
-        return API.getCards(login.login)
-    },
     Auth: (login) => async dispatch => {
         const loginP = dispatch(accountThunks.Login(login))
         const cardP = dispatch(accountThunks.Card(login))
@@ -57,7 +54,6 @@ export const accountThunks = {
     AuthThunk: login => async dispatch => {
         dispatch(actions.startLogin())
         const resp = await API.Login(login)
-        console.log(resp);
         if (resp.status >= 400) {
             dispatch(actions.errorLogin(resp.message))
         } else {

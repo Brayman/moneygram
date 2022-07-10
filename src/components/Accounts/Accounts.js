@@ -9,15 +9,15 @@ import { Navigation } from "../common/Navigation/Navigation";
 import { Icon } from "../Icon/Icon";
 import { Button } from "../common/Button/Buttons";
 
-function Accounts() {
+function Accounts({balance}) {
     const cards = useSelector(selectors.cards);
     return (
 
-        <CardList cards={cards} />
+        <CardList cards={cards} balance={balance} />
 
     )
 }
-function CardList({ cards }) {
+function CardList({ cards, balance }) {
     return (
         <section className="accounts">
             <Navigation title="Accounts" className="accounts__nav" />
@@ -26,7 +26,7 @@ function CardList({ cards }) {
                     Account balance
                 </div>
                 <div className="balance__title">
-                    USD 1905
+                    USD {balance}
                 </div>
             </section>
             <menu className="accounts__list">

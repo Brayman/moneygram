@@ -17,6 +17,8 @@ export const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 export const CHANGE_SETTINGS = 'CHANGE_SETTINGS';
 export const SAVE_SETTINGS = 'SAVE_SETTINGS';
 export const SET_USER = 'SET_USER';
+export const ADD_TO_BALANCE = 'ADD_TO_BALANCE';
+export const SUBTRACT_BALANCE = 'SUBTRACT_BALANCE';
 
 //--- card types
 export const SET_CARDS = 'SET_CARDS';
