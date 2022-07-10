@@ -1,29 +1,36 @@
 {
   "users": [
     {
-      "id": 1,
-      "login": "brayman",
+      "email": "tapakah96@gmail.com",
+      "password": "$2a$10$tnfFHTQGlJlxhS6J/aU5puAiFBVvAsjtp0wmF8d9/CpWCLQRYewbS",
+      "login": "tester",
+      "id": "d5e3c7b9-83b7-4ba5-8770-bd2b08ed67a8"
+    },
+    {
+      "email": "ar.rakitskiy@gmail.com",
+      "password": "$2a$10$aRAUmpa0i1dCZ4R3X7Ni/eBuZeUv5BvFID4gaFUO8jEA2sDW4mDyO",
       "first_name": "Artem",
       "pass": 8292913,
       "balance": 311.03,
       "spend": 15,
       "avatar": null,
-      "mail": "ar.rak@gmail.com",
+      "mail": "ar.rakitskiy@gmail.com",
       "language": "ru",
-      "selectCard": 0,
-      "second_name": "Rakitskiy"
+      "second_name": "Rakitskiy",
+      "login": "brayman",
+      "id": "5dd92916-c4d2-47bd-9d64-71d153944553"
     }
   ],
   "cards": [
     {
-      "userid": 1,
+      "userid": "5dd92916-c4d2-47bd-9d64-71d153944553",
       "id": "36da6363-2982-41fc-b042-c8a3cf1b18b2",
       "name": "CashGEL",
       "currency": "GEL",
       "balance": 191.25
     },
     {
-      "userid": 1,
+      "userid": "5dd92916-c4d2-47bd-9d64-71d153944553",
       "id": "865182c0-06e1-4db8-b963-1818070454ed",
       "name": "CashUSD",
       "currency": "USD",

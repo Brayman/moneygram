@@ -66,11 +66,11 @@ export const API = {
         return instance.patch(`profile/${login}`, data).then(data => data)
     },
     SignUp(formData) {
-        return instance.post(`users`, formData).then(data => data.data)
+        return instance.post(`/register`, formData).then(data => data.data)
     },
     async Login(formData) {
         try {
-            const res = await instance.post(`login`, { login: formData.login, pass: formData.password })
+            const res = await instance.post(`/login`, formData)
             if (res.status >= 400) {
                 return res
             }

@@ -18,6 +18,8 @@ import Accounts from './components/Accounts/Accounts';
 import "./App.css";
 import { actions, cardThunks } from './redux/card';
 import { API } from './api/api';
+import { Statistic } from './pages/Statistic';
+
 
 const App = () => {
   const dispatch = useDispatch();
@@ -31,6 +33,7 @@ const App = () => {
   const app = useSelector(selectors.app)
   const account = useSelector(selectors.account)
   const modal = useSelector(selectors.modal)
+  const transactions = useSelector(selectors.transactions)
   const signUp = FormData => dispatch(accountThunks.SignUp(FormData))
   const Auth = FormData => dispatch(accountThunks.AuthThunk(FormData))
   const addCard = card => dispatch(CreateCard(card))
@@ -46,10 +49,8 @@ const App = () => {
     }
   }, [cardForSave, dispatch])
   useEffect(() => {
-    console.log(account.balance,!!account.balance);
     if (!!account.balance) {
-      
-      API.updateAccount({id: account.id, balance: account.balance})
+      API.updateAccount({ id: account.id, balance: account.balance })
     }
   }, [account, dispatch])
   return (
@@ -64,7 +65,7 @@ const App = () => {
           />}
         />
         <Route path='/' element={<Navigate to='/accounts' />} />
-        <Route path='/accounts' element={<Accounts isAuth={isAuth} balance={account.balance}/>} />
+        <Route path='/accounts' element={<Accounts isAuth={isAuth} balance={account.balance} />} />
         <Route
           path='/transactions/:cardid'
           element={<Main login={login} isAuth={isAuth} modal={modal} />}
@@ -78,9 +79,9 @@ const App = () => {
             cards={cards}
           />
         } />
-
+        <Route path='/analytics' element={<Statistic {...{ isAuth, transactions, balance: account.balance }} />} />
         <Route path='/settings/*' element={<Settings />} />
-        <Route path='/transaction/:id' element={<TransComponent {...{modal, isAuth}} />} />
+        <Route path='/transaction/:id' element={<TransComponent {...{ modal, isAuth }} />} />
         <Route path='/transaction/edit/:id' element={<Edit isAuth={isAuth} />} />
         <Route path='/sign-up' element={<SignUp onSubmit={signUp} />} />
         <Route path='/add' element={<Add isAuth={isAuth} />} />

@@ -5,7 +5,7 @@ import {
     MdKeyboardArrowDown,
     MdKeyboardArrowRight
 } from "react-icons/md";
-import { Filter } from "./Filter/Filter";
+import Filter from "./Filter/FilterContainer";
 import React, { useState } from "react";
 import { Button, IconButton } from "../common/Button/Buttons";
 import "./Main.css"

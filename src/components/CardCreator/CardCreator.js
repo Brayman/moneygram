@@ -3,8 +3,7 @@ import { Formik, Form } from "formik";
 import { v4 as uuidv4 } from 'uuid';
 import { Navigation } from "../common/Navigation/Navigation";
 import "./style.css"
-import { Field } from "../common/Field/Field";
-import { SpecialField } from "../common/Field/SpecialField";
+import { Field, SpecialField } from "../common/Field/Field";
 import { SelectField as Select } from "../common/Select/SelectField";
 import { Button } from "../common/Button/Buttons";
 import CreateClasssName from "../../utils/bemClassCreate";

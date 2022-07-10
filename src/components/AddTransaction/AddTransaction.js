@@ -1,8 +1,6 @@
 import React from 'react';
 import { useNavigate } from "react-router-dom";
-import "./AddTransaktion.css"
 import { v4 as uuidv4 } from 'uuid';
-
 import {
     Form,
     Formik,
@@ -11,12 +9,11 @@ import {
 } from "formik";
 import { Navigation } from '../common/Navigation/Navigation';
 import { SelectField as Select } from '../common/Select/SelectField';
-import { SpecialField } from '../common/Field/SpecialField';
-import { Field } from '../common/Field/Field';
+import { Field, SpecialField } from '../common/Field/Field';
 import { Button, GroupedButton } from '../common/Button/Buttons';
 import CreateClasssName from '../../utils/bemClassCreate';
-
-const add = CreateClasssName('tr')
+import "./AddTransaktion.css"
+const addCN = CreateClasssName()
 const tags = ['send','shop', 'taxi', 'deliver', 'restaurant', 'ethernet', 'bus']
 
 const DatePicker = (props) => {
@@ -33,8 +30,8 @@ function AddForm({ userid,  cards, trans = undefined, Action }) {
         id: uuidv4(),
         userid,
         date: new Date().toISOString().substring(0, 10),
+        cost: '',
         card: cards[0].name || '',
-        cost: 0,
         payee: '',
         tag: '',
         type: 'expense',
@@ -58,10 +55,10 @@ function AddForm({ userid,  cards, trans = undefined, Action }) {
                 }
             }
         >
-            {({ values, setFieldValue }) => <Form className={add('add', null, { [values.type]: true })} date={`page tr-add tr-add_${values.type}`}>
+            {({ values, setFieldValue }) => <Form className={addCN('add', null, { [values.type]: true })} >
 
-                <header className={`tr-add__header header_${values.type}`}>
-                    <Navigation className="header_nav" title={values.type} />
+                <header className={addCN('add', null, { [values.type]: true })}>
+                    <Navigation className={addCN('header', 'nav', {[values.type]: true })} title={values.type} />
                     <SpecialField
                         name='cost'
                         placeholder='How much?'
@@ -73,9 +70,9 @@ function AddForm({ userid,  cards, trans = undefined, Action }) {
                     <Select name="tag" tag options={tags} className="tr-add__field" />
                     <DatePicker className='tr-add__field field' name='date' id='date' placeholder="date" />
                     <Field className='tr-add__field field' name='payee' placeholder='payee' />
-                    <Select up options={cards.map(card => card.name)} className={add('add','field')} name='card' placeholder='select card' />
+                    <Select up options={cards.map(card => card.name)} className={addCN('add','field')} name='card' placeholder='select card' />
                     <GroupedButton
-                        className={add('add','field')}
+                        className={addCN('add','field')}
                         type='button'
                         buttons={['Income', 'Expense', 'Transfer']}
                         onClick={(type) => setFieldValue('type', type)}
