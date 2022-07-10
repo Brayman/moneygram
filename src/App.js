@@ -17,7 +17,8 @@ import TransComponent from './components/Transaction/TransComponent';
 import Accounts from './components/Accounts/Accounts';
 import "./App.css";
 import { actions, cardThunks } from './redux/card';
-import ChartPage from './components/Chart/Chart';
+import ChartPage from './components/Charts/Chart';
+import { Statistic } from './pages/Statistic';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -72,7 +73,7 @@ const App = () => {
             cards={cards}
           />
         } />
-        <Route path='/analytics' element={<ChartPage isAuth={isAuth} data={transactions}/>} />
+        <Route path='/analytics' element={<Statistic {...{isAuth, transactions, balance: account.balance}}/>} />
         <Route path='/settings/*' element={<Settings />} />
         <Route path='/transaction/:id' element={<TransComponent isAuth={isAuth} />} />
         <Route path='/transaction/edit/:id' element={<Edit isAuth={isAuth} />} />
