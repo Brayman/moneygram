@@ -4,11 +4,10 @@
     display: grid;
     grid-template-columns: 1fr 3fr 1fr;
     padding-top: 1em;
-    color: #FFFFFF;
+    color: #000;
     justify-items: center;
     align-items: center;
     padding-top: 1em;
-    color: #FFFFFF;
 }
 
 .nav__button {
