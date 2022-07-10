@@ -13,6 +13,13 @@ export const Dropdown = ({children, items, onClick}) => {
         onClick(event.target.innerText)
         setOpen(false)
     }
+    const Arrow = ({open, ...props}) => {
+        if (open) {
+            return <MdKeyboardArrowUp {...props} />
+        } else {
+            return <MdKeyboardArrowDown {...props} />
+        }
+    }
     return (
         <div className={classNames('dropdown')}>
 
@@ -21,7 +28,7 @@ export const Dropdown = ({children, items, onClick}) => {
                 className={classNames('dropdown', 'button', {open: open})}
                 onClick={() => setOpen(!open)}
                 >
-                <MdKeyboardArrowDown className={classNames('button', 'icon')} />
+                <Arrow open={open} className={classNames('button', 'icon')} />
                 {children}
             </button>
             <div className={classNames('dropdown', 'items', {open: open})}>

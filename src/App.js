@@ -17,7 +17,6 @@ import TransComponent from './components/Transaction/TransComponent';
 import Accounts from './components/Accounts/Accounts';
 import "./App.css";
 import { actions, cardThunks } from './redux/card';
-import ChartPage from './components/Charts/Chart';
 import { Statistic } from './pages/Statistic';
 
 const App = () => {
