@@ -2,3 +2,15 @@
   min-height: 100vh;
   /* padding-bottom: 7vh; */
 }
+.statistic__bottom-element {
+  margin-bottom: 7vh;
+}
+.block-chart {
+  width: 100%;
+  height: 60vw;
+  background-color: gray;
+  color: #FFF;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
