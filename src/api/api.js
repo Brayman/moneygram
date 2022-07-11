@@ -15,6 +15,10 @@ export const API = {
         return instance.get(`transactions?login=${login}&cardid=${cardid}${filter ? `&type=${filter}` : ''}&_limit=${pageSize}&_sort=${sort.field}&_order=${sort.order}`)
             .then(data => data)
     },
+    getTransaction: async (id) => {
+        const res = await instance.get(`transaction/${id}`)
+        return res.data
+    },
     getNextTransactions({login, cardid, pageSize, sort, filter, page}) {
         return instance.get(`transactions?login=${login}&cardid=${cardid}${filter ? `&type=${filter}` : ''}&_limit=${pageSize}&_page=${page}&_sort=${sort.field}&_order=${sort.order}`)
             .then(data => data)
