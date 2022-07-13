@@ -20,9 +20,9 @@ export const MyForm = ({ isValid, setErrors }) => {
     return (
         <Form className="sign__form">
             <Field
-                name="email"
+                name="login"
                 className="sign__field"
-                placeholder="email"
+                placeholder="login"
             />
             <Field
                 className="sign__field"
@@ -63,7 +63,7 @@ const SignIn = ({ Login, init }) => {
             <Navigation title={"login"} className='signin-nav' />
             <Formik
                 initialValues={{
-                    email: '',
+                    login: '',
                     password: '',
                 }}
                 validationSchema={loginValidate}

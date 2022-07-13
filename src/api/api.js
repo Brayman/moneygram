@@ -66,13 +66,14 @@ export const API = {
         return instance.patch(`profile/${login}`, data).then(data => data)
     },
     SignUp(formData) {
-        return instance.post(`/register`, formData).then(data => data.data)
+        return instance.post(`/signup`, formData).then(data => data.data)
     },
     async Login(formData) {
         try {
-            const res = await instance.post(`/login`, formData)
+            const res = await instance.post(`/signin`, formData)
             if (res.status >= 400) {
-                return res
+                localStorage.setItem('token', res.accessToken)
+                return res.user
             }
             return res
         } catch (error) {
