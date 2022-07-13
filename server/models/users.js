@@ -17,7 +17,10 @@ const userSchema = Schema({
     },
     "first_name": String,
     "second_name": String,
-    "balance": Number,
+    "balance": {
+        type: Number,
+        default: 0
+    },
     "avatar": String,
     "language": String
 })

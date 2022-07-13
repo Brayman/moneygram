@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 
 const transactionRoutes = require('./routes/transactions-route')
 const usersRoutes = require('./routes/users-routes');
+const walletsRoutes = require('./routes/wallets-route');
 
 
 
@@ -22,8 +23,9 @@ app.use(express.json())
 
 app.use(transactionRoutes);
 app.use(usersRoutes);
+app.use(walletsRoutes)
 
 
-app.listen(3001, () => {
-   console.log('listen port 3001');
+app.listen(5000, () => {
+   console.log('listen port 5000');
 })
