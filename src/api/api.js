@@ -24,7 +24,7 @@ export const API = {
             .then(data => data)
     },
     addTransaction: async (data) => {
-        return instance.post(`transactions`, data)
+        return instance.post(`transaction/${data.userid}`, data)
     },
     deleteTransaction: async (id) => {
         return await instance.delete(`transactions/${id}`)
@@ -53,10 +53,10 @@ export const API = {
         }
     },
     addCard(form) {
-        return instance.post('cards', form)
+        return instance.post('wallet', form)
     },
-    getCards(id) {
-        return instance.get(`cards?userid=${id}`).then(data => data.data)
+    getCards(login) {
+        return instance.get(`wallets/${login}`).then(data => data.data)
     },
     saveCard: async card => {
         const res = await instance.put(`cards/${card.id}`, card)
@@ -70,13 +70,14 @@ export const API = {
         return instance.patch(`profile/${login}`, data).then(data => data)
     },
     SignUp(formData) {
-        return instance.post(`/register`, formData).then(data => data.data)
+        return instance.post(`/signup`, formData).then(data => data.data)
     },
     async Login(formData) {
         try {
-            const res = await instance.post(`/login`, formData)
+            const res = await instance.post(`/signin`, formData)
             if (res.status >= 400) {
-                return res
+                localStorage.setItem('token', res.accessToken)
+                return res.user
             }
             return res
         } catch (error) {

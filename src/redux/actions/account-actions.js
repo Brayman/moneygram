@@ -59,7 +59,7 @@ export const accountThunks = {
         } else {
             dispatch(actions.setUser(resp.data.user))
             localStorage.setItem('token', resp.data.accessToken)
-            const respCard = await API.getCards(resp.data.user.id)
+            const respCard = await API.getCards(resp.data.user.login)
 
             dispatch(setCardsAC(respCard));
             dispatch(appActions.initialize())

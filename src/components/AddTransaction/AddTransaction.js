@@ -47,7 +47,7 @@ function AddForm({ userid,  cards, trans = undefined, Action }) {
                     Action({
                         ...values,
                         date: new Date(values.date).toISOString(),
-                        cardid: card.id,
+                        cardid: card._id,
                         currency: card.currency
                     })
                     actions.resetForm();

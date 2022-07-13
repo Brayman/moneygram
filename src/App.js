@@ -83,12 +83,12 @@ const App = () => {
         <Route path='/settings/*' element={<Settings />} />
         <Route path='/transaction/:id' element={<TransComponent {...{ modal, isAuth }} />} />
         <Route path='/transaction/edit/:id' element={<Edit isAuth={isAuth} />} />
-        <Route path='/sign-up' element={<SignUp onSubmit={signUp} />} />
+        <Route path='/sign-up' element={<SignUp onSubmit={signUp}/>} />
         <Route path='/add' element={<Add isAuth={isAuth} />} />
         <Route path='/profile' element={<Profile isAuth={isAuth} />} />
         <Route
           path='/create-card'
-          element={<CardCreateForm userid={account.id} CreateCard={addCard} />}
+          element={<CardCreateForm userid={login} CreateCard={addCard} />}
         />
         <Route path='*' element={<NotFound />} />
       </Routes>
