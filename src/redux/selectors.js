@@ -6,7 +6,7 @@ export const pageSize = state => state.transactions.pageSize;
 export const curentPage = state => state.transactions.curentPage;
 export const app = state => state.app;
 export const isAuth = state => state.app.isAuth;
-export const isLoading = state => state.card.isLoading;
+export const isLoading = state => state.transactions.isLoading;
 export const totalTransCount = state => state.transactions.totalTransCount;
 export const moreTransLoad = state => state.transactions.moreTransLoad;
 export const initialized = state => state.app.initialized;

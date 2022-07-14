@@ -14,7 +14,7 @@ import {
 } from "react-icons/bi";
 import { LineChart, PieChart } from '../components/Charts/Chart'
 import { actions } from '../redux/filter'
-import { List } from '../components/common/List/List'
+import { List } from '../components/List/List'
 const getCatigoriesState = (transactions) => {
     let catigoriesState = []
     transactions.forEach(({ tag, cost }, i) => {

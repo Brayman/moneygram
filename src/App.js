@@ -1,7 +1,6 @@
 import Settings from './components/Profile/SettingsContainer';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import MyMenu from './components/Menu/Menu';
-import Main from './components/Main/MainContainer';
 import Profile from './components/Profile/Profile';
 import NotFound from './components/NotFound';
 import { Add, Edit } from './components/AddTransaction/AddConteiner';
@@ -19,6 +18,7 @@ import "./App.css";
 import { actions, cardThunks } from './redux/card';
 import { API } from './api/api';
 import { Statistic } from './pages/Statistic';
+import Transactions from './pages/Transactions';
 
 
 const App = () => {
@@ -67,8 +67,8 @@ const App = () => {
         <Route path='/' element={<Navigate to='/accounts' />} />
         <Route path='/accounts' element={<Accounts isAuth={isAuth} balance={account.balance} />} />
         <Route
-          path='/transactions/:cardid'
-          element={<Main login={login} isAuth={isAuth} modal={modal} />}
+          path='/transactions'
+          element={<Transactions login={login} isAuth={isAuth} modal={modal} />}
         />
         <Route path='/profile' element={
           <Profile

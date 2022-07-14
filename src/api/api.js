@@ -12,7 +12,7 @@ const converteInstance = axios.create({
 })
 export const API = {
     getTransactions({login, cardid, pageSize, filter, sort}) {
-        return instance.get(`transactions?login=${login}&cardid=${cardid}${filter ? `&type=${filter}` : ''}&_limit=${pageSize}&_sort=${sort.field}&_order=${sort.order}`)
+        return instance.get(`transactions/${login}?&sort=${sort.field}&order=${sort.order}`)
             .then(data => data)
     },
     getTransaction: async (id) => {
@@ -20,7 +20,7 @@ export const API = {
         return res.data
     },
     getNextTransactions({login, cardid, pageSize, sort, filter, page}) {
-        return instance.get(`transactions?login=${login}&cardid=${cardid}${filter ? `&type=${filter}` : ''}&_limit=${pageSize}&_page=${page}&_sort=${sort.field}&_order=${sort.order}`)
+        return instance.get(`transactions/${login}?${filter ? `&type=${filter}` : ''}&_limit=${pageSize}&_page=${page}&_sort=${sort.field}&_order=${sort.order}`)
             .then(data => data)
     },
     addTransaction: async (data) => {

@@ -16,6 +16,7 @@ import { cardThunks } from "./card";
 import { appActions } from "./app";
 
 const initialState = {
+    isLoading: true,
     transactions: [],
     pageSize: 50,
     curentPage: 1,
