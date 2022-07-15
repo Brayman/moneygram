@@ -1,4 +1,5 @@
 const Wallet = require("../models/wallets")
+const fakeExchangeService = require("./fakeExchangeService")
 
 class walletService {
     async create(userid, name, balance, currency) {
@@ -21,9 +22,6 @@ class walletService {
     async getMany(userid) {
         try {
             const wallets = await Wallet.find({ userid })
-            if (wallets.length === 0) {
-                throw   "you not have wallets"
-            }
             return wallets
         } catch (error) {
             return { status: 'error', message: error }
@@ -39,22 +37,30 @@ class walletService {
     }
     async delete(id) {
         try {
-            const wallet = await Wallet.findByIdAndDelete(id)
+            await Wallet.findByIdAndDelete(id)
             return { status: 'ok', message: 'delete item success' }
         } catch (error) {
             return { status: 'error', message: error.json() }
         }
     }
-    async addItem(walletid, expense) {
+    async changeBalance(walletid, amount ) {
         try {
-            const wallet = await Wallet.findById(walletid)
-            wallet.balance += expense
-            const updatedWallet = await Wallet.findByIdAndUpdate(walletid, wallet, {new: true})
-            return wallet
+            const wallet = await this.getOne(walletid)
+            wallet.balance += amount
+            const updatedWallet = await this.update(walletid, wallet, { new: true })
+            return updatedWallet
         } catch (error) {
             console.log(error);
             return { status: 'error', message: error }
         }
+    }
+    async getBalance(userid) {
+        const wallets = await this.getMany(userid)
+        const balance = wallets.reduce((balance, wallet) => {
+            const walletBalance = fakeExchangeService.changeTo(wallet.currency, 'USD', wallet.balance)
+            return balance += walletBalance
+        }, 0)
+        return balance
     }
 }
 

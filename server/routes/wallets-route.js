@@ -27,9 +27,12 @@ router.post('/wallet', async (req, res) => {
         const wallet = await walletService.create(userid, name, balance, currency)
         res.json(wallet)
     } catch (error) {
-        res.status(404).json(err)
+        res.status(404).json(error)
     }
 })
-
+router.get('/wallet/balance/:userid', async (req,res) => {
+    const balance = await walletService.getBalance(req.params.userid)
+    res.json(balance)
+})
 module.exports = router
 
