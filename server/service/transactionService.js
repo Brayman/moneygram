@@ -6,6 +6,10 @@ class transactionService {
         transaction.save();
         return transaction;
     }
+    async getOne(id) {
+        const transaction = await Transaction.findById(id)
+        return transaction
+    }
     async getAll({userid, cardid, sort, order, type}) {
         const parametrs = () => {
             let parametrs = {
@@ -28,9 +32,8 @@ class transactionService {
     }
     async delete(id) {
         try {
-            const res = await  Transaction.findByIdAndDelete(id)
-            console.log(res);
-            return 'ok'
+            const res = await Transaction.findByIdAndDelete(id)
+            return res
         } catch (error) {
             console.log(error);
             return {type: 'error'}
