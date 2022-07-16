@@ -12,7 +12,7 @@ const converteInstance = axios.create({
 })
 export const API = {
     getTransactions({login, cardid, pageSize, filter, sort}) {
-        return instance.get(`transactions/${login}?&sort=${sort.field}&order=${sort.order}`)
+        return instance.get(`transactions/${login}?${cardid? '&cardid=' + cardid : ''}&sort=${sort.field}&order=${sort.order}${filter? '&type=' + filter : ''}`)
             .then(data => data)
     },
     getTransaction: async (id) => {
@@ -37,7 +37,7 @@ export const API = {
     },
     editTransaction: async (form) => {
         try {
-            const res = await instance.put(`transactions/${form.id}`, form)
+            const res = await instance.patch(`transaction/${form._id}`, form)
             if (res.status === 200) {
                 return {
                     type: 'message',

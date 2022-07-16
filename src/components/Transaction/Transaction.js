@@ -14,7 +14,7 @@ function Transaction({ transaction, del }) {
         <section className="tr-full">
             <header className={`tr-full__header header_${type}`}>
                 <Navigation className={createCN("header", "nav", {[type]: true})} title={'Detail Transaction'}>
-                    <button className={createCN("nav", "button")} onClick={() => del(id, cardid, cost, type)}>
+                    <button className={createCN("nav", "button")} onClick={() => del(cardid, cost, type)}>
                         <MdDelete />
                     </button>
                 </Navigation>

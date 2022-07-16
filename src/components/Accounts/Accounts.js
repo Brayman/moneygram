@@ -9,15 +9,8 @@ import { Navigation } from "../common/Navigation/Navigation";
 import { Icon } from "../Icon/Icon";
 import { Button } from "../common/Button/Buttons";
 
-function Accounts({balance}) {
+function CardList({ balance }) {
     const cards = useSelector(selectors.cards);
-    return (
-
-        <CardList cards={cards} balance={balance} />
-
-    )
-}
-function CardList({ cards, balance }) {
     return (
         <section className="accounts">
             <Navigation title="Accounts" className="accounts__nav" />
@@ -33,8 +26,8 @@ function CardList({ cards, balance }) {
                 {cards.map(card => {
                     return <NavLink
                         className="wallet"
-                        to={`/transactions/${card._id}`}
-                        key={card.id}>
+                        to={`/wallet/${card._id}`}
+                        key={card._id}>
                         <Icon icon={BiWallet} className="wallet__icon" />
                         <div className="wallet__name">
                             {card.name}
@@ -54,4 +47,4 @@ function CardList({ cards, balance }) {
         </section>
     )
 }
-export default compose(WithAuthRedirect)(Accounts);
+export default compose(WithAuthRedirect)(CardList);

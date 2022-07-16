@@ -1,5 +1,5 @@
 import Settings from './components/Profile/SettingsContainer';
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import MyMenu from './components/Menu/Menu';
 import Profile from './components/Profile/Profile';
 import NotFound from './components/NotFound';
@@ -19,6 +19,8 @@ import { actions, cardThunks } from './redux/card';
 import { API } from './api/api';
 import { Statistic } from './pages/Statistic';
 import Transactions from './pages/Transactions';
+import HomePage from './pages/HomePage';
+import WalletDetail from './pages/WalletDetail';
 
 
 const App = () => {
@@ -64,8 +66,9 @@ const App = () => {
             init={initialized}
           />}
         />
-        <Route path='/' element={<Navigate to='/accounts' />} />
+        <Route path='/' element={<HomePage isAuth={isAuth} />} />
         <Route path='/accounts' element={<Accounts isAuth={isAuth} balance={account.balance} />} />
+        <Route path='/wallet/:cardid' element={<WalletDetail isAuth={isAuth} />} />
         <Route
           path='/transactions'
           element={<Transactions login={login} isAuth={isAuth} modal={modal} />}

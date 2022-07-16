@@ -5,12 +5,10 @@ import {
     MdKeyboardArrowDown,
     MdKeyboardArrowRight
 } from "react-icons/md";
-import Filter from "./Filter/FilterContainer";
-import React, { useState } from "react";
+import React from "react";
 import { Button, IconButton } from "../common/Button/Buttons";
 import "./Main.css"
 function Main({ props }) {
-    const [filter, setFilter] = useState(true)
     return (
         <section className="page transactions">
             <header className="transactions__header">
@@ -21,7 +19,7 @@ function Main({ props }) {
                 <IconButton
                     icon={MdFilterList}
                     className="icon-btn"
-                    onClick={() => setFilter(prev => !prev)}
+                    onClick={() => console.log(prev => !prev)}
                 />
             </header>
             <button className="info-btn transactions__report">
@@ -53,7 +51,7 @@ function Main({ props }) {
                     </Button> :
                     null
             }
-            <Filter hide={filter} showFilter={() => setFilter(!filter)} />
+            
         </section>
     )
 

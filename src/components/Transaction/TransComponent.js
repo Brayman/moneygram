@@ -14,12 +14,12 @@ const TransContainer = () => {
     const params = useParams()
     useEffect(() => {
         dispatch(transactionThunks.getTransaction(params.id))
-    },[params])
+    },[params, dispatch])
     
     const props = {
         modal: useSelector(modal),
         transaction: useSelector(transaction),
-        del: (id, cardid, cost, type) => dispatch(transactionsThunk.deleteTransaction(id, cardid, cost, type))
+        del: () => dispatch(transactionsThunk.deleteTransaction(params.id))
     }
     if (props.transaction === null) {
         return <Loader/>
