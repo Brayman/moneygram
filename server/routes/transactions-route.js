@@ -50,9 +50,17 @@ router.patch('/transaction/:id', async (req, res) => {
         const transaction = await transactionService.update(req.params.id, req.body)
         const difference = () => {
             if (type !== oldTrans.type) {
-                return oldTrans.cost + cost
+                const value = oldTrans.cost + cost
+                if (type === 'income') {
+                    return value
+                }
+                return -value
             }
-            return oldTrans.cost - cost
+            const value = oldTrans.cost - cost
+            if (type === 'income') {
+                return -value
+            }
+            return value
         }
 
         await walletService.changeBalance(cardid, difference())
