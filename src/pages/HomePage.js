@@ -15,7 +15,7 @@ const HomePage = () => {
 
     useEffect(() => {
         dispatch(transactionsThunk.getTransactions({login: account.login, sort}))
-    })
+    },[account.login, sort, dispatch])
   return (
     <List isLoading={isLoading} transactions={transactions} />
   )
