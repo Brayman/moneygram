@@ -1,7 +1,8 @@
-import { Navigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 export const WithAuthRedirect = (Component) => {
     function AuthRedirect(props) {
-        if (!props.isAuth) return <Navigate to='/login' />
+        const location = useLocation()
+        if (!props.isAuth) return <Navigate to='/login' state={location.pathname}/>
         return <Component {...props} />
     }
     return AuthRedirect;

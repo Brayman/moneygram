@@ -24,4 +24,5 @@ export const cardidForSave = state => state.card.cardidForSave;
 export const card = createSelector(cards, cardForSave, (cards, cardid) => {
     return cards.find((card) => card.id === cardid)
 });
+export const wallet = state => state.card.wallet;
 export const cardID = createSelector(card, card => card.id);

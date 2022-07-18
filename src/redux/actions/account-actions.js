@@ -1,6 +1,5 @@
 import { API } from "../../api/api"
 import { v4 as uuidv4 } from 'uuid';
-import { setCardsAC } from "../account";
 import { FAIL_LOGIN, SET_USER, START_LOGIN } from "../action-types";
 import { appActions } from "../app";
 const actions = {
@@ -35,10 +34,6 @@ export const accountThunks = {
     loadUser: id => dispatch => {
         API.getUser(id)
             .then(data => dispatch(actions.setUser(data)))
-        API.getCards(id)
-            .then(data => {
-                dispatch(setCardsAC(data));
-            })
     },
     Login: login => dispatch => {
 
@@ -59,9 +54,6 @@ export const accountThunks = {
         } else {
             dispatch(actions.setUser(resp.data.user))
             localStorage.setItem('token', resp.data.accessToken)
-            const respCard = await API.getCards(resp.data.user.login)
-
-            dispatch(setCardsAC(respCard));
             dispatch(appActions.initialize())
         }
     }

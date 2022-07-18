@@ -1,9 +1,8 @@
 
 import { API } from "../api/api";
-import { add, subtract } from "../utils/saveOperations";
 
 import {
-    ADD_TO_BALANCE,
+    SET_BALANCE,
     SUBTRACT_BALANCE,
     CHANGE_SETTINGS,
     CREATE_CARD,
@@ -25,15 +24,10 @@ const account = (state = defaultState, { type, payload }) => {
                 isAuth: true,
                 ...payload
             }
-        case ADD_TO_BALANCE:
+        case SET_BALANCE:
             return {
                 ...state,
-                balance: add(state.balance, payload)
-            }
-        case SUBTRACT_BALANCE:
-            return {
-                ...state,
-                balance: subtract(state.balance, payload)
+                balance: payload
             }
         case CHANGE_SETTINGS:
             return {
@@ -43,7 +37,6 @@ const account = (state = defaultState, { type, payload }) => {
                     [payload.item]: payload.value
                 }
             }
-
         case SAVE_SETTINGS:
             return {
                 ...state,
@@ -96,10 +89,10 @@ export const updateProfileThunk = (login, items) => dispatch => {
         })
 }
 export const accontActions = {
-    addToBalance: (cardBalance) => {
+    setBalance: (balance) => {
         return {
-            type: ADD_TO_BALANCE,
-            payload: cardBalance
+            type: SET_BALANCE,
+            payload: balance
         } 
     },
     subtractBalance: (cardBalance) => {
@@ -110,9 +103,9 @@ export const accontActions = {
     }
 }
 export const accounThunks = {
-    addToBalance: (from, to, amount) => async (dispatch) => {
-        const res = await API.converteReq(from, to, amount)
-        dispatch(accontActions.addToBalance(res.data.result))
+    getBalanse: (login) => async dispatch => {
+        const res = await API.getBalance(login)
+        dispatch(accontActions.setBalance(res.data))
     },
     subtractBalance: (from, to, amount) => async (dispatch) => {
         const res = await API.converteReq(from, to, amount)

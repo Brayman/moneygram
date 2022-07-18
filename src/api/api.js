@@ -19,15 +19,34 @@ export const API = {
         const res = await instance.get(`transaction/${id}`)
         return res.data
     },
-    getNextTransactions({login, cardid, pageSize, sort, filter, page}) {
-        return instance.get(`transactions/${login}?${filter ? `&type=${filter}` : ''}&_limit=${pageSize}&_page=${page}&_sort=${sort.field}&_order=${sort.order}`)
-            .then(data => data)
-    },
-    addTransaction: async (data) => {
-        return instance.post(`transaction/${data.userid}`, data)
+    addTransaction: async (newTransaction) => {
+        return instance.post(`transaction/${newTransaction.userid}`, newTransaction)
     },
     deleteTransaction: async (id) => {
         return await instance.delete(`transactions/${id}`)
+    },
+    getWallet: async (id) => {
+        const wallet = await instance.get(`wallet/${id}`)
+        return wallet
+    },
+    createWallet: async (walletForm) => {
+        const wallet = await instance.post(`wallet`, walletForm)
+        return wallet
+    },
+    getWallets(login) {
+        return instance.get(`wallets/${login}`).then(data => data.data)
+    },
+    editWallet: async (id, newWallet) => {
+        const wallet = await instance.patch(`wallet/${id}`, newWallet)
+        return wallet
+    },
+    getBalance: async (login) => {
+        const balance = await instance.get(`wallet/balance/${login}`)
+        return balance
+    },
+    getNextTransactions({login, cardid, pageSize, sort, filter, page}) {
+        return instance.get(`transactions/${login}?${filter ? `&type=${filter}` : ''}&_limit=${pageSize}&_page=${page}&_sort=${sort.field}&_order=${sort.order}`)
+            .then(data => data)
     },
     converteReq: async (from, to, amount) => {
         return await converteInstance.get(`exchangerates_data/convert?to=${to}&from=${from}&amount=${amount}`)
@@ -51,16 +70,6 @@ export const API = {
                 message: 'Edit transaction failed'
             }
         }
-    },
-    addCard(form) {
-        return instance.post('wallet', form)
-    },
-    getCards(login) {
-        return instance.get(`wallets/${login}`).then(data => data.data)
-    },
-    saveCard: async card => {
-        const res = await instance.put(`cards/${card.id}`, card)
-        return res
     },
     getUser(id) {
         return instance.get(`users/${id}`).then(data => data.data)

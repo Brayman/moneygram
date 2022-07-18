@@ -1,4 +1,4 @@
-import { Navigate, NavLink } from "react-router-dom";
+import { Navigate, NavLink, useLocation } from "react-router-dom";
 import { Formik, Form } from "formik";
 import { Navigation } from "../common/Navigation/Navigation";
 import "./Sign.css";
@@ -8,7 +8,6 @@ import { useSelector } from "react-redux";
 import { app } from "../../redux/selectors";
 import React, { useEffect } from "react";
 import { Button } from "../common/Button/Buttons";
-import { accountThunks } from "../../redux/actions/account-actions";
 
 export const MyForm = ({ isValid, setErrors }) => {
     const login = useSelector(app).login
@@ -47,15 +46,15 @@ export const MyForm = ({ isValid, setErrors }) => {
                     Sign Up
                 </NavLink>
             </span>
-            <button type='button' onClick={() => accountThunks.tokenAuth()}>auth</button>
         </Form>
     )
 }
 
 
 const SignIn = ({ Login, init }) => {
+    const location = useLocation()
     if (init) {
-        return <Navigate to={-1} replace={true} />
+        return <Navigate to={location.state} replace={true} />
     }
 
     return (

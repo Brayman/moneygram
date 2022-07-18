@@ -1,134 +1,63 @@
-import { add, subtract } from "../utils/saveOperations";
 import { API } from "../api/api";
 import {
-    SET_CARDS,
-    CREATE_CARD,
-    UPDATE_CARD,
-    CARD_ADD_TRANSACTION,
-    CARD_SUBTRACT_TRANSACTION,
-    SAVE_CARD
+    SET_WALLET,
+    SET_WALLETS
 } from "./action-types";
-import { accounThunks } from "./account";
 
 const defaultState = {
     isLoading: false,
-    cards: []
-
+    cards: [],
+    wallet: null
 }
 const card = (state = defaultState, { type, payload }) => {
     switch (type) {
-        case SET_CARDS:
+        case SET_WALLETS:
             return {
                 ...state,
                 cards: payload,
-                card: payload[state.selectCard]
             }
-        case CREATE_CARD:
+        case SET_WALLET:
             return {
                 ...state,
-                cards: [
-                    ...state.cards,
-                    payload
-                ]
-            }
-        case CARD_ADD_TRANSACTION:
-            return {
-                ...state,
-                cards: state.cards.map((card) => {
-                    if (card.id === payload.cardid) {
-                        return {
-                            ...card,
-                            balance: add(card.balance, payload.cost)
-                        }
-                    }
-                    return card
-                }),
-                cardidForSave: payload.cardid
-            }
-        case CARD_SUBTRACT_TRANSACTION:
-            return {
-                ...state,
-                cards: state.cards.map((card) => {
-                    if (card.id === payload.cardid) {
-                        return {
-                            ...card,
-                            balance: subtract(card.balance, payload.cost)
-                        }
-                    }
-                    return card
-                }),
-                cardidForSave: payload.cardid
-            }
-        case UPDATE_CARD:
-            return {
-                ...state,
-                cards: state.cards.map(card => card.id === payload.id ? payload : card)
-            }
-        case SAVE_CARD:
-            return {
-                ...state,
-                cardForSave: state.cards.find(card => card.id === payload)
+                wallet: payload
             }
         default: return state;
     }
 }
 
-
-
-
 export const actions = {
-    addTransaktion: payload => {
+    setWallet: (wallet) => {
         return {
-            type: CARD_ADD_TRANSACTION,
-            payload
+            type: SET_WALLET,
+            payload: wallet
         }
     },
-    subtractTransaktion: payload => {
+    setWallets: wallets => {
         return {
-            type: CARD_SUBTRACT_TRANSACTION,
-            payload
+            type: SET_WALLETS,
+            payload: wallets
         }
-    },
-    updateCard: card => {
-        return {
-            type: UPDATE_CARD,
-            payload: card
-        }
-    },
-    getCardForSave: cardid => {
-        return {
-            type: SAVE_CARD,
-            payload: cardid
-        }
-    },
-  
-}
-export const cardThunks = {
-    addTransaktion: transaction => async dispatch => {
-        dispatch(actions.addTransaktion(transaction))
-        dispatch(accounThunks.addToBalance(transaction.currency, "USD", transaction.cost))
-    },
-    subtractTransaktion: transaction => async dispatch => {
-        dispatch(actions.subtractTransaktion(transaction))
-        dispatch(accounThunks.subtractBalance(transaction.currency, "USD", transaction.cost))
-    },
-    updateCardBalance: data => dispatch => {
-        dispatch(actions.updateBalance(data))
-    },
-    
-    saveCard: (card) => async dispatch => {
-        const res = await API.saveCard(card)
-        if (res.status < 400) {
-            dispatch(actions.updateCard(res.data))
-        }
-        
-    },
-    updateCard: card => dispatch => {
-
-        API.updateCard(card)
-            .then(res => {
-                dispatch(actions.updateCard(res.data))
-            })
     }
 }
+export const walletThunks = {
+    getWallet: id => async dispatch => {
+        const wallet = await API.getWallet(id)
+        dispatch(actions.setWallet(wallet.data))
+    },
+    getWallets: login => async dispatch => {
+        const wallets = await API.getWallets(login)
+        dispatch(actions.setWallets(wallets))
+    },
+    editWallet: (id, form) => async dispatch => {
+        const wallet = await API.editWallet(id, form)
+        dispatch(actions.setWallet(wallet))
+    },
+    createWallet: (form) => async dispatch => {
+        const res = await API.createWallet(form)
+        if (res.status < 400) {
+            dispatch(actions.setWallet(res.data))
+        }
+    },
+}
+
 export default card;
