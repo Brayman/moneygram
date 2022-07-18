@@ -9,6 +9,7 @@
     flex-grow: 0;
     background-color: #fff;
     cursor: pointer;
+    color: #000;
 }
 
 .select__arrow {

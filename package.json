@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@bem-react/classname": "^1.5.12",
+    "apexcharts": "^3.35.3",
     "axios": "^0.26.1",
     "classnames": "^2.3.1",
     "formik": "^2.2.9",
@@ -11,6 +12,7 @@
     "json-server-auth": "^2.1.0",
     "lodash": "^4.17.21",
     "react": "^18.0.0",
+    "react-apexcharts": "^1.4.0",
     "react-dom": "^18.0.0",
     "react-icons": "^4.3.1",
     "react-redux": "^7.2.8",
@@ -26,7 +28,7 @@
   "scripts": {
     "start": "react-scripts start",
     "serv": "json-server --watch DB/db.json --routes DB/routes.json --middlewares ./node_modules/json-server-auth --port 5000",
-    "build": "react-scripts build && npm run serv",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 6006 -s public",

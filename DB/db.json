@@ -10,7 +10,8 @@
       "email": "ar.rakitskiy@gmail.com",
       "password": "$2a$10$aRAUmpa0i1dCZ4R3X7Ni/eBuZeUv5BvFID4gaFUO8jEA2sDW4mDyO",
       "first_name": "Artem",
-      "balance": 299,
+      "pass": 8292913,
+      "balance": 311.03,
       "spend": 15,
       "avatar": null,
       "mail": "ar.rakitskiy@gmail.com",
@@ -26,7 +27,7 @@
       "id": "36da6363-2982-41fc-b042-c8a3cf1b18b2",
       "name": "CashGEL",
       "currency": "GEL",
-      "balance": 201.65
+      "balance": 191.25
     },
     {
       "userid": "5dd92916-c4d2-47bd-9d64-71d153944553",
@@ -188,6 +189,30 @@
       "card": "CashGEL",
       "cost": 25,
       "payee": "",
+      "tag": "shop",
+      "type": "expense",
+      "currency": "GEL",
+      "cardid": "36da6363-2982-41fc-b042-c8a3cf1b18b2"
+    },
+    {
+      "id": "58e4d4d7-5a7a-4135-b6e7-d69f520f375e",
+      "userid": "brayman",
+      "date": "2022-06-28T00:00:00.000Z",
+      "card": "CashGEL",
+      "cost": 10.4,
+      "payee": "yammy",
+      "tag": "shop",
+      "type": "expense",
+      "currency": "GEL",
+      "cardid": "36da6363-2982-41fc-b042-c8a3cf1b18b2"
+    },
+    {
+      "id": "c8c01c9b-7ada-49ca-8923-c6f2f936fc26",
+      "userid": "brayman",
+      "date": "2022-06-26T00:00:00.000Z",
+      "card": "CashGEL",
+      "cost": 25,
+      "payee": "yammy",
       "tag": "shop",
       "type": "expense",
       "currency": "GEL",

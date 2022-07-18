@@ -1,32 +1,13 @@
-import style from './Account.module.css';
-import { MdAdd } from "react-icons/md";
-import { NavLink } from 'react-router-dom';
-export function CreateAccount(params) {
+function Account({balance}) {
     return (
-        <div className={`${style.empty} ${style.account}`}>
-            create card
-            <NavLink to='/card-create'>
-                <MdAdd size={40}/>
-            </NavLink>
-        </div>
-    )
-}
-function Account({card}) {
-    if (!card) {
-       return null
-    } 
-    return (
-        <section className={style.account}>
-            <div className={style.balance_card}>
-                account balance:
-                <div className={style.balance}>${card.balance}</div>
+        <section className="accounts__balance">
+            <div className="balance__subtitle">
+                Account balance
             </div>
-        
-        <div className={style.status}>
-            spent today $
-        </div>
-        <div className={`${style.active} ${style.empty}`}></div>
-      </section>
+            <div className="balance__title">
+                USD {balance}
+            </div>
+        </section>
     )
     
 }

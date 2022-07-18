@@ -1,8 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import "./AddTransaktion.css"
-import { v4 as uuidv4 } from 'uuid';
-
 import {
     Form,
     Formik,
@@ -11,11 +8,12 @@ import {
 } from "formik";
 import { Navigation } from '../common/Navigation/Navigation';
 import { SelectField as Select } from '../common/Select/SelectField';
+import DefaultSelect from '../common/Select/Select';
 import { Field, SpecialField } from '../common/Field/Field';
 import { Button, GroupedButton } from '../common/Button/Buttons';
 import CreateClasssName from '../../utils/bemClassCreate';
-
-const add = CreateClasssName('tr')
+import "./AddTransaktion.css"
+const addCN = CreateClasssName()
 const tags = ['send','shop', 'taxi', 'deliver', 'restaurant', 'ethernet', 'bus']
 
 const DatePicker = (props) => {
@@ -25,15 +23,25 @@ const DatePicker = (props) => {
         <Field type='date' {...field} {...props} onChange={e => setFieldValue('date', new Date(e.target.value).toISOString().substring(0, 10))} />
     )
 }
+const CardSelect = (props) => {
+    const { setFieldValue } = useFormikContext()
+    const [field] = useField(props);
+    const [value, setValue] = useState(props.value)
+    const setFieldsValue = (cardName) => {
+        const cardValues = props.cards.find((card) => card.name === cardName)
+        setFieldValue('cardid', cardValues._id)
+        setFieldValue('currency',cardValues.currency)
+        setValue(cardValues.name)
+    }
+    return <DefaultSelect {...field} {...props} value={value} options={props.cards.map(({name}) => name)} setValue={value => setFieldsValue(value)}/>
+}
 
 function AddForm({ userid,  cards, trans = undefined, Action }) {
 
     const initialValues = trans || {
-        id: uuidv4(),
         userid,
         date: new Date().toISOString().substring(0, 10),
         cost: '',
-        card: cards[0].name || '',
         payee: '',
         tag: '',
         type: 'expense',
@@ -45,22 +53,19 @@ function AddForm({ userid,  cards, trans = undefined, Action }) {
             initialValues={initialValues}
             onSubmit={
                 (values, actions) => {
-                    const card = cards.find((card) => card.name === values.card)
                     Action({
                         ...values,
                         date: new Date(values.date).toISOString(),
-                        cardid: card.id,
-                        currency: card.currency
                     })
                     actions.resetForm();
                     navigate(-1)
                 }
             }
         >
-            {({ values, setFieldValue }) => <Form className={add('add', null, { [values.type]: true })} date={`page tr-add tr-add_${values.type}`}>
+            {({ values, setFieldValue }) => <Form className={addCN('add', null, { [values.type]: true })} >
 
-                <header className={`tr-add__header header_${values.type}`}>
-                    <Navigation className="header_nav" title={values.type} />
+                <header className={addCN('add', null, { [values.type]: true })}>
+                    <Navigation className={addCN('header', 'nav', {[values.type]: true })} title={values.type} />
                     <SpecialField
                         name='cost'
                         placeholder='How much?'
@@ -69,12 +74,12 @@ function AddForm({ userid,  cards, trans = undefined, Action }) {
                     />
                 </header>
                 <main className="tr-add__content">
-                    <Select name="tag" tag options={tags} className="tr-add__field" />
-                    <DatePicker className='tr-add__field field' name='date' id='date' placeholder="date" />
-                    <Field className='tr-add__field field' name='payee' placeholder='payee' />
-                    <Select up options={cards.map(card => card.name)} className={add('add','field')} name='card' placeholder='select card' />
+                    <Select name="tag" tag options={tags} className={addCN('add','field')} />
+                    <DatePicker className={addCN('add','field')} name='date' id='date' placeholder="date" />
+                    <Field className={addCN('add','field')} name='payee' placeholder='payee' />
+                    <CardSelect up cards={cards} className={addCN('add','field')} name='cardid' placeholder='select card' />
                     <GroupedButton
-                        className={add('add','field')}
+                        className={addCN('add','field')}
                         type='button'
                         buttons={['Income', 'Expense', 'Transfer']}
                         onClick={(type) => setFieldValue('type', type)}

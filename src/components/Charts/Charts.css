@@ -1,0 +1,54 @@
+.chart {
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+.chart__nav {
+    color: #000;
+}
+.chart__options {
+    display: flex;
+    flex-direction: row;
+}
+.chart__balance {
+    font-size: 32px;
+    font-weight: 700;
+}
+.chart__chartbox {
+    width: 100vw;
+    height: 50vw;
+    background-color: grey;
+}
+.progress-bar {
+    height: 1em;
+    border-radius: 0.5em;
+    background-color: #F1F1FA;
+}
+.progress-bar__bar {
+    z-index: 4;
+    border-radius: 0.5em;
+    height: inherit;
+    background-color: #FCAC12;
+}
+.bar-chart__item {
+    padding: 0 1em 1.5em 1em;
+}
+.bar-chart__title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.title__cost {
+    font-size: 24px;
+    font-weight: 500;
+    color: #FD3C4A;
+}
+.chart__pie {
+    max-width: 400px;
+    margin: 0 auto;
+}
+.chart__line {
+    margin: 0 auto;
+    max-width: 970px;
+    padding: 0.5em;
+ }

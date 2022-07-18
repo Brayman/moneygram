@@ -1,0 +1,7 @@
+.filter-panel {
+    margin: 0.75em 1em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}

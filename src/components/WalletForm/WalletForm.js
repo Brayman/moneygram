@@ -1,6 +1,5 @@
 import React from "react";
 import { Formik, Form } from "formik";
-import { v4 as uuidv4 } from 'uuid';
 import { Navigation } from "../common/Navigation/Navigation";
 import "./style.css"
 import { Field, SpecialField } from "../common/Field/Field";
@@ -8,20 +7,14 @@ import { SelectField as Select } from "../common/Select/SelectField";
 import { Button } from "../common/Button/Buttons";
 import CreateClasssName from "../../utils/bemClassCreate";
 
-const CardCreateForm = ({ userid, CreateCard }) => {
+const WalletForm = ({ wallet, saveAction }) => {
     const walletCN = CreateClasssName()
     return (
         <section className="wallet-add">
             <Navigation className="wallet-add__nav" title="Add new wallet" />
             <Formik
-                initialValues={{
-                    userid,
-                    id: uuidv4(),
-                    name: '',
-                    currency: "USD",
-                    balance: ''
-                }}
-                onSubmit={formData => CreateCard(formData)}
+                initialValues={wallet}
+                onSubmit={formData => saveAction(formData)}
             >
                 {({ values }) => <Form className="wallet-add__form">
                     <SpecialField
@@ -43,11 +36,10 @@ const CardCreateForm = ({ userid, CreateCard }) => {
                             Save
                         </Button>
                     </section>
-
                 </Form>}
             </Formik>
         </section>
 
     )
 }
-export default CardCreateForm;
+export default WalletForm;

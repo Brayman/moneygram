@@ -1,15 +1,29 @@
 .tr-add {
   font-size: 16px;
 }
-
-.tr-add_expense {
+.add_expense {
   background-color: #FD3C4A;
+  color: #FFF
 }
-.tr-add_income {
+.add_income {
   background-color: #00A86B;
+  color: #FFF
 }
-.tr-add_transfer {
+.add_transfer {
   background-color: #0077FF;
+  color: #FFF
+}
+.header__nav_expense {
+  background-color: #FD3C4A;
+  color: #FFF
+}
+.header__nav_income {
+  background-color: #00A86B;
+  color: #FFF
+}
+.header__nav_transfer {
+  background-color: #0077FF;
+  color: #FFF
 }
 .tr-add__content {
   background-color: #FFF;
@@ -65,7 +79,7 @@
   font-size: 2em;
 }
 
-.tr-add__field {
+.add__field {
   margin: 0 0 1em 0;
 }
 

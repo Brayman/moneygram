@@ -18,21 +18,6 @@
     align-self: center;
     margin-bottom: 1em;
 }
-.filter-btn {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    font-size: 14px;
-    color: #212325;
-    padding: 0.785em 1.14em;
-    border-radius: 2.857em;
-    border: 1px solid #F1F1FA;
-}
-.filter-btn__icon {
-    color: #7F3DFF;
-    font-size: 1.6em;
-    line-height: 24px;
-}
 .icon-btn {
     border-radius: 0.25em;
     border: 1px solid #F1F1FA;

@@ -6,12 +6,12 @@ export const pageSize = state => state.transactions.pageSize;
 export const curentPage = state => state.transactions.curentPage;
 export const app = state => state.app;
 export const isAuth = state => state.app.isAuth;
-export const isLoading = state => state.card.isLoading;
+export const isLoading = state => state.transactions.isLoading;
 export const totalTransCount = state => state.transactions.totalTransCount;
 export const moreTransLoad = state => state.transactions.moreTransLoad;
 export const initialized = state => state.app.initialized;
 export const account = state => state.account;
-export const transaction = state => state.transactions.transaction;
+export const transaction = state => state.transaction;
 export const cards = state => state.card.cards;
 export const modal = state => state.app.modal;
 
@@ -24,4 +24,5 @@ export const cardidForSave = state => state.card.cardidForSave;
 export const card = createSelector(cards, cardForSave, (cards, cardid) => {
     return cards.find((card) => card.id === cardid)
 });
+export const wallet = state => state.card.wallet;
 export const cardID = createSelector(card, card => card.id);

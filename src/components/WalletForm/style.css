@@ -10,6 +10,7 @@
 .wallet-add__nav {
     justify-self: flex-start;
     background-color: #7F3DFF;
+    color: #FFF;
 }
 
 .wallet-add__fields {

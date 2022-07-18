@@ -12,10 +12,10 @@ import {
     MORE_TRANSACTION_LOADING,
     GET_TRANSACTIONS
 } from "./action-types"
-import { cardThunks } from "./card";
 import { appActions } from "./app";
 
 const initialState = {
+    isLoading: true,
     transactions: [],
     pageSize: 50,
     curentPage: 1,
@@ -173,53 +173,15 @@ export const transactionsThunk = {
     },
 
     addTransaction: form => async dispatch => {
-        dispatch(actions.addTransaction(form))
         const res = await API.addTransaction(form)
-        if (form.type === 'expense') {
-
-            dispatch(cardThunks.subtractTransaktion(
-                {
-                    cardid: form.cardid,
-                    cost: form.cost,
-                    type: form.type
-                }
-            ))
-        }
-        if (form.type === 'income') {
-            dispatch(cardThunks.addTransaktion(
-                {
-                    cardid: form.cardid,
-                    cost: form.cost,
-                    type: form.type
-                }
-            ))
-        }
+        dispatch(actions.addTransaction(res))
         if (res.status >= 400) {
             dispatch({
                 type: "REQUEST_ERROR"
             })
         }
     },
-    deleteTransaction: (id, cardid, cost, type) => async dispatch => {
-        if (type === 'expense') {
-            dispatch(cardThunks.addTransaktion(
-                {
-                    cardid: cardid,
-                    cost: cost,
-                    type: type
-                }
-            ))
-        }
-        if (type === 'income') {
-            dispatch(cardThunks.subtractTransaktion(
-                {
-                    cardid: cardid,
-                    cost: cost,
-                    type: type
-                }
-            ))
-            
-        }
+    deleteTransaction: (id) => async dispatch => {
         dispatch(actions.deleteTransaction(id));
         API.deleteTransaction(id)
     },

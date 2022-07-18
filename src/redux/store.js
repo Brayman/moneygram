@@ -4,9 +4,11 @@ import account from "./account";
 import card from "./card";
 import { filter } from "./filter";
 import transactions from "./transactions-reducer";
+import transaction from "./transaction-reducer";
 import app from "./app";
 
 const reducers = combineReducers({
+    transaction,
     transactions,
     filter,
     card,

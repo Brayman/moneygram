@@ -1,10 +1,12 @@
-import Tag from "../Tag";
 import "./Transaction.css";
+import Tag from "../Tag";
 import { memo } from "react";
+import { NavLink } from "react-router-dom"
+
 const TransactionMini = memo(({ body, onClick }) => {
     const date = new Date(body.date).toLocaleString('ru-RU', { month: 'short', day: '2-digit', year: 'numeric' })
     return (
-        <section key={body.id} className="transaction" onClick={() => onClick()}>
+        <NavLink key={body.id} to={`/transaction/${body._id}`} className="transaction">
             <Tag tag={body.tag} />
             <div className="transaction__content">
                 <div className="content__row transaction__title">
@@ -24,7 +26,7 @@ const TransactionMini = memo(({ body, onClick }) => {
                     </div>
                 </div>
             </div>
-        </section>
+        </NavLink>
     )
 
 })
