@@ -74,9 +74,9 @@ function AddForm({ userid,  cards, trans = undefined, Action }) {
                     />
                 </header>
                 <main className="tr-add__content">
-                    <Select name="tag" tag options={tags} className="tr-add__field" />
-                    <DatePicker className='tr-add__field field' name='date' id='date' placeholder="date" />
-                    <Field className='tr-add__field field' name='payee' placeholder='payee' />
+                    <Select name="tag" tag options={tags} className={addCN('add','field')} />
+                    <DatePicker className={addCN('add','field')} name='date' id='date' placeholder="date" />
+                    <Field className={addCN('add','field')} name='payee' placeholder='payee' />
                     <CardSelect up cards={cards} className={addCN('add','field')} name='cardid' placeholder='select card' />
                     <GroupedButton
                         className={addCN('add','field')}

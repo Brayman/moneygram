@@ -10,7 +10,7 @@ import "./style.css"
 import classNames from "classnames";
 const selectCN = createClassName();
 const SelectOption = ({ tag, placeholder = '...', children, ...props}) => {
-    if (children !== '') {
+    if (children) {
         const MyOption = tag ? TagOption : Option;
         return (
             <MyOption {...props}>

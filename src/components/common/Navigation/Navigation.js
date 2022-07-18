@@ -24,3 +24,13 @@ export const Navigation = ({children, className, title}) => {
         </nav>
     )
 }
+
+const Button = ({Icon, onClick}) => {
+  return (
+    <button className={navClassName("nav", "button")} onClick={onClick}>
+        <Icon />
+    </button>
+  )
+}
+
+Navigation.Button = Button
