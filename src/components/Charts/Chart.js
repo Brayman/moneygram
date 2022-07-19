@@ -49,12 +49,15 @@ export const LineChart = ({ transactions, line, balance, className }) => {
 
 
 export const PieChart = ({ categories }) => {
+    if (categories === undefined) {
+        return <Loader/>
+    }
     return (
         <div className="chart__pie">
             <Chart
                 options={{
                     type: "pie",
-                    labels: categories.map(({ name }) => name)
+                    labels: categories.map(({ category }) => category)
                 }}
                 series={categories.map(({ amount }) => amount)}
 

@@ -85,8 +85,12 @@ router.delete('/transaction/:id', async (req, res) => {
     }
 })
 
-router.get('/transactions/stat/:userid', async (req, res) => {
+router.get('/statistic/balance/:userid', async (req, res) => {
     const statistic = await transactionService.getBalanceLine({userid: req.params.userid})
+    res.json(statistic)
+})
+router.get('/statistic/category/:userid', async (req, res) => {
+    const statistic = await transactionService.categoryStatistic({userid: req.params.userid, ...req.query})
     res.json(statistic)
 })
 

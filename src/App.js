@@ -12,7 +12,7 @@ import * as selectors from "./redux/selectors";
 import TransComponent from './components/Transaction/TransComponent';
 import Accounts from './components/Accounts/Accounts';
 import "./App.css";
-import { Statistic } from './pages/Statistic';
+import Statistic from './pages/Statistic';
 import Transactions from './pages/Transactions';
 import HomePage from './pages/HomePage';
 import WalletDetail from './pages/WalletDetail';
@@ -59,7 +59,7 @@ const App = () => {
             cards={cards}
           />
         } />
-        <Route path='/analytics' element={<Statistic {...{ isAuth, transactions, balance: account.balance }} />} />
+        <Route path='/analytics' element={<Statistic {...{ isAuth, transactions}} />} />
         <Route path='/settings/*' element={<Settings />} />
         <Route path='/transaction/:id' element={<TransComponent {...{ modal, isAuth }} />} />
         <Route path='/transaction/edit/:id' element={<Edit isAuth={isAuth} />} />

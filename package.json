@@ -27,7 +27,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "serv": "json-server --watch DB/db.json --routes DB/routes.json --middlewares ./node_modules/json-server-auth --port 5000",
+    "serv": "cd server/ && yarn start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",

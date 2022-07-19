@@ -17,6 +17,8 @@ import {
 import { LineChart, PieChart } from '../components/Charts/Chart'
 import { actions } from '../redux/filter'
 import { List } from '../components/List/List'
+import { compose } from 'redux'
+import { WithAuthRedirect } from '../hoc/withAuthRedirect'
 const getCatigoriesState = (transactions) => {
     let catigoriesState = []
     transactions.forEach(({ tag, cost }, i) => {
@@ -37,12 +39,12 @@ const getCatigoriesState = (transactions) => {
     return catigoriesState
 }
 
-export const Statistic = () => {
+const Statistic = () => {
     const [diraction, setDirection] = useState('month')
-    const [type, setType] = useState('categories')
+    const [type, setType] = useState('transactions')
     const [chart, setChart] = useState('line')
     const [catigories, setCatigories] = useState([])
-    const [balanceLine, setBalanceLine] = useState(undefined)
+    const [statistic, setStatistic] = useState(undefined)
 
     const dispatch = useDispatch()
 
@@ -52,17 +54,24 @@ export const Statistic = () => {
     const account = useSelector(selectors.account)
     const isLoading = useSelector(selectors.isLoading)
     
-    const getStats = async (login) => {
-        const stat = await API.getStatistic(login)
-        setBalanceLine(stat)
-    }
+    
 
     useEffect(() => {
         dispatch(transactionsThunk.getTransactions({login: account.login, sort}))
     },[account.login, sort, dispatch])
     useEffect(() => {
-        getStats(account.login)
-    }, [account])
+        const getStats = async (type, login) => {
+            if (type === 'line') {
+                const stat = await API.getBalanceStatistic(login)
+                setStatistic(stat)
+            }
+            if (type === 'pie' || 'categories') {
+                const stat = await API.getCategoryStatistic(login, filter)
+                setCatigories(stat)
+            }
+        }
+        getStats(chart, account.login, filter)
+    }, [account, chart, filter])
     useEffect(() => {
         setCatigories(getCatigoriesState(transactions))
     }, [transactions])
@@ -88,7 +97,7 @@ export const Statistic = () => {
             </FilterPanel>
             {chart === 'pie' ?
                 <PieChart categories={catigories} /> :
-                <LineChart line={balanceLine} balance={account.balance} />
+                <LineChart line={statistic} balance={account.balance} />
             }
 
             <GroupedButton
@@ -120,3 +129,4 @@ export const Statistic = () => {
         </div>
     )
 }
+export default compose(WithAuthRedirect)(Statistic)

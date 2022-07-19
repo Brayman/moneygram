@@ -44,8 +44,12 @@ export const API = {
         const balance = await instance.get(`wallet/balance/${login}`)
         return balance
     },
-    getStatistic: async (login) => {
-        const stat = await instance.get(`transactions/stat/${login}`)
+    getBalanceStatistic: async (login) => {
+        const stat = await instance.get(`statistic/balance/${login}`)
+        return stat.data
+    },
+    getCategoryStatistic: async (login, filter) => {
+        const stat = await instance.get(`statistic/category/${login}${filter ? '?type=' + filter : ''}`)
         return stat.data
     },
     getNextTransactions({login, cardid, pageSize, sort, filter, page}) {

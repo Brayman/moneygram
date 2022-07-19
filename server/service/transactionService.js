@@ -1,5 +1,6 @@
 const Transaction = require('../models/transaction');
 const toDecimal = require('../utils/toDecimal');
+const fakeExchangeService = require('./fakeExchangeService');
 const walletServise = require('./walletService')
 
 class transactionService {
@@ -48,10 +49,6 @@ class transactionService {
             amount: currentBalance,
             date: new Date().toDateString()
         }];
-
-
-
-
         transactions.forEach(({date, cost, type}) => {
             date = new Date(date).toDateString()
             cost = type === 'expense' ? cost : -cost
@@ -65,17 +62,37 @@ class transactionService {
                     amount: currentBalance,
                     date: new Date(date).toDateString()
                 })
-                return;
             } else {
                 balanceLine[haveItem] = {
                     ...balanceLine[haveItem],
                     amount: currentBalance
                 }
             }
-            
         })
 
         return balanceLine.reverse()
+    }
+    async categoryStatistic (params) {
+        const transactions = await this.getAll({...params})
+        let statistic = []
+        transactions.forEach(({cost, tag, currency}) => {
+            const index = statistic.findIndex(({category}) => {
+                return category === tag
+            })
+            const convertedAmount = fakeExchangeService.changeTo(currency, 'USD', cost) 
+            if (index !== -1) {
+                statistic[index] = {
+                    ...statistic[index],
+                    amount: statistic[index].amount + convertedAmount
+                }
+                return;
+            }
+            statistic.push({
+                category: tag,
+                amount: convertedAmount
+            }) 
+        })
+        return statistic
     }
     
 }

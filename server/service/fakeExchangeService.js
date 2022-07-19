@@ -1,3 +1,5 @@
+const toDecimal = require("../utils/toDecimal")
+
 class fakeExchangeService {
     currences = {
         USD: {
@@ -25,7 +27,7 @@ class fakeExchangeService {
         if (from === to) {
             return amount
         }
-        return amount * this.currences[from][to]
+        return toDecimal(amount * this.currences[from][to])
     }
 }
 

@@ -15,12 +15,12 @@ export const BarChart = ({ catigories, className }) => {
 
     return (
         <div className={className}>
-            {catigories.map(({ name, amount }) => {
+            {catigories.map(({ category, amount }) => {
                 return (
-                    <div key={name} className={progressCN('bar-chart', 'item')}>
+                    <div key={category} className={progressCN('bar-chart', 'item')}>
                         <div className={progressCN('bar-chart', 'title')}>
                             <NamedTag>
-                                {name}
+                                {category}
                             </NamedTag>
                             <span className={progressCN('title', 'cost')}>{amount} USD</span>
                         </div>
