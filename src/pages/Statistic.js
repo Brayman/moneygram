@@ -6,6 +6,8 @@ import { Dropdown } from '../components/common/Dropdown/Dropdown'
 import { Navigation } from '../components/common/Navigation/Navigation'
 import { FilterPanel } from '../components/FilterPanel/FilterPanel'
 import * as selectors from '../redux/selectors'
+import {API} from '../api/api'
+import { transactionsThunk } from '../redux/transactions-reducer'
 import {
     BiBarChartAlt,
     BiPieChartAlt2,
@@ -40,12 +42,27 @@ export const Statistic = () => {
     const [type, setType] = useState('categories')
     const [chart, setChart] = useState('line')
     const [catigories, setCatigories] = useState([])
+    const [balanceLine, setBalanceLine] = useState(undefined)
+
+    const dispatch = useDispatch()
+
     const transactions = useSelector(selectors.transactions)
     const filter = useSelector(selectors.filter)
     const sort = useSelector(selectors.sort)
+    const account = useSelector(selectors.account)
     const isLoading = useSelector(selectors.isLoading)
-    const dispatch = useDispatch()
+    
+    const getStats = async (login) => {
+        const stat = await API.getStatistic(login)
+        setBalanceLine(stat)
+    }
 
+    useEffect(() => {
+        dispatch(transactionsThunk.getTransactions({login: account.login, sort}))
+    },[account.login, sort, dispatch])
+    useEffect(() => {
+        getStats(account.login)
+    }, [account])
     useEffect(() => {
         setCatigories(getCatigoriesState(transactions))
     }, [transactions])
@@ -71,7 +88,7 @@ export const Statistic = () => {
             </FilterPanel>
             {chart === 'pie' ?
                 <PieChart categories={catigories} /> :
-                <LineChart transactions={transactions} balance={69} />
+                <LineChart line={balanceLine} balance={account.balance} />
             }
 
             <GroupedButton

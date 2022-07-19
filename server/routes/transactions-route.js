@@ -85,4 +85,9 @@ router.delete('/transaction/:id', async (req, res) => {
     }
 })
 
+router.get('/transactions/stat/:userid', async (req, res) => {
+    const statistic = await transactionService.getBalanceLine({userid: req.params.userid})
+    res.json(statistic)
+})
+
 module.exports = router

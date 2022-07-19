@@ -1,4 +1,6 @@
-const Transaction = require('../models/transaction')
+const Transaction = require('../models/transaction');
+const toDecimal = require('../utils/toDecimal');
+const walletServise = require('./walletService')
 
 class transactionService {
     async create(newTransaction) {
@@ -38,6 +40,42 @@ class transactionService {
             console.log(error);
             return {type: 'error'}
         }
+    }
+    async getBalanceLine({userid, cardid}) {
+        const transactions =  await this.getAll({userid, cardid, sort: 'date', order: 'desc'})
+        let currentBalance = await walletServise.getBalance(userid)
+        let balanceLine=[{
+            amount: currentBalance,
+            date: new Date().toDateString()
+        }];
+
+
+
+
+        transactions.forEach(({date, cost, type}) => {
+            date = new Date(date).toDateString()
+            cost = type === 'expense' ? cost : -cost
+            const haveItem = balanceLine.findIndex((transaction) => {
+                return transaction.date === date
+            })
+            currentBalance = toDecimal(currentBalance + cost)
+            if (haveItem === -1) {
+                
+                balanceLine.push({
+                    amount: currentBalance,
+                    date: new Date(date).toDateString()
+                })
+                return;
+            } else {
+                balanceLine[haveItem] = {
+                    ...balanceLine[haveItem],
+                    amount: currentBalance
+                }
+            }
+            
+        })
+
+        return balanceLine.reverse()
     }
     
 }

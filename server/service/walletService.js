@@ -1,4 +1,5 @@
 const Wallet = require("../models/wallets")
+const toDecimal = require("../utils/toDecimal")
 const fakeExchangeService = require("./fakeExchangeService")
 
 class walletService {
@@ -46,7 +47,7 @@ class walletService {
     async changeBalance(walletid, amount ) {
         try {
             const wallet = await this.getOne(walletid)
-            wallet.balance += amount
+            wallet.balance = toDecimal(wallet.balance + amount) 
             const updatedWallet = await this.update(walletid, wallet, { new: true })
             return updatedWallet
         } catch (error) {
@@ -58,7 +59,7 @@ class walletService {
         const wallets = await this.getMany(userid)
         const balance = wallets.reduce((balance, wallet) => {
             const walletBalance = fakeExchangeService.changeTo(wallet.currency, 'USD', wallet.balance)
-            return balance += walletBalance
+            return toDecimal(balance += walletBalance)
         }, 0)
         return balance
     }

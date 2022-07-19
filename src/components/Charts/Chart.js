@@ -1,43 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import './Charts.css';
 import Chart from "react-apexcharts";
 import { compose } from "redux";
 import { WithAuthRedirect } from "../../hoc/withAuthRedirect";
 import { Navigation } from "../common/Navigation/Navigation";
 import { Button, GroupedButton } from "../common/Button/Buttons";
-import { orderBy } from "lodash";
 import Main from "../Main/Main";
 import { BarChart } from "./BarChart";
 import { Dropdown } from "../common/Dropdown/Dropdown";
 import { FilterPanel } from "../FilterPanel/FilterPanel";
 import classNames from "classnames";
+import Loader from "../common/Loader/Loader";
 
-export const LineChart = ({ transactions, balance, className }) => {
-    const [data, setData] = useState([]);
+export const LineChart = ({ transactions, line, balance, className }) => {
 
-
-    useEffect(() => {
-        setData(agregateData(transactions, balance))
-    }, [transactions, balance])
-    const agregateData = (transactions, balance) => {
-
-        let currentBalance = balance
-        const balanceLine = orderBy(transactions, 'date', 'desc')
-            .map(({ cost, type, date }) => {
-                if (type === 'expense') {
-                    currentBalance = Math.trunc(currentBalance + cost)
-                    return { date: new Date(date).toDateString(), amount: currentBalance }
-                }
-                if (type === 'income') {
-                    currentBalance = Math.trunc(currentBalance - cost)
-                    return { date: new Date(date).toDateString(), amount: currentBalance }
-                }
-                return undefined;
-            })
-
-        return balanceLine.reverse()
-    }
     
+    if (line === undefined) {
+        return <Loader/>
+    }
     return (
         <div className={classNames("chart__line", className)}>
             <div className="chart__balance">
@@ -51,13 +31,13 @@ export const LineChart = ({ transactions, balance, className }) => {
                             curve: "smooth"
                         },
                         xaxis: {
-                            categories: data.map(({ date }) => date)
+                            categories: line.map(({ date }) => date)
                         }
                     }
                 }
                 series={[{
                     name: 'balance',
-                    data: data.map(({ amount }) => amount)
+                    data: line.map(({ amount }) => amount)
                 }]}
                 type="line"
                 width='100%'
