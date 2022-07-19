@@ -13,7 +13,7 @@ class transactionService {
         const transaction = await Transaction.findById(id)
         return transaction
     }
-    async getAll({userid, cardid, sort, order, type}) {
+    async getAll({userid, cardid, sort, order, type, duration}) {
         const parametrs = () => {
             let parametrs = {
                 userid
@@ -23,6 +23,12 @@ class transactionService {
             }
             if (cardid) {
                 parametrs.cardid = cardid
+            }
+            if (duration) {
+                const date = new Date()
+                const startDate = new Date(date.getFullYear(), date.getMonth() - 1, 1).toDateString()
+                console.log(startDate);
+                parametrs.date = {$gt: startDate}
             }
             return parametrs
         }

@@ -1,6 +1,7 @@
 const UserModel = require('../models/users');
 const bcrypt = require('bcrypt');
 const TokenService = require('./tokenService');
+const transactionService = require('./transactionService');
 class UserService {
     async registration(login, password, email) {
         const candidate = await UserModel.findOne({login});
@@ -55,6 +56,18 @@ class UserService {
         const users = await UserModel.find();
         const bit = users.map((item) => ({login: item.login, first_name: item.first_name, second_name: item.second_name}));
         return bit;
+    }
+    async expense(userid, duration) {
+        const transactions = await transactionService.getAll({userid, type: 'expense', duration})
+        return transactions.reduce((sum, {cost}) => {
+            return sum + cost
+        },0)
+    }
+    async income(userid, duration) {
+        const transactions = await transactionService.getAll({userid, type: 'income', duration})
+        return transactions.reduce((sum, {cost}) => {
+            return sum + cost
+        },0)
     }
 }
 

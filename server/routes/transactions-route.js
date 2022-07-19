@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router();
-const transactionService = require('../service/transactionService')
+const transactionService = require('../service/transactionService');
+const userService = require('../service/userService');
 const walletService = require('../service/walletService');
 
 router.get('/transactions/:userid', async (req, res) => {
@@ -84,7 +85,15 @@ router.delete('/transaction/:id', async (req, res) => {
         res.status(404).json(error)
     }
 })
-
+router.get('/:userid/expense', async (req, res) => {
+    const expense = await userService.expense(req.params.userid, req.query.duration)
+    res.json(expense)
+})
+router.get('/:userid/income', async (req, res) => {
+    const {userid, duration} = req.params
+    const income = await userService.income(userid, duration)
+    res.json(income)    
+})
 router.get('/statistic/balance/:userid', async (req, res) => {
     const statistic = await transactionService.getBalanceLine({userid: req.params.userid})
     res.json(statistic)
