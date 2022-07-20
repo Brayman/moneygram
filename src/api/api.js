@@ -44,6 +44,14 @@ export const API = {
         const balance = await instance.get(`wallet/balance/${login}`)
         return balance
     },
+    getIncome: async (login) => {
+        const res = await instance.get(`${login}/income`)
+        return res.data
+    },
+    getExpense: async (login) => {
+        const res = await instance.get(`${login}/expense`)
+        return res.data
+    },
     getBalanceStatistic: async (login) => {
         const stat = await instance.get(`statistic/balance/${login}`)
         return stat.data

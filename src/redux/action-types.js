@@ -18,7 +18,8 @@ export const CHANGE_SETTINGS = 'CHANGE_SETTINGS';
 export const SAVE_SETTINGS = 'SAVE_SETTINGS';
 export const SET_USER = 'SET_USER';
 export const SET_BALANCE = 'SET_BALANCE';
-export const SUBTRACT_BALANCE = 'SUBTRACT_BALANCE';
+export const SET_INCOME = 'SET_INCOME';
+export const SET_EXPENSE = 'SET_EXPENSE';
 
 //--- card types
 export const SET_CARDS = 'SET_CARDS';

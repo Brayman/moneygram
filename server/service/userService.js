@@ -2,6 +2,8 @@ const UserModel = require('../models/users');
 const bcrypt = require('bcrypt');
 const TokenService = require('./tokenService');
 const transactionService = require('./transactionService');
+const fakeExchangeService = require('./fakeExchangeService');
+const toDecimal = require('../utils/toDecimal');
 class UserService {
     async registration(login, password, email) {
         const candidate = await UserModel.findOne({login});
@@ -59,15 +61,23 @@ class UserService {
     }
     async expense(userid, duration) {
         const transactions = await transactionService.getAll({userid, type: 'expense', duration})
-        return transactions.reduce((sum, {cost}) => {
+        const expense = transactions.reduce((sum, {cost, currency}) => {
+            if (currency !== 'USD') {
+                cost = fakeExchangeService.changeTo(currency, 'USD', cost)
+            }
             return sum + cost
         },0)
+        return toDecimal(expense)
     }
     async income(userid, duration) {
         const transactions = await transactionService.getAll({userid, type: 'income', duration})
-        return transactions.reduce((sum, {cost}) => {
+        const income = transactions.reduce((sum, {cost, currency}) => {
+            if (currency !== 'USD') {
+                cost = fakeExchangeService.changeTo(currency, 'USD', cost)
+            }
             return sum + cost
         },0)
+        return toDecimal(income)
     }
 }
 

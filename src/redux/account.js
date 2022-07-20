@@ -3,17 +3,19 @@ import { API } from "../api/api";
 
 import {
     SET_BALANCE,
-    SUBTRACT_BALANCE,
     CHANGE_SETTINGS,
     CREATE_CARD,
     SAVE_SETTINGS,
     SET_CARDS,
-    SET_USER
+    SET_USER,
+    SET_EXPENSE,
+    SET_INCOME
 } from "./action-types";
 
 const defaultState = {
     isAuth: false,
- 
+    income: 0,
+    expense: 0,
 
 }
 const account = (state = defaultState, { type, payload }) => {
@@ -28,6 +30,16 @@ const account = (state = defaultState, { type, payload }) => {
             return {
                 ...state,
                 balance: payload
+            }
+        case SET_EXPENSE:
+            return {
+                ...state,
+                expense: payload
+            }
+        case SET_INCOME:
+            return {
+                ...state,
+                income: payload
             }
         case CHANGE_SETTINGS:
             return {
@@ -95,10 +107,16 @@ export const accontActions = {
             payload: balance
         } 
     },
-    subtractBalance: (cardBalance) => {
+    setIncome: (amount) => {
         return {
-            type: SUBTRACT_BALANCE,
-            payload: cardBalance
+            type: SET_INCOME,
+            payload: amount
+        } 
+    },
+    setExpense: (amount) => {
+        return {
+            type: SET_EXPENSE,
+            payload: amount
         } 
     }
 }
@@ -107,9 +125,13 @@ export const accounThunks = {
         const res = await API.getBalance(login)
         dispatch(accontActions.setBalance(res.data))
     },
-    subtractBalance: (from, to, amount) => async (dispatch) => {
-        const res = await API.converteReq(from, to, amount)
-        dispatch(accontActions.addToBalance(res.data.result))
+    getIncome: (login) => async dispatch => {
+        const income = await API.getIncome(login)
+        dispatch(accontActions.setIncome(income))
+    },
+    getExpense: (login) => async dispatch => {
+        const expense = await API.getExpense(login)
+        dispatch(accontActions.setExpense(expense))
     }
 }
 

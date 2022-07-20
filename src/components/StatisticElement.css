@@ -1,0 +1,38 @@
+.box {
+    color: #fff;
+    display: flex;
+    flex-direction: row;
+    padding: 1em;
+    border-radius: 28px;
+}
+
+.box_expense {
+   background-color: #FD3C4A;
+}
+.box_income {
+    background-color: #00A86B;
+}
+.box__desc {
+    margin-left: 1em;
+    display: flex;
+    flex-direction: column;
+}
+.desc__title {
+    font-size: 14px;
+}
+.desc__subtitle {
+    font-weight: 600;
+    font-size: 22px;
+}
+.box__icon {
+    width: 2em;
+    height: 2em;
+}
+.box__icon_expense {
+    color: #FD3C4A;
+    background-color: #fff;
+}
+.box__icon_income {
+    color: #00A86B;
+    background-color: #fff;
+}
