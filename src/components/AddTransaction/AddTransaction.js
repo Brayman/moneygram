@@ -45,7 +45,7 @@ function AddForm({ userid,  cards, trans = undefined, Action }) {
         payee: '',
         tag: '',
         type: 'expense',
-        currency: cards[0].currency || ''
+        currency: 'USD'
     }
     const navigate = useNavigate()
     return (

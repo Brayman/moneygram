@@ -9,7 +9,7 @@ import CreateClasssName from "../../utils/bemClassCreate";
 const createCN = CreateClasssName()
 function Transaction({ transaction, del }) {
     const navigate = useNavigate();
-    const { id, tag, cost, date, payee, currency = 'GEL', type = 'expence', cardid, comment = "no comments" } = transaction
+    const { _id, tag, cost, date, payee, currency = 'GEL', type = 'expence', cardid, comment = "no comments" } = transaction
     return (
         <section className="tr-full">
             <header className={`tr-full__header header_${type}`}>
@@ -61,7 +61,7 @@ function Transaction({ transaction, del }) {
                     </h4>
                     {comment}
                 </section>
-                <Button primary onClick={() => navigate(`/transaction/edit/${id}`)}>
+                <Button primary onClick={() => navigate(`/transaction/edit/${_id}`)}>
                     edit
                 </Button>
             </main>       
