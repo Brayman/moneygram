@@ -10,7 +10,7 @@ import { Icon } from "../Icon/Icon";
 import { Button } from "../common/Button/Buttons";
 import Account from "../Account/Account";
 import { useEffect } from "react";
-import { accounThunks } from "../../redux/account";
+import { accountThunks } from "../../redux/account";
 import { walletThunks } from "../../redux/card";
 
 function CardList({ balance }) {
@@ -18,7 +18,7 @@ function CardList({ balance }) {
     const login = useSelector(selectors.login)
     const dispatch = useDispatch()
     useEffect(() => {
-        dispatch(accounThunks.getBalanse(login))
+        dispatch(accountThunks.getBalanse(login))
     },[login, dispatch])
     useEffect(() => {
         dispatch(walletThunks.getWallets(login))

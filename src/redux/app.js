@@ -1,3 +1,5 @@
+import { API } from "../api/api";
+import { accontActions, accountThunks } from "./account";
 import {
     INITIALIZE_SUCCESS,
     SET_USER,
@@ -6,7 +8,6 @@ import {
     SHOW_MODAL,
     HIDE_MODAL
 } from "./action-types";
-import { accountThunks } from "./actions/account-actions";
 
 const initialState = {
     initialized: false,
@@ -105,6 +106,11 @@ export const initializeApp = (login) => dispatch => {
     promise.then(() => {
         dispatch(appActions.initialize())
     })
+}
+export const checkAuth = () => async dispatch => {
+    const res = await API.checkAuth()
+    console.log(res);
+    dispatch(accountThunks.Auth(res))
 }
 
 

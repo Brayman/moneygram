@@ -9,8 +9,11 @@ import {
     SET_CARDS,
     SET_USER,
     SET_EXPENSE,
-    SET_INCOME
+    SET_INCOME,
+    START_LOGIN,
+    FAIL_LOGIN
 } from "./action-types";
+import { appActions } from "./app";
 
 const defaultState = {
     isAuth: false,
@@ -58,6 +61,7 @@ const account = (state = defaultState, { type, payload }) => {
             return state;
     }
 }
+
 export const settingsChangeAC = (item, value) => {
     return {
         type: CHANGE_SETTINGS,
@@ -118,9 +122,26 @@ export const accontActions = {
             type: SET_EXPENSE,
             payload: amount
         } 
+    },
+    setUser: data => {
+        return {
+            type: SET_USER,
+            payload: data
+        }
+    },
+    startLogin: () => {
+        return {
+            type: START_LOGIN
+        }
+    },
+    errorLogin: message => {
+        return {
+            type: FAIL_LOGIN,
+            payload: message
+        }
     }
 }
-export const accounThunks = {
+export const accountThunks = {
     getBalanse: (login) => async dispatch => {
         const res = await API.getBalance(login)
         dispatch(accontActions.setBalance(res.data))
@@ -132,6 +153,36 @@ export const accounThunks = {
     getExpense: (login) => async dispatch => {
         const expense = await API.getExpense(login)
         dispatch(accontActions.setExpense(expense))
+    },
+    SignUp: formData => dispatch => {
+        API.SignUp({
+            ...formData,
+        })
+            .then(data => {
+                dispatch(accontActions.setUser(data))
+            })
+    },
+    loadUser: id => dispatch => {
+        API.getUser(id)
+            .then(data => dispatch(accontActions.setUser(data)))
+    },
+    Login: login => dispatch => {
+
+        return API.Login(login)
+    },
+    Auth: ({user, accessToken}) => async dispatch => {
+        dispatch(accontActions.setUser(user))
+        localStorage.setItem('token', accessToken)
+        dispatch(appActions.initialize())
+    },
+    AuthThunk: login => async dispatch => {
+        dispatch(accontActions.startLogin())
+        const res = await API.Login(login)
+        if (res.status >= 400) {
+            dispatch(accontActions.errorLogin(res.message))
+        } else {
+           dispatch(this.Auth(res.data))
+        }
     }
 }
 

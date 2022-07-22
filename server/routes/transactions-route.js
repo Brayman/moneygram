@@ -1,21 +1,25 @@
-const express = require('express')
+const express = require('express');
+const authMiddleware = require('../middlewares/auth-middleware');
 const router = express.Router();
 const transactionService = require('../service/transactionService');
 const userService = require('../service/userService');
 const walletService = require('../service/walletService');
 
-router.get('/transactions/:userid', async (req, res) => {
+router.get('/transactions/:userid', authMiddleware, async (req, res) => {
     try {
         const transactions = await transactionService.getAll({ ...req.params, ...req.query })
         res.json(transactions)
 
     } catch (error) {
+        if (error.status === 401) {
+            res.status(401).json(error)
+        }
         console.log('error',error);
         res.status(404).json(error)
     }
 })
 
-router.get('/transaction/:id', async (req, res) => {
+router.get('/transaction/:id', authMiddleware, async (req, res) => {
     try {
         const transaction = await transactionService.getOne(req.params.id)
         if (transaction.length <= 0) {
@@ -23,12 +27,11 @@ router.get('/transaction/:id', async (req, res) => {
         }
         res.json(transaction)
     } catch (error) {
-        console.log('error',error);
         res.status(404).json(error)
     }
 })
 
-router.post('/transaction/:userid', async (req, res) => {
+router.post('/transaction/:userid', authMiddleware, async (req, res) => {
     try {
         const transaction = await transactionService.create(req.body)
         const { cardid, cost, type } = req.body
@@ -44,7 +47,7 @@ router.post('/transaction/:userid', async (req, res) => {
     }
 })
 
-router.patch('/transaction/:id', async (req, res) => {
+router.patch('/transaction/:id', authMiddleware, async (req, res) => {
     const { cardid, cost, type } = req.body
     try {
         const oldTrans = await transactionService.getOne(req.params.id)
@@ -71,7 +74,7 @@ router.patch('/transaction/:id', async (req, res) => {
     }
 })
 
-router.delete('/transaction/:id', async (req, res) => {
+router.delete('/transaction/:id', authMiddleware, async (req, res) => {
     try {
         const answer = await transactionService.delete(req.params.id)
         if (answer.type === 'expense') {
@@ -85,20 +88,20 @@ router.delete('/transaction/:id', async (req, res) => {
         res.status(404).json(error)
     }
 })
-router.get('/:userid/expense', async (req, res) => {
+router.get('/:userid/expense', authMiddleware, async (req, res) => {
     const expense = await userService.expense(req.params.userid, req.query.duration)
     res.json(expense)
 })
-router.get('/:userid/income', async (req, res) => {
+router.get('/:userid/income', authMiddleware, async (req, res) => {
     const {userid, duration} = req.params
     const income = await userService.income(userid, duration)
     res.json(income)    
 })
-router.get('/statistic/balance/:userid', async (req, res) => {
+router.get('/statistic/balance/:userid', authMiddleware, async (req, res) => {
     const statistic = await transactionService.getBalanceLine({userid: req.params.userid})
     res.json(statistic)
 })
-router.get('/statistic/category/:userid', async (req, res) => {
+router.get('/statistic/category/:userid', authMiddleware, async (req, res) => {
     const statistic = await transactionService.categoryStatistic({userid: req.params.userid, ...req.query})
     res.json(statistic)
 })

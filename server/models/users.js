@@ -3,26 +3,27 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema
 
 const userSchema = Schema({
-    "login": {
+    login: {
         type: String,
         required: true
     },
-    "email": {
+    email: {
         type: String,
         required: true
     },
-    "password": {
+    password: {
         type: String,
         required: true
     },
-    "first_name": String,
-    "second_name": String,
-    "balance": {
+    first_name: String,
+    second_name: String,
+    balance: {
         type: Number,
         default: 0
     },
-    "avatar": String,
-    "language": String
+    avatar: String,
+    language: String,
+    refreshToken: String
 })
 
 const User = mongoose.model('User', userSchema)

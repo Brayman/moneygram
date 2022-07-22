@@ -1,9 +1,13 @@
-const UserModel = require('../models/users');
 const bcrypt = require('bcrypt');
+
+const UserModel = require('../models/users');
+const userObject = require('../dataObjects');
+
 const TokenService = require('./tokenService');
 const transactionService = require('./transactionService');
 const fakeExchangeService = require('./fakeExchangeService');
 const toDecimal = require('../utils/toDecimal');
+
 class UserService {
     async registration(login, password, email) {
         const candidate = await UserModel.findOne({login});
@@ -11,27 +15,28 @@ class UserService {
             throw new Error(`Логин: ${login} уже занят`)
         }
         const hashPass = await bcrypt.hash(password, 1)
-        const user = await UserModel.create({email, login, password: hashPass})
-        const tokens = TokenService.geterateToken({user: user.login})
+        const User = await UserModel.create({email, login, password: hashPass})
+        const user = new userObject(User)
+        const tokens = TokenService.geterateToken({user: user.login, id: user.id})
         await TokenService.saveToken(user.login, tokens.refreshToken);
-
+        
         return {...tokens, user}
     }
     async login({login, password}) {
-        const user = await UserModel.findOne({login});
-        if (!user) {
+        const User = await UserModel.findOne({login});
+        if (!User) {
             console.log(`ошибка аунтификации. Нет пользователя ${login}`);
             return {error: `ошибка аунтификации. Неверный логин или пароль`}
         }
-        const isPassEquals = await bcrypt.compare(password, user.password);
+        const isPassEquals = await bcrypt.compare(password, User.password);
         if (!isPassEquals) {
             console.log(`ошибка аунтификации. ${login} ввёл неверный пароль`);
             return {error: `ошибка аунтификации. Неверный логин или пароль`}
         }
-        const tokens = TokenService.geterateToken({user: user.login})
+        const user = new userObject(User)
+        const tokens = TokenService.geterateToken({login: user.login, id: user.id})
         await TokenService.saveToken(user.login, tokens.refreshToken);
 
-        console.log(`${login} вошёл`);
         return {...tokens, user}
     }
     async logout(refreshToken) {
@@ -47,10 +52,11 @@ class UserService {
         const userData = await TokenService.valRefreshTok(refreshToken);
         const dbToken = await TokenService.findToken(refreshToken);
         if (!userData || !dbToken) {
-            return {error: 'Не авторизован'};
+            throw new Error( 'Не авторизован');
         }
-        const user = await UserModel.findById(dbToken._id)
-        const tokens = TokenService.geterateToken({user: user.login})
+        const User = await UserModel.findById(dbToken._id)
+        const user = new userObject(User)
+        const tokens = TokenService.geterateToken({login: user.login, id: user.id})
         await TokenService.saveToken(user.login, tokens.refreshToken);
         return {...tokens, user}
     }

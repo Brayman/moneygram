@@ -6,12 +6,12 @@ import {
 } from "react-icons/bi";
 import { WithAuthRedirect } from "../../hoc/withAuthRedirect";
 import { useEffect } from "react";
-import { accountThunks } from "../../redux/actions/account-actions";
 import { compose } from "redux";
 import { connect, useSelector } from "react-redux";
 import * as selectors from "../../redux/selectors"
 import "./Profile.css"
 import { Icon } from "../Icon/Icon";
+import { accountThunks } from "../../redux/account";
 
 function ProfileMenu({items}) {
     return (

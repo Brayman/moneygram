@@ -4,8 +4,8 @@ const SECRET = process.env.SECRET.split('_')
 
 class TokenService {
     geterateToken(payload) {
-        const accessToken = jwt.sign(payload, SECRET[0], {expiresIn: '60m'})
-        const refreshToken = jwt.sign(payload, SECRET[1], {expiresIn: '30d'})
+        const accessToken = jwt.sign(payload, SECRET[0], {expiresIn: '30m'})
+        const refreshToken = jwt.sign(payload, SECRET[1], {expiresIn: '7d'})
         return {
             accessToken,
             refreshToken
@@ -14,7 +14,7 @@ class TokenService {
     valAccessTok(token) {
         try {
             const userData = jwt.verify(token, SECRET[0]);
-            return userData;
+            return userData
         } catch (error) {
             console.log(error);
             return null;
@@ -23,7 +23,7 @@ class TokenService {
     valRefreshTok(token) {
         try {
             const userData = jwt.verify(token, SECRET[1]);
-            return userData;
+            return userData
         } catch (error) {
             console.log(error);
             return null;
@@ -32,21 +32,21 @@ class TokenService {
     async saveToken(login, refreshToken) {
         const tokenData = await UserModel.findOne({login})
         if (tokenData) {
-            const token = await UserModel.findByIdAndUpdate(tokenData._id, {token: {refreshToken}});
+            const token = await UserModel.findByIdAndUpdate(tokenData._id, {refreshToken});
             return token;
         } else {
             console.log('error');
         }
     }
     async removeToken(refreshToken) {
-        const tokenData = await UserModel.findOneAndUpdate(refreshToken, {token: null})
+        await UserModel.findOneAndUpdate({refreshToken}, {refreshToken: null})
         return;
     }
     async findToken(refreshToken) {
-        const tokenData = await UserModel.findOne({token: {refreshToken}});
+        const tokenData = await UserModel.findOne({refreshToken});
         return tokenData;
     }
     
 }
 
-module.exports = new TokenService();
+    module.exports = new TokenService();

@@ -7,7 +7,6 @@ import { Add, Edit } from './components/AddTransaction/AddConteiner';
 import { useDispatch, useSelector } from 'react-redux';
 import SignIn from './components/Sign/SignIn';
 import SignUp from './components/Sign/SignUp';
-import { accountThunks } from './redux/actions/account-actions';
 import * as selectors from "./redux/selectors";
 import TransComponent from './components/Transaction/TransComponent';
 import Accounts from './components/Accounts/Accounts';
@@ -18,6 +17,10 @@ import HomePage from './pages/HomePage';
 import WalletDetail from './pages/WalletDetail';
 import WalletEditor from './pages/WalletEditor';
 import WalletCreate from './pages/WalletCreate';
+import { useEffect } from 'react';
+import { checkAuth } from './redux/app';
+import { accountThunks } from './redux/account';
+import Loader from './components/common/Loader/Loader';
 
 
 const App = () => {
@@ -32,7 +35,15 @@ const App = () => {
   const transactions = useSelector(selectors.transactions)
   const signUp = FormData => dispatch(accountThunks.SignUp(FormData))
   const Auth = FormData => dispatch(accountThunks.AuthThunk(FormData))
-  
+  useEffect(() => {
+    console.log('tick');
+    if (localStorage.getItem('token')) {
+      dispatch(checkAuth())
+    }
+  },[dispatch])
+  if (!initialized) {
+    return <Loader/>
+  }
   return (
     <BrowserRouter>
       <Routes>

@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import * as selectors from '../redux/selectors'
 import { transactionsThunk } from '../redux/transactions-reducer'
 import Account from '../components/Account/Account';
-import { accounThunks } from '../redux/account';
+import { accountThunks } from '../redux/account';
 import StatisticElement from '../components/StatisticElement';
 
 const HomePage = () => {
@@ -16,9 +16,9 @@ const HomePage = () => {
     const account = useSelector(selectors.account)
     const sort = useSelector(selectors.sort)
   useEffect(() => {
-    dispatch(accounThunks.getBalanse(account.login))
-    dispatch(accounThunks.getExpense(account.login))  
-    dispatch(accounThunks.getIncome(account.login))
+    dispatch(accountThunks.getBalanse(account.login))
+    dispatch(accountThunks.getExpense(account.login))  
+    dispatch(accountThunks.getIncome(account.login))
   }, [account.login, dispatch])
     useEffect(() => {
         dispatch(transactionsThunk.getTransactions({login: account.login, sort}))
