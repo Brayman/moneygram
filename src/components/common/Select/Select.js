@@ -8,10 +8,11 @@ import {
 
 import "./style.css"
 import classNames from "classnames";
+import Tag from "../../Tag";
 const selectCN = createClassName();
 const SelectOption = ({ tag, placeholder = '...', children, ...props}) => {
     if (children) {
-        const MyOption = tag ? TagOption : Option;
+        const MyOption = tag ? Tag.Text : Option;
         return (
             <MyOption {...props}>
                 {children}
@@ -35,19 +36,6 @@ const Option = ({ children, ...props}) => {
 
     )
 }
-const TagOption = ({ children }) => {
-    return (
-        <div className={selectCN('option')}>
-            <div className={selectCN('option', 'tag')}>
-                <div className={selectCN('tag', 'dot')}></div>
-                <div className={selectCN('tag', 'text')}>{children}</div>
-            </div>
-        </div>
-
-    )
-}
-
-
 
 const Select = ({ options, up, tag = false, ...props }) => {
     const [open, setOpen] = useState(false)

@@ -13,8 +13,9 @@ import { Field, SpecialField } from '../common/Field/Field';
 import { Button, GroupedButton } from '../common/Button/Buttons';
 import CreateClasssName from '../../utils/bemClassCreate';
 import "./AddTransaktion.css"
+import { Icons } from '../Tag';
 const addCN = CreateClasssName()
-const tags = ['send','shop', 'taxi', 'deliver', 'restaurant', 'ethernet', 'bus']
+
 
 const DatePicker = (props) => {
     const { setFieldValue } = useFormikContext()
@@ -48,6 +49,7 @@ function AddForm({ userid,  cards, trans = undefined, Action }) {
         currency: 'USD'
     }
     const navigate = useNavigate()
+    const tags = new Icons().getTagsNames()
     return (
         <Formik
             initialValues={initialValues}

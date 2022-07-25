@@ -1,5 +1,5 @@
 import { API } from "../api/api";
-import { accontActions, accountThunks } from "./account";
+import { accountThunks } from "./account";
 import {
     INITIALIZE_SUCCESS,
     SET_USER,

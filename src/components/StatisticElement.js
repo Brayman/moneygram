@@ -11,10 +11,14 @@ const StatisticElement = ({type, amount}) => {
     <div className={elemCN('box',null,{[type]: true})}>
       { type === 'income' ?
         <Icon
+          color='#00A86B'
+          backgroundColor='#FFF'
           icon={BiArrowToRight}
           className={elemCN('box', 'icon', {[type]: true})}
         /> : 
         <Icon
+          color='#FD3C4A'
+          backgroundColor='#FFF'
           icon={BiArrowFromLeft}
           className={elemCN('box', 'icon', {[type]: true})}
         /> }

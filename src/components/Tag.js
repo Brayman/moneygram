@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import React from "react";
+import styled from "styled-components"
 import { BiCartAlt } from "react-icons/bi";
 import {
     RiTaxiLine,
@@ -11,65 +12,152 @@ import {
     RiWifiLine,
     RiScissorsFill,
     RiMoneyDollarCircleLine,
-    RiForbidLine,
     RiHandCoinLine
 } from "react-icons/ri";
 import {
     MdOutlineHighlightOff
 } from "react-icons/md"
-function Tag({ tag, getTag = undefined, active }) {
-    const [Icon, setIcon] = useState(<RiForbidLine />)
+import { Icon } from './Icon/Icon'
+import CreateClasssName from "../utils/bemClassCreate";
 
-    useEffect(() => {
-        switch (tag) {
-            case 'taxi':
-                setIcon(<RiTaxiLine className="transaction__icon taxi-icon" />)
-                break;
-            case 'restaurant':
-                setIcon(<RiRestaurant2Fill className="transaction__icon taxi-icon" />)
-                break;
-            case 'deliver':
-                setIcon(<RiTakeawayLine className="transaction__icon taxi-icon" />)
-                break;
-            case 'subscribe':
-                setIcon(<RiMoneyDollarCircleLine className="transaction__icon taxi-icon" />)
-                break;
-            case 'shop':
-                setIcon(<BiCartAlt className="transaction__icon taxi-icon" />)
-                break;
-            case 'health':
-                setIcon(<RiStethoscopeLine className="transaction__icon taxi-icon" />)
-                break;
-            case 'beauty':
-                setIcon(<RiScissorsFill className="transaction__icon taxi-icon" />)
-                break;
-            case 'ethernet':
-                setIcon(<RiWifiLine className="transaction__icon taxi-icon" />)
-                break;
-            case 'travel':
-                setIcon(<RiPlaneFill className="transaction__icon taxi-icon" />)
-                break;
-            case 'gift':
-                setIcon(<RiGiftLine className="transaction__icon taxi-icon" />)
-                break;
-            case 'bus':
-                setIcon(<RiBusFill className="transaction__icon" />)
-                break;
-            case 'send':
-                setIcon(<RiHandCoinLine className="transaction__icon" />)
-                break;
-            default:
-                setIcon(<MdOutlineHighlightOff className="transaction__icon error-icon" />)
-                break;
+export class Icons {
+    taxi = {
+        icon: RiTaxiLine,
+        name: 'taxi',
+        color: '#FCAC12',
+        backgroundColor: '#FCCC6F'
+    }
+    restaurant = {
+        icon: RiRestaurant2Fill,
+        name: 'restaurant',
+        color: '#FCAC12',
+        backgroundColor: '#FCCC6F'
+    }
+    deliver = {
+        icon: RiTakeawayLine,
+        name: 'deliver',
+        color: '#FCAC12',
+        backgroundColor: '#FCCC6F'
+    }
+    subscribe = {
+        icon: RiMoneyDollarCircleLine,
+        name: 'subscribe',
+        color: '#FCAC12',
+        backgroundColor: '#FCCC6F'
+    }
+    shop = {
+        icon: BiCartAlt,
+        name: 'shop',
+        color: '#0077FF',
+        backgroundColor: '#8AC0FF'
+    }
+    health = {
+        icon: RiStethoscopeLine,
+        name: 'health',
+        color: '#B18AFF',
+        backgroundColor: '#7F3DFF'
+    }
+    beauty = {
+        icon: RiScissorsFill,
+        name: 'beauty',
+        color: '#B18AFF',
+        backgroundColor: '#7F3DFF'
+    }
+    ethernet = {
+        icon: RiWifiLine,
+        name: 'ethernet',
+        color: '#57A5FF',
+        backgroundColor: '#0077FF'
+    }
+    travel = {
+        icon: RiPlaneFill,
+        name: 'travel',
+        color: '#FCAC12',
+        backgroundColor: '#FCCC6F'
+    }
+    gift = {
+        icon: RiGiftLine,
+        name: 'gift',
+        color: '#00A86B',
+        backgroundColor: '#65D1AA'
+    }
+    bus = {
+        icon: RiBusFill,
+        name: 'bus',
+        color: '#0077FF',
+        backgroundColor: '#57A5FF'
+    }
+    send = {
+        icon: RiHandCoinLine,
+        name: 'send',
+        color: '#00A86B',
+        backgroundColor: '#65D1AA'
+    }
+    tag = {
+        icon: MdOutlineHighlightOff,
+        name: 'empty',
+        color: '#FD3C4A',
+        backgraundColor: '#FD6F7A'
+    }
+    constructor(tag) {
+        if (!!tag) {
+            this.tag = this[tag]
+            return this.tag
         }
-    }, [tag])
+        if (tag === '' ) {
+            return this.tag
+        }
+        
+    }
+    allTags() {
+        let propertys = []
+        for (const key in this) {
+            propertys.push(this[key])
+        }
+        return propertys
+    }
+    getTagsNames() {
+        let tags = []
+        for (const key in this) {
+            tags.push(this[key].name)
+        }
+        return tags
+    }
 
+}
+
+
+const DotStyle = styled.div`
+    background: ${({color}) => color};
+    width: 1em;
+    height: 1em;
+    border-radius: 1em;
+`
+const Dot = (props) => {
+    return <DotStyle {...props} />
+}
+
+
+export const Tag = ({tag}) => {
+    const icon = new Icons(tag)
+  return (
+    <Icon {...icon} />
+  )
+}
+
+export const NamedTag = ({ children }) => {
+    const icon = new Icons(children)
+    const tagCN = CreateClasssName();
     return (
-
-        <div onClick={getTag && (() => getTag(tag))}>
-            {Icon}
+        <div className={tagCN('option')}>
+            <div className={tagCN('option', 'tag')}>
+                <Dot color={icon.color} />
+                <div className={tagCN('tag', 'text')}>{icon.name}</div>
+            </div>
         </div>
 
     )
 }
+Tag.Text = NamedTag
+
 export default Tag;
