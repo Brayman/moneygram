@@ -3,7 +3,6 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import MyMenu from './components/Menu/Menu';
 import Profile from './components/Profile/Profile';
 import NotFound from './components/NotFound';
-import { Add, Edit } from './components/AddTransaction/AddConteiner';
 import { useDispatch, useSelector } from 'react-redux';
 import SignIn from './components/Sign/SignIn';
 import SignUp from './components/Sign/SignUp';
@@ -11,16 +10,18 @@ import * as selectors from "./redux/selectors";
 import TransComponent from './components/Transaction/TransComponent';
 import Accounts from './components/Accounts/Accounts';
 import "./App.css";
-import Statistic from './pages/Statistic';
-import Transactions from './pages/Transactions';
-import HomePage from './pages/HomePage';
-import WalletDetail from './pages/WalletDetail';
-import WalletEditor from './pages/WalletEditor';
-import WalletCreate from './pages/WalletCreate';
+import Statistic from './containers/Statistic';
+import Transactions from './containers/Transactions';
+import HomePage from './containers/HomePage';
+import WalletDetail from './containers/WalletDetail';
+import WalletEditor from './containers/WalletEditor';
+import WalletCreate from './containers/WalletCreate';
 import { useEffect } from 'react';
 import { checkAuth } from './redux/app';
 import { accountThunks } from './redux/account';
 import Loader from './components/common/Loader/Loader';
+import AddTransaction from './containers/AddTransaction';
+import EditTransaction from './containers/EditTransaction';
 
 
 const App = () => {
@@ -73,9 +74,10 @@ const App = () => {
         <Route path='/analytics' element={<Statistic {...{ isAuth, transactions}} />} />
         <Route path='/settings/*' element={<Settings />} />
         <Route path='/transaction/:id' element={<TransComponent {...{ modal, isAuth }} />} />
-        <Route path='/transaction/edit/:id' element={<Edit isAuth={isAuth} />} />
+        <Route path='/transaction/edit/:id' element={<EditTransaction isAuth={isAuth} />} />
         <Route path='/sign-up' element={<SignUp onSubmit={signUp}/>} />
-        <Route path='/add' element={<Add isAuth={isAuth} />} />
+        <Route path='/add' element={<AddTransaction isAuth={isAuth}/>} />
+        <Route path='/edit' element={<EditTransaction isAuth={isAuth} />} />
         <Route path='/profile' element={<Profile isAuth={isAuth} />} />
         <Route path='/wallet/edit/:walletid' element={<WalletEditor />} />
         <Route path='/wallet/create' element={<WalletCreate />} />

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import {
     Form,
@@ -24,35 +24,36 @@ const DatePicker = (props) => {
         <Field type='date' {...field} {...props} onChange={e => setFieldValue('date', new Date(e.target.value).toISOString().substring(0, 10))} />
     )
 }
-const CardSelect = (props) => {
-    const { setFieldValue } = useFormikContext()
+const CardSelect = ({cards, ...props}) => {
     const [field] = useField(props);
     const [value, setValue] = useState(props.value)
+    useEffect(() => {
+        if (props.value) {
+            setValue(cards.find((card) => card._id === props.value).name)
+        }
+    },[props, cards])
+    const { setFieldValue } = useFormikContext()
     const setFieldsValue = (cardName) => {
-        const cardValues = props.cards.find((card) => card.name === cardName)
+        const cardValues = cards.find((card) => card.name === cardName)
         setFieldValue('cardid', cardValues._id)
         setFieldValue('currency',cardValues.currency)
         setValue(cardValues.name)
     }
-    return <DefaultSelect {...field} {...props} value={value} options={props.cards.map(({name}) => name)} setValue={value => setFieldsValue(value)}/>
+    return <DefaultSelect {...field} {...props} value={value} options={cards.map(({name}) => name)} setValue={value => setFieldsValue(value)}/>
 }
 
-function AddForm({ userid,  cards, trans = undefined, Action }) {
+function TransactionForm({ userid, cards, transaction, date, Action, card }) {
 
-    const initialValues = trans || {
-        userid,
-        date: new Date().toISOString().substring(0, 10),
-        cost: '',
-        payee: '',
-        tag: '',
-        type: 'expense',
-        currency: 'USD'
-    }
     const navigate = useNavigate()
     const tags = new Icons().getTagsNames()
     return (
         <Formik
-            initialValues={initialValues}
+            initialValues={{
+                ...transaction,
+                userid,
+                type: 'expense',
+                date: new Date(date).toISOString().substring(0,10)
+            }}
             onSubmit={
                 (values, actions) => {
                     Action({
@@ -79,7 +80,7 @@ function AddForm({ userid,  cards, trans = undefined, Action }) {
                     <Select name="tag" tag options={tags} className={addCN('add','field')} />
                     <DatePicker className={addCN('add','field')} name='date' id='date' placeholder="date" />
                     <Field className={addCN('add','field')} name='payee' placeholder='payee' />
-                    <CardSelect up cards={cards} className={addCN('add','field')} name='cardid' placeholder='select card' />
+                    <CardSelect up cards={cards} value={values.cardid} className={addCN('add','field')} name='cardid' placeholder='select card' />
                     <GroupedButton
                         className={addCN('add','field')}
                         type='button'
@@ -87,12 +88,6 @@ function AddForm({ userid,  cards, trans = undefined, Action }) {
                         onClick={(type) => setFieldValue('type', type)}
                         value={values.type}
                     />
-                    <section className="tr-add__field tr-add__comment">
-                        <h4 className="comment__header">
-                            Comment
-                        </h4>
-
-                    </section>
                     <Button primary type='submit' className="tr-add__button primary-btn">
                         save
                     </Button>
@@ -103,4 +98,4 @@ function AddForm({ userid,  cards, trans = undefined, Action }) {
         </Formik>
     )
 }
-export default AddForm;
+export default TransactionForm;
