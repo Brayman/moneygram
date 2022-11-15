@@ -24,9 +24,9 @@ class transactionService {
             if (cardid) {
                 parametrs.cardid = cardid
             }
-            if (duration) {
+            if (!!duration) {
                 const date = new Date()
-                const startDate = new Date(date.getFullYear(), date.getMonth() - 1, 1).toDateString()
+                const startDate = new Date(date.getFullYear() - (duration === 'year' ? 1 : 0), date.getMonth() - (duration === 'month' ? 1 : 0), 1).toDateString()
                 console.log(startDate);
                 parametrs.date = {$gt: startDate}
             }
@@ -48,8 +48,8 @@ class transactionService {
             return {type: 'error'}
         }
     }
-    async getBalanceLine({userid, cardid}) {
-        const transactions =  await this.getAll({userid, cardid, sort: 'date', order: 'desc'})
+    async getBalanceLine({userid, cardid , duration}) {
+        const transactions =  await this.getAll({userid, cardid, sort: 'date', order: 'desc', duration})
         let currentBalance = await walletServise.getBalance(userid)
         let balanceLine=[{
             amount: currentBalance,

@@ -98,7 +98,7 @@ router.get('/:userid/income', authMiddleware, async (req, res) => {
     res.json(income)    
 })
 router.get('/statistic/balance/:userid', authMiddleware, async (req, res) => {
-    const statistic = await transactionService.getBalanceLine({userid: req.params.userid})
+    const statistic = await transactionService.getBalanceLine({userid: req.params.userid, duration: req.query.dur})
     res.json(statistic)
 })
 router.get('/statistic/category/:userid', authMiddleware, async (req, res) => {
