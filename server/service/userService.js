@@ -65,6 +65,10 @@ class UserService {
         const bit = users.map((item) => ({login: item.login, first_name: item.first_name, second_name: item.second_name}));
         return bit;
     }
+    async getUserByLogin(login) {
+        const user = await UserModel.findOne({login})
+        return user
+    }
     async expense(userid, duration) {
         const transactions = await transactionService.getAll({userid, type: 'expense', duration})
         const expense = transactions.reduce((sum, {cost, currency}) => {

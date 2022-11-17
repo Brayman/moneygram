@@ -1,11 +1,11 @@
 const express = require('express');
-const authMiddleware = require('../middlewares/auth-middleware');
-
+const isAuth = require('../middlewares/authenticated');
+const  passport = require('passport');
 const walletService = require('../service/walletService')
 
 const router = express.Router();
 
-router.get('/wallets/:userid', authMiddleware, async (req, res) => {
+router.get('/wallets/:userid', isAuth, async (req, res) => {
     try {
         const wallets = await walletService.getMany(req.params.userid)
         res.json(wallets)
@@ -14,7 +14,7 @@ router.get('/wallets/:userid', authMiddleware, async (req, res) => {
         res.status(404).json(err)
     }
 })
-router.get('/wallet/:id', async (req, res) => {
+router.get('/wallet/:id', isAuth, async (req, res) => {
     try {
         const wallet = await walletService.getOne(req.params.id)
         res.json(wallet)
@@ -23,7 +23,7 @@ router.get('/wallet/:id', async (req, res) => {
     }
 })
 
-router.post('/wallet', authMiddleware, async (req, res) => {
+router.post('/wallet', isAuth, async (req, res) => {
     try {
         const {userid, name, balance, currency } = req.body
         const wallet = await walletService.create(userid, name, balance, currency)
@@ -32,7 +32,7 @@ router.post('/wallet', authMiddleware, async (req, res) => {
         res.status(404).json(error)
     }
 })
-router.get('/wallet/balance/:userid', authMiddleware, async (req,res) => {
+router.get('/wallet/balance/:userid', isAuth, async (req,res) => {
     const balance = await walletService.getBalance(req.params.userid)
     res.json(balance)
 })
