@@ -12,29 +12,29 @@ const converteInstance = axios.create({
         apikey: "SScUf1BlWcB37t0hwMe13MduDxkDXTKs"
     }
 })
-instance.interceptors.request.use(config => {
-    config.headers.Autorization = `Bearer ${localStorage.getItem('token')}`
-    return config
-})
-instance.interceptors.response.use(config => {
-    return config
-}, async (error) => {
-    const originalRequest = error.config
-    try {
-        if (error.response.status === 401 && error.config && !error.config._isRetry) {
-            originalRequest._isRetry = true;
-            const res = await axios.get( 'http://localhost:5000/refresh', {
-                withCredentials: true,
-            })
-            if (res.status === 200) {
-                localStorage.setItem('token', res.data.accessToken)
-                return instance.request(originalRequest)
-            }
-        }
-    } catch (error) {
-        console.log('НЕ АВТОРИЗОВАН')
-    }
-})
+// instance.interceptors.request.use(config => {
+//     config.headers.Autorization = `Bearer ${localStorage.getItem('token')}`
+//     return config
+// })
+// instance.interceptors.response.use(config => {
+//     return config
+// }, async (error) => {
+//     const originalRequest = error.config
+//     try {
+//         if (error.response.status === 401 && error.config && !error.config._isRetry) {
+//             originalRequest._isRetry = true;
+//             const res = await axios.get( 'http://localhost:5000/refresh', {
+//                 withCredentials: true,
+//             })
+//             if (res.status === 200) {
+//                 localStorage.setItem('token', res.data.accessToken)
+//                 return instance.request(originalRequest)
+//             }
+//         }
+//     } catch (error) {
+//         console.log('НЕ АВТОРИЗОВАН')
+//     }
+// })
 
 export const API = {
     getTransactions({login, cardid, pageSize, filter, sort}) {
@@ -137,6 +137,7 @@ export const API = {
             }
             return res
         } catch (error) {
+            console.error(error);
             const res = error.toJSON()
             if (res.status >= 400) {
                 return {
@@ -155,7 +156,7 @@ export const API = {
         localStorage.removeItem('token')
     },
     checkAuth: async () => {
-        const res = await axios.get( 'http://localhost:5000/refresh', {
+        const res = await axios.get( 'http://localhost:5000/autho', {
             withCredentials: true,
         })
         if (res.status === 200) {
@@ -163,5 +164,10 @@ export const API = {
             localStorage.setItem('token', res.data.accessToken)
             return res.data
         }
+    },
+    getAccessToken: async (code) => {
+        const res = await instance.get(`/getAccessToken?code=${code}`)
+        console.log(res);
+        return res.data
     }
 }

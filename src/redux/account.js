@@ -170,9 +170,9 @@ export const accountThunks = {
 
         return API.Login(login)
     },
-    Auth: ({user, accessToken}) => async dispatch => {
+    Auth: (user) => async dispatch => {
         dispatch(accontActions.setUser(user))
-        localStorage.setItem('token', accessToken)
+        // localStorage.setItem('token', accessToken)
         dispatch(appActions.initialize())
     },
     AuthThunk: login => async dispatch => {

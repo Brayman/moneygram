@@ -38,13 +38,13 @@ const App = () => {
   const Auth = FormData => dispatch(accountThunks.AuthThunk(FormData))
   useEffect(() => {
     console.log('tick');
-    if (localStorage.getItem('token')) {
+    if (true || localStorage.getItem('token')) {
       dispatch(checkAuth())
     }
   },[dispatch])
-  if (!initialized) {
-    return <Loader/>
-  }
+  // if (!initialized) {
+  //   return <Loader/>
+  // }
   return (
     <BrowserRouter>
       <Routes>
