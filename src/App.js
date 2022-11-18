@@ -42,9 +42,9 @@ const App = () => {
       dispatch(checkAuth())
     }
   },[dispatch])
-  if (!initialized) {
-    return <Loader/>
-  }
+  // if (!initialized) {
+  //   return <Loader/>
+  // }
   return (
     <BrowserRouter>
       <Routes>
