@@ -36,6 +36,7 @@ class transactionService {
         return transactions;
     }
     async update(id, updateData) {
+        console.log(updateData);
         const updatedTransaction = await Transaction.findByIdAndUpdate(id, updateData, {new: true})
         return updatedTransaction;
     }

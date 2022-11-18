@@ -4,7 +4,7 @@ const router = express.Router();
 const transactionService = require('../service/transactionService');
 const userService = require('../service/userService');
 const walletService = require('../service/walletService');
-const  passport = require('passport'); 
+const passport = require('passport');
 router.get('/transactions/:userid', isAuth, async (req, res) => {
     try {
         const transactions = await transactionService.getAll({ ...req.params, ...req.query })
@@ -14,7 +14,7 @@ router.get('/transactions/:userid', isAuth, async (req, res) => {
         if (error.status === 401) {
             res.status(401).json(error)
         }
-        console.log('error',error);
+        console.log('error', error);
         res.status(404).json(error)
     }
 })
@@ -51,7 +51,8 @@ router.patch('/transaction/:id', isAuth, async (req, res) => {
     const { cardid, cost, type } = req.body
     try {
         const oldTrans = await transactionService.getOne(req.params.id)
-        const transaction = await transactionService.update(req.params.id, req.body)
+        const { _id, ...form } = req.body
+        const transaction = await transactionService.update(_id, form)
         const difference = () => {
             if (type !== oldTrans.type) {
                 const value = oldTrans.cost + cost
@@ -93,16 +94,16 @@ router.get('/:userid/expense', isAuth, async (req, res) => {
     res.json(expense)
 })
 router.get('/:userid/income', isAuth, async (req, res) => {
-    const {userid, duration} = req.params
+    const { userid, duration } = req.params
     const income = await userService.income(userid, duration)
-    res.json(income)    
+    res.json(income)
 })
 router.get('/statistic/balance/:userid', isAuth, async (req, res) => {
-    const statistic = await transactionService.getBalanceLine({userid: req.params.userid, duration: req.query.dur})
+    const statistic = await transactionService.getBalanceLine({ userid: req.params.userid, duration: req.query.dur })
     res.json(statistic)
 })
 router.get('/statistic/category/:userid', isAuth, async (req, res) => {
-    const statistic = await transactionService.categoryStatistic({userid: req.params.userid, ...req.query})
+    const statistic = await transactionService.categoryStatistic({ userid: req.params.userid, ...req.query })
     res.json(statistic)
 })
 

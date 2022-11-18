@@ -32,6 +32,10 @@ router.post('/wallet', isAuth, async (req, res) => {
         res.status(404).json(error)
     }
 })
+router.patch('/wallet/:id', isAuth, async (req, res) => {
+    const wallet = await walletService.update(req.params.id, req.body)
+    res.json(wallet)
+})
 router.get('/wallet/balance/:userid', isAuth, async (req,res) => {
     const balance = await walletService.getBalance(req.params.userid)
     res.json(balance)
