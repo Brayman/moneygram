@@ -4,7 +4,7 @@ import { cn } from '@bem-react/classname'
 import React from 'react';
 import CreateClasssName from '../../../utils/bemClassCreate';
 
-const createClassName = (primary, secondary) => {
+const createClassName = (primary, secondary, disabled) => {
     const buttonType = classNames({
         'primary-button': primary,
         'secondary-button': secondary,
@@ -15,12 +15,12 @@ const createClassName = (primary, secondary) => {
 
 
 
-export const Button = ({ active, primary, secondary, className, children, ...props }) => {
-
+export const Button = ({ active, primary, secondary, className, type = 'button', children, ...props }) => {
 
     const bcn = createClassName(primary, secondary)
     return (
         <button
+            type={type}
             {...props}
             className={classNames(bcn({ active }), className)}
 

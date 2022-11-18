@@ -14,6 +14,7 @@ class UserService {
         if (candidate) {
             throw new Error(`Логин: ${login} уже занят`)
         }
+
         const hashPass = await bcrypt.hash(password, 1)
         const User = await UserModel.create({email, login, password: hashPass})
         const user = new userObject(User)
@@ -21,6 +22,16 @@ class UserService {
         await TokenService.saveToken(user.login, tokens.refreshToken);
         
         return {...tokens, user}
+    }
+    async githubRegistration(form) {
+        const candidate = await UserModel.findOne({login: form.login});
+        if (candidate) {
+            throw new Error(`Логин: ${form.login} уже занят`)
+        }
+
+        const User = await UserModel.create(form)
+        const user = new userObject(User)
+        return user
     }
     async login({login, password}) {
         const User = await UserModel.findOne({login});
@@ -65,8 +76,8 @@ class UserService {
         const bit = users.map((item) => ({login: item.login, first_name: item.first_name, second_name: item.second_name}));
         return bit;
     }
-    async getUserByLogin(login) {
-        const user = await UserModel.findOne({login})
+    async getUserByGithubId(githubid) {
+        const user = await UserModel.findOne({githubid})
         return user
     }
     async expense(userid, duration) {

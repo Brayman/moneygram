@@ -93,7 +93,7 @@ export class Icons {
         color: '#00A86B',
         backgroundColor: '#65D1AA'
     }
-    tag = {
+    empty = {
         icon: MdOutlineHighlightOff,
         name: 'empty',
         color: '#FD3C4A',
@@ -105,7 +105,7 @@ export class Icons {
             return this.tag
         }
         if (tag === '' ) {
-            return this.tag
+            return this.empty
         }
         
     }

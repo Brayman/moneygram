@@ -127,6 +127,11 @@ export const API = {
             return res.user
         }
     },
+    SignUpGitHub: async (formData) => {
+        const res = await instance.get(`signup/github`).then(data => data.data)
+        console.log(res);
+        return res
+    },
     Login: async (formData) => {
         try {
             const res = await instance.post(`/signin`, formData)

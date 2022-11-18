@@ -9,11 +9,18 @@ const login = Yup.string()
 const password = Yup.string()
     .min(6, "Must be more 6 characters")
     .required('This required field');
+const githubid = Yup.string()
+    .required('This required field');
 
 export const signupValidate = Yup.object({
     login,
     email,
     password,
+})
+export const signupGithubValidate = Yup.object({
+    login,
+    email,
+    githubid,
 })
 export const loginValidate = Yup.object({
     login,
