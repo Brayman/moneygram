@@ -99,6 +99,12 @@ export class Icons {
         color: '#FD3C4A',
         backgraundColor: '#FD6F7A'
     }
+    tag = {
+        Icon: MdOutlineHighlightOff,
+        name: 'empty',
+        color: '#FD3C4A',
+        backgraundColor: '#FD6F7A'
+    }
     
     constructor(tag) {
         console.warn(`tag: |${tag}|`)
