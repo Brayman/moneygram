@@ -17,7 +17,7 @@ function ProfileMenu({items}) {
     return (
         <menu className="profile__menu">
             {items.map(item => (
-                <div className="menu__option">
+                <div key={item.title} className="menu__option">
                     <Icon icon={item.icon} className="option__icon" />
                     <span className="option__title">
                         {item.title}

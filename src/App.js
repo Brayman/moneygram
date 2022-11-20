@@ -37,10 +37,7 @@ const App = () => {
   const signUp = FormData => dispatch(accountThunks.SignUp(FormData))
   const Auth = FormData => dispatch(accountThunks.AuthThunk(FormData))
   useEffect(() => {
-    console.log('tick');
-    if (true || localStorage.getItem('token')) {
       dispatch(checkAuth())
-    }
   },[dispatch])
   // if (!initialized) {
   //   return <Loader/>

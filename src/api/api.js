@@ -12,29 +12,6 @@ const converteInstance = axios.create({
         apikey: "SScUf1BlWcB37t0hwMe13MduDxkDXTKs"
     }
 })
-// instance.interceptors.request.use(config => {
-//     config.headers.Autorization = `Bearer ${localStorage.getItem('token')}`
-//     return config
-// })
-// instance.interceptors.response.use(config => {
-//     return config
-// }, async (error) => {
-//     const originalRequest = error.config
-//     try {
-//         if (error.response.status === 401 && error.config && !error.config._isRetry) {
-//             originalRequest._isRetry = true;
-//             const res = await axios.get( 'http://localhost:5000/refresh', {
-//                 withCredentials: true,
-//             })
-//             if (res.status === 200) {
-//                 localStorage.setItem('token', res.data.accessToken)
-//                 return instance.request(originalRequest)
-//             }
-//         }
-//     } catch (error) {
-//         console.log('НЕ АВТОРИЗОВАН')
-//     }
-// })
 
 export const API = {
     getTransactions({login, cardid, pageSize, filter, sort}) {
@@ -114,7 +91,7 @@ export const API = {
         }
     },
     getUser(id) {
-        return instance.get(`users/${id}`).then(data => data.data)
+        return instance.get(`user/${id}`).then(data => data.data)
     },
     updateProfile(login, data) {
         console.log(login, data);
@@ -123,26 +100,21 @@ export const API = {
     SignUp: async (formData) => {
         const res = await instance.post(`/signup`, formData).then(data => data.data)
         if (res.status === 200) {
-            localStorage.setItem('token', res.accessToken)
             return res.user
         }
     },
     SignUpGitHub: async (formData) => {
         const res = await instance.get(`signup/github`).then(data => data.data)
-        console.log(res);
         return res
     },
     Login: async (formData) => {
         try {
             const res = await instance.post(`/signin`, formData)
             if (res.status >= 400) {
-                console.log(res);
-                localStorage.setItem('token', res.accessToken)
-                return res.user
+                return res
             }
             return res
         } catch (error) {
-            console.error(error);
             const res = error.toJSON()
             if (res.status >= 400) {
                 return {
@@ -158,21 +130,13 @@ export const API = {
     },
     Logout: async () => {
         await instance.post('/logout')
-        localStorage.removeItem('token')
     },
     checkAuth: async () => {
         const res = await axios.get( 'http://localhost:5000/autho', {
             withCredentials: true,
         })
         if (res.status === 200) {
-            console.log(res);
-            localStorage.setItem('token', res.data.accessToken)
             return res.data
         }
-    },
-    getAccessToken: async (code) => {
-        const res = await instance.get(`/getAccessToken?code=${code}`)
-        console.log(res);
-        return res.data
     }
 }
