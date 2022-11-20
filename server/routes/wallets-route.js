@@ -1,6 +1,5 @@
 const express = require('express');
-const isAuth = require('../middlewares/authenticated');
-const  passport = require('passport');
+const isAuth = require('../middlewares/auth');
 const walletService = require('../service/walletService')
 
 const router = express.Router();

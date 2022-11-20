@@ -1,10 +1,9 @@
 const express = require('express');
-const isAuth = require('../middlewares/authenticated');
-const router = express.Router();
+const isAuth = require('../middlewares/auth');
 const transactionService = require('../service/transactionService');
 const userService = require('../service/userService');
 const walletService = require('../service/walletService');
-const passport = require('passport');
+const router = express.Router();
 router.get('/transactions/:userid', isAuth, async (req, res) => {
     try {
         const transactions = await transactionService.getAll({ ...req.params, ...req.query })

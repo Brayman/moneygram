@@ -1,8 +1,7 @@
 const express = require('express')
-
 const Users = require('../models/users');
 const userService = require('../service/userService');
-const isAuth = require('../middlewares/authenticated');
+const isAuth = require('../middlewares/auth');
 const passport = require('passport');
 const GitHubStrategy = require('passport-github2').Strategy;
 const router = express.Router();
@@ -51,7 +50,6 @@ router.get('/refresh', async (req, res) => {
 
 router.get('/autho', async (req, res) => {
     if (req.user) {
-        console.log('all right');
         const user = await userService.getUserByGithubId(req.user.id)
         res.status(200).json(user);
     }
@@ -59,7 +57,6 @@ router.get('/autho', async (req, res) => {
 
 router.get('/user/:login', isAuth, async (req, res) => {
     const login = req.params.login
-
     try {
         const user = await Users.find({ login })
         if (user) {
@@ -78,8 +75,8 @@ router.post('/signin', passport.authenticate('github'), async (req, res) => {
     res.json(user)
 })
 
-const clientID = "d2799f3ce3d6e393b61b";
-const clientSecret = "866c03fada64c539c09f2541d0e5950d260b7060";
+const clientID = process.env.ClientID;
+const clientSecret = process.env.ClientSecret;
 
 passport.use(new GitHubStrategy({
     clientID: clientID,
@@ -102,7 +99,6 @@ passport.use(new GitHubStrategy({
     }
 ));
 passport.serializeUser((user, done) => {
-    console.log('ok');
     done(null, user)
 })
 
