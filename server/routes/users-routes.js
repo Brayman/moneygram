@@ -1,5 +1,4 @@
 const express = require('express')
-const Users = require('../models/users');
 const userService = require('../service/userService');
 const isAuth = require('../middlewares/auth');
 const passport = require('passport');
@@ -15,13 +14,8 @@ router.post('/signup', async (req, res) => {
     try {
         const { login, password, email, githubid } = req.body;
         if (!!githubid) {
-            console.log({...req.body});
             const user = await userService.githubRegistration(req.body)
-            return res.json({
-                accessToken: '',
-                refreshToken: '',
-                user
-            })
+            return res.json(user)
         }
         const user = await userService.registration(login, password, email);
         res.cookie('refTok', user.refreshToken, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true })
@@ -55,11 +49,11 @@ router.get('/autho', async (req, res) => {
     }
 })
 
-router.get('/user/:login', isAuth, async (req, res) => {
-    const login = req.params.login
+router.get('/user/:id', isAuth, async (req, res) => {
+    const id = req.params.id
     try {
-        const user = await Users.find({ login })
-        if (user) {
+        const user = await userService.getUser(id)
+        if (!user) {
             throw new Error('not find')
         }
         res.json(user)
@@ -69,9 +63,7 @@ router.get('/user/:login', isAuth, async (req, res) => {
     }
 })
 router.post('/signin', passport.authenticate('github'), async (req, res) => {
-    console.log(res.user);
     const user = await userService.login(req.body)
-    res.cookie('refTok', user.refreshToken, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true })
     res.json(user)
 })
 

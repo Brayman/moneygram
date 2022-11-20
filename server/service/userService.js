@@ -45,14 +45,13 @@ class UserService {
         return user
     }
 
-    async getUser() {
-        const users = await UserModel.find();
-        const bit = users.map((item) => ({login: item.login, first_name: item.first_name, second_name: item.second_name}));
-        return bit;
+    async getUser(_id) {
+        const user = await UserModel.findOne({_id});
+        return new userObject(user);
     }
     async getUserByGithubId(githubid) {
         const user = await UserModel.findOne({githubid})
-        return user
+        return new userObject(user)
     }
     async expense(userid, duration) {
         const transactions = await transactionService.getAll({userid, type: 'expense', duration})
