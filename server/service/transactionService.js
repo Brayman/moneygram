@@ -74,24 +74,20 @@ class transactionService {
         }
         function createLine(items, balance, setBalance) {
             let Line = []
-            for (let i = 1; i < 32; i++) {
-                const daySpend = items.filter((item) => {
-                    if (new Date(item.date).getDate() === i) {
-                        return item
-                    }
-                })
+            for (let i = 31; i > 0; i--) {
+                const daySpend = items.filter((item) => new Date(item.date).getDate() === i)
                 if (daySpend.length === 0) {
                     Line.push({ amount: balance.balance, date: i })
                 } else {
                     daySpend.forEach(({ cost, type }) => {
-                        cost = type === 'expense' ? -cost : cost
+                        cost = type === 'expense' ? cost : -cost
                         setBalance(toDecimal(balance.balance + cost))
                     })
                     Line.push({ amount: balance.balance, date: i })
                 }
 
             }
-            return Line
+            return Line.reverse()
         }
         const currentBalance = new balance(await walletServise.getBalance(userid))
         const balanceLine = createLine(transactions, currentBalance, currentBalance.setBalance)

@@ -58,7 +58,7 @@ class walletService {
     async getBalance(userid) {
         const wallets = await this.getMany(userid)
         const balance = wallets.reduce((balance, wallet) => {
-            const walletBalance = fakeExchangeService.changeTo(wallet.currency, 'USD', wallet.balance)
+            const walletBalance = fakeExchangeService.changeTo(wallet.currency, 'BYN', wallet.balance)
             return toDecimal(balance += walletBalance)
         }, 0)
         return balance
