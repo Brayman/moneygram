@@ -12,12 +12,13 @@ import { FilterPanel } from "../FilterPanel/FilterPanel";
 import classNames from "classnames";
 import Loader from "../common/Loader/Loader";
 
-export const LineChart = ({ transactions, line, balance, className }) => {
+export const LineChart = ({ transactions, lines, balance, className }) => {
 
-    
-    if (line === undefined) {
-        return <Loader/>
+
+    if (lines === undefined) {
+        return <Loader />
     }
+    const [line, prevLine] = lines
     return (
         <div className={classNames("chart__line", className)}>
             <div className="chart__balance">
@@ -36,7 +37,11 @@ export const LineChart = ({ transactions, line, balance, className }) => {
                     }
                 }
                 series={[{
-                    name: 'balance',
+                    name: 'previous month',
+                    data: prevLine.map(({ amount }) => amount)
+                },
+                {
+                    name: 'this month',
                     data: line.map(({ amount }) => amount)
                 }]}
                 type="line"
@@ -50,7 +55,7 @@ export const LineChart = ({ transactions, line, balance, className }) => {
 
 export const PieChart = ({ categories }) => {
     if (categories === undefined) {
-        return <Loader/>
+        return <Loader />
     }
     return (
         <div className="chart__pie">

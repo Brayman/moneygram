@@ -1,4 +1,4 @@
-import "./Icon.css"
+// import "./Icon.css"
 import React from 'react'
 import styled from "styled-components"
 
@@ -12,10 +12,11 @@ import styled from "styled-components"
     color: ${({color}) => color || '#7F3DFF'};
 `
 
- export const Icon = (props) => {
+export const Icon = ({Icon, ...props}) => {
     return (
       <IconStyle {...props}>
-          <props.icon/>
+          <Icon/>
       </IconStyle>
     )
   }
+

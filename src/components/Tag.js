@@ -22,84 +22,92 @@ import CreateClasssName from "../utils/bemClassCreate";
 
 export class Icons {
     taxi = {
-        icon: RiTaxiLine,
+        Icon: RiTaxiLine,
         name: 'taxi',
         color: '#FCAC12',
         backgroundColor: '#FCCC6F'
     }
     restaurant = {
-        icon: RiRestaurant2Fill,
+        Icon: RiRestaurant2Fill,
         name: 'restaurant',
         color: '#FCAC12',
         backgroundColor: '#FCCC6F'
     }
     deliver = {
-        icon: RiTakeawayLine,
+        Icon: RiTakeawayLine,
         name: 'deliver',
         color: '#FCAC12',
         backgroundColor: '#FCCC6F'
     }
     subscribe = {
-        icon: RiMoneyDollarCircleLine,
+        Icon: RiMoneyDollarCircleLine,
         name: 'subscribe',
         color: '#FCAC12',
         backgroundColor: '#FCCC6F'
     }
     shop = {
-        icon: BiCartAlt,
+        Icon: BiCartAlt,
         name: 'shop',
         color: '#0077FF',
         backgroundColor: '#8AC0FF'
     }
     health = {
-        icon: RiStethoscopeLine,
+        Icon: RiStethoscopeLine,
         name: 'health',
         color: '#B18AFF',
         backgroundColor: '#7F3DFF'
     }
     beauty = {
-        icon: RiScissorsFill,
+        Icon: RiScissorsFill,
         name: 'beauty',
         color: '#B18AFF',
         backgroundColor: '#7F3DFF'
     }
     ethernet = {
-        icon: RiWifiLine,
+        Icon: RiWifiLine,
         name: 'ethernet',
         color: '#57A5FF',
         backgroundColor: '#0077FF'
     }
     travel = {
-        icon: RiPlaneFill,
+        Icon: RiPlaneFill,
         name: 'travel',
         color: '#FCAC12',
         backgroundColor: '#FCCC6F'
     }
     gift = {
-        icon: RiGiftLine,
+        Icon: RiGiftLine,
         name: 'gift',
         color: '#00A86B',
         backgroundColor: '#65D1AA'
     }
     bus = {
-        icon: RiBusFill,
+        Icon: RiBusFill,
         name: 'bus',
         color: '#0077FF',
         backgroundColor: '#57A5FF'
     }
     send = {
-        icon: RiHandCoinLine,
+        Icon: RiHandCoinLine,
         name: 'send',
         color: '#00A86B',
         backgroundColor: '#65D1AA'
     }
     empty = {
-        icon: MdOutlineHighlightOff,
+        Icon: MdOutlineHighlightOff,
         name: 'empty',
         color: '#FD3C4A',
         backgraundColor: '#FD6F7A'
     }
+    tag = {
+        Icon: MdOutlineHighlightOff,
+        name: 'empty',
+        color: '#FD3C4A',
+        backgraundColor: '#FD6F7A'
+    }
+    
     constructor(tag) {
+        console.warn(`tag: |${tag}|`)
         if (!!tag) {
             this.tag = this[tag]
             return this.tag
@@ -140,6 +148,7 @@ const Dot = (props) => {
 
 export const Tag = ({tag}) => {
     const icon = new Icons(tag)
+    console.log('props :', icon, `|${tag}|`);
   return (
     <Icon {...icon} />
   )
