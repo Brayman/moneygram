@@ -3,7 +3,6 @@ const bcrypt = require('bcrypt');
 const UserModel = require('../models/users');
 const userObject = require('../dataObjects');
 
-const TokenService = require('./tokenService');
 const transactionService = require('./transactionService');
 const fakeExchangeService = require('./fakeExchangeService');
 const toDecimal = require('../utils/toDecimal');
@@ -14,56 +13,45 @@ class UserService {
         if (candidate) {
             throw new Error(`Логин: ${login} уже занят`)
         }
+
         const hashPass = await bcrypt.hash(password, 1)
         const User = await UserModel.create({email, login, password: hashPass})
         const user = new userObject(User)
-        const tokens = TokenService.geterateToken({user: user.login, id: user.id})
-        await TokenService.saveToken(user.login, tokens.refreshToken);
         
-        return {...tokens, user}
+        return user
+    }
+    async githubRegistration(form) {
+        const candidate = await UserModel.findOne({login: form.login});
+        if (candidate) {
+            throw new Error(`Логин: ${form.login} уже занят`)
+        }
+
+        const User = await UserModel.create(form)
+        const user = new userObject(User)
+        return user
     }
     async login({login, password}) {
         const User = await UserModel.findOne({login});
         if (!User) {
-            console.log(`ошибка аунтификации. Нет пользователя ${login}`);
+            console.error(`ошибка аунтификации. Нет пользователя ${login}`);
             return {error: `ошибка аунтификации. Неверный логин или пароль`}
         }
         const isPassEquals = await bcrypt.compare(password, User.password);
         if (!isPassEquals) {
-            console.log(`ошибка аунтификации. ${login} ввёл неверный пароль`);
+            console.error(`ошибка аунтификации. ${login} ввёл неверный пароль`);
             return {error: `ошибка аунтификации. Неверный логин или пароль`}
         }
         const user = new userObject(User)
-        const tokens = TokenService.geterateToken({login: user.login, id: user.id})
-        await TokenService.saveToken(user.login, tokens.refreshToken);
+        return user
+    }
 
-        return {...tokens, user}
+    async getUser(_id) {
+        const user = await UserModel.findOne({_id});
+        return new userObject(user);
     }
-    async logout(refreshToken) {
-        await TokenService.removeToken(refreshToken);
-        return;
-
-    }
-    async refresh(refreshToken) {
-        if (!refreshToken) {
-            console.error('токена нет');
-            throw new Error('токена нет')
-        }
-        const userData = await TokenService.valRefreshTok(refreshToken);
-        const dbToken = await TokenService.findToken(refreshToken);
-        if (!userData || !dbToken) {
-            throw new Error( 'Не авторизован');
-        }
-        const User = await UserModel.findById(dbToken._id)
-        const user = new userObject(User)
-        const tokens = TokenService.geterateToken({login: user.login, id: user.id})
-        await TokenService.saveToken(user.login, tokens.refreshToken);
-        return {...tokens, user}
-    }
-    async getUser() {
-        const users = await UserModel.find();
-        const bit = users.map((item) => ({login: item.login, first_name: item.first_name, second_name: item.second_name}));
-        return bit;
+    async getUserByGithubId(githubid) {
+        const user = await UserModel.findOne({githubid})
+        return new userObject(user)
     }
     async expense(userid, duration) {
         const transactions = await transactionService.getAll({userid, type: 'expense', duration})

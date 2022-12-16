@@ -16,7 +16,7 @@ const Edit = () => {
         card: transaction.cardid,
         cards: useSelector(selectors.cards),
         modal: useSelector(selectors.modal),
-        Action: form => dispatch(transactionsThunk.addTransaction(form))
+        Action: form => dispatch(transactionsThunk.editTrans(form))
     }
     
     return <TransactionForm {...props }/>

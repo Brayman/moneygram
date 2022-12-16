@@ -97,7 +97,7 @@ const Statistic = () => {
             </FilterPanel>
             {chart === 'pie' ?
                 <PieChart categories={catigories} /> :
-                <LineChart line={statistic} balance={account.balance} />
+                <LineChart lines={statistic} balance={account.balance} />
             }
 
             <GroupedButton

@@ -13,7 +13,6 @@ const userSchema = Schema({
     },
     password: {
         type: String,
-        required: true
     },
     first_name: String,
     second_name: String,
@@ -23,6 +22,7 @@ const userSchema = Schema({
     },
     avatar: String,
     language: String,
+    githubid: Number,
     refreshToken: String
 })
 

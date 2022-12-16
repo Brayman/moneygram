@@ -33,7 +33,7 @@ function CardList({ balance }) {
                         className="wallet"
                         to={`/wallet/${card._id}`}
                         key={card._id}>
-                        <Icon icon={BiWallet} className="wallet__icon" />
+                        <Icon Icon={BiWallet} className="wallet__icon" />
                         <div className="wallet__name">
                             {card.name}
                         </div>

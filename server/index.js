@@ -1,6 +1,8 @@
 const express = require('express');
 const cors  = require('cors');
 const cookieParser = require("cookie-parser");
+const cookieSession = require("cookie-session");
+const  passport = require('passport');
 require('dotenv').config()
 const mongoose = require('mongoose');
 
@@ -19,9 +21,16 @@ mongoose.connect(uri)
 
 app.use(express.json())
 app.use(cookieParser());
+app.use(cookieSession({
+   name: 'session',
+   keys: ['megauser'],
+   maxAge: 24 * 60 * 60 * 100
+}))
+app.use(passport.initialize())
+app.use(passport.session())
 app.use(cors({
    credentials: true,
-   origin: 'http://localhost:3000'
+   origin: ['http://localhost:3000','https://github.com']
 }));
 
 

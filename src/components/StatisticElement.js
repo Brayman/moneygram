@@ -13,13 +13,13 @@ const StatisticElement = ({type, amount}) => {
         <Icon
           color='#00A86B'
           backgroundColor='#FFF'
-          icon={BiArrowToRight}
+          Icon={BiArrowToRight}
           className={elemCN('box', 'icon', {[type]: true})}
         /> : 
         <Icon
           color='#FD3C4A'
           backgroundColor='#FFF'
-          icon={BiArrowFromLeft}
+          Icon={BiArrowFromLeft}
           className={elemCN('box', 'icon', {[type]: true})}
         /> }
         <div className={elemCN('box', 'desc')}>

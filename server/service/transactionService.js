@@ -13,7 +13,7 @@ class transactionService {
         const transaction = await Transaction.findById(id)
         return transaction
     }
-    async getAll({userid, cardid, sort, order, type, duration}) {
+    async getAll({ userid, cardid, sort, order, type, duration, prev }) {
         const parametrs = () => {
             let parametrs = {
                 userid
@@ -26,17 +26,21 @@ class transactionService {
             }
             if (!!duration) {
                 const date = new Date()
-                const startDate = new Date(date.getFullYear() - (duration === 'year' ? 1 : 0), date.getMonth() - (duration === 'month' ? 1 : 0), 1).toDateString()
+                const area = !!prev ? 1 : 0
+                const startDate = new Date(date.getFullYear() - (duration === 'year' ? area : 0), date.getMonth() - (duration === 'month' ? area : 0), 1).toDateString()
                 console.log(startDate);
-                parametrs.date = {$gt: startDate}
+                parametrs.date = { $gt: startDate }
+                if (prev) {
+                    parametrs.date = { $gt: startDate, $lt: new Date().setMonth(date.getMonth(), 0) }
+                }
             }
             return parametrs
         }
-        const transactions = await Transaction.find(parametrs()).sort({[sort]: order})
+        const transactions = await Transaction.find(parametrs()).sort({ [sort]: order })
         return transactions;
     }
     async update(id, updateData) {
-        const updatedTransaction = await Transaction.findByIdAndUpdate(id, updateData, {new: true})
+        const updatedTransaction = await Transaction.findByIdAndUpdate(id, updateData, { new: true })
         return updatedTransaction;
     }
     async delete(id) {
@@ -45,47 +49,62 @@ class transactionService {
             return res
         } catch (error) {
             console.log(error);
-            return {type: 'error'}
+            return { type: 'error' }
         }
     }
-    async getBalanceLine({userid, cardid , duration}) {
-        const transactions =  await this.getAll({userid, cardid, sort: 'date', order: 'desc', duration})
-        let currentBalance = await walletServise.getBalance(userid)
-        let balanceLine=[{
-            amount: currentBalance,
-            date: new Date().toDateString()
-        }];
-        transactions.forEach(({date, cost, type}) => {
-            date = new Date(date).toDateString()
-            cost = type === 'expense' ? cost : -cost
-            const haveItem = balanceLine.findIndex((transaction) => {
-                return transaction.date === date
-            })
-            currentBalance = toDecimal(currentBalance + cost)
-            if (haveItem === -1) {
-                
-                balanceLine.push({
-                    amount: currentBalance,
-                    date: new Date(date).toDateString()
-                })
-            } else {
-                balanceLine[haveItem] = {
-                    ...balanceLine[haveItem],
-                    amount: currentBalance
-                }
+    async getBalanceLine({ userid, cardid, duration }) {
+        const transactions = await this.getAll({ userid, cardid, sort: 'date', order: 'desc', duration: 'month' })
+        const prevTransactions = await this.getAll({ userid, cardid, sort: 'date', order: 'desc', duration: 'month', prev: true })
+        console.log(transactions.map(item => item.cost), prevTransactions.map(item =>item.cost));
+        class balance {
+            _balance = 0
+            constructor(balance) {
+                this._balance = balance
             }
-        })
 
-        return balanceLine.reverse()
+            get balance() {
+                return this._balance
+            }
+            set balance(balance) {
+                this._balance = balance
+            }
+            setBalance = (balance) => {
+                this.balance = balance
+            }
+        }
+        function createLine(items, balance, setBalance) {
+            let Line = []
+            for (let i = 31; i > 0; i--) {
+                const daySpend = items.filter((item) => new Date(item.date).getDate() === i)
+                if (daySpend.length === 0) {
+                    Line.push({ amount: balance.balance, date: i })
+                } else {
+                    daySpend.forEach(({ cost, type }) => {
+                        cost = type === 'expense' ? cost : -cost
+                        setBalance(toDecimal(balance.balance + cost))
+                    })
+                    Line.push({ amount: balance.balance, date: i })
+                }
+
+            }
+            return Line.reverse()
+        }
+        const currentBalance = new balance(await walletServise.getBalance(userid))
+        const balanceLine = createLine(transactions, currentBalance, currentBalance.setBalance)
+        const prevBalanceLine = createLine(prevTransactions, currentBalance, currentBalance.setBalance)
+        return [balanceLine, prevBalanceLine]
     }
-    async categoryStatistic (params) {
-        const transactions = await this.getAll({...params})
+
+
+
+    async categoryStatistic(params) {
+        const transactions = await this.getAll({ ...params })
         let statistic = []
-        transactions.forEach(({cost, tag, currency}) => {
-            const index = statistic.findIndex(({category}) => {
+        transactions.forEach(({ cost, tag, currency }) => {
+            const index = statistic.findIndex(({ category }) => {
                 return category === tag
             })
-            const convertedAmount = fakeExchangeService.changeTo(currency, 'USD', cost) 
+            const convertedAmount = fakeExchangeService.changeTo(currency, 'USD', cost)
             if (index !== -1) {
                 statistic[index] = {
                     ...statistic[index],
@@ -96,11 +115,11 @@ class transactionService {
             statistic.push({
                 category: tag,
                 amount: convertedAmount
-            }) 
+            })
         })
         return statistic
     }
-    
+
 }
 
 module.exports = new transactionService()
