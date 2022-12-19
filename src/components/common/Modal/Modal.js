@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react'
 import { MdCancel, MdCheckCircle } from 'react-icons/md'
 import { useDispatch } from 'react-redux';
-import { appActions } from '../../../redux/app';
+import { hideModal } from '../../../redux/app';
 import './Modal.css'
 
 const Modal = ({ text, show, type = 'message' }) => {
     const dispatch = useDispatch();
     useEffect(() => {
         setTimeout(() => {
-            dispatch(appActions.hideModal())
+            dispatch(hideModal())
         }, 6000);
     }, [show, dispatch])
 

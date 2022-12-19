@@ -1,13 +1,7 @@
 import { API } from "../api/api";
-import { accountThunks } from "./account";
-import {
-    INITIALIZE_SUCCESS,
-    SET_USER,
-    START_LOGIN,
-    FAIL_LOGIN,
-    SHOW_MODAL,
-    HIDE_MODAL
-} from "./action-types";
+import { createSlice } from "@reduxjs/toolkit";
+import { accountThunks, setUser } from "./account";
+import { walletThunks } from "./card";
 
 const initialState = {
     initialized: false,
@@ -24,96 +18,51 @@ const initialState = {
     }
 
 }
-const AppReducer = (state = initialState, { type, payload }) => {
-    switch (type) {
-        case INITIALIZE_SUCCESS:
-            return ({
-                ...state,
-                initialized: true,
-                login: {
-                    ...initialState.login
-                }
-            })
-        case SHOW_MODAL:
-            return ({
-                ...state,
-                modal: {
-                    showModal: true,
-                    message: payload.message,
-                    type: payload.type
-                }
-            })
-        case HIDE_MODAL:
-            return ({
-                ...state,
-                modal: {
-                    showModal: false
-                }
-            })
-        case SET_USER:
-            return ({
-                ...state,
-                isAuth: true,
-                login: {
-                    ...state.login,
-                    loading: false
-                }
-            })
-        case START_LOGIN:
-            return ({
-                ...state,
-                login: {
-                    ...state.login,
-                    loading: true
-                }
-            })
-        case FAIL_LOGIN:
-            return ({
-                ...state,
-                login: {
-                    ...state.login,
-                    error: true,
-                    loading: false,
-                    message: payload
-                }
-            })
-        default:
-            return state;
-    }
-}
-export const appActions = {
-    initialize: () => {
-        return ({
-            type: INITIALIZE_SUCCESS
-        })
-    },
-    showModal: message => {
-        return ({
-            type: SHOW_MODAL,
-            payload: message
 
-        })
-    },
-    hideModal: () => {
-        return ({
-            type: HIDE_MODAL
-        })
+const appSlice = createSlice({
+    name: 'app',
+    initialState,
+    reducers: {
+        AuthSuccess: (state) => {
+            state.isAuth = true
+        },
+        AuthFailure: (state) => {
+            state.isAuth = false
+            state.initialized = false
+        },
+        initialize: (state) => {
+            state.initialized = true
+        },
+        showModal: (state, { payload }) => {
+            state.modal = {...payload, showModal: true}
+        },
+        hideModal: state => {
+            state.modal = initialState.modal
+        }
     }
+})
 
-}
-export const initializeApp = (login) => dispatch => {
-    const promise = dispatch(accountThunks.AuthThunk(login))
-    promise.then(() => {
-        dispatch(appActions.initialize())
-    })
+export const { AuthSuccess, AuthFailure, initialize, showModal, hideModal } = appSlice.actions
+
+export const initializeApp = (user) => dispatch => {
+    console.log(user);
+    Promise.all([
+        dispatch(setUser(user)),
+        dispatch(walletThunks.getWallets(user.login)),
+        dispatch(accountThunks.getBalanse(user.login)),
+        dispatch(accountThunks.getExpense(user.login)),
+        dispatch(accountThunks.getIncome(user.login)),
+        dispatch(AuthSuccess())
+    ])
+        .then(() => dispatch(initialize()))
 }
 export const checkAuth = () => async dispatch => {
-    const res = await API.checkAuth()
-    console.log(res);
-    dispatch(accountThunks.Auth(res))
+    try {
+        const res = await API.checkAuth()
+        dispatch(initializeApp(res))
+    } catch (error) {
+        dispatch(AuthFailure())
+    }
 }
 
-
-
-
-export default AppReducer;
+export default appSlice.reducer
