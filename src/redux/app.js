@@ -1,7 +1,7 @@
 import { API } from "../api/api";
 import { createSlice } from "@reduxjs/toolkit";
 import { accountThunks, setUser } from "./account";
-import { walletThunks } from "./card";
+import { walletThunks } from "./wallets";
 
 const initialState = {
     initialized: false,
