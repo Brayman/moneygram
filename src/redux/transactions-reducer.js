@@ -1,180 +1,101 @@
+import { createSlice } from "@reduxjs/toolkit";
 import { API } from "../api/api"
-import {
-    SET_TRANSACTIONS,
-    GET_TRANSACTION,
-    ADD_TRANSACTION,
-    DELETE_TRANSACTION,
-    EDIT_TRANASACTION,
-    SET_TOTAL_COUNT,
-    SET_CURRENT_PAGE,
-    TRANSACTIONS_LOADING,
-    TRANSACTIONS_LOADED,
-    MORE_TRANSACTION_LOADING,
-    GET_TRANSACTIONS
-} from "./action-types"
-import { appActions } from "./app";
+
+import { showModal } from "./app";
 
 const initialState = {
     isLoading: true,
     transactions: [],
     pageSize: 50,
     curentPage: 1,
-    totalTransCount: 0,
+    transactionsCount: 0,
     moreTransLoad: false
 }
 
-const transactions = (state = initialState, { type, payload }) => {
-    switch (type) {
-        case SET_TRANSACTIONS:
-            return {
-                ...state,
-                transactions: payload
-            }
-        case ADD_TRANSACTION:
-            return {
-                ...state,
-                transactions: [
-                    ...state.transactions,
-                    payload
-                ]
-            }
-        case DELETE_TRANSACTION:
-            return {
-                ...state,
-                transactions: state.transactions.filter(item => item.id !== payload)
-            }
-        case GET_TRANSACTION:
-            return {
-                ...state,
-                transaction: payload,
-            }
-        case SET_TOTAL_COUNT:
-            return {
-                ...state,
-                totalTransCount: payload
-            }
-        case SET_CURRENT_PAGE:
-            return {
-                ...state,
-                curentPage: payload
-            }
-        case TRANSACTIONS_LOADING:
-            return {
-                ...state,
-                isLoading: true
-            }
-        case TRANSACTIONS_LOADED:
-            return {
-                ...state,
-                isLoading: false
-            }
-        case MORE_TRANSACTION_LOADING:
-            return {
-                ...state,
-                moreTransLoad: payload
-            }
-        default:
-            return state
-    }
-}
+const transactionSlice = createSlice({
+    name: 'transactions',
+    initialState: initialState,
+    reducers: {
+        addTransaction: (state, { payload }) => {
+            state.transactions.push(payload)
+        },
+        editTransaction: (state, { payload }) => {
+            const index = state.transactions.findIndex(({_id}) => _id === payload._id)
+            state.transactions[index] = payload
+        },
+        deleteTransaction: (state, { payload }) => {
+            state.transactions = state.transactions.filter(item => item.id !== payload)
+        },
+        getTransaction: (state, { payload }) => {
+            state.transaction = payload
+        },
+        startLoadTarns: state => {
+            state.isLoading = true
+        },
+        setCurrentPage: (state, { payload }) => {
+            state.curentPage = payload
+        },
+        setTotalCount: (state, { payload }) => {
+            state.transactionsCount = payload
+        },
+        endLoadTrans: state => {
+            state.isLoading = false
+        },
+        transLoadingProgres: (state, { payload }) => {
+            state.isLoading = payload
+        },
+        setTransactions: (state, { payload }) => {
+            state.transactions = payload
+        },
+        getTransactions: (state, { payload }) => {
+            state.transactions = state.transactions.concat(payload)
+        }
 
-export const actions = {
-    addTransaction: value => {
-        return {
-            type: ADD_TRANSACTION,
-            payload: value
-        }
-    },
-    editTransaction: transaction => {
-        return {
-            type: EDIT_TRANASACTION
-        }
-    },
-    deleteTransaction: id => {
-        return {
-            type: DELETE_TRANSACTION,
-            payload: id
-        }
-    },
-    getTransaction: transaction => {
-        return {
-            type: GET_TRANSACTION,
-            payload: transaction
-        }
-    },
-    startLoadTarns: data => {
-        return {
-            type: TRANSACTIONS_LOADING,
-            payload: data
-        }
-    },
-    setCurrentPage: page => {
-        return {
-            type: SET_CURRENT_PAGE,
-            payload: page
-        }
-    },
-    setTotalCount: count => {
-        return {
-            type: SET_TOTAL_COUNT,
-            payload: count
-        }
-    },
-    endLoadTrans: data => {
-        return {
-            type: TRANSACTIONS_LOADED,
-            payload: data
-        }
-    },
-    transLoadingProgres: data => {
-        return {
-            type: MORE_TRANSACTION_LOADING,
-            payload: data
-        }
-    },
-    setTransactions: transactions => {
-        return {
-            type: SET_TRANSACTIONS,
-            payload: transactions
-        }
-    },
-    getTransactions: transactions => {
-        return {
-            type: GET_TRANSACTIONS,
-            payload: transactions
-        }
     }
+})
 
-}
+export const {
+    getTransaction,
+    startLoadTarns,
+    setCurrentPage,
+    setTransactions,
+    setTotalCount,
+    endLoadTrans,
+    transLoadingProgres,
+    getTransactions,
+    addTransaction,
+    deleteTransaction,
+} = transactionSlice.actions
+
 
 export const transactionsThunk = {
     getTransaction: (transaction) => dispatch => {
-        dispatch(actions.getTransaction(transaction))
+        dispatch(getTransaction(transaction))
     },
     getTransactions: ({ login, cardid, pageSize, sort, filter, page = undefined }) => dispatch => {
         if (page === undefined) {
-            dispatch(actions.startLoadTarns(true))
+            dispatch(startLoadTarns(true))
             API.getTransactions({ login, cardid, pageSize, filter, sort })
                 .then(data => {
-                    dispatch(actions.setCurrentPage(1))
-                    dispatch(actions.setTransactions(data.data))
-                    dispatch(actions.setTotalCount(parseInt(data.headers["x-total-count"])))
-                    dispatch(actions.endLoadTrans(false))
+                    dispatch(setCurrentPage(1))
+                    dispatch(setTransactions(data.data))
+                    dispatch(setTotalCount(parseInt(data.headers["x-total-count"])))
+                    dispatch(endLoadTrans(false))
                 })
         } else {
-            dispatch(actions.transLoadingProgres(true))
-            dispatch(actions.setCurrentPage(page))
+            dispatch(transLoadingProgres(true))
+            dispatch(setCurrentPage(page))
             API.getNextTransactions({ login, cardid, pageSize, filter, sort, page })
                 .then(data => {
-                    dispatch(actions.getTransactions(data.data))
-                    dispatch(actions.transLoadingProgres(false))
+                    dispatch(getTransactions(data.data))
+                    dispatch(transLoadingProgres(false))
                 })
         }
     },
 
     addTransaction: form => async dispatch => {
         const res = await API.addTransaction(form)
-        dispatch(actions.addTransaction(res))
+        dispatch(addTransaction(res))
         if (res.status >= 400) {
             dispatch({
                 type: "REQUEST_ERROR"
@@ -182,20 +103,20 @@ export const transactionsThunk = {
         }
     },
     deleteTransaction: (id) => async dispatch => {
-        dispatch(actions.deleteTransaction(id));
+        dispatch(deleteTransaction(id));
         API.deleteTransaction(id)
     },
     editTrans: form => async dispatch => {
         const res = await API.editTransaction(form)
-        dispatch(appActions.showModal({
+        dispatch(showModal({
             type: res.type,
             message: res.message
         }))
         if (res.type === 'message') {
-            dispatch(actions.getTransaction(res.data))
+            dispatch(getTransaction(res.data))
         }
     },
 
 }
 
-export default transactions
+export default transactionSlice.reducer
