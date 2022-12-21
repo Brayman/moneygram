@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import * as selectors from '../redux/selectors'
 import WalletForm from '../components/WalletForm/WalletForm'
-import { walletThunks } from '../redux/card'
+import { walletThunks } from '../redux/wallets'
 import { useParams } from 'react-router-dom'
 
 const WalletEditor = () => {

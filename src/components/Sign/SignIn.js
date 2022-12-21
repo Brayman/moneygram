@@ -1,4 +1,4 @@
-import { Navigate, NavLink, useLocation, useSearchParams } from "react-router-dom";
+import { Navigate, NavLink, useLocation } from "react-router-dom";
 import { Formik, Form } from "formik";
 import { Navigation } from "../common/Navigation/Navigation";
 import "./Sign.css";
@@ -8,7 +8,6 @@ import { useSelector } from "react-redux";
 import { app } from "../../redux/selectors";
 import React, { useEffect } from "react";
 import { Button } from "../common/Button/Buttons";
-import { API } from "../../api/api";
 
 export const MyForm = ({ isValid, setErrors }) => {
     const login = useSelector(app).login
@@ -17,10 +16,8 @@ export const MyForm = ({ isValid, setErrors }) => {
             setErrors({ login: login.message, password: login.message })
         }
     }, [login, setErrors])
-const [searchParams] = useSearchParams()
     
     
-    const clientID = "d2799f3ce3d6e393b61b";
 
     const github = () => {
         window.open("http://localhost:5000/github", "_self");

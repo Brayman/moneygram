@@ -18,7 +18,7 @@ import WalletEditor from './containers/WalletEditor';
 import WalletCreate from './containers/WalletCreate';
 import { useEffect } from 'react';
 import { checkAuth } from './redux/app';
-import { accountThunks } from './redux/account';
+import { accountThunks } from './redux/account'
 import Loader from './components/common/Loader/Loader';
 import AddTransaction from './containers/AddTransaction';
 import EditTransaction from './containers/EditTransaction';
@@ -29,19 +29,22 @@ const App = () => {
   const login = useSelector(selectors.login)
   const initialized = useSelector(selectors.initialized)
   const isAuth = useSelector(selectors.isAuth)
-  const cards = useSelector(selectors.cards)
   const app = useSelector(selectors.app)
   const account = useSelector(selectors.account)
   const modal = useSelector(selectors.modal)
   const transactions = useSelector(selectors.transactions)
   const signUp = FormData => dispatch(accountThunks.SignUp(FormData))
   const Auth = FormData => dispatch(accountThunks.AuthThunk(FormData))
+
+
+
   useEffect(() => {
-      dispatch(checkAuth())
-  },[dispatch])
-  // if (!initialized) {
-  //   return <Loader/>
-  // }
+    dispatch(checkAuth())
+  }, [dispatch])
+  if (!initialized && isAuth) {
+    return <Loader/>
+  }
+  
   return (
     <BrowserRouter>
       <Routes>
@@ -60,20 +63,12 @@ const App = () => {
           path='/transactions'
           element={<Transactions login={login} isAuth={isAuth} modal={modal} />}
         />
-        <Route path='/profile' element={
-          <Profile
-            account={account}
-            isAuth={isAuth}
-            setUser={Auth}
-            cards={cards}
-          />
-        } />
-        <Route path='/analytics' element={<Statistic {...{ isAuth, transactions}} />} />
+        <Route path='/analytics' element={<Statistic {...{ isAuth, transactions }} />} />
         <Route path='/settings/*' element={<Settings />} />
         <Route path='/transaction/:id' element={<TransComponent {...{ modal, isAuth }} />} />
         <Route path='/transaction/edit/:id' element={<EditTransaction isAuth={isAuth} />} />
-        <Route path='/sign-up' element={<SignUp onSubmit={signUp}/>} />
-        <Route path='/add' element={<AddTransaction isAuth={isAuth}/>} />
+        <Route path='/sign-up' element={<SignUp onSubmit={signUp} />} />
+        <Route path='/add' element={<AddTransaction isAuth={isAuth} />} />
         <Route path='/edit' element={<EditTransaction isAuth={isAuth} />} />
         <Route path='/profile' element={<Profile isAuth={isAuth} />} />
         <Route path='/wallet/edit/:walletid' element={<WalletEditor />} />

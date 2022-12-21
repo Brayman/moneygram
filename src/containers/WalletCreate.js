@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import WalletForm from '../components/WalletForm/WalletForm'
-import { walletThunks } from '../redux/card'
+import { walletThunks } from '../redux/wallets'
 
 const WalletCreate = () => {
     const dispatch = useDispatch()

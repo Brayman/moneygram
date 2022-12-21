@@ -7,7 +7,7 @@ import {
 import { WithAuthRedirect } from "../../hoc/withAuthRedirect";
 import { useEffect } from "react";
 import { compose } from "redux";
-import { connect, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import * as selectors from "../../redux/selectors"
 import "./Profile.css"
 import { Icon } from "../Icon/Icon";
@@ -18,7 +18,7 @@ function ProfileMenu({items}) {
         <menu className="profile__menu">
             {items.map(item => (
                 <div key={item.title} className="menu__option">
-                    <Icon icon={item.icon} className="option__icon" />
+                    <Icon Icon={item.icon} className="option__icon" />
                     <span className="option__title">
                         {item.title}
                     </span>
@@ -28,10 +28,10 @@ function ProfileMenu({items}) {
     )
 }
 
-function Profile({ userid, loadUser }) {
+function Profile({ userid }) {
     useEffect(() => {
-        loadUser(userid)
-    }, [loadUser, userid])
+        accountThunks.loadUser(userid)
+    }, [userid])
     const user = useSelector(selectors.account)
     return (
         <section className="profile">
@@ -71,20 +71,7 @@ function Profile({ userid, loadUser }) {
         </section>
     )
 }
-const mapStateToProps = state => {
-    return {
-        userid: state.account.id,
-        cards: state.card.cards,
-        selectCard: state.card.selectCard
-    }
-}
 
-const mapDispatchToProps = dispatch => {
-    return {
-        loadUser: (id) => dispatch(accountThunks.loadUser(id)),
-    }
-}
 export default compose(
-    connect(mapStateToProps, mapDispatchToProps),
     WithAuthRedirect
 )(Profile)

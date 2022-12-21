@@ -11,7 +11,7 @@ import { Button } from "../common/Button/Buttons";
 import Account from "../Account/Account";
 import { useEffect } from "react";
 import { accountThunks } from "../../redux/account";
-import { walletThunks } from "../../redux/card";
+import { walletThunks } from "../../redux/wallets";
 
 function CardList({ balance }) {
     const cards = useSelector(selectors.cards);

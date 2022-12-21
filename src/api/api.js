@@ -3,10 +3,10 @@ import * as axios from "axios";
 const instance = axios.create({
     withCredentials: true,
     baseURL: 'http://localhost:5000/'
-    
+
 })
 const converteInstance = axios.create({
-    baseURL: "https://api.apilayer.com/", 
+    baseURL: "https://api.apilayer.com/",
     redirect: 'follow',
     headers: {
         apikey: "SScUf1BlWcB37t0hwMe13MduDxkDXTKs"
@@ -14,8 +14,8 @@ const converteInstance = axios.create({
 })
 
 export const API = {
-    getTransactions({login, cardid, pageSize, filter, sort}) {
-        return instance.get(`transactions/${login}?${cardid? '&cardid=' + cardid : ''}&sort=${sort.field}&order=${sort.order}${filter? '&type=' + filter : ''}`)
+    getTransactions({ login, cardid, pageSize, filter, sort }) {
+        return instance.get(`transactions/${login}?${cardid ? '&cardid=' + cardid : ''}&sort=${sort.field}&order=${sort.order}${filter ? '&type=' + filter : ''}`)
             .then(data => data)
     },
     getTransaction: async (id) => {
@@ -63,7 +63,7 @@ export const API = {
         const stat = await instance.get(`statistic/category/${login}${filter ? '?type=' + filter : ''}`)
         return stat.data
     },
-    getNextTransactions({login, cardid, pageSize, sort, filter, page}) {
+    getNextTransactions({ login, cardid, pageSize, sort, filter, page }) {
         return instance.get(`transactions/${login}?${filter ? `&type=${filter}` : ''}&_limit=${pageSize}&_page=${page}&_sort=${sort.field}&_order=${sort.order}`)
             .then(data => data)
     },
@@ -132,11 +132,17 @@ export const API = {
         await instance.post('/logout')
     },
     checkAuth: async () => {
-        const res = await axios.get( 'http://localhost:5000/autho', {
-            withCredentials: true,
-        })
-        if (res.status === 200) {
-            return res.data
+        try {
+            const res = await axios.get('http://localhost:5000/autho', {
+                withCredentials: true,
+            })
+            if (res.status === 200) {
+                return res.data
+            }
+        } catch (error) {
+            throw new Error(error)
         }
+
+
     }
 }
