@@ -1,6 +1,6 @@
 import { createSelector } from "reselect";
 
-export const login = state => state.account.login;
+export const login = state => state.account.user.login;
 export const transactions = state => state.transactions.transactions;
 export const pageSize = state => state.transactions.pageSize;
 export const curentPage = state => state.transactions.curentPage;
@@ -10,9 +10,9 @@ export const isLoading = state => state.transactions.isLoading;
 export const totalTransCount = state => state.transactions.totalTransCount;
 export const moreTransLoad = state => state.transactions.moreTransLoad;
 export const initialized = state => state.app.initialized;
-export const account = state => state.account;
+export const account = state => state.account.user;
 export const transaction = state => state.transaction;
-export const cards = state => state.card.cards;
+export const cards = state => state.wallet.wallets;
 export const modal = state => state.app.modal;
 
 // export const card = state => state.card.card;
@@ -24,5 +24,5 @@ export const cardidForSave = state => state.card.cardidForSave;
 export const card = createSelector(cards, cardForSave, (cards, cardid) => {
     return cards.find((card) => card.id === cardid)
 });
-export const wallet = state => state.card.wallet;
+export const wallet = state => state.wallet.wallet;
 export const cardID = createSelector(card, card => card.id);
