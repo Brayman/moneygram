@@ -7,6 +7,23 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+:root {
+  --dark-25: #7A7E80;
+  --dark-50: #464A4D;
+  --dark-75: #161719;
+  --dark-100: #0D0E0F;
+  --light-20: #E3E5E6;
+  --light-40: #F2F4F5;
+  --light-60: #F7F9FA;
+  --light-80: #FBFBFB;
+  --light-100: #FFFFFF;
+  --violet-20: #EEE5FF;
+  --violet-40: #D3BDFF;
+  --violet-60: #B18AFF;
+  --violet-80: #8F57FF;
+  --violet-100: #7F3DFF;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
