@@ -105,17 +105,16 @@ export class Icons {
         color: '#FD3C4A',
         backgraundColor: '#FD6F7A'
     }
-    
+
     constructor(tag) {
-        console.warn(`tag: |${tag}|`)
         if (!!tag) {
             this.tag = this[tag]
             return this.tag
         }
-        if (tag === '' ) {
+        if (tag === '') {
             return this.empty
         }
-        
+
     }
     allTags() {
         let propertys = []
@@ -136,7 +135,7 @@ export class Icons {
 
 
 const DotStyle = styled.div`
-    background: ${({color}) => color};
+    background: ${({ color }) => color};
     width: 1em;
     height: 1em;
     border-radius: 1em;
@@ -146,12 +145,11 @@ const Dot = (props) => {
 }
 
 
-export const Tag = ({tag}) => {
+export const Tag = ({ tag }) => {
     const icon = new Icons(tag)
-    console.log('props :', icon, `|${tag}|`);
-  return (
-    <Icon {...icon} />
-  )
+    return (
+        <Icon {...icon} />
+    )
 }
 
 export const NamedTag = ({ children }) => {

@@ -12,6 +12,7 @@ const Add = () => {
         date: new Date().getTime(),
         cards: useSelector(selectors.cards),
         modal: useSelector(selectors.modal),
+        card: useSelector(selectors.wallet),
         Action: form => dispatch(transactionsThunk.addTransaction(form))
     }
     return <TransactionForm {...props}/>

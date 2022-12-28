@@ -24,22 +24,25 @@ const DatePicker = (props) => {
         <Field type='date' {...field} {...props} onChange={e => setFieldValue('date', new Date(e.target.value).toISOString().substring(0, 10))} />
     )
 }
-const CardSelect = ({cards, ...props}) => {
+const CardSelect = ({ cards, ...props }) => {
     const [field] = useField(props);
     const [value, setValue] = useState(props.value)
     useEffect(() => {
         if (props.value) {
             setValue(cards.find((card) => card._id === props.value).name)
         }
-    },[props, cards])
+    }, [props, cards])
     const { setFieldValue } = useFormikContext()
     const setFieldsValue = (cardName) => {
         const cardValues = cards.find((card) => card.name === cardName)
+        console.log(
+            cardValues
+        );
         setFieldValue('cardid', cardValues._id)
-        setFieldValue('currency',cardValues.currency)
+        setFieldValue('currency', cardValues.currency)
         setValue(cardValues.name)
     }
-    return <DefaultSelect {...field} {...props} value={value} options={cards.map(({name}) => name)} setValue={value => setFieldsValue(value)}/>
+    return <DefaultSelect {...field} {...props} value={value} options={cards.map(({ name }) => name)} setValue={value => setFieldsValue(value)} />
 }
 
 function TransactionForm({ userid, cards, transaction, date, Action, card }) {
@@ -51,8 +54,10 @@ function TransactionForm({ userid, cards, transaction, date, Action, card }) {
             initialValues={{
                 ...transaction,
                 userid,
+                cardid: card._id,
+                currency: card.currency,
                 type: 'expense',
-                date: new Date(date).toISOString().substring(0,10)
+                date: new Date(date).toISOString().substring(0, 10)
             }}
             onSubmit={
                 (values, actions) => {
@@ -68,7 +73,7 @@ function TransactionForm({ userid, cards, transaction, date, Action, card }) {
             {({ values, setFieldValue }) => <Form className={addCN('add', null, { [values.type]: true })} >
 
                 <header className={addCN('add', null, { [values.type]: true })}>
-                    <Navigation className={addCN('header', 'nav', {[values.type]: true })} title={values.type} />
+                    <Navigation className={addCN('header', 'nav', { [values.type]: true })} title={values.type} />
                     <SpecialField
                         name='cost'
                         placeholder='How much?'
@@ -77,12 +82,12 @@ function TransactionForm({ userid, cards, transaction, date, Action, card }) {
                     />
                 </header>
                 <main className="tr-add__content">
-                    <Select name="tag" tag options={tags} className={addCN('add','field')} />
-                    <DatePicker className={addCN('add','field')} name='date' id='date' placeholder="date" />
-                    <Field className={addCN('add','field')} name='payee' placeholder='payee' />
-                    <CardSelect up cards={cards} value={values.cardid} className={addCN('add','field')} name='cardid' placeholder='select card' />
+                    <Select name="tag" tag options={tags} className={addCN('add', 'field')} />
+                    <DatePicker className={addCN('add', 'field')} name='date' id='date' placeholder="date" />
+                    <Field className={addCN('add', 'field')} name='payee' placeholder='payee' />
+                    <CardSelect up cards={cards} value={values.cardid} className={addCN('add', 'field')} name='cardid' placeholder='select card' />
                     <GroupedButton
-                        className={addCN('add','field')}
+                        className={addCN('add', 'field')}
                         type='button'
                         buttons={['Income', 'Expense', 'Transfer']}
                         onClick={(type) => setFieldValue('type', type)}
