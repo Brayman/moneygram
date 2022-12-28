@@ -14,6 +14,10 @@ const walletSchema = new Schema({
     "balance": {
         type: Number,
         default: 0
+    },
+    "saving": {
+        type: Boolean,
+        default: false
     }
 })
 
