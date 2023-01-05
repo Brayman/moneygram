@@ -15,12 +15,40 @@ import {
     RiHandCoinLine
 } from "react-icons/ri";
 import {
+    MdCreditCard,
+    MdAccountBalanceWallet,
+    MdSavings,
+    MdAccountBalance,
     MdOutlineHighlightOff
 } from "react-icons/md"
 import { Icon } from './Icon/Icon'
 import CreateClasssName from "../utils/bemClassCreate";
 
 export class Icons {
+    card = {
+        Icon: MdCreditCard,
+        name: 'card',
+        color: '#FCAC12',
+        backgroundColor: '#FCCC6F'
+    }
+    bank = {
+        Icon: MdAccountBalance,
+        name: 'bank',
+        color: '#FCAC12',
+        backgroundColor: '#FCCC6F'
+    }
+    cash = {
+        Icon: MdAccountBalanceWallet,
+        name: 'cash',
+        color: '#FCAC12',
+        backgroundColor: '#FCCC6F'
+    }
+    saving = {
+        Icon: MdSavings,
+        name: 'saving',
+        color: '#FCAC12',
+        backgroundColor: '#FCCC6F'
+    }
     taxi = {
         Icon: RiTaxiLine,
         name: 'taxi',

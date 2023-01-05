@@ -6,31 +6,46 @@ import {
     MdKeyboardBackspace,
 } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
 import CreateClasssName from '../../../utils/bemClassCreate';
 import "./Navigation.css";
 
 const navClassName = CreateClasssName()
+
+const Title = styled.div`
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 21.8px;
+`
+
+const NavButton = styled.button`
+    font-size: 16px;
+    width: 2em;
+    height: 2em;
+    cursor: pointer;
+`
+
+const Button = ({Icon, onClick}) => {
+  return (
+    <NavButton onClick={onClick}>
+        <Icon style={{width: '100%', height:'100%'}}/>
+    </NavButton>
+  )
+}
+
 export const Navigation = ({children, className, title}) => {
     const nav = useNavigate();
     return (
         <nav className={classNames(navClassName('nav'), className)}>
-            <button type='button' className={navClassName('nav', 'button')} onClick={() => nav(-1)}>
-                <MdKeyboardBackspace />
-            </button>
-            <h2 className={navClassName('nav', 'title')}>
+            <Button Icon={MdKeyboardBackspace}  onClick={() => nav(-1)} />
+            <Title>
                 {title}
-            </h2>
+            </Title>
             {children}
         </nav>
     )
 }
 
-const Button = ({Icon, onClick}) => {
-  return (
-    <button className={navClassName("nav", "button")} onClick={onClick}>
-        <Icon />
-    </button>
-  )
-}
+
 
 Navigation.Button = Button
