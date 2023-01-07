@@ -13,6 +13,9 @@ const walletsRoutes = require('./routes/wallets-route');
 const app = express();
 
 const uri = process.env.MONGO_URI
+
+console.log(uri.slice(0,17), process.env);
+
  mongoose.connect(uri)
  .then(() => console.log('Connected to DB'))
  .catch(err => console.log(err))
