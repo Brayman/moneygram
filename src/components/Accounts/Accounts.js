@@ -13,7 +13,7 @@ import { useEffect } from "react";
 import { accountThunks } from "../../redux/account";
 import { walletThunks } from "../../redux/wallets";
 
-function CardList({ balance }) {
+function CardList({ balance, currency }) {
     const cards = useSelector(selectors.cards);
     const login = useSelector(selectors.login)
     const dispatch = useDispatch()
@@ -26,7 +26,7 @@ function CardList({ balance }) {
     return (
         <section className="accounts">
             <Navigation title="Accounts" className="accounts__nav" />
-            <Account balance={balance} />
+            <Account {...{balance, currency}} />
             <menu className="accounts__list">
                 {cards.map(card => {
                     return <NavLink

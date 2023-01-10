@@ -57,7 +57,7 @@ const App = () => {
           />}
         />
         <Route path='/' element={<HomePage isAuth={isAuth} />} />
-        <Route path='/accounts' element={<Accounts isAuth={isAuth} balance={account.balance} />} />
+        <Route path='/accounts' element={<Accounts isAuth={isAuth} balance={account.balance} currency={account.currency} />} />
         <Route path='/wallet/:cardid' element={<WalletDetail isAuth={isAuth} />} />
         <Route
           path='/transactions'

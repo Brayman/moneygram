@@ -12,7 +12,7 @@ import { FilterPanel } from "../FilterPanel/FilterPanel";
 import classNames from "classnames";
 import Loader from "../common/Loader/Loader";
 
-export const LineChart = ({ transactions, lines, balance, className }) => {
+export const LineChart = ({ transactions, lines, balance, className, currency }) => {
 
 
     if (lines === undefined) {
@@ -22,7 +22,7 @@ export const LineChart = ({ transactions, lines, balance, className }) => {
     return (
         <div className={classNames("chart__line", className)}>
             <div className="chart__balance">
-                {balance} USD
+                {balance} {currency}
             </div>
             <Chart
                 options={

@@ -1,11 +1,11 @@
-function Account({balance}) {
+function Account({balance, currency}) {
     return (
         <section className="accounts__balance">
             <div className="balance__subtitle">
                 Account balance
             </div>
             <div className="balance__title">
-                USD {balance}
+                {currency} {balance}
             </div>
         </section>
     )
