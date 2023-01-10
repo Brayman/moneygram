@@ -1,5 +1,6 @@
 const express = require('express');
 const isAuth = require('../middlewares/auth');
+const userService = require('../service/userService');
 const walletService = require('../service/walletService')
 
 const router = express.Router();
@@ -36,7 +37,8 @@ router.patch('/wallet/:id', isAuth, async (req, res) => {
     res.json(wallet)
 })
 router.get('/wallet/balance/:userid', isAuth, async (req,res) => {
-    const balance = await walletService.getBalance(req.params.userid)
+    const currency = await userService.getCurrency(req.params.userid)
+    const balance = await walletService.getBalance(req.params.userid, currency)
     res.json(balance)
 })
 module.exports = router

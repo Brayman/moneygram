@@ -52,10 +52,9 @@ class transactionService {
             return { type: 'error' }
         }
     }
-    async getBalanceLine({ userid, cardid, duration }) {
+    async getBalanceLine({ userid, cardid, currency  }) {
         const transactions = await this.getAll({ userid, cardid, sort: 'date', order: 'desc', duration: 'month' })
         const prevTransactions = await this.getAll({ userid, cardid, sort: 'date', order: 'desc', duration: 'month', prev: true })
-        console.log(transactions.map(item => item.cost), prevTransactions.map(item =>item.cost));
         class balance {
             _balance = 0
             constructor(balance) {
@@ -72,14 +71,17 @@ class transactionService {
                 this.balance = balance
             }
         }
-        function createLine(items, balance, setBalance) {
+        function createLine(items, balance, setBalance, mainCurrency) {
             let Line = []
             for (let i = 31; i > 0; i--) {
                 const daySpend = items.filter((item) => new Date(item.date).getDate() === i)
                 if (daySpend.length === 0) {
                     Line.push({ amount: balance.balance, date: i })
                 } else {
-                    daySpend.forEach(({ cost, type }) => {
+                    daySpend.forEach(({ cost, type, currency }) => {
+                        if (currency !== mainCurrency) {
+                            cost = fakeExchangeService.changeTo(currency, mainCurrency, cost)
+                        }
                         cost = type === 'expense' ? cost : -cost
                         setBalance(toDecimal(balance.balance + cost))
                     })
@@ -89,9 +91,9 @@ class transactionService {
             }
             return Line.reverse()
         }
-        const currentBalance = new balance(await walletServise.getBalance(userid))
-        const balanceLine = createLine(transactions, currentBalance, currentBalance.setBalance)
-        const prevBalanceLine = createLine(prevTransactions, currentBalance, currentBalance.setBalance)
+        const currentBalance = new balance(await walletServise.getBalance(userid, currency))
+        const balanceLine = createLine(transactions, currentBalance, currentBalance.setBalance, currency)
+        const prevBalanceLine = createLine(prevTransactions, currentBalance, currentBalance.setBalance, currency)
         return [balanceLine, prevBalanceLine]
     }
 

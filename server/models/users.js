@@ -20,6 +20,7 @@ const userSchema = Schema({
         type: Number,
         default: 0
     },
+    currency: String,
     avatar: String,
     language: String,
     githubid: Number,

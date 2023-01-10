@@ -49,6 +49,10 @@ class UserService {
         const user = await UserModel.findOne({_id});
         return new userObject(user);
     }
+    async getCurrency(login) {
+        const user = await UserModel.findOne({login});
+        return new userObject(user).currency;
+    }
     async getUserByGithubId(githubid) {
         const user = await UserModel.findOne({githubid})
         return new userObject(user)
