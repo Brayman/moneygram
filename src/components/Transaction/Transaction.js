@@ -9,6 +9,7 @@ import CreateClasssName from "../../utils/bemClassCreate";
 const createCN = CreateClasssName()
 function Transaction({ transaction, del }) {
     const navigate = useNavigate();
+    console.log(transaction);
     const { _id, tag, cost, date, payee, currency = 'GEL', type = 'expence', cardid, comment = "no comments" } = transaction
     return (
         <section className="tr-full">

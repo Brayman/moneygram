@@ -11,7 +11,7 @@ export const totalTransCount = state => state.transactions.totalTransCount;
 export const moreTransLoad = state => state.transactions.moreTransLoad;
 export const initialized = state => state.app.initialized;
 export const account = state => state.account.user;
-export const transaction = state => state.transaction;
+export const transaction = state => state.transactions.transaction;
 export const cards = state => state.wallet.wallets;
 export const modal = state => state.app.modal;
 

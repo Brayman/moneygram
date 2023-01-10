@@ -7,13 +7,12 @@ import { modal, transaction } from "../../redux/selectors";
 import { withModalAlert } from "../../hoc/withModalAlert";
 import { WithAuthRedirect } from "../../hoc/withAuthRedirect";
 import { transactionsThunk } from "../../redux/transactions-reducer";
-import { transactionThunks } from "../../redux/transaction-reducer";
 import Loader from "../common/Loader/Loader";
 const TransContainer = () => {
     const dispatch = useDispatch()
     const params = useParams()
     useEffect(() => {
-        dispatch(transactionThunks.getTransaction(params.id))
+        dispatch(transactionsThunk.getTransaction(params.id))
     },[params, dispatch])
     
     const props = {

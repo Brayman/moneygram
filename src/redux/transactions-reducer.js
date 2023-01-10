@@ -9,7 +9,8 @@ const initialState = {
     pageSize: 50,
     curentPage: 1,
     transactionsCount: 0,
-    moreTransLoad: false
+    moreTransLoad: false,
+    transaction: null
 }
 
 const transactionSlice = createSlice({
@@ -20,7 +21,7 @@ const transactionSlice = createSlice({
             state.transactions.push(payload)
         },
         editTransaction: (state, { payload }) => {
-            const index = state.transactions.findIndex(({_id}) => _id === payload._id)
+            const index = state.transactions.findIndex(({ _id }) => _id === payload._id)
             state.transactions[index] = payload
         },
         deleteTransaction: (state, { payload }) => {
@@ -69,7 +70,9 @@ export const {
 
 
 export const transactionsThunk = {
-    getTransaction: (transaction) => dispatch => {
+    getTransaction: (id) => async (dispatch) => {
+        const transaction = await API.getTransaction(id)
+        console.log(transaction);
         dispatch(getTransaction(transaction))
     },
     getTransactions: ({ login, cardid, pageSize, sort, filter, page = undefined }) => dispatch => {
