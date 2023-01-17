@@ -3,6 +3,7 @@ import classNames from 'classnames'
 import { cn } from '@bem-react/classname'
 import React from 'react';
 import CreateClasssName from '../../../utils/bemClassCreate';
+import styled from 'styled-components';
 
 const createClassName = (primary, secondary, disabled) => {
     const buttonType = classNames({
@@ -13,9 +14,7 @@ const createClassName = (primary, secondary, disabled) => {
     return cn(buttonType);
 }
 
-
-
-export const Button = ({ active, primary, secondary, className, type = 'button', children, ...props }) => {
+export const Button = ({ active, primary, secondary, className, Icon = null, type = 'button', children, ...props }) => {
 
     const bcn = createClassName(primary, secondary)
     return (
@@ -23,8 +22,8 @@ export const Button = ({ active, primary, secondary, className, type = 'button',
             type={type}
             {...props}
             className={classNames(bcn({ active }), className)}
-
         >
+            {!!Icon ? <Icon/> : null}
             {children}
         </button>
     )
@@ -41,6 +40,20 @@ export const IconButton = ({ className, onClick, ...props }) => {
         </button>
     )
 }
+
+export const GhostButton = styled(Button)`
+    border: 1px solid var(--light-60);
+    background-color: inherit;
+    color: var(--dark-100);
+    
+    svg {
+        margin-right: 10px;
+    }
+    &:hover {
+        background-color: var(--light-60);
+    }
+`
+
 export const GroupedButton = ({ className, onClick, value, ...props }) => {
     const groupCN = CreateClasssName()
     return (
@@ -55,8 +68,6 @@ export const GroupedButton = ({ className, onClick, value, ...props }) => {
                     {button}
                 </button>
             ))}
-
         </div>
-
     )
 }

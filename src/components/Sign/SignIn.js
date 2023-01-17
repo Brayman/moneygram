@@ -7,7 +7,18 @@ import { loginValidate } from "../../utils/validators/validators";
 import { useSelector } from "react-redux";
 import { app } from "../../redux/selectors";
 import React, { useEffect } from "react";
-import { Button } from "../common/Button/Buttons";
+import { Button, GhostButton } from "../common/Button/Buttons";
+import { BsGithub } from 'react-icons/bs'
+import styled from "styled-components";
+
+const HelperText = styled.div`
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 18px;
+    text-align: center;
+    margin: 12px 0 12px 0;
+    color: var(--dark-25);
+`
 
 export const MyForm = ({ isValid, setErrors }) => {
     const login = useSelector(app).login
@@ -16,12 +27,12 @@ export const MyForm = ({ isValid, setErrors }) => {
             setErrors({ login: login.message, password: login.message })
         }
     }, [login, setErrors])
-    
-    
+
+
 
     const github = () => {
         window.open("http://localhost:5000/github", "_self");
-      };
+    };
 
     return (
         <Form className="sign__form">
@@ -44,11 +55,17 @@ export const MyForm = ({ isValid, setErrors }) => {
             >
                 Login
             </Button>
-            <Button
-             primary
-             onClick={github}>
+            <HelperText>
+                or with
+            </HelperText>
+            <GhostButton
+                primary
+                onClick={github}
+                Icon={BsGithub}
+                className="sign__field"
+            >
                 Login with GitHub
-             </Button>
+            </GhostButton>
             <NavLink to="/sign" className="sign-link sign-link__title">
                 Forgot password?
             </NavLink>
