@@ -32,6 +32,9 @@ class fakeExchangeService {
         const URL = process.env.ASTATS_URL
         const resUsd = await fetch(`${URL}exchange?amount=1&from=USD`)
         const resByn = await fetch(`${URL}exchange?amount=1&from=BYN`)
+        if (resUsd.status > 400 || resByn.status > 400) {
+            return;
+        }
         const usd = await resByn.json()
         const byn = await resUsd.json()
         this.currences['USD']['BYN'] = Number.parseFloat(byn.byn)
