@@ -2,6 +2,7 @@ const express = require('express')
 const userService = require('../service/userService');
 const isAuth = require('../middlewares/auth');
 const passport = require('passport');
+const userController = require('../controllers/user.controller');
 const GitHubStrategy = require('passport-github2').Strategy;
 const router = express.Router();
 
@@ -31,16 +32,6 @@ router.post('/logout', async (req, res) => {
     res.clearCookie('refTok')
     res.sendStatus(200)
 })
-router.get('/refresh', async (req, res) => {
-    try {
-        const { refTok } = req.cookies;
-        const User = await userService.refresh(refTok)
-        res.cookie('refTok', User.refreshToken, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true })
-        res.json(User)
-    } catch (error) {
-        res.status(401).json(error)
-    }
-})
 
 router.get('/autho', async (req, res) => {
     if (req.user) {
@@ -49,19 +40,8 @@ router.get('/autho', async (req, res) => {
     }
 })
 
-router.get('/user/:id', isAuth, async (req, res) => {
-    const id = req.params.id
-    try {
-        const user = await userService.getUser(id)
-        if (!user) {
-            throw new Error('not find')
-        }
-        res.json(user)
-    } catch (error) {
-        console.log(error);
-        res.status(404).json(error)
-    }
-})
+router.get('/user/:id', isAuth, userController.getUser)
+
 router.post('/signin', passport.authenticate('github'), async (req, res) => {
     const user = await userService.login(req.body)
     res.json(user)
@@ -76,17 +56,6 @@ passport.use(new GitHubStrategy({
     callbackURL: "http://localhost:5000/auth/github/callback"
 },
     async function (accessToken, refreshToken, profile, cb) {
-        cb(null, profile)
-    }
-));
-passport.use(new GitHubStrategy({
-    clientID: clientID,
-    clientSecret: clientSecret,
-    callbackURL: "http://localhost:5000/auth/github/callback"
-},
-    async function (accessToken, refreshToken, profile, cb) {
-        console.log('signup');
-
         cb(null, profile)
     }
 ));
@@ -113,5 +82,10 @@ router.get("/logout", (req, res) => {
     req.logout();
     res.redirect('http://localhost:3000/');
 });
+
+router.get('/:userid/expense', isAuth, userController.expense)
+
+router.get('/:userid/income', isAuth, userController.income)
+
 
 module.exports = router
