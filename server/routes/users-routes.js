@@ -6,6 +6,8 @@ const userController = require('../controllers/user.controller');
 const GitHubStrategy = require('passport-github2').Strategy;
 const router = express.Router();
 
+require('dotenv').config();
+
 router.get('/signup/github', isAuth, async (req, res) => {
     const { login, id, email, avatar_url } = req.user._json
     res.json({ login, githubid: id, email, avatar: avatar_url })
@@ -19,7 +21,6 @@ router.post('/signup', async (req, res) => {
             return res.json(user)
         }
         const user = await userService.registration(login, password, email);
-        res.cookie('refTok', user.refreshToken, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true })
         return res.json(user)
     } catch (error) {
         console.log(error);
@@ -28,7 +29,6 @@ router.post('/signup', async (req, res) => {
 
 router.post('/logout', async (req, res) => {
     const { refTok } = req.cookies;
-    await userService.logout(refTok)
     res.clearCookie('refTok')
     res.sendStatus(200)
 })
@@ -49,7 +49,7 @@ router.post('/signin', passport.authenticate('github'), async (req, res) => {
 
 const clientID = process.env.ClientID;
 const clientSecret = process.env.ClientSecret;
-
+console.log(clientID);
 passport.use(new GitHubStrategy({
     clientID: clientID,
     clientSecret: clientSecret,

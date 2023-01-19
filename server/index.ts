@@ -1,23 +1,25 @@
-const express = require('express');
+import express, { Express, Request, Response } from "express";
 const cors  = require('cors');
 const cookieParser = require("cookie-parser");
 const cookieSession = require("cookie-session");
 const  passport = require('passport');
-require('dotenv').config()
+import dotenv from 'dotenv';
 const mongoose = require('mongoose');
 
-const transactionRoutes = require('./routes/transactions-route')
+import router from "./routes/transactions-route";
+
 const usersRoutes = require('./routes/users-routes');
 const walletsRoutes = require('./routes/wallets-route');
 
+dotenv.config();
 
 
-const app = express();
+const app: Express = express();
 
 const uri = process.env.MONGO_URI
 mongoose.connect(uri)
  .then(() => console.log('Connected to DB'))
- .catch(err => console.log(err))
+ .catch((err: any) => console.error(err))
 
 app.use(express.json())
 app.use(cookieParser());
@@ -35,7 +37,7 @@ app.use(cors({
 
 
 
-app.use(transactionRoutes);
+app.use(router);
 app.use(usersRoutes);
 app.use(walletsRoutes)
 

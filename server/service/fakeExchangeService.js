@@ -1,5 +1,5 @@
 const toDecimal = require("../utils/toDecimal")
-
+require('dotenv').config();
 class fakeExchangeService {
     currences = {
         USD: {
