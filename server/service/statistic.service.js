@@ -1,11 +1,12 @@
+import transactionService  from './transactionService';
+
 const toDecimal = require('../utils/toDecimal');
 const fakeExchangeService = require('./fakeExchangeService');
 const walletServise = require('./walletService')
-
 class StatisticServise {
     async getBalanceLine({ userid, cardid, currency  }) {
-        const transactions = await this.getAll({ userid, cardid, sort: 'date', order: 'desc', duration: 'month' })
-        const prevTransactions = await this.getAll({ userid, cardid, sort: 'date', order: 'desc', duration: 'month', prev: true })
+        const transactions = await transactionService.getAll({ userid, cardid, sort: 'date', order: 'desc', duration: 'month' })
+        const prevTransactions = await transactionService.getAll({ userid, cardid, sort: 'date', order: 'desc', duration: 'month', prev: true })
         class balance {
             _balance = 0
             constructor(balance) {
@@ -51,7 +52,7 @@ class StatisticServise {
 
 
     async categoryStatistic(params) {
-        const transactions = await this.getAll({ ...params })
+        const transactions = await transactionService.getAll({ ...params })
         let statistic = []
         transactions.forEach(({ cost, tag, currency }) => {
             const index = statistic.findIndex(({ category }) => {
