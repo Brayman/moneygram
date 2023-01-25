@@ -23,6 +23,8 @@ const NavButton = styled.button`
     width: 2em;
     height: 2em;
     cursor: pointer;
+    color: inherit;
+    background-color: inherit;
 `
 
 const Button = ({Icon, onClick}) => {

@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components"
-import { BiCartAlt } from "react-icons/bi";
+import { BiCartAlt, BiTransfer } from "react-icons/bi";
 import {
     RiTaxiLine,
     RiTakeawayLine,
@@ -12,7 +12,7 @@ import {
     RiWifiLine,
     RiScissorsFill,
     RiMoneyDollarCircleLine,
-    RiHandCoinLine
+    RiHandCoinLine,
 } from "react-icons/ri";
 import {
     MdCreditCard,
@@ -121,28 +121,33 @@ export class Icons {
         color: '#00A86B',
         backgroundColor: '#65D1AA'
     }
+    transfer = {
+        Icon: BiTransfer,
+        name: 'transfer',
+        color: '#248AFF',
+        backgroundColor: '#BDDCFF'
+    }
     empty = {
         Icon: MdOutlineHighlightOff,
         name: 'empty',
         color: '#FD3C4A',
-        backgraundColor: '#FD6F7A'
+        backgroundColor: '#FD6F7A'
     }
     tag = {
         Icon: MdOutlineHighlightOff,
         name: 'empty',
         color: '#FD3C4A',
-        backgraundColor: '#FD6F7A'
+        backgroundColor: '#FD6F7A'
     }
 
     constructor(tag) {
+        if (tag === '' || tag !== undefined || !this[tag] ) {
+            return this.empty
+        }
         if (!!tag) {
             this.tag = this[tag]
             return this.tag
         }
-        if (tag === '') {
-            return this.empty
-        }
-
     }
     allTags() {
         let propertys = []
@@ -156,6 +161,7 @@ export class Icons {
         for (const key in this) {
             tags.push(this[key].name)
         }
+        console.log(tags);
         return tags
     }
 
@@ -175,6 +181,7 @@ const Dot = (props) => {
 
 export const Tag = ({ tag }) => {
     const icon = new Icons(tag)
+    console.log(icon);
     return (
         <Icon {...icon} />
     )
