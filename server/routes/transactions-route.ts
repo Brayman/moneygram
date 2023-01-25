@@ -1,7 +1,7 @@
-const express = require('express');
-const isAuth = require('../middlewares/auth');
-const transactionsController = require('../controllers/transactions.controller.js')
-const statisticController = require('../controllers/statistic.controller');
+import express from 'express'
+import isAuth from '../middlewares/auth';
+import transactionsController from '../controllers/transactions.controller.js';
+import statisticController from '../controllers/statistic.controller';
 
 const router = express.Router();
 
@@ -19,4 +19,4 @@ router.get('/statistic/balance/:userid', isAuth, statisticController.balanceChar
 
 router.get('/statistic/category/:userid', isAuth, statisticController.categoryStatistic)
 
-module.exports = router
+export default router

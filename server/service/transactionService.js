@@ -19,7 +19,7 @@ class transactionService {
                 parametrs.type = type
             }
             if (cardid) {
-                parametrs.cardid = cardid
+                parametrs['$or'] = [{ incomeWallet: cardid }, { outcomeWallet: cardid }]
             }
             if (!!duration) {
                 const date = new Date()

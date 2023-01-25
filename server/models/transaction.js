@@ -8,10 +8,7 @@ const transactionSchema = new Schema({
     },
     "date": Date,
     "card": String,
-    "cost": {
-        type: Number,
-        required: true
-    },
+    "cost": Number,
     "payee": String,
     "tag": String,
     "type": {
@@ -19,10 +16,15 @@ const transactionSchema = new Schema({
         required: true
     },
     "currency": String,
-    "cardid": {
-        type: String,
-        required: true
-    },
+    "cardid": String,
+    "category": String,
+    "comment": String,
+    "outcomeWallet": String,
+    "outcome": Number,
+    "outcomeCurrency": String,
+    "incomeWallet": String,
+    "income": Number,
+    "incomeCurrency": String,
 })
 
 const Transaction = mongoose.model('Transaction', transactionSchema)
