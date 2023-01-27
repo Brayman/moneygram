@@ -14,6 +14,7 @@ import { Button, GroupedButton } from '../common/Button/Buttons';
 import CreateClasssName from '../../utils/bemClassCreate';
 import "./AddTransaktion.css"
 import { Icons } from '../Tag';
+import TransferForm from '../Forms/TransferForm';
 const addCN = CreateClasssName()
 
 
@@ -64,42 +65,58 @@ function TransactionForm({ userid, cards, transaction, date, Action, card }) {
                     Action({
                         ...values,
                         date: new Date(values.date).toISOString(),
+                        incomeWallet: cards.find(card => card.name === values.incomeWallet)._id,
+                        outcomeWallet: cards.find(card => card.name === values.outcomeWallet)._id,
+                        income: values.income || values.outcome,
+                        category: values.type === 'transfer' ? 'transfer' : values.category
                     })
                     actions.resetForm();
                     navigate(-1)
                 }
             }
         >
-            {({ values, setFieldValue }) => <Form className={addCN('add', null, { [values.type]: true })} >
-
-                <header className={addCN('add', null, { [values.type]: true })}>
-                    <Navigation className={addCN('header', 'nav', { [values.type]: true })} title={values.type} />
-                    <SpecialField
-                        name='cost'
-                        placeholder='How much?'
-                        label={values.currency}
-                        type='number'
+            {({ values, setFieldValue, ...props }) => {
+                if (values.type === 'transfer') {
+                    return <TransferForm
+                        {...props}
+                        values={values}
+                        setFieldValue={setFieldValue}
+                        wallets={cards}
                     />
-                </header>
-                <main className="tr-add__content">
-                    <Select name="tag" tag options={tags} className={addCN('add', 'field')} />
-                    <DatePicker className={addCN('add', 'field')} name='date' id='date' placeholder="date" />
-                    <Field className={addCN('add', 'field')} name='payee' placeholder='payee' />
-                    <CardSelect up cards={cards} value={values.cardid} className={addCN('add', 'field')} name='cardid' placeholder='select card' />
-                    <GroupedButton
-                        className={addCN('add', 'field')}
-                        type='button'
-                        buttons={['Income', 'Expense', 'Transfer']}
-                        onClick={(type) => setFieldValue('type', type)}
-                        value={values.type}
-                    />
-                    <Button primary type='submit' className="tr-add__button primary-btn">
-                        save
-                    </Button>
-                </main>
+                }
+                return (
+                    <Form className={addCN('add', null, { [values.type]: true })} >
+
+                        <header className={addCN('add', null, { [values.type]: true })}>
+                            <Navigation className={addCN('header', 'nav', { [values.type]: true })} title={values.type} />
+                            <SpecialField
+                                name='cost'
+                                placeholder='How much?'
+                                label={values.currency}
+                                type='number'
+                            />
+                        </header>
+                        <main className="tr-add__content">
+                            <Select name="category" tag options={tags} className={addCN('add', 'field')} />
+                            <DatePicker className={addCN('add', 'field')} name='date' id='date' placeholder="date" />
+                            <Field className={addCN('add', 'field')} name='payee' placeholder='payee' />
+                            <CardSelect up cards={cards} value={values.cardid} className={addCN('add', 'field')} name='cardid' placeholder='select card' />
+                            <GroupedButton
+                                className={addCN('add', 'field')}
+                                type='button'
+                                buttons={['Income', 'Expense', 'Transfer']}
+                                onClick={(type) => setFieldValue('type', type)}
+                                value={values.type}
+                            />
+                            <Button primary type='submit' className="tr-add__button primary-btn">
+                                save
+                            </Button>
+                        </main>
 
 
-            </Form>}
+                    </Form>
+                )
+            }}
         </Formik>
     )
 }

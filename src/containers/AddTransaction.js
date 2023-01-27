@@ -10,7 +10,7 @@ const Add = () => {
     const props = {
         userid: useSelector(selectors.login),
         date: new Date().getTime(),
-        cards: useSelector(selectors.cards),
+        cards: useSelector(selectors.wallets),
         modal: useSelector(selectors.modal),
         card: useSelector(selectors.wallet),
         Action: form => dispatch(transactionsThunk.addTransaction(form))

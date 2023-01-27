@@ -45,7 +45,9 @@ const Select = ({ options, up, tag = false, ...props }) => {
     }
     return (
         <div
-        onClick={() => setOpen(!open)}
+        onClick={() => {
+            setOpen(!open)
+        }}
         className={classNames(selectCN('select', null, {open}), props.className)}>
             <SelectOption tag={tag} placeholder={props.placeholder}>
                 {props.value}
@@ -59,6 +61,7 @@ const Select = ({ options, up, tag = false, ...props }) => {
                             className={selectCN('option')}
                             onClick={() => {
                                 props.setValue(option)
+                                props.hasOwnProperty('onClick') && props.onClick(option)
                                 setOpen(!open)
                             }}
                         >

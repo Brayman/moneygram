@@ -6,6 +6,7 @@ export const Input = ({meta, field, ...props}) => {
     return (
         <div className={classNames(cn('field', '', { error: !!meta.error }), props.className)}>
             <input
+                placeholder={props.placeholder || props.name}
                 {...props}
                 {...field}
                 className={cn('field','input')}
