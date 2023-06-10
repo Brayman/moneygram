@@ -22,8 +22,7 @@ import { accountThunks } from './redux/account'
 import Loader from './components/common/Loader/Loader';
 import AddTransaction from './containers/AddTransaction';
 import EditTransaction from './containers/EditTransaction';
-
-
+import TransferForm from './components/Forms/TransferForm';
 const App = () => {
   const dispatch = useDispatch();
   const login = useSelector(selectors.login)
@@ -37,14 +36,33 @@ const App = () => {
   const Auth = FormData => dispatch(accountThunks.AuthThunk(FormData))
 
 
+  const testTrans = {
+    _id: "63cab9441d44e1a97b54eafe",
+    cardid: "62d00b4ca45f0edb55a5f95f",
+    currency: "USD",
+    date: "2023-01-19T00:00:00.000Z",
+    payee: "DollarCash",
+    tag: "transfer",
+    type: "transfer",
+    userid: "brayman",
+    categoryName: "transfer",
+    comment: '',
+    outcomeAccountName: "Alfa",
+    outcome: 2.46,
+    outcomeCurrency: "BYN",
+    incomeAccountName: "DollarCash",
+    income: 1,
+    incomeCurrency: "USD",
+
+  }
 
   useEffect(() => {
     dispatch(checkAuth())
   }, [dispatch])
   if (!initialized && isAuth) {
-    return <Loader/>
+    return <Loader />
   }
-  
+
   return (
     <BrowserRouter>
       <Routes>
@@ -64,6 +82,9 @@ const App = () => {
           element={<Transactions login={login} isAuth={isAuth} modal={modal} />}
         />
         <Route path='/analytics' element={<Statistic {...{ isAuth, transactions }} />} />
+        <Route path='/develop'
+          element={<TransferForm sendForm={form => console.log(form)} />}
+        />
         <Route path='/settings/*' element={<Settings />} />
         <Route path='/transaction/:id' element={<TransComponent {...{ modal, isAuth }} />} />
         <Route path='/transaction/edit/:id' element={<EditTransaction isAuth={isAuth} />} />

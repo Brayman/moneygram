@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 import React from 'react'
-import TransactionMini from '../Transaction/TransactionPreview'
+import TransactionMini from "../TransactionPreview/TransactionPreview"
 import Loader from '../common/Loader/Loader'
 import styled from 'styled-components'
 
@@ -50,7 +50,7 @@ export const List = ({ isLoading, transactions, className }) => {
                     {getTitle(new Date(item.date))}
                     <TransactionMini
                         key={item._id}
-                        body={item}
+                        {...item}
                     />
                 </>)
             }) : <Loader />}

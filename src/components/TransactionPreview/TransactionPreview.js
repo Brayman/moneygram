@@ -1,21 +1,21 @@
 import "./Transaction.css";
 import Tag from "../Tag";
 import { memo } from "react";
-import { NavLink } from "react-router-dom"
+import { Content, Title, Transaction } from "./TransactionPreview.styles";
+import Amount from "./Amount";
 
-const TransactionMini = memo(({ body, onClick }) => {
+const TransactionMini = memo(({ _id, type, currency, income, outcome, category, onClick, ...body }) => {
     const date = new Date(body.date).toLocaleString('ru-RU', { month: 'short', day: '2-digit', year: 'numeric' })
+    console.log(body);
     return (
-        <NavLink key={body.id} to={`/transaction/${body._id}`} className="transaction">
-            <Tag tag={body.tag} />
-            <div className="transaction__content">
+        <Transaction to={`/transaction/${_id}`}>
+            <Tag tag={category} />
+            <Content>
                 <div className="content__row transaction__title">
-                    <div>
-                        {body.tag}
-                    </div>
-                    <div className={`cost cost_${body.type || 'expense'}`}>
-                        {`${body.type === 'expense'? '-' : '+'} ${body.cost}  ${body.currency || ''}`}
-                    </div>
+                    <Title>
+                        {category}
+                    </Title>
+                    <Amount {...{ type, currency, income, outcome }} />
                 </div>
                 <div className="content__row transaction__subtitle">
                     <div>
@@ -25,9 +25,8 @@ const TransactionMini = memo(({ body, onClick }) => {
                         {date}
                     </div>
                 </div>
-            </div>
-        </NavLink>
+            </Content>
+        </Transaction>
     )
-
 })
 export default TransactionMini;

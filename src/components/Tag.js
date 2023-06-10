@@ -141,7 +141,7 @@ export class Icons {
     }
 
     constructor(tag) {
-        if (tag === '' || tag !== undefined || !this[tag] ) {
+        if (!this[tag] && tag !== undefined) {
             return this.empty
         }
         if (!!tag) {
@@ -161,7 +161,6 @@ export class Icons {
         for (const key in this) {
             tags.push(this[key].name)
         }
-        console.log(tags);
         return tags
     }
 
@@ -181,7 +180,6 @@ const Dot = (props) => {
 
 export const Tag = ({ tag }) => {
     const icon = new Icons(tag)
-    console.log(icon);
     return (
         <Icon {...icon} />
     )

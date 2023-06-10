@@ -19,19 +19,6 @@
 
 }
 
-.transaction__content {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 0.375em 0;
-  flex-grow: 1;
-  margin-left: 0.5625em;
-}
-
-.transaction__title {
-  font-weight: 500;
-  color: #292B2D;
-}
 
 .transaction__subtitle {
   font-size: 13px;
@@ -45,17 +32,6 @@
   justify-content: space-between;
 }
 
-.cost {
-  font-weight: 600;
-}
-
-.cost_expense {
-  color: #FD3C4A;
-}
-
-.cost_income {
-  color: #00A86B;
-}
 
 .error-icon {
   color: #FD3C4A;

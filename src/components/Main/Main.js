@@ -1,5 +1,4 @@
 import Loader from "../common/Loader/Loader";
-import TransactionMini from "../Transaction/TransactionPreview";
 import {
     MdFilterList,
     MdKeyboardArrowDown,
@@ -8,6 +7,7 @@ import {
 import React from "react";
 import { Button, IconButton } from "../common/Button/Buttons";
 import "./Main.css"
+import TransactionMini from "../TransactionPreview/TransactionPreview";
 function Main({ props }) {
     return (
         <section className="page transactions">
@@ -51,7 +51,7 @@ function Main({ props }) {
                     </Button> :
                     null
             }
-            
+
         </section>
     )
 
