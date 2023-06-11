@@ -5,57 +5,86 @@ import "./Trans.css"
 import { Navigation } from "../common/Navigation/Navigation";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../common/Button/Buttons";
+import { Title, Header, DateString } from "./Transaction.styles"
 import CreateClasssName from "../../utils/bemClassCreate";
+
 const createCN = CreateClasssName()
-function Transaction({ transaction, del }) {
+
+
+const Panel = ({ type, category, from, to }) => {
+    return (
+        <section className="tr-full__panel panel">
+            <div className="panel__col">
+                <div className="panel__title">
+                    Type
+                </div>
+                <div className="panel__text">
+                    {type}
+                </div>
+            </div>
+            <div className="panel__col">
+                <div className="panel__title">
+                    {type === 'transfer' ? 'From' : 'Category'}
+                </div>
+                <div className="panel__text">
+                    {type === 'transfer' ? from : category}
+                </div>
+            </div>
+            <div className="panel__col">
+                <div className="panel__title">
+                    {type === 'transfer' ? 'To' : 'Wallet'}
+                </div>
+                <div className="panel__text">
+                    {type === 'transfer' ? to : 'Wallet'}
+                </div>
+            </div>
+        </section>
+    )
+}
+
+function Transaction({ transaction, cards, del }) {
     const navigate = useNavigate();
+    const {
+        _id,
+        cost,
+        date,
+        payee,
+        outcomeCurrency,
+        incomeCurrency,
+        income,
+        outcome,
+        cardid,
+        type = 'expence',
+        comment = "no comments"
+    } = transaction
+    const amount = () => {
+        const currency = type === 'expence' || 'transfer' ? outcomeCurrency : incomeCurrency
+        if (currency === 'USD') {
+            return `$ ${outcome}`
+        }
+        return `${outcome} ${currency}`
+    }
     console.log(transaction);
-    const { _id, tag, cost, date, payee, currency = 'GEL', type = 'expence', cardid, comment = "no comments" } = transaction
     return (
         <section className="tr-full">
-            <header className={`tr-full__header header_${type}`}>
-                <Navigation className={createCN("header", "nav", {[type]: true})} title={'Detail Transaction'}>
+            <Header type={type}>
+                <Navigation className={createCN("header", "nav", { [type]: true })} title={'Detail Transaction'}>
                     <button className={createCN("nav", "button")} onClick={() => del(cardid, cost, type)}>
                         <MdDelete />
                     </button>
                 </Navigation>
-                <h1 className="header__title">
-                    {`${currency} ${cost}`}
-                </h1>
+                <Title>
+                    {amount()}
+                </Title>
                 <div className="header__subtitle">
                     {payee}
                 </div>
-                <div className="header__date">
+                <DateString>
                     {new Date(date).toLocaleString()}
-                </div>
-            </header>
+                </DateString>
+            </Header>
             <main className="tr-full__content">
-                <section className="tr-full__panel panel">
-                    <div className="panel__col">
-                        <div className="panel__title">
-                            Type
-                        </div>
-                        <div className="panel__text">
-                            {type}
-                        </div>
-                    </div>
-                    <div className="panel__col">
-                        <div className="panel__title">
-                            Category
-                        </div>
-                        <div className="panel__text">
-                            {tag}
-                        </div>
-                    </div>
-                    <div className="panel__col">
-                        <div className="panel__title">
-                            Wallet
-                        </div>
-                        <div className="panel__text">
-                            main
-                        </div>
-                    </div>
-                </section>
+                <Panel {...transaction} />
                 <section className="tr-full__comment">
                     <h4 className="comment__header">
                         Comment
@@ -65,7 +94,7 @@ function Transaction({ transaction, del }) {
                 <Button primary onClick={() => navigate(`/transaction/edit/${_id}`)}>
                     edit
                 </Button>
-            </main>       
+            </main>
         </section>
     )
 }

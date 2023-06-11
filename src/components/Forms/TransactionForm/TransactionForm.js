@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import {
-    Form,
     Formik,
     useField,
     useFormikContext
 } from "formik";
-import { Navigation } from '../common/Navigation/Navigation';
-import { SelectField as Select } from '../common/Select/SelectField';
-import DefaultSelect from '../common/Select/Select';
-import { Field, SpecialField } from '../common/Field/Field';
-import { Button, GroupedButton } from '../common/Button/Buttons';
-import CreateClasssName from '../../utils/bemClassCreate';
+import { Navigation } from '../../common/Navigation/Navigation';
+import { SelectField as Select } from '../../common/Select/SelectField';
+import DefaultSelect from '../../common/Select/Select';
+import { Field, SpecialField } from '../../common/Field/Field';
+import { Button, GroupedButton } from '../../common/Button/Buttons';
+import CreateClasssName from '../../../utils/bemClassCreate';
 import "./AddTransaktion.css"
-import { Icons } from '../Tag';
-import TransferForm from '../Forms/TransferForm';
+import { Icons } from '../../Tag';
+import TransferForm from '../TransferForm';
+import { Header, StyledForm } from './TransactionForm.styles';
 const addCN = CreateClasssName()
 
 
@@ -85,17 +85,17 @@ function TransactionForm({ userid, cards, transaction, date, Action, card }) {
                     />
                 }
                 return (
-                    <Form className={addCN('add', null, { [values.type]: true })} >
-
-                        <header className={addCN('add', null, { [values.type]: true })}>
-                            <Navigation className={addCN('header', 'nav', { [values.type]: true })} title={values.type} />
-                            <SpecialField
-                                name='cost'
-                                placeholder='How much?'
-                                label={values.currency}
-                                type='number'
-                            />
-                        </header>
+                    <StyledForm type={values.type} >
+                        <Header>
+                            <Navigation title={values.type} />
+                        </Header>
+                        <SpecialField
+                            currency={values.outcomeCurrency}
+                            name={values.type}
+                            label='How much?'
+                            placeholder='0'
+                            type='number'
+                        />
                         <main className="tr-add__content">
                             <Select name="category" tag options={tags} className={addCN('add', 'field')} />
                             <DatePicker className={addCN('add', 'field')} name='date' id='date' placeholder="date" />
@@ -112,9 +112,7 @@ function TransactionForm({ userid, cards, transaction, date, Action, card }) {
                                 save
                             </Button>
                         </main>
-
-
-                    </Form>
+                    </StyledForm>
                 )
             }}
         </Formik>
