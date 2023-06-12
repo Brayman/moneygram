@@ -1,6 +1,6 @@
 import { Form } from "formik"
 import styled from "styled-components"
-import Select from "../../common/Select/Select"
+import SelectField from "../../common/Select/SelectField"
 
 const selectFormType = ({ type }) => {
     switch (type) {
@@ -48,6 +48,6 @@ export const BalanceRow = styled(RowFields)`
     flex-wrap: wrap;
     justify-content: space-between;
 `
-export const StyledSelect = styled(Select)`
+export const StyledSelect = styled(SelectField)`
     width: 50%;
 `

@@ -3,7 +3,7 @@ import { Formik, Form } from "formik";
 import { Navigation } from "../common/Navigation/Navigation";
 import "./style.css"
 import { Field, SpecialField } from "../common/Field/Field";
-import { SelectField as Select } from "../common/Select/SelectField";
+import Select from "../common/Select/SelectField";
 import { Button } from "../common/Button/Buttons";
 import CreateClasssName from "../../utils/bemClassCreate";
 import ToggleField from "../common/Toggle/toggle-field";
@@ -25,7 +25,7 @@ const WalletForm = ({ wallet, saveAction }) => {
                         name='balance'
                         className='wallet-add__header-input'
                     />
-                    
+
                     <section className="wallet-add__fields">
                         <Field name="name" placeholder="Name" className={walletCN('wallet-add', 'field')} />
                         <Select
@@ -34,7 +34,7 @@ const WalletForm = ({ wallet, saveAction }) => {
                             className={walletCN('wallet-add', 'field')}
                             options={["USD", "BYN", "GEL", "EUR"]}
                         />
-                        <ToggleField label='Saving' name='saving' tabIndex={0}/>
+                        <ToggleField label='Saving' name='saving' tabIndex={0} />
                         <Button primary type="submit">
                             Save
                         </Button>

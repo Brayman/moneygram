@@ -6,7 +6,7 @@ import {
     useFormikContext
 } from "formik";
 import { Navigation } from '../../common/Navigation/Navigation';
-import { SelectField as Select } from '../../common/Select/SelectField';
+import Select from '../../common/Select/SelectField';
 import DefaultSelect from '../../common/Select/Select';
 import { Field, SpecialField } from '../../common/Field/Field';
 import { Button, GroupedButton } from '../../common/Button/Buttons';
@@ -97,7 +97,7 @@ function TransactionForm({ userid, cards, transaction, date, Action, card }) {
                             type='number'
                         />
                         <main className="tr-add__content">
-                            <Select name="category" tag options={tags} className={addCN('add', 'field')} />
+                            <Select name="category" size={'3'} tag options={tags} className={addCN('add', 'field')} />
                             <DatePicker className={addCN('add', 'field')} name='date' id='date' placeholder="date" />
                             <Field className={addCN('add', 'field')} name='payee' placeholder='payee' />
                             <CardSelect up cards={cards} value={values.cardid} className={addCN('add', 'field')} name='cardid' placeholder='select card' />
