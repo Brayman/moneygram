@@ -14,7 +14,7 @@ import CreateClasssName from '../../../utils/bemClassCreate';
 import "./AddTransaktion.css"
 import { Icons } from '../../Tag';
 import TransferForm from '../TransferForm';
-import { Header, StyledForm } from './TransactionForm.styles';
+import { Header, StyledForm } from '../Forms.styles';
 const addCN = CreateClasssName()
 
 

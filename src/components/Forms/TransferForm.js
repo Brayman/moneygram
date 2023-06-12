@@ -5,8 +5,9 @@ import { Button, GroupedButton } from '../common/Button/Buttons'
 import { Field, SpecialField } from '../common/Field/Field'
 import { Navigation } from '../common/Navigation/Navigation'
 import CreateClasssName from '../../utils/bemClassCreate'
-import { BalanceRow, Header, RowFields, Segment, StyledForm, StyledSelect } from './TransactionForm/TransactionForm.styles'
+import { Header, Segment, StyledForm } from './Forms.styles'
 
+import { BalanceRow, RowFields, StyledSelect } from './TransactionForm/TransactionForm.styles'
 const addCN = CreateClasssName()
 
 
