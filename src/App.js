@@ -35,27 +35,6 @@ const App = () => {
   const signUp = FormData => dispatch(accountThunks.SignUp(FormData))
   const Auth = FormData => dispatch(accountThunks.AuthThunk(FormData))
 
-
-  const testTrans = {
-    _id: "63cab9441d44e1a97b54eafe",
-    cardid: "62d00b4ca45f0edb55a5f95f",
-    currency: "USD",
-    date: "2023-01-19T00:00:00.000Z",
-    payee: "DollarCash",
-    tag: "transfer",
-    type: "transfer",
-    userid: "brayman",
-    categoryName: "transfer",
-    comment: '',
-    outcomeAccountName: "Alfa",
-    outcome: 2.46,
-    outcomeCurrency: "BYN",
-    incomeAccountName: "DollarCash",
-    income: 1,
-    incomeCurrency: "USD",
-
-  }
-
   useEffect(() => {
     dispatch(checkAuth())
   }, [dispatch])

@@ -15,22 +15,38 @@ const TransContainer = () => {
     const dispatch = useDispatch()
     const params = useParams()
     useEffect(() => {
+        console.log('go');
         dispatch(transactionsThunk.getTransaction(params.id))
     }, [params, dispatch])
     const cards = useSelector(wallets)
     const trans = useSelector(transaction)
+    console.log(trans);
+    const getWalletsNames = () => {
+
+        if (trans.type === 'transfer') {
+            return {
+                from: cards.find(wallet => wallet._id === trans.outcomeWallet).name,
+                to: cards.find(wallet => wallet._id === trans.incomeWallet).name
+            }
+        }
+    }
+
     const props = {
         modal: useSelector(modal),
         transaction: {
             ...trans,
-            from: cards.find(wallet => wallet._id === trans.outcomeWallet).name,
-            to: cards.find(wallet => wallet._id === trans.incomeWallet).name
         },
 
         del: () => dispatch(transactionsThunk.deleteTransaction(params.id))
     }
-    if (props.transaction === null) {
+    if (trans === null) {
         return <Loader />
+    }
+    if (trans) {
+        props.transaction = {
+            ...trans,
+            ...getWalletsNames()
+        }
     }
     return (
         <Transaction {...props} />
