@@ -13,7 +13,11 @@ const WalletForm = ({ wallet, saveAction }) => {
     const walletCN = CreateClasssName()
     return (
         <Formik
-            initialValues={wallet}
+            initialValues={{
+                ...wallet,
+                balance: '',
+                name: ''
+            }}
             onSubmit={formData => saveAction(formData)}
         >
             {({ values }) => <StyledForm>

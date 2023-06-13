@@ -14,7 +14,7 @@ import { accountThunks } from "../../redux/account";
 import { walletThunks } from "../../redux/wallets";
 
 function CardList({ balance, currency }) {
-    const cards = useSelector(selectors.cards);
+    const cards = useSelector(selectors.wallets);
     const login = useSelector(selectors.login)
     const dispatch = useDispatch()
     useEffect(() => {
